@@ -8,6 +8,7 @@
 
 // Import the interfaces
 #import "HelloWorldLayer.h"
+#import "GameLevelLayer.h"
 
 // Not included in "cocos2d.h"
 #import "CCPhysicsSprite.h"
@@ -78,7 +79,7 @@ enum {
 		
 		[self addNewSpriteAtPosition:ccp(s.width/2, s.height/2)];
 		
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Tap screen" fontName:@"Marker Felt" fontSize:32];
+		CCLabelTTF *label = [CCLabelTTF labelWithString:@"iPointball - 2D" fontName:@"Marker Felt" fontSize:32];
 		[self addChild:label z:0];
 		[label setColor:ccc3(0,0,255)];
 		label.position = ccp( s.width/2, s.height-50);
@@ -139,8 +140,18 @@ enum {
 		
 		[leaderboardViewController release];
 	}];
+    
+    CCMenuItem *itemLevelSelect = [CCMenuItemFont itemWithString:@"Level Select" block:^(id sender) {        
+        AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+        
+        [[ app director] replaceScene:[GameLevelLayer scene]];
+        
+        // Show new layer
+        //[[CCDirector sharedDirector] replaceScene:[GameLevelLayer scene]];
+        
+    }];
 	
-	CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, reset, nil];
+	CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, itemLevelSelect,reset, nil];
 	
 	[menu alignItemsVertically];
 	

@@ -186,6 +186,15 @@
 		4D4693281710735000837BC5 /* IntroLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D4693271710735000837BC5 /* IntroLayer.mm */; };
 		4D46932B1710735000837BC5 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D46932A1710735000837BC5 /* GLES-Render.mm */; };
 		4D46932D1710735000837BC5 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D46932C1710735000837BC5 /* blocks.png */; };
+		4D4693371710764F00837BC5 /* monster-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4693331710764F00837BC5 /* monster-hd.png */; };
+		4D4693381710764F00837BC5 /* monster.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4693341710764F00837BC5 /* monster.png */; };
+		4D4693391710764F00837BC5 /* player-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4693351710764F00837BC5 /* player-hd.png */; };
+		4D46933A1710764F00837BC5 /* player.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4693361710764F00837BC5 /* player.png */; };
+		4D469340171076E600837BC5 /* Enemy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D46933F171076E500837BC5 /* Enemy.m */; };
+		4D469343171076FE00837BC5 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D469342171076FD00837BC5 /* Player.m */; };
+		4D469346171078B500837BC5 /* GameLevelLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D469345171078B500837BC5 /* GameLevelLayer.mm */; };
+		4D46934917107B9400837BC5 /* Bunker.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D46934817107B9400837BC5 /* Bunker.mm */; };
+		4D46934C17108F4400837BC5 /* Paint.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D46934B17108F4400837BC5 /* Paint.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -210,7 +219,7 @@
 		4D4691111710734B00837BC5 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = Resources/Icon.png; sourceTree = "<group>"; };
 		4D4691131710734B00837BC5 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "Resources/Icon@2x.png"; sourceTree = "<group>"; };
 		4D4691151710734B00837BC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
-		4D4691161710734B00837BC5 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = Resources/iTunesArtwork; sourceTree = "<group>"; };
+		4D4691161710734B00837BC5 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = text; name = iTunesArtwork; path = Resources/iTunesArtwork; sourceTree = "<group>"; };
 		4D46911A1710734B00837BC5 /* CCAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CCAction.h; path = libs/cocos2d/CCAction.h; sourceTree = "<group>"; };
 		4D46911B1710734B00837BC5 /* CCAction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CCAction.m; path = libs/cocos2d/CCAction.m; sourceTree = "<group>"; };
 		4D46911D1710734B00837BC5 /* CCActionCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CCActionCamera.h; path = libs/cocos2d/CCActionCamera.h; sourceTree = "<group>"; };
@@ -564,6 +573,20 @@
 		4D4693291710735000837BC5 /* GLES-Render.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
 		4D46932A1710735000837BC5 /* GLES-Render.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "GLES-Render.mm"; sourceTree = "<group>"; };
 		4D46932C1710735000837BC5 /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blocks.png; path = Resources/blocks.png; sourceTree = "<group>"; };
+		4D4693331710764F00837BC5 /* monster-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "monster-hd.png"; path = "../../../../Downloads/ResourcePack/Art/monster-hd.png"; sourceTree = "<group>"; };
+		4D4693341710764F00837BC5 /* monster.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = monster.png; path = ../../../../Downloads/ResourcePack/Art/monster.png; sourceTree = "<group>"; };
+		4D4693351710764F00837BC5 /* player-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "player-hd.png"; path = "../../../../Downloads/ResourcePack/Art/player-hd.png"; sourceTree = "<group>"; };
+		4D4693361710764F00837BC5 /* player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = player.png; path = ../../../../Downloads/ResourcePack/Art/player.png; sourceTree = "<group>"; };
+		4D46933E171076E500837BC5 /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
+		4D46933F171076E500837BC5 /* Enemy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy.m; sourceTree = "<group>"; };
+		4D469341171076FD00837BC5 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		4D469342171076FD00837BC5 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		4D469344171078B400837BC5 /* GameLevelLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLevelLayer.h; sourceTree = "<group>"; };
+		4D469345171078B500837BC5 /* GameLevelLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameLevelLayer.mm; sourceTree = "<group>"; };
+		4D46934717107B9400837BC5 /* Bunker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bunker.h; sourceTree = "<group>"; };
+		4D46934817107B9400837BC5 /* Bunker.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Bunker.mm; sourceTree = "<group>"; };
+		4D46934A17108F4400837BC5 /* Paint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Paint.h; sourceTree = "<group>"; };
+		4D46934B17108F4400837BC5 /* Paint.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Paint.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -622,6 +645,14 @@
 		4D4690FF1710734B00837BC5 /* iPointball2D */ = {
 			isa = PBXGroup;
 			children = (
+				4D46934717107B9400837BC5 /* Bunker.h */,
+				4D46934817107B9400837BC5 /* Bunker.mm */,
+				4D469344171078B400837BC5 /* GameLevelLayer.h */,
+				4D469345171078B500837BC5 /* GameLevelLayer.mm */,
+				4D469341171076FD00837BC5 /* Player.h */,
+				4D469342171076FD00837BC5 /* Player.m */,
+				4D46933E171076E500837BC5 /* Enemy.h */,
+				4D46933F171076E500837BC5 /* Enemy.m */,
 				4D4693201710735000837BC5 /* AppDelegate.h */,
 				4D4693211710735000837BC5 /* AppDelegate.mm */,
 				4D4693231710735000837BC5 /* HelloWorldLayer.h */,
@@ -633,6 +664,8 @@
 				4D4691001710734B00837BC5 /* Resources */,
 				4D4691181710734B00837BC5 /* libs */,
 				4D46931C1710735000837BC5 /* Supporting Files */,
+				4D46934A17108F4400837BC5 /* Paint.h */,
+				4D46934B17108F4400837BC5 /* Paint.mm */,
 			);
 			path = iPointball2D;
 			sourceTree = "<group>";
@@ -640,6 +673,10 @@
 		4D4691001710734B00837BC5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4D4693331710764F00837BC5 /* monster-hd.png */,
+				4D4693341710764F00837BC5 /* monster.png */,
+				4D4693351710764F00837BC5 /* player-hd.png */,
+				4D4693361710764F00837BC5 /* player.png */,
 				4D4691011710734B00837BC5 /* Default.png */,
 				4D4691031710734B00837BC5 /* Default@2x.png */,
 				4D4691051710734B00837BC5 /* Default-568h@2x.png */,
@@ -1239,6 +1276,10 @@
 				4D4691171710734B00837BC5 /* iTunesArtwork in Resources */,
 				4D46926D1710734F00837BC5 /* ChangeLog in Resources */,
 				4D46932D1710735000837BC5 /* blocks.png in Resources */,
+				4D4693371710764F00837BC5 /* monster-hd.png in Resources */,
+				4D4693381710764F00837BC5 /* monster.png in Resources */,
+				4D4693391710764F00837BC5 /* player-hd.png in Resources */,
+				4D46933A1710764F00837BC5 /* player.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1406,6 +1447,11 @@
 				4D4693251710735000837BC5 /* HelloWorldLayer.mm in Sources */,
 				4D4693281710735000837BC5 /* IntroLayer.mm in Sources */,
 				4D46932B1710735000837BC5 /* GLES-Render.mm in Sources */,
+				4D469340171076E600837BC5 /* Enemy.m in Sources */,
+				4D469343171076FE00837BC5 /* Player.m in Sources */,
+				4D469346171078B500837BC5 /* GameLevelLayer.mm in Sources */,
+				4D46934917107B9400837BC5 /* Bunker.mm in Sources */,
+				4D46934C17108F4400837BC5 /* Paint.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1467,12 +1513,14 @@
 				);
 				HEADER_SEARCH_PATHS = "\"iPointball2D/libs/kazmath/include\"";
 				INFOPLIST_FILE = iPointball2D/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "\"iPointball2D/libs\"";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1492,12 +1540,14 @@
 				);
 				HEADER_SEARCH_PATHS = "\"iPointball2D/libs/kazmath/include\"";
 				INFOPLIST_FILE = iPointball2D/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "\"iPointball2D/libs\"";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -1523,6 +1573,7 @@
 				4D4693321710735000837BC5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
