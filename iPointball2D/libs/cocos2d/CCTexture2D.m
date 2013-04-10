@@ -451,7 +451,7 @@ static CCTexture2DPixelFormat defaultAlphaPixel_format = kCCTexture2DPixelFormat
 }
 @end
 
-#pragma mark -
+/*#pragma mark -
 #pragma mark CCTexture2D - Text
 
 @implementation CCTexture2D (Text)
@@ -816,7 +816,7 @@ static BOOL _PVRHaveAlphaPremultiplied = NO;
 	CC_INCREMENT_GL_DRAWS(1);
 }
 
-@end
+@end*/
 
 
 #pragma mark -

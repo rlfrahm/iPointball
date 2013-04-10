@@ -20,10 +20,11 @@
 	
 	// iPhone only
 	if( [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone )
-		return UIInterfaceOrientationMaskLandscape;
+		return UIInterfaceOrientationLandscapeLeft;//return UIInterfaceOrientationMaskLandscape;
 	
 	// iPad only
-	return UIInterfaceOrientationMaskLandscape;
+	//return UIInterfaceOrientationMaskLandscape;
+    return UIInterfaceOrientationLandscapeLeft;
 }
 
 // Supported orientations. Customize it for your own needs

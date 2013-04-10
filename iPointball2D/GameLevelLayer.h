@@ -12,6 +12,7 @@
 #import "Player.h"
 #import "Enemy.h"
 #import "Bunker.h"
+#import "MyContactListener.h"
 
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
 //This ratio defines how many pixels correspond to 1 Box2D "metre"
@@ -22,14 +23,26 @@
 @interface GameLevelLayer : CCLayerColor {
     NSMutableArray *_enemies;
     NSMutableArray *_paint;
-    NSMutableArray *_coverChoices;
+    NSMutableArray *_bunkers;
     int _monstersDestroyed;
     CCSprite *player;
     CCSprite *enemy;
     CCSprite *bunker;
+    CCSprite *paint;
     NSInteger gameState;
     b2World *world;
-    CCTexture2D *spriteTexture_;
+    b2Body *groundBody;
+    b2Body *playerBody;
+    b2Body *enemyBody;
+    b2Body *paintBody;
+    b2Body *bunkerBody;
+    //CCTexture2D *spriteTexture_;
+    b2MouseJoint *_mouseJoint;
+    b2Fixture *_playerFixture;
+    b2Fixture *enemyFixture;
+    b2Fixture *paintFixture;
+    b2Fixture *bunkerFixture;
+    MyContactListener *contactListener;
 }
 
 + (CCScene *) scene;

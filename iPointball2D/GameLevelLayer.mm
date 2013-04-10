@@ -16,6 +16,8 @@ enum {
 
 #pragma mark - GameLevelLayer
 
+#define PAINTFPS 680 // pixels/sec
+
 @interface GameLevelLayer()
 -(void) initPhysics;
 -(void) addNewPlayerAtPosition:(CGPoint)p;
@@ -40,12 +42,17 @@ enum {
 	return scene;
 }
 
+- (void) gameLogic:(ccTime)delta{
+    
+}
+
 -(id) init{
     if (self = [super initWithColor:ccc4(255,255,255,255)]) {
         
         // enable events
         
         self.touchEnabled = YES;
+        
         CGSize winSize = [CCDirector sharedDirector].winSize;
         
         // init physics
@@ -56,7 +63,7 @@ enum {
         
         // set up sprite
         
-#if 1
+/*#if 1
         // Batch node. Faster
         CCSpriteBatchNode *parent = [CCSpriteBatchNode batchNodeWithFile:@"player.png" capacity:100];
         spriteTexture_ = [parent texture];
@@ -65,7 +72,7 @@ enum {
         spriteTexture_ = [[CCTextureCache sharedTextureCache] addImage:@"player.png"];
         CCNode *parent = [CCNode node];
 #endif
-        [self addChild:parent z:0 tag:kTagParentNode];
+        [self addChild:parent z:0 tag:kTagParentNode];*/
         
         [self addNewPlayerAtPosition:ccp(10, winSize.height/2)];
         
@@ -74,6 +81,10 @@ enum {
         //[player setPosition:ccp(player.contentSize.width/2, winSize.height/2)];
         
         // Add bunkers
+        
+        // collision detection
+        contactListener = new MyContactListener();
+        world->SetContactListener(contactListener);
     }
     return self;
 }
@@ -81,6 +92,8 @@ enum {
 -(void) dealloc{
     delete world;
     world = NULL;
+    
+    delete contactListener;
     
     [super dealloc];
 }
@@ -112,7 +125,7 @@ enum {
     // Call the body factory which allocates memory for the ground body
     // from a pool that creates the ground box shape (also from a pool).
     // The body is also added to the world.
-    b2Body* groundBody = world->CreateBody(&groundBodyDef);
+    groundBody = world->CreateBody(&groundBodyDef);
     
     // Define the ground box shape.
     b2EdgeShape groundBox;
@@ -136,22 +149,33 @@ enum {
 
 -(void) addNewPlayerAtPosition:(CGPoint)p{
     CCLOG(@"Add player %0.2f x %0.2f",p.x,p.y);
+    
+    // Create player and add it to the layer
+    player = [CCSprite spriteWithFile:@"player.png"];
+    player.position = p;
+    [self addChild:player];
+    
     // Define the dynamic body.
     // Set up a 1m squared box in the physics world
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.position.Set(p.x/PTM_RATIO, p.y/PTM_RATIO);
-    b2Body *body = world->CreateBody(&bodyDef);
+    bodyDef.userData = player;
+    playerBody = world->CreateBody(&bodyDef);
     
-    // Define another box shape for our dynamic body
-    b2PolygonShape dynamicBox;
-    dynamicBox.SetAsBox(.5f, .5f); // These are mid points for our 1m box
+    // Create player shape
+    b2PolygonShape playerShape;
+    playerShape.SetAsBox(player.contentSize.width/PTM_RATIO/2, player.contentSize.height/PTM_RATIO/2); // These are mid points for our 1m box
     
-    // Define the dynamic body fixture.
-    b2FixtureDef fixtureDef;
-    fixtureDef.shape = &dynamicBox;
-    body->CreateFixture(&fixtureDef);
+    // Create shape definition and add to body
+    b2FixtureDef playerShapeDef;
+    playerShapeDef.shape = &playerShape;
+    playerShapeDef.density = 10.0f;
+    playerShapeDef.friction = 0.4f;
+    playerShapeDef.restitution = 0.1f;
+    _playerFixture = playerBody->CreateFixture(&playerShapeDef);
     
+    /*
     CCNode *parent = [self getChildByTag:kTagParentNode];
     
     // We have a 64 x 64 sprite sheet with 4 different 32 x 32 images.
@@ -160,12 +184,106 @@ enum {
     
     [sprite setPTMRatio:PTM_RATIO];
     [sprite setB2Body:body];
-    [sprite setPosition:ccp(p.x,p.y)];
+    [sprite setPosition:ccp(p.x,p.y)];*/
     
 }
 
 -(void) addNewEnemyAtPosition:(CGPoint)p{
     CCLOG(@"Add enemy %0.2f x %0.2f", p.x,p.y);
+    
+    // Create enemy and add it to the layer
+    enemy = [CCSprite spriteWithFile:@"enemy.png"];
+    enemy.position = p;
+    [self addChild:enemy];
+    
+    // Define the dynamic body
+    // Set up a box in the physics world
+    b2BodyDef enemyBodyDef;
+    enemyBodyDef.type = b2_dynamicBody;
+    enemyBodyDef.position.Set(p.x/PTM_RATIO, p.y/PTM_RATIO);
+    enemyBodyDef.userData = enemy;
+    enemyBody = world->CreateBody(&enemyBodyDef);
+    
+    // Create player shape
+    b2PolygonShape enemyShape;
+    enemyShape.SetAsBox(enemy.contentSize.width/PTM_RATIO/2, enemy.contentSize.height/PTM_RATIO/2);
+    
+    // Create shape definition and add to body
+    b2FixtureDef enemyShapeDef;
+    enemyShapeDef.shape = &enemyShape;
+    enemyShapeDef.density = 10.0f;
+    enemyShapeDef.friction = 0.4f;
+    enemyShapeDef.restitution = 0.1f;
+    enemyFixture = enemyBody->CreateFixture(&enemyShapeDef);
+}
+
+- (void) addNewMovingPaintToLocation:(CGPoint)p{
+    // Adds a bullet animation from the player or enemy towards p
+    CCLOG(@"Paint is moving towards: %0.2f x %0.2f", p.x,p.y);
+    
+    // Create paint and add it to the layer
+    paint = [CCSprite spriteWithFile:@"Projectile.png"];
+    paint.position = player.position;
+    [self addChild:paint];
+    
+    // Define the dynamic body
+    b2BodyDef paintBodyDef;
+    paintBodyDef.type = b2_dynamicBody;
+    paintBodyDef.position.Set(paint.position.x/PTM_RATIO, paint.position.y/PTM_RATIO);
+    paintBodyDef.userData = enemy;
+    paintBody = world->CreateBody(&paintBodyDef);
+    
+    // Create player shape
+    b2PolygonShape paintShape;
+    //
+    //
+    // NEEDS TO BE CIRCLE SHAPE!!!********************************************
+    //
+    //
+    paintShape.SetAsBox(paint.contentSize.width/PTM_RATIO/2, paint.contentSize.height/PTM_RATIO/2);
+    
+    // Create shape definition and add to body
+    b2FixtureDef paintShapeDef;
+    paintShapeDef.shape = &paintShape;
+    paintShapeDef.density = 10.0f;
+    paintShapeDef.friction = 0.4f;
+    paintShapeDef.restitution = 0.1f;
+    paintFixture = paintBody->CreateFixture(&paintShapeDef);
+    
+    //
+    // Shoot the paint
+    //
+    
+    // Using Physics
+    // Determine offset between the paint and destination p
+    CGPoint offset = ccpSub(p, player.position);
+    b2Vec2 impulse = b2Vec2(offset.x,offset.y);
+    b2Vec2 point = b2Vec2(paintBody->GetWorldCenter().x, paintBody->GetWorldCenter().y);
+    paintBody->ApplyLinearImpulse(impulse, point);
+    
+    // Using Animations
+    /*CGSize winSize = [[CCDirector sharedDirector] winSize];
+    
+    float ratio = offset.y/offset.x;
+    float xTravelLength = winSize.width - player.position.x;
+    float yTravelLength = ratio * xTravelLength + player.position.y;
+    // Pythagorean theorem
+    float distance = sqrtf((offset.x*offset.x) + (offset.y*offset.y));
+    float paintTravelTime = distance/PAINTFPS;
+    
+    CGPoint realDest = ccp(p.x,p.y);
+    
+    // Move paint to actual endpoint
+    [paint runAction:[CCSequence actions:[CCMoveTo actionWithDuration:paintTravelTime position:realDest], [CCCallBlockN actionWithBlock:^(CCNode *node) {
+        //
+        // Destroy paint
+        //
+        [node removeFromParentAndCleanup:YES];
+    }], nil]];*/
+}
+
+- (void) addBunkerAtPosition:(CGPoint)p{
+    
 }
 
 -(void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -177,7 +295,21 @@ enum {
     {
         // Choose one of the touches to work with
         UITouch *touch1 = [touchArray objectAtIndex:0];
-        CGPoint location1 = [self convertTouchToNodeSpace:touch1];
+        CGPoint location1 = [touch1 locationInView:[touch1 view]];
+        location1 = [[CCDirector sharedDirector] convertToGL:location1];
+        b2Vec2 locationWorld = b2Vec2(location1.x/PTM_RATIO, location1.y/PTM_RATIO);
+        
+        if (_playerFixture->TestPoint(locationWorld)) {
+            b2MouseJointDef md;
+            md.bodyA = groundBody;
+            md.bodyB = playerBody;
+            md.target = locationWorld;
+            md.collideConnected = true;
+            md.maxForce = 1000.0f * playerBody->GetMass();
+            
+            _mouseJoint = (b2MouseJoint *)world->CreateJoint(&md);
+            playerBody->SetAwake(true);
+        }
         
         // Shoot Stuff!
         
@@ -188,7 +320,39 @@ enum {
 }
 
 -(void) ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+    CCLOG(@"Touch Moved");
     
+    if (_mouseJoint == NULL) return;
+    
+    NSArray *touchArray = [touches allObjects];
+    
+    if([touchArray count]>0)
+    {
+        UITouch *touch1 = [touchArray objectAtIndex:0];
+        CGPoint location1 = [touch1 locationInView:[touch1 view]];
+        location1 = [[CCDirector sharedDirector] convertToGL:location1];
+        b2Vec2 locationWorld = b2Vec2(location1.x/PTM_RATIO, location1.y/PTM_RATIO);
+        
+        _mouseJoint->SetTarget(locationWorld);
+    }
+}
+
+-(void) ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event{
+    if (_mouseJoint) {
+        world->DestroyJoint(_mouseJoint);
+        _mouseJoint = NULL;
+    }
+}
+
+-(void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+    if (_mouseJoint){
+        world->DestroyJoint(_mouseJoint);
+        _mouseJoint = NULL;
+    }
+}
+
+- (void) handleTap:(UITapGestureRecognizer *)sender{
+    // Enable double tap gesture recognizer to simulate a slide or something
 }
 
 
@@ -197,12 +361,18 @@ enum {
 }
 
 -(void) update:(ccTime)dt{
-    [self enemyMoveDecision];
     
     int32 velocityIterations = 8;
     int32 positionIterations = 1;
     
     world->Step(dt, velocityIterations, positionIterations);
+    
+    std::vector<MyContact>::iterator pos;
+    for(pos = contactListener->_contacts.begin(); pos != contactListener->_contacts.end(); ++pos) {
+        MyContact contact = *pos;
+        
+        // TODO Finish
+    }
 }
 
 -(void) enemyMoveDecision{
