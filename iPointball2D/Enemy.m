@@ -7,8 +7,13 @@
 //
 
 #import "Enemy.h"
+#import "GameLevelLayer.h"
+#import "Player.h"
+#import "SimpleAudioEngine.h"
+#import "Paint.h"
 
 
 @implementation Enemy
+
 
 @end

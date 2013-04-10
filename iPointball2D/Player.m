@@ -11,18 +11,12 @@
 
 @implementation Player
 
--(id) init{
-    if(self = [super init])
+-(id)initWithSpriteFrameName:(NSString *)spriteFrameName layer:(GameLevelLayer *)layer {
+    if((self = [super initWithSpriteFrameName:spriteFrameName layer:layer]))
     {
-        [Player spriteWithFile:@"player.png"];
+        self.attacking = NO;
     }
     return self;
-}
-
--(void) setPosition:(CGPoint) p{
-    NSLog(@"Hello?");
-    self.position = ccp(p.x,p.y);
-    CCLOG(@"Player added at 0.2%f x 0.2%f",self.position.x,self.position.y);
 }
 
 @end

@@ -1,0 +1,4 @@
+These are some helpful links to tutorials.
+
+For game AI:
+http://www.raywenderlich.com/24824/introduction-to-ai-programming-for-games

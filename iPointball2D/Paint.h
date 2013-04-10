@@ -6,11 +6,10 @@
 //  Copyright 2013 Ryan Frahm. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "cocos2d.h"
+#import "Enemy.h"
 
-@interface Paint : CCSprite {
-    
-}
+@interface Paint : Enemy
+
+-(id)initWithTeam:(int)team layer:(GameLevelLayer *)layer;
 
 @end

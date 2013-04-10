@@ -6,11 +6,17 @@
 //  Copyright 2013 Ryan Frahm. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "cocos2d.h"
+#import "GameObject.h"
 
-@interface Enemy : CCSprite {
-    
-}
+@class GameLevelLayer;
+
+@interface Enemy : GameObject
+
+@property(assign) CGPoint velocity;
+@property(assign) CGPoint acceleration;
+@property(assign) float maxVelocity;
+@property(assign) float maxAcceleration;
+
+@property(assign) NSString *shotSound;
 
 @end
