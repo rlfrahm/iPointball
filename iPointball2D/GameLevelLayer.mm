@@ -5,9 +5,11 @@
 //  Created by Ryan Frahm on 4/6/13.
 //  Copyright 2013 Ryan Frahm. All rights reserved.
 //
+// Notes on removing bodies
+// http://www.iforce2d.net/b2dtut/removing-bodies
 
 #import "GameLevelLayer.h"
-
+#import "GameOverLayer.h"
 #import "CCPhysicsSprite.h"
 
 enum {
@@ -153,6 +155,7 @@ enum {
     // Create player and add it to the layer
     player = [CCSprite spriteWithFile:@"player.png"];
     player.position = p;
+    player.tag = 1;
     [self addChild:player];
     
     // Define the dynamic body.
@@ -194,6 +197,7 @@ enum {
     // Create enemy and add it to the layer
     enemy = [CCSprite spriteWithFile:@"enemy.png"];
     enemy.position = p;
+    enemy.tag = 2;
     [self addChild:enemy];
     
     // Define the dynamic body
@@ -215,6 +219,8 @@ enum {
     enemyShapeDef.friction = 0.4f;
     enemyShapeDef.restitution = 0.1f;
     enemyFixture = enemyBody->CreateFixture(&enemyShapeDef);
+    
+    [_enemiesAlive addObject:enemy];
 }
 
 - (void) addNewMovingPaintToLocation:(CGPoint)p{
@@ -224,6 +230,7 @@ enum {
     // Create paint and add it to the layer
     paint = [CCSprite spriteWithFile:@"Projectile.png"];
     paint.position = player.position;
+    paint.tag = 3;
     [self addChild:paint];
     
     // Define the dynamic body
@@ -280,6 +287,8 @@ enum {
         //
         [node removeFromParentAndCleanup:YES];
     }], nil]];*/
+    
+    [_paint addObject:paint];
 }
 
 - (void) addBunkerAtPosition:(CGPoint)p{
@@ -367,11 +376,105 @@ enum {
     
     world->Step(dt, velocityIterations, positionIterations);
     
+    std::vector<b2Body *>toDestroy;
     std::vector<MyContact>::iterator pos;
     for(pos = contactListener->_contacts.begin(); pos != contactListener->_contacts.end(); ++pos) {
         MyContact contact = *pos;
+        CCSprite *spriteA, *spriteB;
+        b2Body *bodyA, *bodyB;
         
-        // TODO Finish
+        if ((contact.fixtureA == _playerFixture && contact.fixtureB == bunkerFixture) || (contact.fixtureA == bunkerFixture && contact.fixtureB == _playerFixture))
+        {
+            CCLOG(@"Player hit the bunker!");
+            // Bounce off?
+        }
+        else if ((contact.fixtureA == enemyFixture && contact.fixtureB == bunkerFixture) || (contact.fixtureA == bunkerFixture && contact.fixtureB == enemyFixture))
+        {
+            CCLOG(@"Enemy hit the bunker!");
+            // Bounce off?
+        }
+        else if ((contact.fixtureA == _playerFixture && contact.fixtureB == paintFixture) || (contact.fixtureA == paintFixture && contact.fixtureB == _playerFixture))
+        {
+            CCLOG(@"Player got hit by paint!");
+            // Not sure if destroy player
+            // Destroy paint
+            CCScene *gameOverScene = [GameOverLayer sceneWithWon:NO];
+            [[CCDirector sharedDirector] replaceScene:gameOverScene];
+            
+            bodyA = contact.fixtureA->GetBody();
+            bodyB = contact.fixtureB->GetBody();
+        }
+        else if ((contact.fixtureA == enemyFixture && contact.fixtureB == paintFixture) || (contact.fixtureA == paintFixture && contact.fixtureB == enemyFixture))
+        {
+            CCLOG(@"Enemy got hit by paint!");
+            // Destroy enemy and paint
+            if ([_enemiesAlive count] == 0) {
+                CCScene *gameOverScene = [GameOverLayer sceneWithWon:YES];
+                [[CCDirector sharedDirector] replaceScene:gameOverScene];
+            }
+            
+            bodyA = contact.fixtureA->GetBody();
+            bodyB = contact.fixtureB->GetBody();
+        }
+        
+        if(bodyA->GetUserData() != NULL && bodyB->GetUserData() != NULL)
+        {
+            spriteA = (CCSprite *) bodyA->GetUserData();
+            spriteB = (CCSprite *) bodyB->GetUserData();
+            
+            // spriteA = player, spriteB = paint
+            if(spriteA.tag == 1 && spriteB.tag == 3)
+            {
+                if(std::find(toDestroy.begin(), toDestroy.end(), bodyB) == toDestroy.end())
+                {
+                    toDestroy.push_back(bodyB);
+                }
+            }
+            
+            // spriteA = player, spriteB = paint
+            else if(spriteA.tag == 3 && spriteB.tag == 1)
+            {
+                if(std::find(toDestroy.begin(), toDestroy.end(), bodyA) == toDestroy.end())
+                {
+                    toDestroy.push_back(bodyA);
+                }
+            }
+            
+            // spriteA = player, spriteB = paint
+            else if(spriteA.tag == 2 && spriteB.tag == 3)
+            {
+                if(std::find(toDestroy.begin(), toDestroy.end(), bodyB) == toDestroy.end())
+                {
+                    toDestroy.push_back(bodyB);
+                }
+            }
+            
+            // spriteA = player, spriteB = paint
+            else if(spriteA.tag == 3 && spriteB.tag == 2)
+            {
+                if(std::find(toDestroy.begin(), toDestroy.end(), bodyA) == toDestroy.end())
+                {
+                    toDestroy.push_back(bodyA);
+                }
+            }
+            
+        }
+        else
+        {
+            CCLOG(@"User data A:%s B:%s", spriteA, spriteB);
+        }
+    }
+    
+    std::vector<b2Body *>::iterator pos2;
+    for(pos2 = toDestroy.begin(); pos2 != toDestroy.end(); ++pos2)
+    {
+        b2Body *body = *pos2;
+        if(body ->GetUserData() != NULL)
+        {
+            CCSprite *sprite = (CCSprite *) body->GetUserData();
+            [self removeChild:sprite cleanup:YES];
+        }
+        world->DestroyBody(body);
     }
 }
 

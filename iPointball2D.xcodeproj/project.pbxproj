@@ -194,6 +194,7 @@
 		E131A3E61714B2B500DC66F8 /* Projectile.png in Resources */ = {isa = PBXBuildFile; fileRef = E131A3E31714B2B500DC66F8 /* Projectile.png */; };
 		E131A3E71714B2B500DC66F8 /* Target.png in Resources */ = {isa = PBXBuildFile; fileRef = E131A3E41714B2B500DC66F8 /* Target.png */; };
 		E131A3EA1714D22400DC66F8 /* MyContactListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = E131A3E91714D22400DC66F8 /* MyContactListener.mm */; };
+		E1A2C5451715BA95007B65B0 /* GameOverLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = E1A2C5441715BA95007B65B0 /* GameOverLayer.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -586,6 +587,8 @@
 		E131A3E41714B2B500DC66F8 /* Target.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Target.png; sourceTree = "<group>"; };
 		E131A3E81714D22400DC66F8 /* MyContactListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyContactListener.h; sourceTree = "<group>"; };
 		E131A3E91714D22400DC66F8 /* MyContactListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MyContactListener.mm; sourceTree = "<group>"; };
+		E1A2C5431715BA95007B65B0 /* GameOverLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverLayer.h; sourceTree = "<group>"; };
+		E1A2C5441715BA95007B65B0 /* GameOverLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameOverLayer.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -644,6 +647,8 @@
 		4D4690FF1710734B00837BC5 /* iPointball2D */ = {
 			isa = PBXGroup;
 			children = (
+				E1A2C5431715BA95007B65B0 /* GameOverLayer.h */,
+				E1A2C5441715BA95007B65B0 /* GameOverLayer.mm */,
 				E131A3E81714D22400DC66F8 /* MyContactListener.h */,
 				E131A3E91714D22400DC66F8 /* MyContactListener.mm */,
 				4D46934717107B9400837BC5 /* Bunker.h */,
@@ -1450,6 +1455,7 @@
 				4D46934917107B9400837BC5 /* Bunker.mm in Sources */,
 				4D46934C17108F4400837BC5 /* Paint.mm in Sources */,
 				E131A3EA1714D22400DC66F8 /* MyContactListener.mm in Sources */,
+				E1A2C5451715BA95007B65B0 /* GameOverLayer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

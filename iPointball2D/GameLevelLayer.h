@@ -21,7 +21,7 @@
 #define PTM_RATIO 32
 
 @interface GameLevelLayer : CCLayerColor {
-    NSMutableArray *_enemies;
+    NSMutableArray *_enemiesAlive;
     NSMutableArray *_paint;
     NSMutableArray *_bunkers;
     int _monstersDestroyed;
