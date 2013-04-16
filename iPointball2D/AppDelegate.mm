@@ -20,11 +20,11 @@
 	
 	// iPhone only
 	if( [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone )
-		return UIInterfaceOrientationLandscapeLeft;//return UIInterfaceOrientationMaskLandscape;
+		return UIInterfaceOrientationMaskLandscape;//return UIInterfaceOrientationMaskLandscape;
 	
 	// iPad only
 	//return UIInterfaceOrientationMaskLandscape;
-    return UIInterfaceOrientationLandscapeLeft;
+    return UIInterfaceOrientationMaskLandscape;
 }
 
 // Supported orientations. Customize it for your own needs
@@ -135,7 +135,8 @@
 	[director_ setDelegate:navController_];
 	
 	// set the Navigation Controller as the root view controller
-	[window_ setRootViewController:navController_];
+	//[window_ setRootViewController:navController_];
+    window_.rootViewController = navController_;
 	
 	// make main window visible
 	[window_ makeKeyAndVisible];

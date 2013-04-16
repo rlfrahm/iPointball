@@ -78,6 +78,8 @@ enum {
         
         [self addNewPlayerAtPosition:ccp(10, winSize.height/2)];
         
+        //[self addNewEnemyAtPosition:ccp(470, winSize.height/2)];
+        
         [self scheduleUpdate];
         
         //[player setPosition:ccp(player.contentSize.width/2, winSize.height/2)];
@@ -153,7 +155,7 @@ enum {
     CCLOG(@"Add player %0.2f x %0.2f",p.x,p.y);
     
     // Create player and add it to the layer
-    player = [CCSprite spriteWithFile:@"player.png"];
+    player = [CCSprite spriteWithFile:@"Player.png"];
     player.position = p;
     player.tag = 1;
     [self addChild:player];
@@ -195,7 +197,7 @@ enum {
     CCLOG(@"Add enemy %0.2f x %0.2f", p.x,p.y);
     
     // Create enemy and add it to the layer
-    enemy = [CCSprite spriteWithFile:@"enemy.png"];
+    enemy = [CCSprite spriteWithFile:@"Target.png"];
     enemy.position = p;
     enemy.tag = 2;
     [self addChild:enemy];
@@ -252,9 +254,10 @@ enum {
     // Create shape definition and add to body
     b2FixtureDef paintShapeDef;
     paintShapeDef.shape = &paintShape;
-    paintShapeDef.density = 10.0f;
-    paintShapeDef.friction = 0.4f;
+    paintShapeDef.density = 0.1f;
+    paintShapeDef.friction = 0.04f;
     paintShapeDef.restitution = 0.1f;
+    
     paintFixture = paintBody->CreateFixture(&paintShapeDef);
     
     //
@@ -266,7 +269,9 @@ enum {
     CGPoint offset = ccpSub(p, player.position);
     b2Vec2 impulse = b2Vec2(offset.x,offset.y);
     b2Vec2 point = b2Vec2(paintBody->GetWorldCenter().x, paintBody->GetWorldCenter().y);
+    
     paintBody->ApplyLinearImpulse(impulse, point);
+    CCLOG(@"Impulse: %0.2f x %0.2f, Point: %0.2f x %0.2f", impulse.x, impulse.y, p.x, p.y);
     
     // Using Animations
     /*CGSize winSize = [[CCDirector sharedDirector] winSize];
@@ -321,9 +326,10 @@ enum {
         }
         
         // Shoot Stuff!
+        [self addNewMovingPaintToLocation:location1];
         
         // Set up initial loaction of projectile
-        CGSize winSize = [[CCDirector sharedDirector] winSize];
+        //CGSize winSize = [[CCDirector sharedDirector] winSize];
         // Shoot projectile
     }
 }
@@ -371,8 +377,8 @@ enum {
 
 -(void) update:(ccTime)dt{
     
-    int32 velocityIterations = 8;
-    int32 positionIterations = 1;
+    int32 velocityIterations = 10;
+    int32 positionIterations = 5;
     
     world->Step(dt, velocityIterations, positionIterations);
     
@@ -393,7 +399,7 @@ enum {
             CCLOG(@"Enemy hit the bunker!");
             // Bounce off?
         }
-        else if ((contact.fixtureA == _playerFixture && contact.fixtureB == paintFixture) || (contact.fixtureA == paintFixture && contact.fixtureB == _playerFixture))
+        /*else if ((contact.fixtureA == _playerFixture && contact.fixtureB == paintFixture) || (contact.fixtureA == paintFixture && contact.fixtureB == _playerFixture))
         {
             CCLOG(@"Player got hit by paint!");
             // Not sure if destroy player
@@ -403,7 +409,7 @@ enum {
             
             bodyA = contact.fixtureA->GetBody();
             bodyB = contact.fixtureB->GetBody();
-        }
+        }*/
         else if ((contact.fixtureA == enemyFixture && contact.fixtureB == paintFixture) || (contact.fixtureA == paintFixture && contact.fixtureB == enemyFixture))
         {
             CCLOG(@"Enemy got hit by paint!");
@@ -416,8 +422,9 @@ enum {
             bodyA = contact.fixtureA->GetBody();
             bodyB = contact.fixtureB->GetBody();
         }
+        //CCLOG(@"User data A:%@ B:%@", spriteA, spriteB);
         
-        if(bodyA->GetUserData() != NULL && bodyB->GetUserData() != NULL)
+        /*if(bodyA->GetUserData() != NULL && bodyB->GetUserData() != NULL)
         {
             spriteA = (CCSprite *) bodyA->GetUserData();
             spriteB = (CCSprite *) bodyB->GetUserData();
@@ -461,8 +468,8 @@ enum {
         }
         else
         {
-            CCLOG(@"User data A:%s B:%s", spriteA, spriteB);
-        }
+            CCLOG(@"User data A:%@ B:%@", spriteA, spriteB);
+        }*/
     }
     
     std::vector<b2Body *>::iterator pos2;

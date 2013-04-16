@@ -141,14 +141,15 @@ enum {
 		[leaderboardViewController release];
 	}];
     
-    CCMenuItem *itemLevelSelect = [CCMenuItemFont itemWithString:@"Level Select" block:^(id sender) {        
+    CCMenuItem *itemLevelSelect = [CCMenuItemFont itemWithString:@"Level Select" block:^(id sender)
+    {
         AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
         
-        [[ app director] replaceScene:[GameLevelLayer scene]];
-        
+        //[[ app director] replaceScene:[GameLevelLayer scene]];
+        //[[app director] replaceScene:[GameLevelLayer scene]];
         // Show new layer
         //[[CCDirector sharedDirector] replaceScene:[GameLevelLayer scene]];
-        
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[GameLevelLayer scene] ]];
     }];
 	
 	CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, itemLevelSelect,reset, nil];
