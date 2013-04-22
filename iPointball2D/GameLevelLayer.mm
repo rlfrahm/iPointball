@@ -225,9 +225,13 @@ enum {
     [_enemiesAlive addObject:enemy];
 }
 
-- (void) addNewMovingPaintToLocation:(CGPoint)p{
+- (void) addNewMovingPaintToLocation:(CGPoint)p :(CGFloat)shootAngle{
     // Adds a bullet animation from the player or enemy towards p
     CCLOG(@"Paint is moving towards: %0.2f x %0.2f", p.x,p.y);
+    
+    int power = 100;
+    float x1 = cos(shootAngle);
+    float y1 = sin(shootAngle);
     
     // Create paint and add it to the layer
     paint = [CCSprite spriteWithFile:@"Projectile.png"];
@@ -239,24 +243,20 @@ enum {
     b2BodyDef paintBodyDef;
     paintBodyDef.type = b2_dynamicBody;
     paintBodyDef.position.Set(paint.position.x/PTM_RATIO, paint.position.y/PTM_RATIO);
-    paintBodyDef.userData = enemy;
+    paintBodyDef.userData = paint;
+    paintBodyDef.bullet = true;
     paintBody = world->CreateBody(&paintBodyDef);
     
     // Create player shape
-    b2PolygonShape paintShape;
-    //
-    //
-    // NEEDS TO BE CIRCLE SHAPE!!!********************************************
-    //
-    //
-    paintShape.SetAsBox(paint.contentSize.width/PTM_RATIO/2, paint.contentSize.height/PTM_RATIO/2);
+    b2CircleShape paintShape;
+    paintShape.m_radius = 7.0/PTM_RATIO;
     
     // Create shape definition and add to body
     b2FixtureDef paintShapeDef;
     paintShapeDef.shape = &paintShape;
-    paintShapeDef.density = 0.1f;
-    paintShapeDef.friction = 0.04f;
-    paintShapeDef.restitution = 0.1f;
+    paintShapeDef.density = 80.0f;
+    paintShapeDef.friction = 0.0f;
+    paintShapeDef.restitution = 1.0f;
     
     paintFixture = paintBody->CreateFixture(&paintShapeDef);
     
@@ -266,32 +266,12 @@ enum {
     
     // Using Physics
     // Determine offset between the paint and destination p
-    CGPoint offset = ccpSub(p, player.position);
-    b2Vec2 impulse = b2Vec2(offset.x,offset.y);
-    b2Vec2 point = b2Vec2(paintBody->GetWorldCenter().x, paintBody->GetWorldCenter().y);
+    b2Vec2 force = b2Vec2(x1*power,y1*power);
     
-    paintBody->ApplyLinearImpulse(impulse, point);
-    CCLOG(@"Impulse: %0.2f x %0.2f, Point: %0.2f x %0.2f", impulse.x, impulse.y, p.x, p.y);
+    paintBody->ApplyLinearImpulse(force, paintBodyDef.position);
+    //CCLOG(@"Impulse: %0.2f x %0.2f, Point: %0.2f x %0.2f", impulse.x, impulse.y, p.x, p.y);
     
-    // Using Animations
-    /*CGSize winSize = [[CCDirector sharedDirector] winSize];
     
-    float ratio = offset.y/offset.x;
-    float xTravelLength = winSize.width - player.position.x;
-    float yTravelLength = ratio * xTravelLength + player.position.y;
-    // Pythagorean theorem
-    float distance = sqrtf((offset.x*offset.x) + (offset.y*offset.y));
-    float paintTravelTime = distance/PAINTFPS;
-    
-    CGPoint realDest = ccp(p.x,p.y);
-    
-    // Move paint to actual endpoint
-    [paint runAction:[CCSequence actions:[CCMoveTo actionWithDuration:paintTravelTime position:realDest], [CCCallBlockN actionWithBlock:^(CCNode *node) {
-        //
-        // Destroy paint
-        //
-        [node removeFromParentAndCleanup:YES];
-    }], nil]];*/
     
     [_paint addObject:paint];
 }
@@ -309,9 +289,14 @@ enum {
     {
         // Choose one of the touches to work with
         UITouch *touch1 = [touchArray objectAtIndex:0];
-        CGPoint location1 = [touch1 locationInView:[touch1 view]];
-        location1 = [[CCDirector sharedDirector] convertToGL:location1];
-        b2Vec2 locationWorld = b2Vec2(location1.x/PTM_RATIO, location1.y/PTM_RATIO);
+        CGPoint location = [touch1 locationInView:[touch1 view]];
+        location = [[CCDirector sharedDirector] convertToGL:location];
+        CGPoint shootVector = ccpSub(location, paint.position);
+        CGFloat shootAngle = ccpToAngle(shootVector);
+        CGPoint normalizedShootVector = ccpNormalize(shootVector);
+        CGPoint overshotVector = ccpMult(normalizedShootVector, 420);
+        CGPoint offscreenPoint = ccpAdd(paint.position, overshotVector);
+        /*b2Vec2 locationWorld = b2Vec2(location1.x/PTM_RATIO, location1.y/PTM_RATIO);
         
         if (_playerFixture->TestPoint(locationWorld)) {
             b2MouseJointDef md;
@@ -323,10 +308,10 @@ enum {
             
             _mouseJoint = (b2MouseJoint *)world->CreateJoint(&md);
             playerBody->SetAwake(true);
-        }
+        }*/
         
         // Shoot Stuff!
-        [self addNewMovingPaintToLocation:location1];
+        [self addNewMovingPaintToLocation:location :shootAngle];
         
         // Set up initial loaction of projectile
         //CGSize winSize = [[CCDirector sharedDirector] winSize];

@@ -17,6 +17,6 @@
 @property(assign) float maxVelocity;
 @property(assign) float maxAcceleration;
 
-@property(assign) NSString *shotSound;
+//@property(assign) NSString *shotSound;
 
 @end
