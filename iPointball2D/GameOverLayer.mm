@@ -9,7 +9,6 @@
 #import "GameOverLayer.h"
 #import "GameLevelLayer.h"
 
-
 @implementation GameOverLayer
 
 +(CCScene *) sceneWithWon:(BOOL)won{

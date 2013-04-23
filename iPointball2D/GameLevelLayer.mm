@@ -11,6 +11,8 @@
 #import "GameLevelLayer.h"
 #import "GameOverLayer.h"
 #import "CCPhysicsSprite.h"
+#import "EntityManager.h"
+#import "RenderComponent.h"
 
 enum {
     kTagParentNode = 1,
@@ -76,7 +78,7 @@ enum {
 #endif
         [self addChild:parent z:0 tag:kTagParentNode];*/
         
-        [self addNewPlayerAtPosition:ccp(10, winSize.height/2)];
+        [self addNewPlayerAtPosition:ccp(winSize.width/2, winSize.height/2)];
         
         //[self addNewEnemyAtPosition:ccp(470, winSize.height/2)];
         
@@ -229,6 +231,8 @@ enum {
     // Adds a bullet animation from the player or enemy towards p
     CCLOG(@"Paint is moving towards: %0.2f x %0.2f", p.x,p.y);
     
+    b2Body *paintBody;
+    
     int power = 100;
     float x1 = cos(shootAngle);
     float y1 = sin(shootAngle);
@@ -239,7 +243,7 @@ enum {
     paint.tag = 3;
     [self addChild:paint];
     
-    // Define the dynamic body
+    // body definition
     b2BodyDef paintBodyDef;
     paintBodyDef.type = b2_dynamicBody;
     paintBodyDef.position.Set(paint.position.x/PTM_RATIO, paint.position.y/PTM_RATIO);
@@ -247,18 +251,18 @@ enum {
     paintBodyDef.bullet = true;
     paintBody = world->CreateBody(&paintBodyDef);
     
-    // Create player shape
+    // shape definiation
     b2CircleShape paintShape;
     paintShape.m_radius = 7.0/PTM_RATIO;
     
     // Create shape definition and add to body
-    b2FixtureDef paintShapeDef;
-    paintShapeDef.shape = &paintShape;
-    paintShapeDef.density = 80.0f;
-    paintShapeDef.friction = 0.0f;
-    paintShapeDef.restitution = 1.0f;
+    b2FixtureDef paintFixtureDef;
+    paintFixtureDef.shape = &paintShape;
+    paintFixtureDef.density = 1.0f;
+    //paintShapeDef.friction = 0.0f;
+    //paintShapeDef.restitution = 1.0f;
     
-    paintFixture = paintBody->CreateFixture(&paintShapeDef);
+    paintFixture = paintBody->CreateFixture(&paintFixtureDef);
     
     //
     // Shoot the paint
@@ -268,10 +272,8 @@ enum {
     // Determine offset between the paint and destination p
     b2Vec2 force = b2Vec2(x1*power,y1*power);
     
-    paintBody->ApplyLinearImpulse(force, paintBodyDef.position);
+    paintBody->ApplyLinearImpulse(b2Vec2(0,100), paintBody->GetWorldCenter());
     //CCLOG(@"Impulse: %0.2f x %0.2f, Point: %0.2f x %0.2f", impulse.x, impulse.y, p.x, p.y);
-    
-    
     
     [_paint addObject:paint];
 }
@@ -310,10 +312,12 @@ enum {
             playerBody->SetAwake(true);
         }*/
         
+        [self draw:shootVector];
+        
         // Shoot Stuff!
         [self addNewMovingPaintToLocation:location :shootAngle];
         
-        // Set up initial loaction of projectile
+        // Set up initial location of projectile
         //CGSize winSize = [[CCDirector sharedDirector] winSize];
         // Shoot projectile
     }
@@ -337,7 +341,7 @@ enum {
     }
 }
 
--(void) ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event{
+/*-(void) ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event{
     if (_mouseJoint) {
         world->DestroyJoint(_mouseJoint);
         _mouseJoint = NULL;
@@ -353,7 +357,7 @@ enum {
 
 - (void) handleTap:(UITapGestureRecognizer *)sender{
     // Enable double tap gesture recognizer to simulate a slide or something
-}
+}*/
 
 
 -(void) createMenu{
@@ -367,7 +371,7 @@ enum {
     
     world->Step(dt, velocityIterations, positionIterations);
     
-    std::vector<b2Body *>toDestroy;
+    /*std::vector<b2Body *>toDestroy;
     std::vector<MyContact>::iterator pos;
     for(pos = contactListener->_contacts.begin(); pos != contactListener->_contacts.end(); ++pos) {
         MyContact contact = *pos;
@@ -394,7 +398,7 @@ enum {
             
             bodyA = contact.fixtureA->GetBody();
             bodyB = contact.fixtureB->GetBody();
-        }*/
+        }
         else if ((contact.fixtureA == enemyFixture && contact.fixtureB == paintFixture) || (contact.fixtureA == paintFixture && contact.fixtureB == enemyFixture))
         {
             CCLOG(@"Enemy got hit by paint!");
@@ -454,7 +458,7 @@ enum {
         else
         {
             CCLOG(@"User data A:%@ B:%@", spriteA, spriteB);
-        }*/
+        }
     }
     
     std::vector<b2Body *>::iterator pos2;
@@ -497,6 +501,13 @@ enum {
      [node removeFromParentAndCleanup:YES];
      }];
      [computer runAction:[CCSequence actions:actionMove,actionMoveDone, nil]];*/
+}
+
+-(void)draw:(CGPoint)p{
+    CCLOG(@"Drawing..");
+    glColorMask(0.8, 1.0, 0.76, 1.0);
+    glLineWidth(2.0f);
+    ccDrawLine(player.position, ccp(p.x, p.y));
 }
 
 @end

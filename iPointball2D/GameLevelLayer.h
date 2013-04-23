@@ -34,7 +34,6 @@
     b2Body *groundBody;
     b2Body *playerBody;
     b2Body *enemyBody;
-    b2Body *paintBody;
     b2Body *bunkerBody;
     //CCTexture2D *spriteTexture_;
     b2MouseJoint *_mouseJoint;

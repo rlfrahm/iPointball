@@ -189,6 +189,12 @@
 		4D469343171076FE00837BC5 /* Player.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D469342171076FD00837BC5 /* Player.mm */; };
 		4D469346171078B500837BC5 /* GameLevelLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D469345171078B500837BC5 /* GameLevelLayer.mm */; };
 		4D46934917107B9400837BC5 /* Bunker.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D46934817107B9400837BC5 /* Bunker.mm */; };
+		4DF5E7B217260BBE007257FA /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF5E7B117260BBE007257FA /* Entity.m */; };
+		4DF5E7B917260D90007257FA /* Component.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF5E7B817260D90007257FA /* Component.m */; };
+		4DF5E7BC17260DC7007257FA /* RenderComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF5E7BB17260DC7007257FA /* RenderComponent.m */; };
+		4DF5E7BF17260E85007257FA /* HealthComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF5E7BE17260E85007257FA /* HealthComponent.m */; };
+		4DF5E7C217260F68007257FA /* EntityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF5E7C117260F68007257FA /* EntityManager.m */; };
+		4DF5E7C617261BD7007257FA /* System.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF5E7C517261BD7007257FA /* System.m */; };
 		E131A3E51714B2B500DC66F8 /* Player.png in Resources */ = {isa = PBXBuildFile; fileRef = E131A3E21714B2B500DC66F8 /* Player.png */; };
 		E131A3E61714B2B500DC66F8 /* Projectile.png in Resources */ = {isa = PBXBuildFile; fileRef = E131A3E31714B2B500DC66F8 /* Projectile.png */; };
 		E131A3E71714B2B500DC66F8 /* Target.png in Resources */ = {isa = PBXBuildFile; fileRef = E131A3E41714B2B500DC66F8 /* Target.png */; };
@@ -591,6 +597,18 @@
 		4D46934717107B9400837BC5 /* Bunker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bunker.h; sourceTree = "<group>"; };
 		4D46934817107B9400837BC5 /* Bunker.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Bunker.mm; sourceTree = "<group>"; };
 		4D46934A17108F4400837BC5 /* Paint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Paint.h; sourceTree = "<group>"; };
+		4DF5E7B017260BBE007257FA /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
+		4DF5E7B117260BBE007257FA /* Entity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entity.m; sourceTree = "<group>"; };
+		4DF5E7B717260D90007257FA /* Component.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Component.h; sourceTree = "<group>"; };
+		4DF5E7B817260D90007257FA /* Component.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Component.m; sourceTree = "<group>"; };
+		4DF5E7BA17260DC7007257FA /* RenderComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderComponent.h; sourceTree = "<group>"; };
+		4DF5E7BB17260DC7007257FA /* RenderComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenderComponent.m; sourceTree = "<group>"; };
+		4DF5E7BD17260E85007257FA /* HealthComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthComponent.h; sourceTree = "<group>"; };
+		4DF5E7BE17260E85007257FA /* HealthComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthComponent.m; sourceTree = "<group>"; };
+		4DF5E7C017260F68007257FA /* EntityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityManager.h; sourceTree = "<group>"; };
+		4DF5E7C117260F68007257FA /* EntityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityManager.m; sourceTree = "<group>"; };
+		4DF5E7C417261BD7007257FA /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
+		4DF5E7C517261BD7007257FA /* System.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = System.m; sourceTree = "<group>"; };
 		E131A3E21714B2B500DC66F8 /* Player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Player.png; sourceTree = "<group>"; };
 		E131A3E31714B2B500DC66F8 /* Projectile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Projectile.png; sourceTree = "<group>"; };
 		E131A3E41714B2B500DC66F8 /* Target.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Target.png; sourceTree = "<group>"; };
@@ -676,6 +694,7 @@
 		4D4690FF1710734B00837BC5 /* iPointball2D */ = {
 			isa = PBXGroup;
 			children = (
+				4DF5E7AE17260B70007257FA /* EntitySystem */,
 				E1A2C54C1715D37B007B65B0 /* Sounds */,
 				E1A2C54B1715D36B007B65B0 /* GameObjects */,
 				E1A2C5431715BA95007B65B0 /* GameOverLayer.h */,
@@ -1240,6 +1259,49 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		4DF5E7AE17260B70007257FA /* EntitySystem */ = {
+			isa = PBXGroup;
+			children = (
+				4DF5E7C317261BAF007257FA /* Systems */,
+				4DF5E7B617260D80007257FA /* Components */,
+				4DF5E7AF17260B84007257FA /* Framework */,
+			);
+			name = EntitySystem;
+			sourceTree = "<group>";
+		};
+		4DF5E7AF17260B84007257FA /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				4DF5E7B017260BBE007257FA /* Entity.h */,
+				4DF5E7B117260BBE007257FA /* Entity.m */,
+				4DF5E7C017260F68007257FA /* EntityManager.h */,
+				4DF5E7C117260F68007257FA /* EntityManager.m */,
+			);
+			name = Framework;
+			sourceTree = "<group>";
+		};
+		4DF5E7B617260D80007257FA /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				4DF5E7B717260D90007257FA /* Component.h */,
+				4DF5E7B817260D90007257FA /* Component.m */,
+				4DF5E7BA17260DC7007257FA /* RenderComponent.h */,
+				4DF5E7BB17260DC7007257FA /* RenderComponent.m */,
+				4DF5E7BD17260E85007257FA /* HealthComponent.h */,
+				4DF5E7BE17260E85007257FA /* HealthComponent.m */,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
+		4DF5E7C317261BAF007257FA /* Systems */ = {
+			isa = PBXGroup;
+			children = (
+				4DF5E7C417261BD7007257FA /* System.h */,
+				4DF5E7C517261BD7007257FA /* System.m */,
+			);
+			name = Systems;
+			sourceTree = "<group>";
+		};
 		E1A2C54B1715D36B007B65B0 /* GameObjects */ = {
 			isa = PBXGroup;
 			children = (
@@ -1562,6 +1624,12 @@
 				E1A2C5671715D706007B65B0 /* HumanPlayer.mm in Sources */,
 				E1A2C56A1715D7DF007B65B0 /* LongRangeEnemy.mm in Sources */,
 				E1A2C56D1715E2CF007B65B0 /* Paint.mm in Sources */,
+				4DF5E7B217260BBE007257FA /* Entity.m in Sources */,
+				4DF5E7B917260D90007257FA /* Component.m in Sources */,
+				4DF5E7BC17260DC7007257FA /* RenderComponent.m in Sources */,
+				4DF5E7BF17260E85007257FA /* HealthComponent.m in Sources */,
+				4DF5E7C217260F68007257FA /* EntityManager.m in Sources */,
+				4DF5E7C617261BD7007257FA /* System.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
