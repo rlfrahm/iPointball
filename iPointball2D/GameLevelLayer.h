@@ -9,10 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Box2D.h"
-#import "Player.h"
-#import "Enemy.h"
-#import "Bunker.h"
 #import "MyContactListener.h"
+#import "GLES-Render.h"
+#import "Sprite.h"
 
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
 //This ratio defines how many pixels correspond to 1 Box2D "metre"
@@ -42,7 +41,11 @@
     b2Fixture *paintFixture;
     b2Fixture *bunkerFixture;
     MyContactListener *contactListener;
+    GLESDebugDraw *_debugDraw;
+    CCArray *_cache;
 }
+
+@property(retain)CCArray *cache;
 
 + (CCScene *) scene;
 

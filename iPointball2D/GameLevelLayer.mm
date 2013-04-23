@@ -11,8 +11,7 @@
 #import "GameLevelLayer.h"
 #import "GameOverLayer.h"
 #import "CCPhysicsSprite.h"
-#import "EntityManager.h"
-#import "RenderComponent.h"
+#import "Player.h"
 
 enum {
     kTagParentNode = 1,
@@ -21,6 +20,7 @@ enum {
 #pragma mark - GameLevelLayer
 
 #define PAINTFPS 680 // pixels/sec
+#define PTM_RATIO 32 // pixels-meters
 
 @interface GameLevelLayer()
 -(void) initPhysics;
@@ -30,6 +30,8 @@ enum {
 @end
 
 @implementation GameLevelLayer
+
+@synthesize cache = _cache;
 
 +(CCScene *) scene
 {
@@ -61,7 +63,7 @@ enum {
         
         // init physics
         [self initPhysics];
-                
+        
         // create menu
         // [self createMenu];
         
@@ -95,11 +97,27 @@ enum {
     return self;
 }
 
+-(void)draw{
+    [super draw];
+    
+    ccGLEnableVertexAttribs(kCCVertexAttribFlag_Position);
+    
+    kmGLPushMatrix();
+    world->DrawDebugData();
+    
+    kmGLPushMatrix();
+}
+
 -(void) dealloc{
     delete world;
     world = NULL;
     
+    delete _debugDraw;
+    
     delete contactListener;
+    
+    [_cache release];
+    _cache = nil;
     
     [super dealloc];
 }
@@ -116,13 +134,16 @@ enum {
     
     world->SetContinuousPhysics(true);
     
+    _debugDraw = new GLESDebugDraw(PTM_RATIO);
+    world->SetDebugDraw(_debugDraw);
+    
     uint32 flags = 0;
     flags += b2Draw::e_shapeBit;
     //		flags += b2Draw::e_jointBit;
 	//		flags += b2Draw::e_aabbBit;
 	//		flags += b2Draw::e_pairBit;
 	//		flags += b2Draw::e_centerOfMassBit;
-	//m_debugDraw->SetFlags(flags);
+	_debugDraw->SetFlags(flags);
     
     // Define the ground body.
     b2BodyDef groundBodyDef;
@@ -154,7 +175,14 @@ enum {
 }
 
 -(void) addNewPlayerAtPosition:(CGPoint)p{
-    CCLOG(@"Add player %0.2f x %0.2f",p.x,p.y);
+    //CCLOG(@"Add player %0.2f x %0.2f",player.position.x/PTM_RATIO,player.position.y/PTM_RATIO);
+    
+    /*_cache = [[CCArray alloc] initWithCapacity:53];
+    
+    Sprite *player = [[Player alloc] initWithWorld:world];
+    [self addChild:player z:1];
+    [player activateCollisions];
+    [_cache addObject:player];*/
     
     // Create player and add it to the layer
     player = [CCSprite spriteWithFile:@"Player.png"];
@@ -166,8 +194,10 @@ enum {
     // Set up a 1m squared box in the physics world
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
-    bodyDef.position.Set(p.x/PTM_RATIO, p.y/PTM_RATIO);
+    bodyDef.position.Set(player.position.x/PTM_RATIO, player.position.y/PTM_RATIO);
     bodyDef.userData = player;
+    bodyDef.angle = 0;
+    bodyDef.fixedRotation = true;
     playerBody = world->CreateBody(&bodyDef);
     
     // Create player shape
@@ -233,7 +263,7 @@ enum {
     
     b2Body *paintBody;
     
-    int power = 100;
+    int power = 5;
     float x1 = cos(shootAngle);
     float y1 = sin(shootAngle);
     
@@ -272,7 +302,8 @@ enum {
     // Determine offset between the paint and destination p
     b2Vec2 force = b2Vec2(x1*power,y1*power);
     
-    paintBody->ApplyLinearImpulse(b2Vec2(0,100), paintBody->GetWorldCenter());
+    //paintBody->ApplyForceToCenter(force);
+    paintBody->ApplyLinearImpulse(force, paintBody->GetWorldCenter());
     //CCLOG(@"Impulse: %0.2f x %0.2f, Point: %0.2f x %0.2f", impulse.x, impulse.y, p.x, p.y);
     
     [_paint addObject:paint];
@@ -298,7 +329,7 @@ enum {
         CGPoint normalizedShootVector = ccpNormalize(shootVector);
         CGPoint overshotVector = ccpMult(normalizedShootVector, 420);
         CGPoint offscreenPoint = ccpAdd(paint.position, overshotVector);
-        /*b2Vec2 locationWorld = b2Vec2(location1.x/PTM_RATIO, location1.y/PTM_RATIO);
+        b2Vec2 locationWorld = b2Vec2(location.x/PTM_RATIO, location.y/PTM_RATIO);
         
         if (_playerFixture->TestPoint(locationWorld)) {
             b2MouseJointDef md;
@@ -310,9 +341,7 @@ enum {
             
             _mouseJoint = (b2MouseJoint *)world->CreateJoint(&md);
             playerBody->SetAwake(true);
-        }*/
-        
-        [self draw:shootVector];
+        }
         
         // Shoot Stuff!
         [self addNewMovingPaintToLocation:location :shootAngle];
@@ -328,20 +357,15 @@ enum {
     
     if (_mouseJoint == NULL) return;
     
-    NSArray *touchArray = [touches allObjects];
-    
-    if([touchArray count]>0)
-    {
-        UITouch *touch1 = [touchArray objectAtIndex:0];
-        CGPoint location1 = [touch1 locationInView:[touch1 view]];
-        location1 = [[CCDirector sharedDirector] convertToGL:location1];
-        b2Vec2 locationWorld = b2Vec2(location1.x/PTM_RATIO, location1.y/PTM_RATIO);
+    UITouch *myTouch = [touches anyObject];
+    CGPoint location1 = [myTouch locationInView:[myTouch view]];
+    location1 = [[CCDirector sharedDirector] convertToGL:location1];
+    b2Vec2 locationWorld = b2Vec2(location1.x/PTM_RATIO, location1.y/PTM_RATIO);
         
-        _mouseJoint->SetTarget(locationWorld);
-    }
+    _mouseJoint->SetTarget(locationWorld);
 }
 
-/*-(void) ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event{
+-(void) ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event{
     if (_mouseJoint) {
         world->DestroyJoint(_mouseJoint);
         _mouseJoint = NULL;
@@ -357,7 +381,7 @@ enum {
 
 - (void) handleTap:(UITapGestureRecognizer *)sender{
     // Enable double tap gesture recognizer to simulate a slide or something
-}*/
+}
 
 
 -(void) createMenu{
@@ -371,7 +395,9 @@ enum {
     
     world->Step(dt, velocityIterations, positionIterations);
     
-    /*std::vector<b2Body *>toDestroy;
+    player.position = ccp(playerBody->GetPosition().x*PTM_RATIO, playerBody->GetPosition().y*PTM_RATIO);
+    
+    std::vector<b2Body *>toDestroy;
     std::vector<MyContact>::iterator pos;
     for(pos = contactListener->_contacts.begin(); pos != contactListener->_contacts.end(); ++pos) {
         MyContact contact = *pos;
@@ -388,16 +414,16 @@ enum {
             CCLOG(@"Enemy hit the bunker!");
             // Bounce off?
         }
-        /*else if ((contact.fixtureA == _playerFixture && contact.fixtureB == paintFixture) || (contact.fixtureA == paintFixture && contact.fixtureB == _playerFixture))
+        else if ((contact.fixtureA == _playerFixture && contact.fixtureB == paintFixture) || (contact.fixtureA == paintFixture && contact.fixtureB == _playerFixture))
         {
             CCLOG(@"Player got hit by paint!");
-            // Not sure if destroy player
+            /*// Not sure if destroy player
             // Destroy paint
             CCScene *gameOverScene = [GameOverLayer sceneWithWon:NO];
             [[CCDirector sharedDirector] replaceScene:gameOverScene];
             
             bodyA = contact.fixtureA->GetBody();
-            bodyB = contact.fixtureB->GetBody();
+            bodyB = contact.fixtureB->GetBody();*/
         }
         else if ((contact.fixtureA == enemyFixture && contact.fixtureB == paintFixture) || (contact.fixtureA == paintFixture && contact.fixtureB == enemyFixture))
         {
@@ -411,13 +437,13 @@ enum {
             bodyA = contact.fixtureA->GetBody();
             bodyB = contact.fixtureB->GetBody();
         }
-        //CCLOG(@"User data A:%@ B:%@", spriteA, spriteB);
         
-        /*if(bodyA->GetUserData() != NULL && bodyB->GetUserData() != NULL)
+        
+        if(bodyA->GetUserData() != NULL && bodyB->GetUserData() != NULL)
         {
             spriteA = (CCSprite *) bodyA->GetUserData();
             spriteB = (CCSprite *) bodyB->GetUserData();
-            
+            CCLOG(@"User data A:%@ B:%@", spriteA, spriteB);
             // spriteA = player, spriteB = paint
             if(spriteA.tag == 1 && spriteB.tag == 3)
             {
@@ -501,13 +527,6 @@ enum {
      [node removeFromParentAndCleanup:YES];
      }];
      [computer runAction:[CCSequence actions:actionMove,actionMoveDone, nil]];*/
-}
-
--(void)draw:(CGPoint)p{
-    CCLOG(@"Drawing..");
-    glColorMask(0.8, 1.0, 0.76, 1.0);
-    glLineWidth(2.0f);
-    ccDrawLine(player.position, ccp(p.x, p.y));
 }
 
 @end

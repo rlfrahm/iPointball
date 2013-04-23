@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "iPointball2D/Player.h"
-         timestampString = "386959446.731704"
+         timestampString = "388442948.426781"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "14"
-         endingLineNumber = "14"
+         startingLineNumber = "15"
+         endingLineNumber = "15"
          landmarkName = "@interface Player"
          landmarkType = "2">
       </FileBreakpoint>
@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "iPointball2D/GameLevelLayer.mm"
-         timestampString = "386968441.458448"
+         timestampString = "388442948.426781"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "74"
-         endingLineNumber = "74"
+         startingLineNumber = "76"
+         endingLineNumber = "76"
          landmarkName = "-init"
          landmarkType = "5">
       </FileBreakpoint>
@@ -99,11 +99,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "iPointball2D/GameLevelLayer.mm"
-         timestampString = "387573388.792549"
+         timestampString = "388442948.426781"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "38"
-         endingLineNumber = "38"
+         startingLineNumber = "40"
+         endingLineNumber = "40"
          landmarkName = "+scene"
          landmarkType = "5">
       </FileBreakpoint>
@@ -112,11 +112,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "iPointball2D/GameLevelLayer.mm"
-         timestampString = "387836874.587055"
+         timestampString = "388442948.426781"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "79"
-         endingLineNumber = "79"
+         startingLineNumber = "81"
+         endingLineNumber = "81"
          landmarkName = "-init"
          landmarkType = "5">
       </FileBreakpoint>
@@ -125,11 +125,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "iPointball2D/GameLevelLayer.mm"
-         timestampString = "387574130.366218"
+         timestampString = "388442948.426781"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "44"
-         endingLineNumber = "44"
+         startingLineNumber = "46"
+         endingLineNumber = "46"
          landmarkName = "+scene"
          landmarkType = "5">
       </FileBreakpoint>
@@ -138,11 +138,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "iPointball2D/GameLevelLayer.mm"
-         timestampString = "387574734.705691"
+         timestampString = "388442948.426781"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "45"
-         endingLineNumber = "45"
+         startingLineNumber = "47"
+         endingLineNumber = "47"
          landmarkName = "+scene"
          landmarkType = "5">
       </FileBreakpoint>
@@ -164,11 +164,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "iPointball2D/GameLevelLayer.mm"
-         timestampString = "388378947.113917"
+         timestampString = "388444071.012644"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "427"
-         endingLineNumber = "427"
+         startingLineNumber = "453"
+         endingLineNumber = "453"
          landmarkName = "-update:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -177,13 +177,52 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "iPointball2D/GameLevelLayer.mm"
-         timestampString = "387836955.740849"
+         timestampString = "388442948.426781"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "52"
-         endingLineNumber = "52"
+         startingLineNumber = "54"
+         endingLineNumber = "54"
          landmarkName = "@implementation GameLevelLayer"
          landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "iPointball2D/GameLevelLayer.mm"
+         timestampString = "388442948.426781"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "197"
+         endingLineNumber = "197"
+         landmarkName = "-addNewPlayerAtPosition:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "iPointball2D/GameLevelLayer.mm"
+         timestampString = "388444071.012644"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "264"
+         endingLineNumber = "264"
+         landmarkName = "-addNewMovingPaintToLocation::"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "iPointball2D/Sprite.mm"
+         timestampString = "388441386.85982"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "137"
+         endingLineNumber = "137"
+         landmarkName = "-nodeToParentTransform"
+         landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>
