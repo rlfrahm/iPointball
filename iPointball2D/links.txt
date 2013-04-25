@@ -12,3 +12,4 @@ http://www.raywenderlich.com/14302/how-to-make-a-game-like-fruit-ninja-with-box2
 
 For Collisions:
 http://blog.allanbishop.com/box-2d-2-1a-tutorial-part-5-collision-filtering/
+http://box2d.org/manual.pdf

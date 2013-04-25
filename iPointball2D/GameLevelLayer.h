@@ -36,6 +36,7 @@
     b2Body *bunkerBody;
     //CCTexture2D *spriteTexture_;
     b2MouseJoint *_mouseJoint;
+    b2Fixture *_groundFixture;
     b2Fixture *_playerFixture;
     b2Fixture *enemyFixture;
     b2Fixture *paintFixture;
@@ -43,6 +44,8 @@
     MyContactListener *contactListener;
     GLESDebugDraw *_debugDraw;
     CCArray *_cache;
+    BOOL playerFlag;
+    b2Body *paintBod[100];
 }
 
 @property(retain)CCArray *cache;

@@ -19,9 +19,10 @@ enum {
 
 enum CATEGORY_BITS
 {
-    PLAYER_CATEGORY_BITS = 0x00000001,
-    ENEMY_CATEGORY_BITS = 0x00000002,
-    PAINT_CATEGORY_BITS = 0x00000004,
+    PLAYER_CATEGORY_BITS = 0x0001,
+    ENEMY_CATEGORY_BITS = 0x0002,
+    PAINT_CATEGORY_BITS = 0x0003,
+    WORLD_CATEGORY_BITS = 0x0004,
 };
 
 #pragma mark - GameLevelLayer
@@ -87,8 +88,8 @@ enum CATEGORY_BITS
 #endif
         [self addChild:parent z:0 tag:kTagParentNode];*/
         
-        [self addNewPlayerAtPosition:ccp(winSize.width/2, winSize.height/2)];
-        
+        [self addNewPlayerAtPosition:ccp(1.5*PTM_RATIO, winSize.height/2)];
+        [self addNewEnemyAtPosition:ccp(winSize.width -1.5*PTM_RATIO, winSize.height/2)];
         //[self addNewEnemyAtPosition:ccp(470, winSize.height/2)];
         
         [self scheduleUpdate];
@@ -113,20 +114,6 @@ enum CATEGORY_BITS
     world->DrawDebugData();
     
     kmGLPushMatrix();
-}
-
--(void) dealloc{
-    delete world;
-    world = NULL;
-    
-    delete _debugDraw;
-    
-    delete contactListener;
-    
-    [_cache release];
-    _cache = nil;
-    
-    [super dealloc];
 }
 
 -(void) initPhysics{
@@ -163,6 +150,8 @@ enum CATEGORY_BITS
     
     // Define the ground box shape.
     b2EdgeShape groundBox;
+    b2FixtureDef groundFixtureDef;
+    
     
     // bottom
     groundBox.Set(b2Vec2(0,0), b2Vec2(winSize.width/PTM_RATIO,0));
@@ -179,6 +168,9 @@ enum CATEGORY_BITS
     // right
     groundBox.Set(b2Vec2(winSize.width/PTM_RATIO,winSize.height/PTM_RATIO), b2Vec2(winSize.width/PTM_RATIO,0));
     groundBody->CreateFixture(&groundBox,0);
+    
+    groundFixtureDef.shape = &groundBox;
+    groundFixtureDef.filter.categoryBits = WORLD_CATEGORY_BITS;
 }
 
 -(void) addNewPlayerAtPosition:(CGPoint)p{
@@ -212,12 +204,14 @@ enum CATEGORY_BITS
     playerShape.SetAsBox(player.contentSize.width/PTM_RATIO/2, player.contentSize.height/PTM_RATIO/2); // These are mid points for our 1m box
     
     // Create shape definition and add to body
-    b2FixtureDef playerShapeDef;
-    playerShapeDef.shape = &playerShape;
-    playerShapeDef.density = 10.0f;
-    playerShapeDef.friction = 0.4f;
-    playerShapeDef.restitution = 0.1f;
-    _playerFixture = playerBody->CreateFixture(&playerShapeDef);
+    b2FixtureDef playerFixtureDef;
+    playerFixtureDef.shape = &playerShape;
+    playerFixtureDef.density = 10.0f;
+    playerFixtureDef.friction = 0.4f;
+    playerFixtureDef.restitution = 0.1f;
+    playerFixtureDef.filter.categoryBits = PLAYER_CATEGORY_BITS;
+    
+    _playerFixture = playerBody->CreateFixture(&playerFixtureDef);
     
     /*
     CCNode *parent = [self getChildByTag:kTagParentNode];
@@ -254,12 +248,14 @@ enum CATEGORY_BITS
     enemyShape.SetAsBox(enemy.contentSize.width/PTM_RATIO/2, enemy.contentSize.height/PTM_RATIO/2);
     
     // Create shape definition and add to body
-    b2FixtureDef enemyShapeDef;
-    enemyShapeDef.shape = &enemyShape;
-    enemyShapeDef.density = 10.0f;
-    enemyShapeDef.friction = 0.4f;
-    enemyShapeDef.restitution = 0.1f;
-    enemyFixture = enemyBody->CreateFixture(&enemyShapeDef);
+    b2FixtureDef enemyFixtureDef;
+    enemyFixtureDef.shape = &enemyShape;
+    enemyFixtureDef.density = 10.0f;
+    enemyFixtureDef.friction = 0.4f;
+    enemyFixtureDef.restitution = 0.1f;
+    enemyFixtureDef.filter.categoryBits = ENEMY_CATEGORY_BITS;
+    
+    enemyFixture = enemyBody->CreateFixture(&enemyFixtureDef);
     
     [_enemiesAlive addObject:enemy];
 }
@@ -296,8 +292,9 @@ enum CATEGORY_BITS
     b2FixtureDef paintFixtureDef;
     paintFixtureDef.shape = &paintShape;
     paintFixtureDef.density = 1.0f;
-    //paintFixtureDef.filter.categoryBits = PAINT_CATEGORY_BITS;
-    //paintFixtureDef.filter.maskBits = PAINT_CATEGORY_BITS | ENEMY_CATEGORY_BITS;
+    paintFixtureDef.filter.categoryBits = PAINT_CATEGORY_BITS;
+    //paintFixtureDef.filter.maskBits = ENEMY_CATEGORY_BITS | WORLD_CATEGORY_BITS;
+    
     //paintShapeDef.friction = 0.0f;
     //paintShapeDef.restitution = 1.0f;
     
@@ -407,6 +404,7 @@ enum CATEGORY_BITS
     world->Step(dt, velocityIterations, positionIterations);
     
     player.position = ccp(playerBody->GetPosition().x*PTM_RATIO, playerBody->GetPosition().y*PTM_RATIO);
+    enemy.position = ccp(enemyBody->GetPosition().x*PTM_RATIO, enemyBody->GetPosition().y*PTM_RATIO);
     
     std::vector<b2Body *>toDestroy;
     std::vector<MyContact>::iterator pos;
@@ -428,6 +426,9 @@ enum CATEGORY_BITS
         else if ((contact.fixtureA == _playerFixture && contact.fixtureB == paintFixture) || (contact.fixtureA == paintFixture && contact.fixtureB == _playerFixture))
         {
             CCLOG(@"Player got hit by paint!");
+            
+            // Destroy Paint
+            
             /*// Not sure if destroy player
             // Destroy paint
             CCScene *gameOverScene = [GameOverLayer sceneWithWon:NO];
@@ -439,14 +440,14 @@ enum CATEGORY_BITS
         else if ((contact.fixtureA == enemyFixture && contact.fixtureB == paintFixture) || (contact.fixtureA == paintFixture && contact.fixtureB == enemyFixture))
         {
             CCLOG(@"Enemy got hit by paint!");
-            // Destroy enemy and paint
+            /*// Destroy enemy and paint
             if ([_enemiesAlive count] == 0) {
                 CCScene *gameOverScene = [GameOverLayer sceneWithWon:YES];
                 [[CCDirector sharedDirector] replaceScene:gameOverScene];
             }
             
             bodyA = contact.fixtureA->GetBody();
-            bodyB = contact.fixtureB->GetBody();
+            bodyB = contact.fixtureB->GetBody();*/
         }
         
         
@@ -538,6 +539,20 @@ enum CATEGORY_BITS
      [node removeFromParentAndCleanup:YES];
      }];
      [computer runAction:[CCSequence actions:actionMove,actionMoveDone, nil]];*/
+}
+
+-(void) dealloc{
+    delete world;
+    world = NULL;
+    
+    delete _debugDraw;
+    
+    delete contactListener;
+    
+    [_cache release];
+    _cache = nil;
+    
+    [super dealloc];
 }
 
 @end
