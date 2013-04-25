@@ -191,6 +191,7 @@
 		4D46932B1710735000837BC5 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D46932A1710735000837BC5 /* GLES-Render.mm */; };
 		4D46932D1710735000837BC5 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D46932C1710735000837BC5 /* blocks.png */; };
 		4D469346171078B500837BC5 /* GameLevelLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D469345171078B500837BC5 /* GameLevelLayer.mm */; };
+		4D6A14F11728D814008DA350 /* features.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4D6A14F01728D814008DA350 /* features.txt */; };
 		E131A3E51714B2B500DC66F8 /* Player.png in Resources */ = {isa = PBXBuildFile; fileRef = E131A3E21714B2B500DC66F8 /* Player.png */; };
 		E131A3E61714B2B500DC66F8 /* Projectile.png in Resources */ = {isa = PBXBuildFile; fileRef = E131A3E31714B2B500DC66F8 /* Projectile.png */; };
 		E131A3E71714B2B500DC66F8 /* Target.png in Resources */ = {isa = PBXBuildFile; fileRef = E131A3E41714B2B500DC66F8 /* Target.png */; };
@@ -587,6 +588,7 @@
 		4D46932C1710735000837BC5 /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blocks.png; path = Resources/blocks.png; sourceTree = "<group>"; };
 		4D469344171078B400837BC5 /* GameLevelLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLevelLayer.h; sourceTree = "<group>"; };
 		4D469345171078B500837BC5 /* GameLevelLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameLevelLayer.mm; sourceTree = "<group>"; };
+		4D6A14F01728D814008DA350 /* features.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = features.txt; sourceTree = "<group>"; };
 		E131A3E21714B2B500DC66F8 /* Player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Player.png; sourceTree = "<group>"; };
 		E131A3E31714B2B500DC66F8 /* Projectile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Projectile.png; sourceTree = "<group>"; };
 		E131A3E41714B2B500DC66F8 /* Target.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Target.png; sourceTree = "<group>"; };
@@ -753,6 +755,7 @@
 				4D4691151710734B00837BC5 /* Info.plist */,
 				4D46932C1710735000837BC5 /* blocks.png */,
 				E1A2C56E1715E3A9007B65B0 /* links.txt */,
+				4D6A14F01728D814008DA350 /* features.txt */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1349,6 +1352,7 @@
 				E131A3E61714B2B500DC66F8 /* Projectile.png in Resources */,
 				E131A3E71714B2B500DC66F8 /* Target.png in Resources */,
 				E1A2C56F1715E3A9007B65B0 /* links.txt in Resources */,
+				4D6A14F11728D814008DA350 /* features.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

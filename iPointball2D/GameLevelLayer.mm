@@ -17,6 +17,13 @@ enum {
     kTagParentNode = 1,
 };
 
+enum CATEGORY_BITS
+{
+    PLAYER_CATEGORY_BITS = 0x00000001,
+    ENEMY_CATEGORY_BITS = 0x00000002,
+    PAINT_CATEGORY_BITS = 0x00000004,
+};
+
 #pragma mark - GameLevelLayer
 
 #define PAINTFPS 680 // pixels/sec
@@ -263,7 +270,7 @@ enum {
     
     b2Body *paintBody;
     
-    int power = 5;
+    int power = 2;
     float x1 = cos(shootAngle);
     float y1 = sin(shootAngle);
     
@@ -289,6 +296,8 @@ enum {
     b2FixtureDef paintFixtureDef;
     paintFixtureDef.shape = &paintShape;
     paintFixtureDef.density = 1.0f;
+    //paintFixtureDef.filter.categoryBits = PAINT_CATEGORY_BITS;
+    //paintFixtureDef.filter.maskBits = PAINT_CATEGORY_BITS | ENEMY_CATEGORY_BITS;
     //paintShapeDef.friction = 0.0f;
     //paintShapeDef.restitution = 1.0f;
     
@@ -341,10 +350,12 @@ enum {
             
             _mouseJoint = (b2MouseJoint *)world->CreateJoint(&md);
             playerBody->SetAwake(true);
+        } else {
+            // Shoot Stuff!
+            [self addNewMovingPaintToLocation:location :shootAngle];
         }
         
-        // Shoot Stuff!
-        [self addNewMovingPaintToLocation:location :shootAngle];
+        
         
         // Set up initial location of projectile
         //CGSize winSize = [[CCDirector sharedDirector] winSize];
@@ -439,7 +450,7 @@ enum {
         }
         
         
-        if(bodyA->GetUserData() != NULL && bodyB->GetUserData() != NULL)
+        /*if(bodyA->GetUserData() != NULL && bodyB->GetUserData() != NULL)
         {
             spriteA = (CCSprite *) bodyA->GetUserData();
             spriteB = (CCSprite *) bodyB->GetUserData();
@@ -484,7 +495,7 @@ enum {
         else
         {
             CCLOG(@"User data A:%@ B:%@", spriteA, spriteB);
-        }
+        }*/
     }
     
     std::vector<b2Body *>::iterator pos2;
