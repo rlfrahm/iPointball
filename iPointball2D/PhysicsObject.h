@@ -5,6 +5,7 @@
 //  Created by Ryan Frahm on 4/23/13.
 //  Copyright 2013 Ryan Frahm. All rights reserved.
 //
+//  
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
@@ -13,7 +14,7 @@
 
 #define PTM_RATIO 32
 
-@interface Sprite : CCSprite {
+@interface PhysicsObject : CCSprite {
     b2Body *_body;
     BOOL _original;
     b2Vec2 _centroid;
@@ -30,7 +31,12 @@
 +(id)spriteWithTexture:(CCTexture2D*)texture body:(b2Body*)body original:(BOOL)original;
 -(id)initWithWorld:(b2World*)world;
 +(id)spriteWithWorld:(b2World*)world;
--(b2Body*)createBodyForWorld:(b2World*)world position:(b2Vec2)position rotation:(float)rotation vertices:(b2Vec2*)vertices vertexCount:(int32)count density:(float)density friction:(float)friction restitution:(float)restitution;
+
+// Setting up body
+-(b2Body*)createBodyForWorld:(b2World*)world position:(b2Vec2)position vertices:(b2Vec2*)vertices withVertextCount:(int32)count rotation:(float)rotation density:(float)density friction:(float)friction restitution:(float)restitution bullet:(BOOL)bullet;
+-(void)setIsBullet:(b2Body*)body;
+
+// Collisions
 -(void)activateCollisions;
 -(void)deactivateCollisions;
 

@@ -11,7 +11,6 @@
 #import "GameLevelLayer.h"
 #import "GameOverLayer.h"
 #import "CCPhysicsSprite.h"
-#import "Player.h"
 
 enum {
     kTagParentNode = 1,
@@ -176,6 +175,10 @@ enum CATEGORY_BITS
 -(void) addNewPlayerAtPosition:(CGPoint)p{
     //CCLOG(@"Add player %0.2f x %0.2f",player.position.x/PTM_RATIO,player.position.y/PTM_RATIO);
     
+    PhysicsObject *guy = [[Player alloc] initWithWorld:world];
+    [self addChild:guy z:1];
+    [guy activateCollisions];
+    [_cache addObject:guy];
     /*_cache = [[CCArray alloc] initWithCapacity:53];
     
     Sprite *player = [[Player alloc] initWithWorld:world];
@@ -184,7 +187,8 @@ enum CATEGORY_BITS
     [_cache addObject:player];*/
     
     // Create player and add it to the layer
-    player = [CCSprite spriteWithFile:@"Player.png"];
+    
+    /*player = [CCSprite spriteWithFile:@"Player.png"];
     player.position = p;
     player.tag = 1;
     [self addChild:player];
@@ -207,9 +211,9 @@ enum CATEGORY_BITS
     b2FixtureDef playerFixtureDef;
     playerFixtureDef.shape = &playerShape;
     playerFixtureDef.density = 10.0f;
-    playerFixtureDef.friction = 0.4f;
+    playerFixtureDef.friction = 1.0f;
     playerFixtureDef.restitution = 0.1f;
-    playerFixtureDef.filter.categoryBits = PLAYER_CATEGORY_BITS;
+    //playerFixtureDef.filter.maskBits = 0x2;
     
     _playerFixture = playerBody->CreateFixture(&playerFixtureDef);
     
@@ -223,7 +227,6 @@ enum CATEGORY_BITS
     [sprite setPTMRatio:PTM_RATIO];
     [sprite setB2Body:body];
     [sprite setPosition:ccp(p.x,p.y)];*/
-    
 }
 
 -(void) addNewEnemyAtPosition:(CGPoint)p{
@@ -241,6 +244,7 @@ enum CATEGORY_BITS
     enemyBodyDef.type = b2_dynamicBody;
     enemyBodyDef.position.Set(p.x/PTM_RATIO, p.y/PTM_RATIO);
     enemyBodyDef.userData = enemy;
+    enemyBodyDef.fixedRotation = true;
     enemyBody = world->CreateBody(&enemyBodyDef);
     
     // Create player shape
@@ -292,7 +296,7 @@ enum CATEGORY_BITS
     b2FixtureDef paintFixtureDef;
     paintFixtureDef.shape = &paintShape;
     paintFixtureDef.density = 1.0f;
-    paintFixtureDef.filter.categoryBits = PAINT_CATEGORY_BITS;
+    paintFixtureDef.filter.categoryBits = 0x2;
     //paintFixtureDef.filter.maskBits = ENEMY_CATEGORY_BITS | WORLD_CATEGORY_BITS;
     
     //paintShapeDef.friction = 0.0f;
@@ -403,7 +407,7 @@ enum CATEGORY_BITS
     
     world->Step(dt, velocityIterations, positionIterations);
     
-    player.position = ccp(playerBody->GetPosition().x*PTM_RATIO, playerBody->GetPosition().y*PTM_RATIO);
+    //player.position = ccp(playerBody->GetPosition().x*PTM_RATIO, playerBody->GetPosition().y*PTM_RATIO);
     enemy.position = ccp(enemyBody->GetPosition().x*PTM_RATIO, enemyBody->GetPosition().y*PTM_RATIO);
     
     std::vector<b2Body *>toDestroy;
@@ -448,6 +452,7 @@ enum CATEGORY_BITS
             
             bodyA = contact.fixtureA->GetBody();
             bodyB = contact.fixtureB->GetBody();*/
+            //world->DestroyBody(enemyBody);
         }
         
         

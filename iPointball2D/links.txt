@@ -1,15 +1,17 @@
 These are some helpful links to tutorials.
 
-For game AI:
+For game AI-
 http://www.raywenderlich.com/24824/introduction-to-ai-programming-for-games
 
-For bullets:
+For bullets-
 http://www.coderzheaven.com/2011/01/30/how-to-shoot-a-bullet-in-the-direction-of-touch-in-box2d-iphone-2/
+Create/Destroy:
+http://www.box2d.org/forum/viewtopic.php?f=3&t=1588
 
-For architecture:
+For architecture-
 http://www.raywenderlich.com/24878/introduction-to-component-based-architecture-in-games
 http://www.raywenderlich.com/14302/how-to-make-a-game-like-fruit-ninja-with-box2d-and-cocos2d-part-1
 
-For Collisions:
+For Collisions-
 http://blog.allanbishop.com/box-2d-2-1a-tutorial-part-5-collision-filtering/
 http://box2d.org/manual.pdf

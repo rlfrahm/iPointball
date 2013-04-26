@@ -6,10 +6,10 @@
 //  Copyright 2013 Ryan Frahm. All rights reserved.
 //
 
-#import "Sprite.h"
+#import "PhysicsObject.h"
 
 
-@implementation Sprite
+@implementation PhysicsObject
 
     @synthesize body = _body;
     @synthesize original = _original;
@@ -76,12 +76,14 @@
     _body->SetTransform(b2Vec2(position.x/PTM_RATIO,position.y/PTM_RATIO), _body->GetAngle());
 }
 
--(b2Body*)createBodyForWorld:(b2World *)world position:(b2Vec2)position rotation:(float)rotation vertices:(b2Vec2*)vertices vertexCount:(int32)count density:(float)density friction:(float)friction restitution:(float)restitution
+//  For polygon shapes
+-(b2Body*)createBodyForWorld:(b2World *)world position:(b2Vec2)position vertices:(b2Vec2 *)vertices withVertextCount:(int32)count rotation:(float)rotation density:(float)density friction:(float)friction restitution:(float)restitution bullet:(BOOL)bullet
 {
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.position = position;
     bodyDef.angle = rotation;
+    bodyDef.bullet = bullet;
     b2Body *body = world->CreateBody(&bodyDef);
     
     b2FixtureDef fixtureDef;

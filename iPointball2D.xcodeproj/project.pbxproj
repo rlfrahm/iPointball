@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4D16B1651727227000D40933 /* Sprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D16B1641727227000D40933 /* Sprite.mm */; };
+		4D16B1651727227000D40933 /* PhysicsObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D16B1641727227000D40933 /* PhysicsObject.mm */; };
 		4D16B1681727264800D40933 /* Player.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D16B1671727264800D40933 /* Player.mm */; };
 		4D16B171172727B100D40933 /* PRFilledPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D16B16B172727B100D40933 /* PRFilledPolygon.m */; };
 		4D16B172172727B100D40933 /* PRRatcliffTriangulator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D16B16D172727B100D40933 /* PRRatcliffTriangulator.mm */; };
@@ -192,6 +192,12 @@
 		4D46932D1710735000837BC5 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D46932C1710735000837BC5 /* blocks.png */; };
 		4D469346171078B500837BC5 /* GameLevelLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D469345171078B500837BC5 /* GameLevelLayer.mm */; };
 		4D6A14F11728D814008DA350 /* features.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4D6A14F01728D814008DA350 /* features.txt */; };
+		4D72E2D3172AF6320040273B /* Bunker.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D72E2D2172AF6320040273B /* Bunker.mm */; };
+		4D72E2D6172AF6710040273B /* GameTool.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D72E2D5172AF6710040273B /* GameTool.mm */; };
+		4D72E2D9172AF6950040273B /* Paint.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D72E2D8172AF6950040273B /* Paint.mm */; };
+		4D72E2DC172AF6A80040273B /* Gun.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D72E2DB172AF6A80040273B /* Gun.mm */; };
+		4D72E2DF172AF6D20040273B /* Character.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D72E2DE172AF6D20040273B /* Character.mm */; };
+		4D72E2E2172AF6E80040273B /* Computer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D72E2E1172AF6E80040273B /* Computer.mm */; };
 		E131A3E51714B2B500DC66F8 /* Player.png in Resources */ = {isa = PBXBuildFile; fileRef = E131A3E21714B2B500DC66F8 /* Player.png */; };
 		E131A3E61714B2B500DC66F8 /* Projectile.png in Resources */ = {isa = PBXBuildFile; fileRef = E131A3E31714B2B500DC66F8 /* Projectile.png */; };
 		E131A3E71714B2B500DC66F8 /* Target.png in Resources */ = {isa = PBXBuildFile; fileRef = E131A3E41714B2B500DC66F8 /* Target.png */; };
@@ -201,8 +207,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4D16B1631727227000D40933 /* Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprite.h; sourceTree = "<group>"; };
-		4D16B1641727227000D40933 /* Sprite.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Sprite.mm; sourceTree = "<group>"; };
+		4D16B1631727227000D40933 /* PhysicsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsObject.h; sourceTree = "<group>"; };
+		4D16B1641727227000D40933 /* PhysicsObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PhysicsObject.mm; sourceTree = "<group>"; };
 		4D16B1661727264800D40933 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		4D16B1671727264800D40933 /* Player.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Player.mm; sourceTree = "<group>"; };
 		4D16B16A172727B100D40933 /* PRFilledPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRFilledPolygon.h; sourceTree = "<group>"; };
@@ -589,6 +595,18 @@
 		4D469344171078B400837BC5 /* GameLevelLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLevelLayer.h; sourceTree = "<group>"; };
 		4D469345171078B500837BC5 /* GameLevelLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameLevelLayer.mm; sourceTree = "<group>"; };
 		4D6A14F01728D814008DA350 /* features.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = features.txt; sourceTree = "<group>"; };
+		4D72E2D1172AF6320040273B /* Bunker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bunker.h; sourceTree = "<group>"; };
+		4D72E2D2172AF6320040273B /* Bunker.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Bunker.mm; sourceTree = "<group>"; };
+		4D72E2D4172AF6710040273B /* GameTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameTool.h; sourceTree = "<group>"; };
+		4D72E2D5172AF6710040273B /* GameTool.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameTool.mm; sourceTree = "<group>"; };
+		4D72E2D7172AF6950040273B /* Paint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Paint.h; sourceTree = "<group>"; };
+		4D72E2D8172AF6950040273B /* Paint.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Paint.mm; sourceTree = "<group>"; };
+		4D72E2DA172AF6A80040273B /* Gun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gun.h; sourceTree = "<group>"; };
+		4D72E2DB172AF6A80040273B /* Gun.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Gun.mm; sourceTree = "<group>"; };
+		4D72E2DD172AF6D20040273B /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
+		4D72E2DE172AF6D20040273B /* Character.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Character.mm; sourceTree = "<group>"; };
+		4D72E2E0172AF6E80040273B /* Computer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Computer.h; sourceTree = "<group>"; };
+		4D72E2E1172AF6E80040273B /* Computer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Computer.mm; sourceTree = "<group>"; };
 		E131A3E21714B2B500DC66F8 /* Player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Player.png; sourceTree = "<group>"; };
 		E131A3E31714B2B500DC66F8 /* Projectile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Projectile.png; sourceTree = "<group>"; };
 		E131A3E41714B2B500DC66F8 /* Target.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Target.png; sourceTree = "<group>"; };
@@ -622,42 +640,46 @@
 		4D16B15B1727212700D40933 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
-				4D16B1631727227000D40933 /* Sprite.h */,
-				4D16B1641727227000D40933 /* Sprite.mm */,
+				4D16B1631727227000D40933 /* PhysicsObject.h */,
+				4D16B1641727227000D40933 /* PhysicsObject.mm */,
 				4D16B15F1727214E00D40933 /* Bunker */,
-				4D16B15E1727214200D40933 /* Enemy */,
-				4D16B15D1727213B00D40933 /* Paint */,
-				4D16B15C1727213400D40933 /* Player */,
+				4D16B15C1727213400D40933 /* Character */,
+				4D16B15D1727213B00D40933 /* Tool */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
 		};
-		4D16B15C1727213400D40933 /* Player */ = {
+		4D16B15C1727213400D40933 /* Character */ = {
 			isa = PBXGroup;
 			children = (
 				4D16B1661727264800D40933 /* Player.h */,
 				4D16B1671727264800D40933 /* Player.mm */,
+				4D72E2DD172AF6D20040273B /* Character.h */,
+				4D72E2DE172AF6D20040273B /* Character.mm */,
+				4D72E2E0172AF6E80040273B /* Computer.h */,
+				4D72E2E1172AF6E80040273B /* Computer.mm */,
 			);
-			name = Player;
+			name = Character;
 			sourceTree = "<group>";
 		};
-		4D16B15D1727213B00D40933 /* Paint */ = {
+		4D16B15D1727213B00D40933 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				4D72E2D4172AF6710040273B /* GameTool.h */,
+				4D72E2D5172AF6710040273B /* GameTool.mm */,
+				4D72E2D7172AF6950040273B /* Paint.h */,
+				4D72E2D8172AF6950040273B /* Paint.mm */,
+				4D72E2DA172AF6A80040273B /* Gun.h */,
+				4D72E2DB172AF6A80040273B /* Gun.mm */,
 			);
-			name = Paint;
-			sourceTree = "<group>";
-		};
-		4D16B15E1727214200D40933 /* Enemy */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Enemy;
+			name = Tool;
 			sourceTree = "<group>";
 		};
 		4D16B15F1727214E00D40933 /* Bunker */ = {
 			isa = PBXGroup;
 			children = (
+				4D72E2D1172AF6320040273B /* Bunker.h */,
+				4D72E2D2172AF6320040273B /* Bunker.mm */,
 			);
 			name = Bunker;
 			sourceTree = "<group>";
@@ -1523,11 +1545,17 @@
 				4D469346171078B500837BC5 /* GameLevelLayer.mm in Sources */,
 				E131A3EA1714D22400DC66F8 /* MyContactListener.mm in Sources */,
 				E1A2C5451715BA95007B65B0 /* GameOverLayer.mm in Sources */,
-				4D16B1651727227000D40933 /* Sprite.mm in Sources */,
+				4D16B1651727227000D40933 /* PhysicsObject.mm in Sources */,
 				4D16B1681727264800D40933 /* Player.mm in Sources */,
 				4D16B171172727B100D40933 /* PRFilledPolygon.m in Sources */,
 				4D16B172172727B100D40933 /* PRRatcliffTriangulator.mm in Sources */,
 				4D16B173172727B100D40933 /* triangulate.cpp in Sources */,
+				4D72E2D3172AF6320040273B /* Bunker.mm in Sources */,
+				4D72E2D6172AF6710040273B /* GameTool.mm in Sources */,
+				4D72E2D9172AF6950040273B /* Paint.mm in Sources */,
+				4D72E2DC172AF6A80040273B /* Gun.mm in Sources */,
+				4D72E2DF172AF6D20040273B /* Character.mm in Sources */,
+				4D72E2E2172AF6E80040273B /* Computer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
