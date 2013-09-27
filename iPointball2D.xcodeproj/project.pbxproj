@@ -9,9 +9,10 @@
 /* Begin PBXBuildFile section */
 		4D16B1651727227000D40933 /* PhysicsObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D16B1641727227000D40933 /* PhysicsObject.mm */; };
 		4D16B1681727264800D40933 /* Player.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D16B1671727264800D40933 /* Player.mm */; };
-		4D16B171172727B100D40933 /* PRFilledPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D16B16B172727B100D40933 /* PRFilledPolygon.m */; };
-		4D16B172172727B100D40933 /* PRRatcliffTriangulator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D16B16D172727B100D40933 /* PRRatcliffTriangulator.mm */; };
-		4D16B173172727B100D40933 /* triangulate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D16B16F172727B100D40933 /* triangulate.cpp */; };
+		4D1B02C217EDC5E60057F384 /* PRFilledPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D1B02BB17EDC5E60057F384 /* PRFilledPolygon.m */; };
+		4D1B02C317EDC5E60057F384 /* PRRatcliffTriangulator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D1B02BD17EDC5E60057F384 /* PRRatcliffTriangulator.mm */; };
+		4D1B02C417EDC5E60057F384 /* triangulate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D1B02BF17EDC5E60057F384 /* triangulate.cpp */; };
+		4D1B02C717EDF0EC0057F384 /* MyContactListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D1B02C617EDF0EC0057F384 /* MyContactListener.mm */; };
 		4D4690EE1710734B00837BC5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4690ED1710734B00837BC5 /* QuartzCore.framework */; };
 		4D4690F01710734B00837BC5 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4690EF1710734B00837BC5 /* OpenGLES.framework */; };
 		4D4690F21710734B00837BC5 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4690F11710734B00837BC5 /* OpenAL.framework */; };
@@ -201,7 +202,6 @@
 		E131A3E51714B2B500DC66F8 /* Player.png in Resources */ = {isa = PBXBuildFile; fileRef = E131A3E21714B2B500DC66F8 /* Player.png */; };
 		E131A3E61714B2B500DC66F8 /* Projectile.png in Resources */ = {isa = PBXBuildFile; fileRef = E131A3E31714B2B500DC66F8 /* Projectile.png */; };
 		E131A3E71714B2B500DC66F8 /* Target.png in Resources */ = {isa = PBXBuildFile; fileRef = E131A3E41714B2B500DC66F8 /* Target.png */; };
-		E131A3EA1714D22400DC66F8 /* MyContactListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = E131A3E91714D22400DC66F8 /* MyContactListener.mm */; };
 		E1A2C5451715BA95007B65B0 /* GameOverLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = E1A2C5441715BA95007B65B0 /* GameOverLayer.mm */; };
 		E1A2C56F1715E3A9007B65B0 /* links.txt in Resources */ = {isa = PBXBuildFile; fileRef = E1A2C56E1715E3A9007B65B0 /* links.txt */; };
 /* End PBXBuildFile section */
@@ -211,13 +211,15 @@
 		4D16B1641727227000D40933 /* PhysicsObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PhysicsObject.mm; sourceTree = "<group>"; };
 		4D16B1661727264800D40933 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		4D16B1671727264800D40933 /* Player.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Player.mm; sourceTree = "<group>"; };
-		4D16B16A172727B100D40933 /* PRFilledPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRFilledPolygon.h; sourceTree = "<group>"; };
-		4D16B16B172727B100D40933 /* PRFilledPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRFilledPolygon.m; sourceTree = "<group>"; };
-		4D16B16C172727B100D40933 /* PRRatcliffTriangulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRRatcliffTriangulator.h; sourceTree = "<group>"; };
-		4D16B16D172727B100D40933 /* PRRatcliffTriangulator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PRRatcliffTriangulator.mm; sourceTree = "<group>"; };
-		4D16B16E172727B100D40933 /* PRTriangulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRTriangulator.h; sourceTree = "<group>"; };
-		4D16B16F172727B100D40933 /* triangulate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = triangulate.cpp; sourceTree = "<group>"; };
-		4D16B170172727B100D40933 /* triangulate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = triangulate.h; sourceTree = "<group>"; };
+		4D1B02BA17EDC5E60057F384 /* PRFilledPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRFilledPolygon.h; sourceTree = "<group>"; };
+		4D1B02BB17EDC5E60057F384 /* PRFilledPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRFilledPolygon.m; sourceTree = "<group>"; };
+		4D1B02BC17EDC5E60057F384 /* PRRatcliffTriangulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRRatcliffTriangulator.h; sourceTree = "<group>"; };
+		4D1B02BD17EDC5E60057F384 /* PRRatcliffTriangulator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PRRatcliffTriangulator.mm; sourceTree = "<group>"; };
+		4D1B02BE17EDC5E60057F384 /* PRTriangulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRTriangulator.h; sourceTree = "<group>"; };
+		4D1B02BF17EDC5E60057F384 /* triangulate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = triangulate.cpp; sourceTree = "<group>"; };
+		4D1B02C017EDC5E60057F384 /* triangulate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = triangulate.h; sourceTree = "<group>"; };
+		4D1B02C517EDF0EC0057F384 /* MyContactListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyContactListener.h; sourceTree = "<group>"; };
+		4D1B02C617EDF0EC0057F384 /* MyContactListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MyContactListener.mm; sourceTree = "<group>"; };
 		4D4690EA1710734B00837BC5 /* iPointball2D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPointball2D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D4690ED1710734B00837BC5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4D4690EF1710734B00837BC5 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -610,8 +612,6 @@
 		E131A3E21714B2B500DC66F8 /* Player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Player.png; sourceTree = "<group>"; };
 		E131A3E31714B2B500DC66F8 /* Projectile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Projectile.png; sourceTree = "<group>"; };
 		E131A3E41714B2B500DC66F8 /* Target.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Target.png; sourceTree = "<group>"; };
-		E131A3E81714D22400DC66F8 /* MyContactListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyContactListener.h; sourceTree = "<group>"; };
-		E131A3E91714D22400DC66F8 /* MyContactListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MyContactListener.mm; sourceTree = "<group>"; };
 		E1A2C5431715BA95007B65B0 /* GameOverLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverLayer.h; sourceTree = "<group>"; };
 		E1A2C5441715BA95007B65B0 /* GameOverLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameOverLayer.mm; sourceTree = "<group>"; };
 		E1A2C56E1715E3A9007B65B0 /* links.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = links.txt; sourceTree = "<group>"; };
@@ -684,16 +684,16 @@
 			name = Bunker;
 			sourceTree = "<group>";
 		};
-		4D16B169172727B100D40933 /* PRKit */ = {
+		4D1B02B717EDC5E60057F384 /* PRKit */ = {
 			isa = PBXGroup;
 			children = (
-				4D16B16A172727B100D40933 /* PRFilledPolygon.h */,
-				4D16B16B172727B100D40933 /* PRFilledPolygon.m */,
-				4D16B16C172727B100D40933 /* PRRatcliffTriangulator.h */,
-				4D16B16D172727B100D40933 /* PRRatcliffTriangulator.mm */,
-				4D16B16E172727B100D40933 /* PRTriangulator.h */,
-				4D16B16F172727B100D40933 /* triangulate.cpp */,
-				4D16B170172727B100D40933 /* triangulate.h */,
+				4D1B02BA17EDC5E60057F384 /* PRFilledPolygon.h */,
+				4D1B02BB17EDC5E60057F384 /* PRFilledPolygon.m */,
+				4D1B02BC17EDC5E60057F384 /* PRRatcliffTriangulator.h */,
+				4D1B02BD17EDC5E60057F384 /* PRRatcliffTriangulator.mm */,
+				4D1B02BE17EDC5E60057F384 /* PRTriangulator.h */,
+				4D1B02BF17EDC5E60057F384 /* triangulate.cpp */,
+				4D1B02C017EDC5E60057F384 /* triangulate.h */,
 			);
 			path = PRKit;
 			sourceTree = "<group>";
@@ -734,13 +734,13 @@
 		4D4690FF1710734B00837BC5 /* iPointball2D */ = {
 			isa = PBXGroup;
 			children = (
-				4D16B169172727B100D40933 /* PRKit */,
+				4D1B02C517EDF0EC0057F384 /* MyContactListener.h */,
+				4D1B02C617EDF0EC0057F384 /* MyContactListener.mm */,
+				4D1B02B717EDC5E60057F384 /* PRKit */,
 				4D16B15B1727212700D40933 /* Objects */,
 				E1A2C54C1715D37B007B65B0 /* Sounds */,
 				E1A2C5431715BA95007B65B0 /* GameOverLayer.h */,
 				E1A2C5441715BA95007B65B0 /* GameOverLayer.mm */,
-				E131A3E81714D22400DC66F8 /* MyContactListener.h */,
-				E131A3E91714D22400DC66F8 /* MyContactListener.mm */,
 				4D469344171078B400837BC5 /* GameLevelLayer.h */,
 				4D469345171078B500837BC5 /* GameLevelLayer.mm */,
 				4D4693201710735000837BC5 /* AppDelegate.h */,
@@ -1391,6 +1391,7 @@
 				4D4691251710734B00837BC5 /* CCActionEase.m in Sources */,
 				4D4691281710734C00837BC5 /* CCActionGrid.m in Sources */,
 				4D46912B1710734C00837BC5 /* CCActionGrid3D.m in Sources */,
+				4D1B02C317EDC5E60057F384 /* PRRatcliffTriangulator.mm in Sources */,
 				4D46912E1710734C00837BC5 /* CCActionInstant.m in Sources */,
 				4D4691311710734C00837BC5 /* CCActionInterval.m in Sources */,
 				4D4691341710734C00837BC5 /* CCActionManager.m in Sources */,
@@ -1420,6 +1421,7 @@
 				4D46917E1710734D00837BC5 /* CCMenu.m in Sources */,
 				4D4691811710734D00837BC5 /* CCMenuItem.m in Sources */,
 				4D4691841710734D00837BC5 /* CCMotionStreak.m in Sources */,
+				4D1B02C417EDC5E60057F384 /* triangulate.cpp in Sources */,
 				4D4691871710734D00837BC5 /* CCNode+Debug.m in Sources */,
 				4D46918A1710734D00837BC5 /* CCNode.m in Sources */,
 				4D46918D1710734D00837BC5 /* CCParallaxNode.m in Sources */,
@@ -1468,6 +1470,7 @@
 				4D4692271710734E00837BC5 /* CCProfiling.m in Sources */,
 				4D4692291710734E00837BC5 /* ccUtils.c in Sources */,
 				4D46922D1710734E00837BC5 /* CCVertex.m in Sources */,
+				4D1B02C717EDF0EC0057F384 /* MyContactListener.mm in Sources */,
 				4D4692301710734E00837BC5 /* CGPointExtension.m in Sources */,
 				4D4692331710734E00837BC5 /* NSThread+performBlock.m in Sources */,
 				4D4692371710734E00837BC5 /* TGAlib.m in Sources */,
@@ -1525,6 +1528,7 @@
 				4D4692ED1710734F00837BC5 /* b2EdgeAndPolygonContact.cpp in Sources */,
 				4D4692F01710734F00837BC5 /* b2PolygonAndCircleContact.cpp in Sources */,
 				4D4692F31710735000837BC5 /* b2PolygonContact.cpp in Sources */,
+				4D1B02C217EDC5E60057F384 /* PRFilledPolygon.m in Sources */,
 				4D4692F71710735000837BC5 /* b2DistanceJoint.cpp in Sources */,
 				4D4692FA1710735000837BC5 /* b2FrictionJoint.cpp in Sources */,
 				4D4692FD1710735000837BC5 /* b2GearJoint.cpp in Sources */,
@@ -1543,13 +1547,9 @@
 				4D4693281710735000837BC5 /* IntroLayer.mm in Sources */,
 				4D46932B1710735000837BC5 /* GLES-Render.mm in Sources */,
 				4D469346171078B500837BC5 /* GameLevelLayer.mm in Sources */,
-				E131A3EA1714D22400DC66F8 /* MyContactListener.mm in Sources */,
 				E1A2C5451715BA95007B65B0 /* GameOverLayer.mm in Sources */,
 				4D16B1651727227000D40933 /* PhysicsObject.mm in Sources */,
 				4D16B1681727264800D40933 /* Player.mm in Sources */,
-				4D16B171172727B100D40933 /* PRFilledPolygon.m in Sources */,
-				4D16B172172727B100D40933 /* PRRatcliffTriangulator.mm in Sources */,
-				4D16B173172727B100D40933 /* triangulate.cpp in Sources */,
 				4D72E2D3172AF6320040273B /* Bunker.mm in Sources */,
 				4D72E2D6172AF6710040273B /* GameTool.mm in Sources */,
 				4D72E2D9172AF6950040273B /* Paint.mm in Sources */,
@@ -1577,7 +1577,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1596,7 +1596,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1606,6 +1606,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1617,7 +1618,7 @@
 				);
 				HEADER_SEARCH_PATHS = "\"iPointball2D/libs/kazmath/include\"";
 				INFOPLIST_FILE = iPointball2D/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",
@@ -1634,6 +1635,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iPointball2D/Prefix.pch;
@@ -1644,7 +1646,7 @@
 				);
 				HEADER_SEARCH_PATHS = "\"iPointball2D/libs/kazmath/include\"";
 				INFOPLIST_FILE = iPointball2D/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",

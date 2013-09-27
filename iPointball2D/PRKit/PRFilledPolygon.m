@@ -50,29 +50,28 @@
  Returns an autoreleased polygon.  Default triangulator is used (Ratcliff's).
  */
 +(id) filledPolygonWithPoints: (NSArray *) polygonPoints andTexture: (CCTexture2D *) fillTexture {
-    return [[PRFilledPolygon alloc] initWithPoints:polygonPoints andTexture:fillTexture];
+    return [[[PRFilledPolygon alloc] initWithPoints:polygonPoints andTexture:fillTexture] autorelease];
 }
 
 /**
  Returns an autoreleased filled poly with a supplied triangulator.
  */
 +(id) filledPolygonWithPoints:(NSArray *)polygonPoints andTexture:(CCTexture2D *)fillTexture usingTriangulator: (id<PRTriangulator>) polygonTriangulator {
-    return [[PRFilledPolygon alloc] initWithPoints:polygonPoints andTexture:fillTexture usingTriangulator:polygonTriangulator];
+    return [[[PRFilledPolygon alloc] initWithPoints:polygonPoints andTexture:fillTexture usingTriangulator:polygonTriangulator] autorelease];
 }
 
 -(id) initWithPoints: (NSArray *) polygonPoints andTexture: (CCTexture2D *) fillTexture {
-    return [self initWithPoints:polygonPoints andTexture:fillTexture usingTriangulator:[[PRRatcliffTriangulator alloc] init]];
+    return [self initWithPoints:polygonPoints andTexture:fillTexture usingTriangulator:[[[PRRatcliffTriangulator alloc] init] autorelease]];
 }
 
 -(id) initWithPoints:(NSArray *)polygonPoints andTexture:(CCTexture2D *)fillTexture usingTriangulator: (id<PRTriangulator>) polygonTriangulator {
     if( (self=[super init])) {
-		
+        self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTexture];
         self.triangulator = polygonTriangulator;
         
         [self setPoints:polygonPoints];
 		self.texture = fillTexture;
         
-        self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTexture];
 	}
 	
 	return self;
@@ -86,18 +85,12 @@
     
     NSArray *triangulatedPoints = [triangulator triangulateVertices:points];
     
-    areaTrianglePointCount = (int)[triangulatedPoints count];
-    areaTrianglePoints = (ccVertex2F *) malloc(sizeof(ccVertex2F) * areaTrianglePointCount);
-    textureCoordinates = (ccVertex2F *) malloc(sizeof(ccVertex2F) * areaTrianglePointCount);
+    areaTrianglePointCount = [triangulatedPoints count];
+    areaTrianglePoints = (CGPoint *) malloc(sizeof(CGPoint) * areaTrianglePointCount);
+    textureCoordinates = (CGPoint *) malloc(sizeof(CGPoint) * areaTrianglePointCount);
     
     for (int i = 0; i < areaTrianglePointCount; i++) {
-        
-#ifdef __CC_PLATFORM_IOS
-        CGPoint vert = [[triangulatedPoints objectAtIndex:i] CGPointValue];
-#else
-        CGPoint vert = [[triangulatedPoints objectAtIndex:i] pointValue];
-#endif
-        areaTrianglePoints[i] = (ccVertex2F) { vert.x, vert.y };
+        areaTrianglePoints[i] = [[triangulatedPoints objectAtIndex:i] CGPointValue];
     }
     
     [self calculateTextureCoordinates];
@@ -106,27 +99,26 @@
 
 -(void) calculateTextureCoordinates {
     for (int j = 0; j < areaTrianglePointCount; j++) {
-        GLfloat scale = 1.0f/texture.pixelsWide * CC_CONTENT_SCALE_FACTOR();
-        textureCoordinates[j] = (ccVertex2F) { areaTrianglePoints[j].x * scale, areaTrianglePoints[j].y * scale };
+        textureCoordinates[j] = ccpMult(areaTrianglePoints[j], 1.0f/texture.pixelsWide*CC_CONTENT_SCALE_FACTOR());
         textureCoordinates[j].y = 1 - textureCoordinates[j].y;
     }
 }
 
--(void) draw {
+-(void) draw{
     CC_NODE_DRAW_SETUP();
     
     ccGLBindTexture2D( self.texture.name );
-    
+
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     
     ccGLBlendFunc( blendFunc.src, blendFunc.dst);
-    
+	
     ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position | kCCVertexAttribFlag_TexCoords );
     
     glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, 0, areaTrianglePoints);
     glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, 0, textureCoordinates);
-    
+	
     glDrawArrays(GL_TRIANGLES, 0, areaTrianglePointCount);
 }
 
@@ -156,7 +148,8 @@
 	// accept texture==nil as argument
 	NSAssert( !texture || [texture isKindOfClass:[CCTexture2D class]], @"setTexture expects a CCTexture2D. Invalid argument");
 	
-	texture = texture2D;
+	[texture release];
+	texture = [texture2D retain];
 	ccTexParams texParams = { GL_NEAREST, GL_NEAREST, GL_REPEAT, GL_REPEAT };
 	[texture setTexParameters: &texParams];
 	
@@ -172,8 +165,9 @@
     [super dealloc];
 	free(areaTrianglePoints);
 	free(textureCoordinates);
-	 texture = nil;
-    triangulator = nil;
+	[texture release]; texture = nil;
+    [triangulator release]; triangulator = nil;
+
 }
 
 @end

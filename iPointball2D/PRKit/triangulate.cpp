@@ -60,7 +60,7 @@ static const float EPSILON=0.0000000001f;
 float Triangulate::Area(const Vector2dVector &contour)
 {
 	
-	int n = (int)contour.size();
+	int n = contour.size();
 	
 	float A=0.0f;
 	
@@ -129,7 +129,7 @@ bool Triangulate::Process(const Vector2dVector &contour,Vector2dVector &result)
 {
 	/* allocate and initialize list of Vertices in polygon */
 	
-	int n = (int)contour.size();
+	int n = contour.size();
 	if ( n < 3 ) return false;
 	
 	int *V = new int[n];

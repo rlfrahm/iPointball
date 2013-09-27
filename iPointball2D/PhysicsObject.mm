@@ -59,7 +59,6 @@
         // assign an anchor point based on the center
         self.anchorPoint = ccp(_centroid.x * PTM_RATIO / texture.contentSize.width,
                                _centroid.y * PTM_RATIO / texture.contentSize.height);
-        // more init stuff here later when you expand PolygonSprite
     }
     return self;
 }

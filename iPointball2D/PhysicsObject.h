@@ -11,10 +11,11 @@
 #import "cocos2d.h"
 #import "Box2D.h"
 #import "CCPhysicsSprite.h"
+#import "PRFilledPolygon.h"
 
 #define PTM_RATIO 32
 
-@interface PhysicsObject : CCSprite {
+@interface PhysicsObject : PRFilledPolygon {
     b2Body *_body;
     BOOL _original;
     b2Vec2 _centroid;

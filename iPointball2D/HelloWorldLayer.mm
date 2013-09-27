@@ -304,13 +304,13 @@ enum {
 
 #pragma mark GameKit delegate
 
--(void) achievementViewControllerDidFinish:(GKAchievementViewController *)viewController
+-(void) achievementViewControllerDidFinish:(GKGameCenterViewController *)viewController
 {
 	AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
 	[[app navController] dismissModalViewControllerAnimated:YES];
 }
 
--(void) leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController
+-(void) leaderboardViewControllerDidFinish:(GKGameCenterViewController *)viewController
 {
 	AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
 	[[app navController] dismissModalViewControllerAnimated:YES];

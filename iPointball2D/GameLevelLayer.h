@@ -11,11 +11,7 @@
 #import "Box2D.h"
 #import "MyContactListener.h"
 #import "GLES-Render.h"
-#import "Bunker.h"
-#import "Player.h"
-#import "Computer.h"
-#import "Paint.h"
-#import "Gun.h"
+#import "PhysicsObject.h"
 
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
 //This ratio defines how many pixels correspond to 1 Box2D "metre"
@@ -50,8 +46,13 @@
     CCArray *_cache;
     BOOL playerFlag;
     b2Body *paintBod[100];
+    BOOL firing;
+    CGPoint origin;
+    UITapGestureRecognizer* _doubleTapRecognizer;
+    b2Vec2 moveToLocation;
 }
 
+@property(retain)UITapGestureRecognizer* doubleTapRecognizer;
 @property(retain)CCArray *cache;
 
 + (CCScene *) scene;

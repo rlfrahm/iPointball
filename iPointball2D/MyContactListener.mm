@@ -1,30 +1,27 @@
 //
 //  MyContactListener.m
-//  iPointball2D
+//  Box2DPong
 //
-//  Created by  on 4/9/13.
-//  Copyright (c) 2013 Ryan Frahm. All rights reserved.
+//  Created by Ray Wenderlich on 2/18/10.
+//  Copyright 2010 Ray Wenderlich. All rights reserved.
 //
-// http://www.raywenderlich.com/28606/how-to-create-a-breakout-game-with-box2d-and-cocos2d-2-x-tutorial-part-2
 
 #import "MyContactListener.h"
 
 MyContactListener::MyContactListener() : _contacts() {
-    
 }
 
 MyContactListener::~MyContactListener() {
-    
 }
 
-void MyContactListener::BeginContact(b2Contact *contact) {
+void MyContactListener::BeginContact(b2Contact* contact) {
     // We need to copy out the data because the b2Contact passed in
-    // is refused
+    // is reused.
     MyContact myContact = { contact->GetFixtureA(), contact->GetFixtureB() };
     _contacts.push_back(myContact);
 }
 
-void MyContactListener::EndContact(b2Contact *contact) {
+void MyContactListener::EndContact(b2Contact* contact) {
     MyContact myContact = { contact->GetFixtureA(), contact->GetFixtureB() };
     std::vector<MyContact>::iterator pos;
     pos = std::find(_contacts.begin(), _contacts.end(), myContact);
@@ -34,9 +31,8 @@ void MyContactListener::EndContact(b2Contact *contact) {
 }
 
 void MyContactListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifold) {
-    
 }
 
-void MyContactListener::PostSolve(b2Contact *contact, const b2ContactImpulse* impulse) {
-    
+void MyContactListener::PostSolve(b2Contact* contact, const b2ContactImpulse* impulse) {
 }
+

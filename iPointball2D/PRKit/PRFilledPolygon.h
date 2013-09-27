@@ -40,14 +40,14 @@
 	CCTexture2D *texture;
 	ccBlendFunc blendFunc;
 	
-	ccVertex2F *areaTrianglePoints;
-	ccVertex2F *textureCoordinates;
+	CGPoint *areaTrianglePoints;
+	CGPoint *textureCoordinates;
     
     id<PRTriangulator> triangulator;
 }
 
-@property (nonatomic, strong) CCTexture2D *texture;
-@property (nonatomic, strong) id<PRTriangulator> triangulator;
+@property (nonatomic, retain) CCTexture2D *texture;
+@property (nonatomic, retain) id<PRTriangulator> triangulator;
 
 /**
  Returns an autoreleased polygon.  Default triangulator is used (Ratcliff's).
