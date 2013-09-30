@@ -10,8 +10,9 @@
 
 #import "GameLevelLayer.h"
 #import "GameOverLayer.h"
-#import "CCPhysicsSprite.h"
-#import "Player.h"
+#import "RayCastCallback.h"
+#import "EnemyData.h"
+#import "LevelHelperLoader.h"
 
 enum {
     kTagParentNode = 1,
@@ -79,6 +80,7 @@ enum MASK_BITS
         
         _paint = [[NSMutableArray alloc]init];
         _enemiesAlive = [[NSMutableArray alloc]init];
+        offensive=true;
         _bunkers = [[NSMutableArray alloc]init];
         // create menu
         // [self createMenu];
@@ -128,6 +130,16 @@ enum MASK_BITS
         ccDrawCircle(origin, 20, 0, 10, NO);
     }
     firing = NO;
+    
+    for (enemy in _enemiesAlive) {
+        EnemyData * data = [LevelHelperLoader customValueWithKey:@"data" forSprite:enemy];
+        if (!data.canSeePlayer) {
+            ccDrawColor4F(0.0f, 1.0f, 0.0f, 1.0f);
+        } else {
+            ccDrawColor4F(1.0f, 0.0f, 0.0f, 1.0f);
+        }
+        ccDrawLine(data.eye, data.target);
+    }
     
     ccGLEnableVertexAttribs(kCCVertexAttribFlag_Position);
     
@@ -200,15 +212,6 @@ enum MASK_BITS
 }
 
 -(void) addNewPlayerAtPosition:(CGPoint)p{
-    //CCLOG(@"Add player %0.2f x %0.2f",player.position.x/PTM_RATIO,player.position.y/PTM_RATIO);
-    
-    /*_cache = [[CCArray alloc] initWithCapacity:53];
-    
-    Sprite *player = [[Player alloc] initWithWorld:world];
-    [self addChild:player z:1];
-    [player activateCollisions];
-    [_cache addObject:player];*/
-    
     // Create player and add it to the layer
     player = [CCSprite spriteWithFile:@"Player.png"];
     player.position = p;
@@ -238,7 +241,7 @@ enum MASK_BITS
     playerFixtureDef.friction = 0.4f;
     playerFixtureDef.restitution = 0.1f;
     playerFixtureDef.filter.categoryBits = 0x0002;
-    playerFixtureDef.filter.maskBits = 0x0008 | 0x0001;
+    playerFixtureDef.filter.maskBits = 0x0008 | 0x0001 | 0x0004;
     
     
     b2CircleShape playerTouchShape;
@@ -247,34 +250,23 @@ enum MASK_BITS
     b2FixtureDef playerTouchFixtureDef;
     playerTouchFixtureDef.shape = &playerTouchShape;
     playerTouchFixtureDef.density = 1000.0f;
+    playerTouchFixtureDef.filter.categoryBits = 0x0002;
+    playerTouchFixtureDef.filter.maskBits = 0x0008 | 0x0001;
     
     _playerFixture = playerBody->CreateFixture(&playerTouchFixtureDef);
     
     playerBody->CreateFixture(&playerFixtureDef);
-    
-    
-    
-    /*
-    CCNode *parent = [self getChildByTag:kTagParentNode];
-    
-    // We have a 64 x 64 sprite sheet with 4 different 32 x 32 images.
-    CCPhysicsSprite *sprite = [CCPhysicsSprite spriteWithTexture:spriteTexture_];
-    [parent addChild:sprite];
-    
-    [sprite setPTMRatio:PTM_RATIO];
-    [sprite setB2Body:body];
-    [sprite setPosition:ccp(p.x,p.y)];*/
-    
 }
 
 -(void) addNewEnemyAtPosition:(CGPoint)p{
-    //CCLOG(@"Add enemy %0.2f x %0.2f", p.x,p.y);
-    
     // Create enemy and add it to the layer
     enemy = [CCSprite spriteWithFile:@"Target.png"];
     enemy.position = p;
     enemy.tag = 2;
     [self addChild:enemy];
+    
+    EnemyData* data = [[[EnemyData alloc]init]autorelease];
+    [LevelHelperLoader setCustomValue:data withKey:@"data" onSprite:enemy];
     
     // Define the dynamic body
     // Set up a box in the physics world
@@ -296,7 +288,7 @@ enum MASK_BITS
     enemyFixtureDef.friction = 0.4f;
     enemyFixtureDef.restitution = 0.1f;
     enemyFixtureDef.filter.categoryBits = 0x0004;
-    enemyFixtureDef.filter.maskBits = 0x0008 | 0x0001;
+    enemyFixtureDef.filter.maskBits = 0x0008 | 0x0001 | 0x0016 | 0x0002;
     
     enemyFixture = enemyBody->CreateFixture(&enemyFixtureDef);
     
@@ -338,7 +330,7 @@ enum MASK_BITS
     paintFixtureDef.friction = 0.5f;
     paintFixtureDef.restitution = .01f;
     paintFixtureDef.filter.categoryBits = 0x0008;
-    paintFixtureDef.filter.maskBits = 0x0004 | 0x0001;
+    paintFixtureDef.filter.maskBits = 0x0004 | 0x0001 | 0x0016;
     
     //paintShapeDef.friction = 0.0f;
     //paintShapeDef.restitution = 1.0f;
@@ -360,23 +352,29 @@ enum MASK_BITS
 }
 
 - (void) addBunkerAtPosition:(CGPoint)p{
+    bunker = [CCSprite spriteWithFile:@"bunker1.png"];
     bunker.position = p;
     bunker.tag = 4;
+    [self addChild:bunker];
     
     b2BodyDef bunkerBodyDef;
     bunkerBodyDef.type = b2_staticBody;
+    bunkerBodyDef.position.Set(bunker.position.x/PTM_RATIO, bunker.position.y/PTM_RATIO);
+    bunkerBodyDef.userData = bunker;
     bunkerBody = world->CreateBody(&bunkerBodyDef);
     
     b2PolygonShape bunkerShape;
-    bunkerShape.SetAsBox(0.1f, 1.0f);
+    bunkerShape.SetAsBox(bunker.contentSize.width/PTM_RATIO/2, bunker.contentSize.height/PTM_RATIO/2);
     
     b2FixtureDef bunkerFixtureDef;
     bunkerFixtureDef.shape = &bunkerShape;
     bunkerFixtureDef.density = 1.0f;
     bunkerFixtureDef.restitution = 0.1f;
+    bunkerFixtureDef.filter.categoryBits = 0x0016;
+    bunkerFixtureDef.filter.maskBits = 0x0002 | 0x0004 | 0x0008;
     
     bunkerFixture = bunkerBody->CreateFixture(&bunkerFixtureDef);
-    //[_bunkers addObject:bunker];
+    [_bunkers addObject:bunker];
 }
 
 #pragma mark Touch Interaction
@@ -384,37 +382,93 @@ enum MASK_BITS
 -(void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     //CCLOG(@"Touch Began");
     NSArray *touchArray = [touches allObjects];
-    
+    NSSet *allTouches = [event allTouches];
     // only run the following code if there is more than one touch
     if([touchArray count]>0)
     {
         // Choose one of the touches to work with
-        UITouch *touch1 = [touchArray objectAtIndex:0];
-        CGPoint location = [touch1 locationInView:[touch1 view]];
+        UITouch *touch = [touchArray objectAtIndex:0];
+        NSUInteger tapCount = [touch tapCount];
+        CGPoint location = [touch locationInView:[touch view]];
         location = [[CCDirector sharedDirector] convertToGL:location];
-        origin = location;
+        b2Vec2 locationWorld = b2Vec2(location.x/PTM_RATIO, location.y/PTM_RATIO);
+        
+        if(tapCount == 1 && !bunkerFixture->TestPoint(locationWorld))
+        {
+            [self singleTap:touch];
+        }
+        else if(tapCount == 2 && bunkerFixture->TestPoint(locationWorld))
+        {
+            [self doubleTap:touch withBody:bunkerBody];
+            // Two Taps
+            /*for(b2Body* b = world->GetBodyList(); b; b->GetNext())
+            {
+                // For each body in the world
+                if (b->GetType() == bunkerBody->GetType())
+                {
+                    // We want to check the bunkerBody types
+                    for(b2Fixture* f = b->GetFixtureList();f; f->GetNext())
+                    {
+                        // For each fixture of the current bunkerBody
+                        if(f->TestPoint(locationWorld))
+                        {
+                            [self doubleTap:touch withBody:b];
+                        }
+                    }
+                    
+                }else{
+                    // If a bunkerBody wasn't doubleTapped
+                    [self doubleTap:touch withBody:b];
+                }
+            }
+             */
+            
+        }
+        else if(tapCount > 2)
+        {
+            // For now we only need to check for a doubleTap
+            [self singleTap:touch];
+        }
+    }
+}
+
+-(void)singleTap:(UITouch*)touch
+{
+    CGPoint location = [touch locationInView:[touch view]];
+    location = [[CCDirector sharedDirector] convertToGL:location];
+    b2Vec2 locationWorld = b2Vec2(location.x/PTM_RATIO, location.y/PTM_RATIO);
+    origin = location;
+    if (_playerFixture->TestPoint(locationWorld)) {
+        b2MouseJointDef md;
+        md.bodyA = groundBody;
+        md.bodyB = playerBody;
+        md.target = locationWorld;
+        md.collideConnected = false;
+        md.maxForce = 20.0f * playerBody->GetMass();
+        _mouseJoint = (b2MouseJoint *)world->CreateJoint(&md);
+        playerBody->SetAwake(true);
+    } else {
+        // Shoot Stuff!
         CGPoint shootVector = ccpSub(location, player.position);
         CGFloat shootAngle = ccpToAngle(shootVector);
-        b2Vec2 locationWorld = b2Vec2(location.x/PTM_RATIO, location.y/PTM_RATIO);
-        //CGFloat distance = sqrtf((player.position.x-location.x)*(player.position.x-location.x)+(player.position.y-location.y)*(player.position.y-location.y));
-        if (_playerFixture->TestPoint(locationWorld)) {
-                b2MouseJointDef md;
-                md.bodyA = groundBody;
-                md.bodyB = playerBody;
-                md.target = locationWorld;
-                md.collideConnected = false;
-                md.maxForce = 20.0f * playerBody->GetMass();
-                _mouseJoint = (b2MouseJoint *)world->CreateJoint(&md);
-                playerBody->SetAwake(true);
-        } else {
-                // Shoot Stuff!
-                [self addNewMovingPaintToLocation:location :shootAngle];
-        }
-        firing = YES;
-        // Set up initial location of projectile
-        // CGSize winSize = [[CCDirector sharedDirector] winSize];
-        // Shoot projectile
+        [self addNewMovingPaintToLocation:location :shootAngle];
     }
+    firing = YES;
+}
+
+-(void)doubleTap:(UITouch*)touch withBody:(b2Body*)bodyB
+{
+    CCLOG(@"Double Tap!");
+    CGPoint location = [touch locationInView:[touch view]];
+    location = [[CCDirector sharedDirector] convertToGL:location];
+    CGPoint shootVector = ccpSub(location, player.position);
+    CGFloat shootAngle = ccpToAngle(shootVector);
+    float x = cosf(shootAngle);
+    float y = sinf(shootAngle);
+    int pwr = 10;
+    //b2Vec2 vec = b2Vec2(shootVector.x/PTM_RATIO,shootVector.y/PTM_RATIO);
+    b2Vec2 impulse = b2Vec2(x*pwr,y*pwr);
+    playerBody->ApplyLinearImpulse(impulse, playerBody->GetWorldCenter());
 }
 
 -(void) ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -427,18 +481,6 @@ enum MASK_BITS
     moveToLocation = b2Vec2(location1.x/PTM_RATIO, location1.y/PTM_RATIO);
     //CGFloat distance = sqrtf((player.position.x-location1.x)*(player.position.x-location1.x)+(player.position.y-location1.y)*(player.position.y-location1.y));
     _mouseJoint->SetTarget(moveToLocation);
-}
-
--(void)handleDoubleTap:(UITapGestureRecognizer*)doubleTapRecognizer
-{
-    CCLOG(@"Double Tap!");
-    CGPoint location = [[CCDirector sharedDirector] convertToGL:[self convertToNodeSpace:[doubleTapRecognizer locationInView:[[CCDirector sharedDirector] view]]]];
-    b2Vec2 locationWorld = b2Vec2(location.x/PTM_RATIO, location.y/PTM_RATIO);
-    CGPoint sprintVector = ccpSub(player.position, location);
-    CGFloat sprintAngle = ccpToAngle(sprintVector);
-    b2Vec2 impulse = b2Vec2(cosf(sprintAngle)*10, sinf(sprintAngle)*10);
-    //playerBody->ApplyLinearImpulse(impulse, locationWorld);
-    playerBody->ApplyForceToCenter(impulse);
 }
 
 -(void) ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event{
@@ -455,11 +497,6 @@ enum MASK_BITS
         //playerBody->SetLinearVelocity(b2Vec2(0,0));
     }
 }
-
-- (void) handleTap:(UITapGestureRecognizer *)sender{
-    // Enable double tap gesture recognizer to simulate a slide or something
-}
-
 
 -(void) createMenu{
     
@@ -642,11 +679,59 @@ enum MASK_BITS
         }
         world->DestroyBody(body);
     }
+    [self updateEnemy:dt];
+}
+
+-(void)updateEnemy:(ccTime)dt
+{
+    [self enemyMoveDecision];
 }
 
 -(void) enemyMoveDecision{
-    CCLOG(@"Enemy is thinking..");
-    
+    //CCLOG(@"Enemy is thinking..");
+    for(enemy in _enemiesAlive)
+    {
+        b2Vec2 start = b2Vec2(enemy.position.x,enemy.position.y);
+        b2Vec2 target = start;
+        target.Normalize();
+        target *= 20;
+        ccDrawColor4F(1.0f, 0.0f, 1.0f, 0.0f);
+        ccDrawLine(ccp(1*PTM_RATIO, 2*PTM_RATIO), ccp(100*PTM_RATIO, 200*PTM_RATIO));
+        //ccDrawLine(ccp(start.x*PTM_RATIO, start.y*PTM_RATIO), ccp(target.x*PTM_RATIO, target.y*PTM_RATIO));
+        
+        EnemyData* enemydata = [LevelHelperLoader customValueWithKey:@"data" forSprite:enemy];
+        enemydata.eye = ccp(enemy.position.x*PTM_RATIO,enemy.position.y*PTM_RATIO);
+        enemydata.target = ccp(target.x*PTM_RATIO,target.y*PTM_RATIO);
+        enemydata.canSeePlayer = NO;
+        enemydata.canSeeCover = NO;
+        
+        RayCastCallback callback;
+        world->RayCast(&callback, target, start);
+        if(callback.m_fixture)
+        {
+            CCLOG(@"Here");
+            enemydata.target = ccp(callback.m_point.x*PTM_RATIO, callback.m_point.y*PTM_RATIO);
+            if(callback.m_fixture->GetBody() == playerBody)
+            {
+                CCLOG(@"Enemy Can see you!");
+                enemydata.canSeePlayer = YES;
+            }
+            else if(callback.m_fixture->GetBody() == bunkerBody)
+            {
+                CCLOG(@"Enemy sees a cover option!");
+                enemydata.canSeeCover = YES;
+            }
+        }
+        if(offensive)
+        {
+            // If the enemy is on the offensive
+            
+        }
+        else
+        {
+            // If the enemy is on the defensive
+        }
+    }
 }
 
 -(void) dealloc{

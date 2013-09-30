@@ -192,6 +192,9 @@
 		4D46932B1710735000837BC5 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D46932A1710735000837BC5 /* GLES-Render.mm */; };
 		4D46932D1710735000837BC5 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D46932C1710735000837BC5 /* blocks.png */; };
 		4D469346171078B500837BC5 /* GameLevelLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D469345171078B500837BC5 /* GameLevelLayer.mm */; };
+		4D650F4A17F67A9B00BB48AA /* bunker1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D650F4917F67A9B00BB48AA /* bunker1.png */; };
+		4D650F4E17F6F43B00BB48AA /* EnemyData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D650F4D17F6F43B00BB48AA /* EnemyData.m */; };
+		4D650F5117F6F97200BB48AA /* LevelHelperLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D650F5017F6F97200BB48AA /* LevelHelperLoader.mm */; };
 		4D6A14F11728D814008DA350 /* features.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4D6A14F01728D814008DA350 /* features.txt */; };
 		4D72E2D3172AF6320040273B /* Bunker.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D72E2D2172AF6320040273B /* Bunker.mm */; };
 		4D72E2D6172AF6710040273B /* GameTool.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D72E2D5172AF6710040273B /* GameTool.mm */; };
@@ -596,6 +599,12 @@
 		4D46932C1710735000837BC5 /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blocks.png; path = Resources/blocks.png; sourceTree = "<group>"; };
 		4D469344171078B400837BC5 /* GameLevelLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLevelLayer.h; sourceTree = "<group>"; };
 		4D469345171078B500837BC5 /* GameLevelLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameLevelLayer.mm; sourceTree = "<group>"; };
+		4D650F4917F67A9B00BB48AA /* bunker1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bunker1.png; sourceTree = "<group>"; };
+		4D650F4B17F6E5D700BB48AA /* RayCastCallback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RayCastCallback.h; sourceTree = "<group>"; };
+		4D650F4C17F6F43B00BB48AA /* EnemyData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnemyData.h; sourceTree = "<group>"; };
+		4D650F4D17F6F43B00BB48AA /* EnemyData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnemyData.m; sourceTree = "<group>"; };
+		4D650F4F17F6F97200BB48AA /* LevelHelperLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelHelperLoader.h; sourceTree = "<group>"; };
+		4D650F5017F6F97200BB48AA /* LevelHelperLoader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LevelHelperLoader.mm; sourceTree = "<group>"; };
 		4D6A14F01728D814008DA350 /* features.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = features.txt; sourceTree = "<group>"; };
 		4D72E2D1172AF6320040273B /* Bunker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bunker.h; sourceTree = "<group>"; };
 		4D72E2D2172AF6320040273B /* Bunker.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Bunker.mm; sourceTree = "<group>"; };
@@ -740,9 +749,14 @@
 				4D16B15B1727212700D40933 /* Objects */,
 				E1A2C54C1715D37B007B65B0 /* Sounds */,
 				E1A2C5431715BA95007B65B0 /* GameOverLayer.h */,
+				4D650F4B17F6E5D700BB48AA /* RayCastCallback.h */,
 				E1A2C5441715BA95007B65B0 /* GameOverLayer.mm */,
 				4D469344171078B400837BC5 /* GameLevelLayer.h */,
 				4D469345171078B500837BC5 /* GameLevelLayer.mm */,
+				4D650F4F17F6F97200BB48AA /* LevelHelperLoader.h */,
+				4D650F5017F6F97200BB48AA /* LevelHelperLoader.mm */,
+				4D650F4C17F6F43B00BB48AA /* EnemyData.h */,
+				4D650F4D17F6F43B00BB48AA /* EnemyData.m */,
 				4D4693201710735000837BC5 /* AppDelegate.h */,
 				4D4693211710735000837BC5 /* AppDelegate.mm */,
 				4D4693231710735000837BC5 /* HelloWorldLayer.h */,
@@ -761,6 +775,7 @@
 		4D4691001710734B00837BC5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4D650F4917F67A9B00BB48AA /* bunker1.png */,
 				E131A3E21714B2B500DC66F8 /* Player.png */,
 				E131A3E31714B2B500DC66F8 /* Projectile.png */,
 				E131A3E41714B2B500DC66F8 /* Target.png */,
@@ -1362,6 +1377,7 @@
 				4D4691041710734B00837BC5 /* Default@2x.png in Resources */,
 				4D4691061710734B00837BC5 /* Default-568h@2x.png in Resources */,
 				4D4691081710734B00837BC5 /* Default-Landscape~ipad.png in Resources */,
+				4D650F4A17F67A9B00BB48AA /* bunker1.png in Resources */,
 				4D46910A1710734B00837BC5 /* Icon-72.png in Resources */,
 				4D46910C1710734B00837BC5 /* Icon-Small-50.png in Resources */,
 				4D46910E1710734B00837BC5 /* Icon-Small.png in Resources */,
@@ -1385,6 +1401,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D650F5117F6F97200BB48AA /* LevelHelperLoader.mm in Sources */,
 				4D46911C1710734B00837BC5 /* CCAction.m in Sources */,
 				4D46911F1710734B00837BC5 /* CCActionCamera.m in Sources */,
 				4D4691221710734B00837BC5 /* CCActionCatmullRom.m in Sources */,
@@ -1427,6 +1444,7 @@
 				4D46918D1710734D00837BC5 /* CCParallaxNode.m in Sources */,
 				4D4691901710734D00837BC5 /* CCParticleBatchNode.m in Sources */,
 				4D4691931710734D00837BC5 /* CCParticleExamples.m in Sources */,
+				4D650F4E17F6F43B00BB48AA /* EnemyData.m in Sources */,
 				4D4691961710734D00837BC5 /* CCParticleSystem.m in Sources */,
 				4D4691991710734D00837BC5 /* CCParticleSystemQuad.m in Sources */,
 				4D46919C1710734D00837BC5 /* CCPhysicsDebugNode.m in Sources */,

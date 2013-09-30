@@ -50,6 +50,7 @@
     CGPoint origin;
     UITapGestureRecognizer* _doubleTapRecognizer;
     b2Vec2 moveToLocation;
+    BOOL offensive;
 }
 
 @property(retain)UITapGestureRecognizer* doubleTapRecognizer;
