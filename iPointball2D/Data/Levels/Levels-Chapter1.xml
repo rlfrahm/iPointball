@@ -1,0 +1,128 @@
+<Levels>
+    <Level>
+        <Name>Chapter1Level1</Name>
+        <Number>1</Number>
+        <Unlocked>1</Unlocked>
+        <Stars>0</Stars>
+        <Data>Some Level 1 data here...</Data>
+    </Level>
+    <Level>
+        <Name>Chapter1Level2</Name>
+        <Number>2</Number>
+        <Unlocked>0</Unlocked>
+        <Stars>0</Stars>
+        <Data>Some Level 1 data here...</Data>
+    </Level>
+    <Level>
+        <Name>Chapter1Level3</Name>
+        <Number>3</Number>
+        <Unlocked>0</Unlocked>
+        <Stars>0</Stars>
+        <Data>Some Level 1 data here...</Data>
+    </Level>
+    <Level>
+        <Name>Chapter1Level4</Name>
+        <Number>4</Number>
+        <Unlocked>0</Unlocked>
+        <Stars>0</Stars>
+        <Data>Some Level 1 data here...</Data>
+    </Level>
+    <Level>
+        <Name>Chapter1Level5</Name>
+        <Number>5</Number>
+        <Unlocked>0</Unlocked>
+        <Stars>0</Stars>
+        <Data>Some Level 1 data here...</Data>
+    </Level>
+    <Level>
+        <Name>Chapter1Level6</Name>
+        <Number>6</Number>
+        <Unlocked>0</Unlocked>
+        <Stars>0</Stars>
+        <Data>Some Level 1 data here...</Data>
+    </Level>
+    <Level>
+        <Name>Chapter1Level7</Name>
+        <Number>7</Number>
+        <Unlocked>0</Unlocked>
+        <Stars>0</Stars>
+        <Data>Some Level 1 data here...</Data>
+    </Level>
+    <Level>
+        <Name>Chapter1Level8</Name>
+        <Number>8</Number>
+        <Unlocked>0</Unlocked>
+        <Stars>0</Stars>
+        <Data>Some Level 1 data here...</Data>
+    </Level>
+    <Level>
+        <Name>Chapter1Level9</Name>
+        <Number>9</Number>
+        <Unlocked>0</Unlocked>
+        <Stars>0</Stars>
+        <Data>Some Level 1 data here...</Data>
+    </Level>
+    <Level>
+        <Name>Chapter1Level10</Name>
+        <Number>10</Number>
+        <Unlocked>0</Unlocked>
+        <Stars>0</Stars>
+        <Data>Some Level 1 data here...</Data>
+    </Level>
+    <Level>
+        <Name>Chapter1Level11</Name>
+        <Number>11</Number>
+        <Unlocked>0</Unlocked>
+        <Stars>0</Stars>
+        <Data>Some Level 1 data here...</Data>
+    </Level>
+    <Level>
+        <Name>Chapter1Level12</Name>
+        <Number>12</Number>
+        <Unlocked>0</Unlocked>
+        <Stars>0</Stars>
+        <Data>Some Level 1 data here...</Data>
+    </Level>
+    <Level>
+        <Name>Chapter1Level13</Name>
+        <Number>13</Number>
+        <Unlocked>0</Unlocked>
+        <Stars>0</Stars>
+        <Data>Some Level 1 data here...</Data>
+    </Level>
+    <Level>
+        <Name>Chapter1Level14</Name>
+        <Number>14</Number>
+        <Unlocked>0</Unlocked>
+        <Stars>0</Stars>
+        <Data>Some Level 1 data here...</Data>
+    </Level>
+    <Level>
+        <Name>Chapter1Level15</Name>
+        <Number>15</Number>
+        <Unlocked>0</Unlocked>
+        <Stars>0</Stars>
+        <Data>Some Level 1 data here...</Data>
+    </Level>
+    <Level>
+        <Name>Chapter1Level16</Name>
+        <Number>16</Number>
+        <Unlocked>0</Unlocked>
+        <Stars>0</Stars>
+        <Data>Some Level 1 data here...</Data>
+    </Level>
+    <Level>
+        <Name>Chapter1Level17</Name>
+        <Number>17</Number>
+        <Unlocked>0</Unlocked>
+        <Stars>0</Stars>
+        <Data>Some Level 1 data here...</Data>
+    </Level>
+    <Level>
+        <Name>Chapter1Level18</Name>
+        <Number>18</Number>
+        <Unlocked>0</Unlocked>
+        <Stars>0</Stars>
+        <Data>Some Level 1 data here...</Data>
+    </Level>
+</Levels>

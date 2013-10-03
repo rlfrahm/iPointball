@@ -1,0 +1,18 @@
+<Chapters>
+    <Chapter>
+        <Name>Amateur</Name>
+        <Number>1</Number>
+    </Chapter>
+    <Chapter>
+        <Name>Rookie</Name>
+        <Number>2</Number>
+    </Chapter>
+    <Chapter>
+        <Name>Semi-Pro</Name>
+        <Number>3</Number>
+    </Chapter>
+    <Chapter>
+        <Name>Pro</Name>
+        <Number>4</Number>
+    </Chapter>
+</Chapters>
