@@ -47,6 +47,9 @@
     BOOL unlocked;
     int stars;
     NSString* data;
+    NSMutableArray* enemies = [[[NSMutableArray alloc]init]autorelease];
+    NSString* bunker;
+    NSString* paint;
     Levels *levels = [[[Levels alloc]init]autorelease];
 
     // Create NSData instance from xml in filePath
@@ -79,6 +82,9 @@
         NSArray *unlockedArray = [element elementsForName:@"Unlocked"];
         NSArray *starsArray = [element elementsForName:@"Stars"];
         NSArray *dataArray = [element elementsForName:@"Data"];
+        NSArray *enemiesArray = [element elementsForName:@"Enemies"];
+        NSArray *bunkerArray = [element elementsForName:@"Bunker"];
+        NSArray *paintArray = [element elementsForName:@"Paint"];
         
         // exampleInt
         if (nameArray.count > 0) {
@@ -107,7 +113,32 @@
             GDataXMLElement *dataElement = (GDataXMLElement *) [dataArray objectAtIndex:0];
             data = [dataElement stringValue];
         }
-        Level* level = [[Level alloc] initWithName:name number:number unlocked:unlocked stars:stars data:data];
+        
+        if (enemiesArray.count > 0) {
+            int i = 0;
+            for(GDataXMLElement* enemy in enemiesArray)
+            {
+                NSArray* enemyArray = [enemy elementsForName:@"Enemy"];
+                
+                if (enemyArray.count > 0) {
+                    GDataXMLElement* enemyElement = (GDataXMLElement *) [enemyArray objectAtIndex:i];
+                    [enemies addObject:[enemyElement stringValue]];
+                }
+                i++;
+            }
+        }
+        
+        if (bunkerArray.count > 0) {
+            GDataXMLElement *bunkerElement = (GDataXMLElement *) [bunkerArray objectAtIndex:0];
+            bunker = [bunkerElement stringValue];
+        }
+        
+        if (paintArray.count > 0) {
+            GDataXMLElement *paintElement = (GDataXMLElement *) [paintArray objectAtIndex:0];
+            paint = [paintElement stringValue];
+        }
+        
+        Level* level = [[Level alloc] initWithName:name number:number unlocked:unlocked stars:stars data:data enemies:enemies bunker:bunker withPaint:paint];
         
         [levels.levels addObject:level];
     }
@@ -160,13 +191,26 @@
         
         GDataXMLElement *dataElement = [GDataXMLNode elementWithName:@"Data" stringValue:level.data];
         
+        GDataXMLElement *enemiesElement = [GDataXMLNode elementWithName:@"Enemies"];
+        
+        GDataXMLElement *bunkerElement = [GDataXMLNode elementWithName:@"Bunker"];
+        
+        GDataXMLElement *paintElement = [GDataXMLNode elementWithName:@"Paint"];
+        
+        for(id enemy in level.enemies)
+        {
+            GDataXMLElement *enemyElement = [GDataXMLNode elementWithName:@"Enemy"];
+            [enemiesElement addChild:enemyElement];
+        }
+        
         // Using the elements just created, set up the hierarchy
         [levelElement addChild:nameElement];
         [levelElement addChild:numberElement];
         [levelElement addChild:unlockedElement];
         [levelElement addChild:starsElement];
         [levelElement addChild:dataElement];
-        
+        [levelElement addChild:bunkerElement];
+        [levelElement addChild:paintElement];
         [levelsElement addChild:levelElement];
     }
     

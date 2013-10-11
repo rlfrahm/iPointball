@@ -130,9 +130,9 @@
         }
         
         [levelMenu alignItemsInColumns:
-         [NSNumber numberWithInt:6],
-         [NSNumber numberWithInt:6],
-         [NSNumber numberWithInt:6], nil];
+         [NSNumber numberWithInt:3],
+         [NSNumber numberWithInt:0],
+         [NSNumber numberWithInt:0], nil];
         
         // Move the whole menu up by a small percentage so it doesn't overlap the back button
         CGPoint newPosition = levelMenu.position;

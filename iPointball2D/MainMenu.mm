@@ -71,6 +71,9 @@ enum {
         CCLOG(@"Selected Layer = %i", gameData.selectedLevel);
         CCLOG(@"Sound = %i", gameData.sound);
         CCLOG(@"Music = %i", gameData.music);
+        CCLOG(@"Player = %@", gameData.player);
+        CCLOG(@"Marker = %@", gameData.marker);
+        CCLOG(@"FPS = %i", gameData.fps);
         gameData.selectedChapter = 7;
         gameData.selectedLevel = 4;
         gameData.sound = 0;

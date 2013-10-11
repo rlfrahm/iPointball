@@ -12,10 +12,13 @@
 @synthesize unlocked = _unlocked;
 @synthesize stars = _stars;
 @synthesize data = _data;
+@synthesize enemies = _enemies;
+@synthesize bunker = _bunker;
+@synthesize paint = _paint;
 
 // put your custom init method here which takes a variable 
 // for each class instance variable
--(id)initWithName:(NSString *)name number:(int)number unlocked:(BOOL)unlocked stars:(int)stars data:(NSString *)data {
+-(id)initWithName:(NSString *)name number:(int)number unlocked:(BOOL)unlocked stars:(int)stars data:(NSString *)data enemies:(NSArray *)enemies bunker:(NSString *)bunker withPaint:(NSString *)paint{
 
     if ((self = [super init])) {
 
@@ -26,6 +29,11 @@
         self.unlocked = unlocked;
         self.stars = stars;
         self.data = data;
+        self.enemies = enemies;
+        self.bunker = bunker;
+        self.paint = paint;
+        //self.enemies = enemies;
+        //self.bunkers = bunkers;
     }
     return self;
 }

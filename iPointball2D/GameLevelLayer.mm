@@ -13,6 +13,7 @@
 #import "RayCastCallback.h"
 #import "EnemyData.h"
 #import "LevelHelperLoader.h"
+#import "Player.h"
 
 enum {
     kTagParentNode = 1,

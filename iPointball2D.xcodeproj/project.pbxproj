@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4D16B1651727227000D40933 /* PhysicsObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D16B1641727227000D40933 /* PhysicsObject.mm */; };
-		4D16B1681727264800D40933 /* Player.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D16B1671727264800D40933 /* Player.mm */; };
+		4D1A9AC918001DCF004D663F /* Paint.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D1A9AC818001DCF004D663F /* Paint.mm */; };
 		4D1B02C217EDC5E60057F384 /* PRFilledPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D1B02BB17EDC5E60057F384 /* PRFilledPolygon.m */; };
 		4D1B02C317EDC5E60057F384 /* PRRatcliffTriangulator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D1B02BD17EDC5E60057F384 /* PRRatcliffTriangulator.mm */; };
 		4D1B02C417EDC5E60057F384 /* triangulate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D1B02BF17EDC5E60057F384 /* triangulate.cpp */; };
@@ -34,6 +33,10 @@
 		4D1D802117FCC70E0035F8CA /* GameData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D1D801D17FCC70E0035F8CA /* GameData.m */; };
 		4D1D802217FCC70E0035F8CA /* GameData.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4D1D801E17FCC70E0035F8CA /* GameData.xml */; };
 		4D1D802317FCC70E0035F8CA /* GameDataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D1D802017FCC70E0035F8CA /* GameDataParser.m */; };
+		4D2016B117FE49CD00392465 /* Player.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D2016B017FE49CD00392465 /* Player.mm */; };
+		4D2016B417FE4C8100392465 /* GameObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D2016B317FE4C8100392465 /* GameObject.mm */; };
+		4D2016B717FE4CAD00392465 /* Bunker.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D2016B617FE4CAD00392465 /* Bunker.mm */; };
+		4D2016BA17FE5F7B00392465 /* Enemy.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D2016B917FE5F7B00392465 /* Enemy.mm */; };
 		4D2C4C8117FD825A00FA5E20 /* Level.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2C4C7D17FD825A00FA5E20 /* Level.m */; };
 		4D2C4C8217FD825A00FA5E20 /* Levels-Chapter1.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4D2C4C7E17FD825A00FA5E20 /* Levels-Chapter1.xml */; };
 		4D2C4C8317FD825A00FA5E20 /* LevelParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2C4C8017FD825A00FA5E20 /* LevelParser.m */; };
@@ -221,12 +224,6 @@
 		4D650F4E17F6F43B00BB48AA /* EnemyData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D650F4D17F6F43B00BB48AA /* EnemyData.m */; };
 		4D650F5117F6F97200BB48AA /* LevelHelperLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D650F5017F6F97200BB48AA /* LevelHelperLoader.mm */; };
 		4D6A14F11728D814008DA350 /* features.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4D6A14F01728D814008DA350 /* features.txt */; };
-		4D72E2D3172AF6320040273B /* Bunker.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D72E2D2172AF6320040273B /* Bunker.mm */; };
-		4D72E2D6172AF6710040273B /* GameTool.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D72E2D5172AF6710040273B /* GameTool.mm */; };
-		4D72E2D9172AF6950040273B /* Paint.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D72E2D8172AF6950040273B /* Paint.mm */; };
-		4D72E2DC172AF6A80040273B /* Gun.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D72E2DB172AF6A80040273B /* Gun.mm */; };
-		4D72E2DF172AF6D20040273B /* Character.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D72E2DE172AF6D20040273B /* Character.mm */; };
-		4D72E2E2172AF6E80040273B /* Computer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D72E2E1172AF6E80040273B /* Computer.mm */; };
 		4DAA28DA17FE144900C26F58 /* Amateur-Normal-iPad-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA28B217FE144900C26F58 /* Amateur-Normal-iPad-hd.png */; };
 		4DAA28DB17FE144900C26F58 /* Amateur-Normal-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA28B317FE144900C26F58 /* Amateur-Normal-iPad.png */; };
 		4DAA28DC17FE144900C26F58 /* Amateur-Normal-iPhone-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA28B417FE144900C26F58 /* Amateur-Normal-iPhone-hd.png */; };
@@ -287,6 +284,8 @@
 		4DAA292917FE16C800C26F58 /* Locked-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA291517FE16C800C26F58 /* Locked-iPad.png */; };
 		4DAA292A17FE16C800C26F58 /* Locked-iPhone-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA291617FE16C800C26F58 /* Locked-iPhone-hd.png */; };
 		4DAA292B17FE16C800C26F58 /* Locked-iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA291717FE16C800C26F58 /* Locked-iPhone.png */; };
+		4DD249411805F33F006D9E9B /* HumanPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4DD249401805F33F006D9E9B /* HumanPlayer.mm */; };
+		4DD249441805F6FC006D9E9B /* AIPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4DD249431805F6FC006D9E9B /* AIPlayer.mm */; };
 		4DF73D9417FD0B5E00507149 /* CCScrollLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF73D9317FD0B5E00507149 /* CCScrollLayer.m */; };
 		4DF73D9917FD0D5C00507149 /* StickyNote-iPad-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DF73D9517FD0D5C00507149 /* StickyNote-iPad-hd.png */; };
 		4DF73D9A17FD0D5C00507149 /* StickyNote-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DF73D9617FD0D5C00507149 /* StickyNote-iPad.png */; };
@@ -304,10 +303,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4D16B1631727227000D40933 /* PhysicsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsObject.h; sourceTree = "<group>"; };
-		4D16B1641727227000D40933 /* PhysicsObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PhysicsObject.mm; sourceTree = "<group>"; };
-		4D16B1661727264800D40933 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
-		4D16B1671727264800D40933 /* Player.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Player.mm; sourceTree = "<group>"; };
+		4D1A9AC718001DCF004D663F /* Paint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Paint.h; sourceTree = "<group>"; };
+		4D1A9AC818001DCF004D663F /* Paint.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Paint.mm; sourceTree = "<group>"; };
 		4D1B02BA17EDC5E60057F384 /* PRFilledPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRFilledPolygon.h; sourceTree = "<group>"; };
 		4D1B02BB17EDC5E60057F384 /* PRFilledPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRFilledPolygon.m; sourceTree = "<group>"; };
 		4D1B02BC17EDC5E60057F384 /* PRRatcliffTriangulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRRatcliffTriangulator.h; sourceTree = "<group>"; };
@@ -350,6 +347,14 @@
 		4D1D801E17FCC70E0035F8CA /* GameData.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = GameData.xml; sourceTree = "<group>"; };
 		4D1D801F17FCC70E0035F8CA /* GameDataParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameDataParser.h; sourceTree = "<group>"; };
 		4D1D802017FCC70E0035F8CA /* GameDataParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameDataParser.m; sourceTree = "<group>"; };
+		4D2016AF17FE49CD00392465 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		4D2016B017FE49CD00392465 /* Player.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Player.mm; sourceTree = "<group>"; };
+		4D2016B217FE4C8100392465 /* GameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObject.h; sourceTree = "<group>"; };
+		4D2016B317FE4C8100392465 /* GameObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameObject.mm; sourceTree = "<group>"; };
+		4D2016B517FE4CAD00392465 /* Bunker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bunker.h; sourceTree = "<group>"; };
+		4D2016B617FE4CAD00392465 /* Bunker.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Bunker.mm; sourceTree = "<group>"; };
+		4D2016B817FE5F7B00392465 /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
+		4D2016B917FE5F7B00392465 /* Enemy.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Enemy.mm; sourceTree = "<group>"; };
 		4D2C4C7C17FD825A00FA5E20 /* Level.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level.h; sourceTree = "<group>"; };
 		4D2C4C7D17FD825A00FA5E20 /* Level.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level.m; sourceTree = "<group>"; };
 		4D2C4C7E17FD825A00FA5E20 /* Levels-Chapter1.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Levels-Chapter1.xml"; sourceTree = "<group>"; };
@@ -740,18 +745,6 @@
 		4D650F4F17F6F97200BB48AA /* LevelHelperLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelHelperLoader.h; sourceTree = "<group>"; };
 		4D650F5017F6F97200BB48AA /* LevelHelperLoader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LevelHelperLoader.mm; sourceTree = "<group>"; };
 		4D6A14F01728D814008DA350 /* features.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = features.txt; sourceTree = "<group>"; };
-		4D72E2D1172AF6320040273B /* Bunker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bunker.h; sourceTree = "<group>"; };
-		4D72E2D2172AF6320040273B /* Bunker.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Bunker.mm; sourceTree = "<group>"; };
-		4D72E2D4172AF6710040273B /* GameTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameTool.h; sourceTree = "<group>"; };
-		4D72E2D5172AF6710040273B /* GameTool.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameTool.mm; sourceTree = "<group>"; };
-		4D72E2D7172AF6950040273B /* Paint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Paint.h; sourceTree = "<group>"; };
-		4D72E2D8172AF6950040273B /* Paint.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Paint.mm; sourceTree = "<group>"; };
-		4D72E2DA172AF6A80040273B /* Gun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gun.h; sourceTree = "<group>"; };
-		4D72E2DB172AF6A80040273B /* Gun.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Gun.mm; sourceTree = "<group>"; };
-		4D72E2DD172AF6D20040273B /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
-		4D72E2DE172AF6D20040273B /* Character.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Character.mm; sourceTree = "<group>"; };
-		4D72E2E0172AF6E80040273B /* Computer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Computer.h; sourceTree = "<group>"; };
-		4D72E2E1172AF6E80040273B /* Computer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Computer.mm; sourceTree = "<group>"; };
 		4DAA28B217FE144900C26F58 /* Amateur-Normal-iPad-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Amateur-Normal-iPad-hd.png"; sourceTree = "<group>"; };
 		4DAA28B317FE144900C26F58 /* Amateur-Normal-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Amateur-Normal-iPad.png"; sourceTree = "<group>"; };
 		4DAA28B417FE144900C26F58 /* Amateur-Normal-iPhone-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Amateur-Normal-iPhone-hd.png"; sourceTree = "<group>"; };
@@ -812,6 +805,10 @@
 		4DAA291517FE16C800C26F58 /* Locked-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Locked-iPad.png"; sourceTree = "<group>"; };
 		4DAA291617FE16C800C26F58 /* Locked-iPhone-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Locked-iPhone-hd.png"; sourceTree = "<group>"; };
 		4DAA291717FE16C800C26F58 /* Locked-iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Locked-iPhone.png"; sourceTree = "<group>"; };
+		4DD2493F1805F33F006D9E9B /* HumanPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HumanPlayer.h; sourceTree = "<group>"; };
+		4DD249401805F33F006D9E9B /* HumanPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HumanPlayer.mm; sourceTree = "<group>"; };
+		4DD249421805F6FC006D9E9B /* AIPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIPlayer.h; sourceTree = "<group>"; };
+		4DD249431805F6FC006D9E9B /* AIPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AIPlayer.mm; sourceTree = "<group>"; };
 		4DF73D9217FD0B5E00507149 /* CCScrollLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCScrollLayer.h; sourceTree = "<group>"; };
 		4DF73D9317FD0B5E00507149 /* CCScrollLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCScrollLayer.m; sourceTree = "<group>"; };
 		4DF73D9517FD0D5C00507149 /* StickyNote-iPad-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StickyNote-iPad-hd.png"; sourceTree = "<group>"; };
@@ -856,48 +853,22 @@
 		4D16B15B1727212700D40933 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
-				4D16B1631727227000D40933 /* PhysicsObject.h */,
-				4D16B1641727227000D40933 /* PhysicsObject.mm */,
-				4D16B15F1727214E00D40933 /* Bunker */,
-				4D16B15C1727213400D40933 /* Character */,
-				4D16B15D1727213B00D40933 /* Tool */,
+				4DD249461806062E006D9E9B /* Bunkers */,
+				4DD2494518060624006D9E9B /* Paint */,
+				4DD2493E1805F327006D9E9B /* Players */,
+				4D2016B217FE4C8100392465 /* GameObject.h */,
+				4D2016B317FE4C8100392465 /* GameObject.mm */,
+				4D2016B817FE5F7B00392465 /* Enemy.h */,
+				4D2016B917FE5F7B00392465 /* Enemy.mm */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
 		};
-		4D16B15C1727213400D40933 /* Character */ = {
+		4D1A9ACA18002237004D663F /* Actors */ = {
 			isa = PBXGroup;
 			children = (
-				4D16B1661727264800D40933 /* Player.h */,
-				4D16B1671727264800D40933 /* Player.mm */,
-				4D72E2DD172AF6D20040273B /* Character.h */,
-				4D72E2DE172AF6D20040273B /* Character.mm */,
-				4D72E2E0172AF6E80040273B /* Computer.h */,
-				4D72E2E1172AF6E80040273B /* Computer.mm */,
 			);
-			name = Character;
-			sourceTree = "<group>";
-		};
-		4D16B15D1727213B00D40933 /* Tool */ = {
-			isa = PBXGroup;
-			children = (
-				4D72E2D4172AF6710040273B /* GameTool.h */,
-				4D72E2D5172AF6710040273B /* GameTool.mm */,
-				4D72E2D7172AF6950040273B /* Paint.h */,
-				4D72E2D8172AF6950040273B /* Paint.mm */,
-				4D72E2DA172AF6A80040273B /* Gun.h */,
-				4D72E2DB172AF6A80040273B /* Gun.mm */,
-			);
-			name = Tool;
-			sourceTree = "<group>";
-		};
-		4D16B15F1727214E00D40933 /* Bunker */ = {
-			isa = PBXGroup;
-			children = (
-				4D72E2D1172AF6320040273B /* Bunker.h */,
-				4D72E2D2172AF6320040273B /* Bunker.mm */,
-			);
-			name = Bunker;
+			name = Actors;
 			sourceTree = "<group>";
 		};
 		4D1B02B717EDC5E60057F384 /* PRKit */ = {
@@ -917,8 +888,8 @@
 		4D1D800017FCBA890035F8CA /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				4D1D800817FCC1470035F8CA /* GameScene.mm */,
 				4D1D800917FCC1470035F8CA /* GameScene.h */,
+				4D1D800817FCC1470035F8CA /* GameScene.mm */,
 				4D1D800517FCC12B0035F8CA /* LevelSelect.mm */,
 				4D1D800617FCC12B0035F8CA /* LevelSelect.h */,
 				4D1D800217FCC0FD0035F8CA /* ChapterSelect.mm */,
@@ -955,6 +926,7 @@
 		4D1D800F17FCC5F00035F8CA /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				4D1A9ACA18002237004D663F /* Actors */,
 				4D1D801017FCC5F00035F8CA /* Chapters */,
 				4D1D801117FCC5F00035F8CA /* GameData */,
 				4D1D801217FCC5F00035F8CA /* Levels */,
@@ -1722,6 +1694,37 @@
 			path = Progress;
 			sourceTree = "<group>";
 		};
+		4DD2493E1805F327006D9E9B /* Players */ = {
+			isa = PBXGroup;
+			children = (
+				4D2016AF17FE49CD00392465 /* Player.h */,
+				4D2016B017FE49CD00392465 /* Player.mm */,
+				4DD2493F1805F33F006D9E9B /* HumanPlayer.h */,
+				4DD249401805F33F006D9E9B /* HumanPlayer.mm */,
+				4DD249421805F6FC006D9E9B /* AIPlayer.h */,
+				4DD249431805F6FC006D9E9B /* AIPlayer.mm */,
+			);
+			name = Players;
+			sourceTree = "<group>";
+		};
+		4DD2494518060624006D9E9B /* Paint */ = {
+			isa = PBXGroup;
+			children = (
+				4D1A9AC718001DCF004D663F /* Paint.h */,
+				4D1A9AC818001DCF004D663F /* Paint.mm */,
+			);
+			name = Paint;
+			sourceTree = "<group>";
+		};
+		4DD249461806062E006D9E9B /* Bunkers */ = {
+			isa = PBXGroup;
+			children = (
+				4D2016B517FE4CAD00392465 /* Bunker.h */,
+				4D2016B617FE4CAD00392465 /* Bunker.mm */,
+			);
+			name = Bunkers;
+			sourceTree = "<group>";
+		};
 		4DF73D9017FD0B5E00507149 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -1914,6 +1917,7 @@
 				4D4691311710734C00837BC5 /* CCActionInterval.m in Sources */,
 				4D4691341710734C00837BC5 /* CCActionManager.m in Sources */,
 				4D4691371710734C00837BC5 /* CCActionPageTurn3D.m in Sources */,
+				4DD249411805F33F006D9E9B /* HumanPlayer.mm in Sources */,
 				4D46913A1710734C00837BC5 /* CCActionProgressTimer.m in Sources */,
 				4D46913D1710734C00837BC5 /* CCActionTiledGrid.m in Sources */,
 				4D4691401710734C00837BC5 /* CCActionTween.m in Sources */,
@@ -1922,6 +1926,7 @@
 				4D4691461710734C00837BC5 /* CCAnimationCache.m in Sources */,
 				4D4691491710734C00837BC5 /* CCAtlasNode.m in Sources */,
 				4D46914C1710734C00837BC5 /* CCCamera.m in Sources */,
+				4DD249441805F6FC006D9E9B /* AIPlayer.mm in Sources */,
 				4D46914F1710734C00837BC5 /* CCClippingNode.m in Sources */,
 				4D4691531710734C00837BC5 /* CCConfiguration.m in Sources */,
 				4D1D7FEF17FCB7640035F8CA /* OptionsMenu.mm in Sources */,
@@ -1932,6 +1937,7 @@
 				4D4691621710734C00837BC5 /* ccFPSImages.m in Sources */,
 				4D4691651710734C00837BC5 /* CCGLProgram.m in Sources */,
 				4D1D801B17FCC5F00035F8CA /* TemplateDataParser.m in Sources */,
+				4D2016BA17FE5F7B00392465 /* Enemy.mm in Sources */,
 				4D4691681710734C00837BC5 /* ccGLStateCache.m in Sources */,
 				4D46916B1710734C00837BC5 /* CCGrabber.m in Sources */,
 				4D46916E1710734C00837BC5 /* CCGrid.m in Sources */,
@@ -1981,6 +1987,7 @@
 				4D4691F11710734E00837BC5 /* CCTransitionProgress.m in Sources */,
 				4D4691F51710734E00837BC5 /* cocos2d.m in Sources */,
 				4D1D7FEB17FCB65F0035F8CA /* MainMenu.mm in Sources */,
+				4D2016B117FE49CD00392465 /* Player.mm in Sources */,
 				4D4691FC1710734E00837BC5 /* CCDirectorIOS.m in Sources */,
 				4D4691FF1710734E00837BC5 /* CCES2Renderer.m in Sources */,
 				4D2C4C8117FD825A00FA5E20 /* Level.m in Sources */,
@@ -1989,6 +1996,7 @@
 				4D4692071710734E00837BC5 /* CCTouchDispatcher.m in Sources */,
 				4D46920A1710734E00837BC5 /* CCTouchHandler.m in Sources */,
 				4D46920E1710734E00837BC5 /* CCDirectorMac.m in Sources */,
+				4D1A9AC918001DCF004D663F /* Paint.mm in Sources */,
 				4D4692111710734E00837BC5 /* CCEventDispatcher.m in Sources */,
 				4D4692141710734E00837BC5 /* CCGLView.m in Sources */,
 				4D4692171710734E00837BC5 /* CCWindow.m in Sources */,
@@ -2026,6 +2034,7 @@
 				4D4692871710734F00837BC5 /* vec4.c in Sources */,
 				4D46928F1710734F00837BC5 /* b2BroadPhase.cpp in Sources */,
 				4D4692921710734F00837BC5 /* b2CollideCircle.cpp in Sources */,
+				4D2016B717FE4CAD00392465 /* Bunker.mm in Sources */,
 				4D4692941710734F00837BC5 /* b2CollideEdge.cpp in Sources */,
 				4D4692961710734F00837BC5 /* b2CollidePolygon.cpp in Sources */,
 				4D4692981710734F00837BC5 /* b2Collision.cpp in Sources */,
@@ -2037,6 +2046,7 @@
 				4D4692AB1710734F00837BC5 /* b2EdgeShape.cpp in Sources */,
 				4D4692AE1710734F00837BC5 /* b2PolygonShape.cpp in Sources */,
 				4D4692B31710734F00837BC5 /* b2BlockAllocator.cpp in Sources */,
+				4D2016B417FE4C8100392465 /* GameObject.mm in Sources */,
 				4D4692B61710734F00837BC5 /* b2Draw.cpp in Sources */,
 				4D4692BA1710734F00837BC5 /* b2Math.cpp in Sources */,
 				4D4692BD1710734F00837BC5 /* b2Settings.cpp in Sources */,
@@ -2083,15 +2093,7 @@
 				4D46932B1710735000837BC5 /* GLES-Render.mm in Sources */,
 				4D469346171078B500837BC5 /* GameLevelLayer.mm in Sources */,
 				E1A2C5451715BA95007B65B0 /* GameOverLayer.mm in Sources */,
-				4D16B1651727227000D40933 /* PhysicsObject.mm in Sources */,
-				4D16B1681727264800D40933 /* Player.mm in Sources */,
-				4D72E2D3172AF6320040273B /* Bunker.mm in Sources */,
 				4D1D801917FCC5F00035F8CA /* TemplateData.m in Sources */,
-				4D72E2D6172AF6710040273B /* GameTool.mm in Sources */,
-				4D72E2D9172AF6950040273B /* Paint.mm in Sources */,
-				4D72E2DC172AF6A80040273B /* Gun.mm in Sources */,
-				4D72E2DF172AF6D20040273B /* Character.mm in Sources */,
-				4D72E2E2172AF6E80040273B /* Computer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

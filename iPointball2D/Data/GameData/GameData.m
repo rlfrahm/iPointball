@@ -14,7 +14,7 @@
 
 // put your custom init method here which takes a variable 
 // for each class instance variable
--(id)initWithSelectedChapter:(int)chapter selectedLevel:(int)level sound:(BOOL)sound music:(BOOL)music {
+-(id)initWithSelectedChapter:(int)chapter selectedLevel:(int)level sound:(BOOL)sound music:(BOOL)music player:(NSString *)player marker:(NSString *)marker fps:(int)fps{
 
     if ((self = [super init])) {
 
@@ -24,9 +24,14 @@
         self.selectedLevel = level;
         self.sound = sound;
         self.music = music;
+        self.player = player;
+        self.marker = marker;
+        self.fps = fps;
     }
     return self;
 }
+
+
 
 - (void) dealloc {
     [super dealloc];

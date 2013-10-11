@@ -1,15 +1,13 @@
 //
-//  Player.h
+//  Enemy.h
 //  iPointball2D
 //
 //  Created by Ryan Frahm on 10/3/13.
 //  Copyright (c) 2013 Ryan Frahm. All rights reserved.
 //
 
-#import "GameObject.h"
+#import <Foundation/Foundation.h>
 
-@interface Player : GameObject
-
--(void)shootPaintToPoint:(CGPoint)point;
+@interface Enemy : NSObject
 
 @end

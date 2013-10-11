@@ -4,4 +4,7 @@
     <SelectedLevel>1</SelectedLevel>
     <Sound>1</Sound>
     <Music>1</Music>
+    <Player>Player.png</Player>
+    <Marker>Default.png</Marker>
+    <FPS>30</FPS>
 </GameData>

@@ -11,7 +11,7 @@
 #import "Box2D.h"
 #import "MyContactListener.h"
 #import "GLES-Render.h"
-#import "PhysicsObject.h"
+#import "GameObject.h"
 
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
 //This ratio defines how many pixels correspond to 1 Box2D "metre"

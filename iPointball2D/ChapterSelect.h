@@ -7,7 +7,7 @@
 #import "Constants.h"
 #import "SceneManager.h"
 
-@interface ChapterSelect : CCLayer {  // <-- RENAME THIS (the SceneName bit)
+@interface ChapterSelect : CCLayer {
     
 }
 

@@ -1,17 +1,17 @@
 //
-//  Bunker.h
+//  Object.h
 //  iPointball2D
 //
-//  Created by Ryan Frahm on 4/26/13.
-//  Copyright 2013 Ryan Frahm. All rights reserved.
+//  Created by Ryan Frahm on 10/3/13.
+//  Copyright (c) 2013 Ryan Frahm. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "cocos2d.h"
-#import "PhysicsObject.h"
+#import "GameObject.h"
 
-@interface Bunker : PhysicsObject {
-    
-}
+@interface Bunker : GameObject
+
+-(id)initWithLayer:(GameScene*)layer andFile:(NSString*)file forWorld:(b2World*)world andPosition:(CGPoint)position;
+
+
 
 @end

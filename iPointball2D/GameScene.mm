@@ -7,11 +7,28 @@
 #import "GameDataParser.h"
 #import "LevelHelperLoader.h"
 #import "EnemyData.h"
+#import "HumanPlayer.h"
+#import "AIPlayer.h"
+#import "Bunker.h"
+#import "Paint.h"
 
 #define PAINTFPS 680 // pixels/sec
 #define PTM_RATIO 32 // pixels-meters
 
-@implementation GameScene
+@implementation GameScene {
+    NSMutableArray* _gameObjects;
+    HumanPlayer* _humanPlayer;
+    CCSpriteBatchNode* _batchNode;
+    AIPlayer* _aiPlayer;
+    BOOL _gameOver;
+    b2World* world;
+    GameData* gameData;
+    MyContactListener *contactListener;
+    Level* levelData;
+    Bunker* _bunker;
+    Paint* _paint;
+    Levels* levels;
+}
 @synthesize iPad;
 
 -(void) initPhysics{
@@ -74,53 +91,6 @@
     groundFixtureDef.filter.categoryBits = 0x0001;
 }
 
--(void) addNewPlayerAtPosition:(CGPoint)p{
-    // Create player and add it to the layer
-    player = [CCSprite spriteWithFile:@"Player.png"];
-    player.position = p;
-    player.tag = 1;
-    [self addChild:player];
-    
-    // Define the dynamic body.
-    // Set up a 1m squared box in the physics world
-    b2BodyDef bodyDef;
-    bodyDef.type = b2_dynamicBody;
-    bodyDef.position.Set(player.position.x/PTM_RATIO, player.position.y/PTM_RATIO);
-    bodyDef.userData = player;
-    bodyDef.angle = 0;
-    bodyDef.fixedRotation = true;
-    bodyDef.angularDamping = 1000.0f;
-    bodyDef.linearDamping = 4.0f;
-    playerBody = world->CreateBody(&bodyDef);
-    
-    // Create player shape
-    b2PolygonShape playerShape;
-    playerShape.SetAsBox(player.contentSize.width/PTM_RATIO/2, player.contentSize.height/PTM_RATIO/2); // These are mid points for our 1m box
-    
-    // Create shape definition and add to body
-    b2FixtureDef playerFixtureDef;
-    playerFixtureDef.shape = &playerShape;
-    playerFixtureDef.density = 1000.0f;
-    playerFixtureDef.friction = 0.4f;
-    playerFixtureDef.restitution = 0.1f;
-    playerFixtureDef.filter.categoryBits = 0x0002;
-    playerFixtureDef.filter.maskBits = 0x0008 | 0x0001 | 0x0004;
-    
-    
-    b2CircleShape playerTouchShape;
-    playerTouchShape.m_radius = 1.0f;
-    
-    b2FixtureDef playerTouchFixtureDef;
-    playerTouchFixtureDef.shape = &playerTouchShape;
-    playerTouchFixtureDef.density = 1000.0f;
-    playerTouchFixtureDef.filter.categoryBits = 0x0002;
-    playerTouchFixtureDef.filter.maskBits = 0x0008 | 0x0001;
-    
-    _playerFixture = playerBody->CreateFixture(&playerTouchFixtureDef);
-    
-    playerBody->CreateFixture(&playerFixtureDef);
-}
-
 -(void) addNewEnemyAtPosition:(CGPoint)p{
     // Create enemy and add it to the layer
     enemy = [CCSprite spriteWithFile:@"Target.png"];
@@ -131,116 +101,12 @@
     EnemyData* data = [[[EnemyData alloc]init]autorelease];
     [LevelHelperLoader setCustomValue:data withKey:@"data" onSprite:enemy];
     
-    // Define the dynamic body
-    // Set up a box in the physics world
-    b2BodyDef enemyBodyDef;
-    enemyBodyDef.type = b2_dynamicBody;
-    enemyBodyDef.position.Set(p.x/PTM_RATIO, p.y/PTM_RATIO);
-    enemyBodyDef.userData = enemy;
-    enemyBodyDef.fixedRotation = true;
-    enemyBody = world->CreateBody(&enemyBodyDef);
     
-    // Create player shape
-    b2PolygonShape enemyShape;
-    enemyShape.SetAsBox(enemy.contentSize.width/PTM_RATIO/2, enemy.contentSize.height/PTM_RATIO/2);
     
-    // Create shape definition and add to body
-    b2FixtureDef enemyFixtureDef;
-    enemyFixtureDef.shape = &enemyShape;
-    enemyFixtureDef.density = 1000.0f;
-    enemyFixtureDef.friction = 0.4f;
-    enemyFixtureDef.restitution = 0.1f;
-    enemyFixtureDef.filter.categoryBits = 0x0004;
-    enemyFixtureDef.filter.maskBits = 0x0008 | 0x0001 | 0x0016 | 0x0002;
     
-    enemyFixture = enemyBody->CreateFixture(&enemyFixtureDef);
-    
-    [_enemiesAlive addObject:enemy];
 }
 
-- (void) addNewMovingPaintToLocation:(CGPoint)p :(CGFloat)shootAngle{
-    // Adds a bullet animation from the player or enemy towards p
-    //CCLOG(@"Paint is moving towards: %0.2f x %0.2f", p.x,p.y);
-    
-    b2Body *paintBody;
-    int power = 2;
-    float x1 = cos(shootAngle);
-    float y1 = sin(shootAngle);
-    
-    // Create paint and add it to the layer
-    paint = [CCSprite spriteWithFile:@"Projectile.png"];
-    paint.position = player.position;
-    paint.tag = 3;
-    [self addChild:paint];
-    
-    // body definition
-    b2BodyDef paintBodyDef;
-    paintBodyDef.type = b2_dynamicBody;
-    paintBodyDef.position.Set(paint.position.x/PTM_RATIO, paint.position.y/PTM_RATIO);
-    paintBodyDef.userData = paint;
-    paintBodyDef.bullet = true;
-    //paintBodyDef.angularDamping = 1.0f;
-    paintBody = world->CreateBody(&paintBodyDef);
-    
-    // shape definiation
-    b2CircleShape paintShape;
-    paintShape.m_radius = 5.0/PTM_RATIO;
-    
-    // Create shape definition and add to body
-    b2FixtureDef paintFixtureDef;
-    paintFixtureDef.shape = &paintShape;
-    paintFixtureDef.density = 1.0f;
-    paintFixtureDef.friction = 0.5f;
-    paintFixtureDef.restitution = .01f;
-    paintFixtureDef.filter.categoryBits = 0x0008;
-    paintFixtureDef.filter.maskBits = 0x0004 | 0x0001 | 0x0016;
-    
-    //paintShapeDef.friction = 0.0f;
-    //paintShapeDef.restitution = 1.0f;
-    
-    paintFixture = paintBody->CreateFixture(&paintFixtureDef);
-    b2Body* b = world->GetBodyList();
-    //
-    // Shoot the paint
-    //
-    
-    // Using Physics
-    // Determine offset between the paint and destination p
-    b2Vec2 force = b2Vec2(x1*power,y1*power);
-    //paintBody->ApplyForceToCenter(force);
-    paintBody->ApplyLinearImpulse(force, paintBody->GetWorldCenter());
-    //CCLOG(@"Impulse: %0.2f x %0.2f, Point: %0.2f x %0.2f", impulse.x, impulse.y, p.x, p.y);
-    
-    //[_paint addObject:paint];
-}
-
-- (void) addBunkerAtPosition:(CGPoint)p{
-    bunker = [CCSprite spriteWithFile:@"bunker1.png"];
-    bunker.position = p;
-    bunker.tag = 4;
-    [self addChild:bunker];
-    
-    b2BodyDef bunkerBodyDef;
-    bunkerBodyDef.type = b2_staticBody;
-    bunkerBodyDef.position.Set(bunker.position.x/PTM_RATIO, bunker.position.y/PTM_RATIO);
-    bunkerBodyDef.userData = bunker;
-    bunkerBody = world->CreateBody(&bunkerBodyDef);
-    
-    b2PolygonShape bunkerShape;
-    bunkerShape.SetAsBox(bunker.contentSize.width/PTM_RATIO/2, bunker.contentSize.height/PTM_RATIO/2);
-    
-    b2FixtureDef bunkerFixtureDef;
-    bunkerFixtureDef.shape = &bunkerShape;
-    bunkerFixtureDef.density = 1.0f;
-    bunkerFixtureDef.restitution = 0.1f;
-    bunkerFixtureDef.filter.categoryBits = 0x0016;
-    bunkerFixtureDef.filter.maskBits = 0x0002 | 0x0004 | 0x0008;
-    
-    bunkerFixture = bunkerBody->CreateFixture(&bunkerFixtureDef);
-    //[_bunkers addObject:bunker];
-}
-
-#pragma mark Touch Interaction
+#pragma mark Touch Interaction methods
 
 -(void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     //CCLOG(@"Touch Began");
@@ -255,14 +121,14 @@
         CGPoint location = [touch locationInView:[touch view]];
         location = [[CCDirector sharedDirector] convertToGL:location];
         b2Vec2 locationWorld = b2Vec2(location.x/PTM_RATIO, location.y/PTM_RATIO);
-        
-        if(tapCount == 1 && !bunkerFixture->TestPoint(locationWorld))
+        [self singleTap:touch];
+        if(tapCount == 1 && !_bunker.fixture->TestPoint(locationWorld))
         {
             [self singleTap:touch];
         }
-        else if(tapCount == 2 && bunkerFixture->TestPoint(locationWorld))
+        else if(tapCount == 2 && _bunker.fixture->TestPoint(locationWorld))
         {
-            [self doubleTap:touch withBody:bunkerBody];
+            [self doubleTap:touch withBody:_bunker.body];
             // Two Taps
             /*for(b2Body* b = world->GetBodyList(); b; b->GetNext())
              {
@@ -284,8 +150,8 @@
              [self doubleTap:touch withBody:b];
              }
              }
-             */
-            
+         
+            */
         }
         else if(tapCount > 2)
         {
@@ -301,20 +167,20 @@
     location = [[CCDirector sharedDirector] convertToGL:location];
     b2Vec2 locationWorld = b2Vec2(location.x/PTM_RATIO, location.y/PTM_RATIO);
     origin = location;
-    if (_playerFixture->TestPoint(locationWorld)) {
+    if (_humanPlayer.fixture->TestPoint(locationWorld)) {
         b2MouseJointDef md;
         md.bodyA = groundBody;
-        md.bodyB = playerBody;
+        md.bodyB = _humanPlayer.body;
         md.target = locationWorld;
         md.collideConnected = false;
-        md.maxForce = 20.0f * playerBody->GetMass();
+        md.maxForce = 20.0f * _humanPlayer.body->GetMass();
         _mouseJoint = (b2MouseJoint *)world->CreateJoint(&md);
-        playerBody->SetAwake(true);
+        _humanPlayer.body->SetAwake(true);
     } else {
         // Shoot Stuff!
-        CGPoint shootVector = ccpSub(location, player.position);
+        CGPoint shootVector = ccpSub(location, _humanPlayer.sprite.position);
         CGFloat shootAngle = ccpToAngle(shootVector);
-        [self addNewMovingPaintToLocation:location :shootAngle];
+        [self shootPaintToLocation:location withAngle:shootAngle];
     }
     firing = YES;
 }
@@ -324,14 +190,14 @@
     CCLOG(@"Double Tap!");
     CGPoint location = [touch locationInView:[touch view]];
     location = [[CCDirector sharedDirector] convertToGL:location];
-    CGPoint shootVector = ccpSub(location, player.position);
+    CGPoint shootVector = ccpSub(location, _humanPlayer.sprite.position);
     CGFloat shootAngle = ccpToAngle(shootVector);
     float x = cosf(shootAngle);
     float y = sinf(shootAngle);
     int pwr = 10;
     //b2Vec2 vec = b2Vec2(shootVector.x/PTM_RATIO,shootVector.y/PTM_RATIO);
     b2Vec2 impulse = b2Vec2(x*pwr,y*pwr);
-    playerBody->ApplyLinearImpulse(impulse, playerBody->GetWorldCenter());
+    _humanPlayer.body->ApplyLinearImpulse(impulse, _humanPlayer.body->GetWorldCenter());
 }
 
 -(void) ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -359,6 +225,24 @@
         _mouseJoint = NULL;
         //playerBody->SetLinearVelocity(b2Vec2(0,0));
     }
+}
+
+-(void)shootPaintToLocation:(CGPoint)location withAngle:(CGFloat)angle
+{
+    CGPoint point = _humanPlayer.sprite.position;
+    _paint = [[Paint alloc] initWithLayer:self andFile:levelData.paint forWorld:world andPosition:point];
+    _paint.tag = 3;
+    
+    [_batchNode addChild:_paint];
+    
+    [_paint fireToLocation:location withAngle:angle];
+}
+
+# pragma mark Scene Transition methods
+
+-(void)onOptions: (id) sender
+{
+    [SceneManager goOptionsMenu];
 }
 
 - (void)onBack: (id) sender {
@@ -402,6 +286,8 @@
     }
 }
 
+# pragma mark Update methods
+
 -(void) update:(ccTime)dt{
     
     int32 velocityIterations = 10;
@@ -409,7 +295,7 @@
     
     world->Step(dt, velocityIterations, positionIterations);
     
-    // Updata position of the texture for the bodies
+    // Update position of the texture for the bodies
     for(b2Body *b = world->GetBodyList(); b; b=b->GetNext()) {
         if (b->GetUserData() != NULL) {
             CCSprite *sprite = (CCSprite *)b->GetUserData();
@@ -419,7 +305,7 @@
         }
     }
     
-    b2Vec2 playerPos = b2Vec2(player.position.x,player.position.y);
+    b2Vec2 playerPos = b2Vec2(_humanPlayer.position.x,_humanPlayer.position.y);
     if(playerPos == moveToLocation)
     {
         //playerBody->SetLinearVelocity(b2Vec2(0,0));
@@ -439,17 +325,17 @@
         bodyA = contact.fixtureA->GetBody();
         bodyB = contact.fixtureB->GetBody();
         
-        if ((contact.fixtureA == _playerFixture && contact.fixtureB == bunkerFixture) || (contact.fixtureA == bunkerFixture && contact.fixtureB == _playerFixture))
+        if ((contact.fixtureA == _humanPlayer.fixture && contact.fixtureB == _bunker.fixture) || (contact.fixtureA == _bunker.fixture && contact.fixtureB == _humanPlayer.fixture))
         {
             //CCLOG(@"Player hit the bunker!");
             // Bounce off?
         }
-        else if ((contact.fixtureA == enemyFixture && contact.fixtureB == bunkerFixture) || (contact.fixtureA == bunkerFixture && contact.fixtureB == enemyFixture))
+        else if ((contact.fixtureA == enemyFixture && contact.fixtureB == _bunker.fixture) || (contact.fixtureA == _bunker.fixture && contact.fixtureB == enemyFixture))
         {
             //CCLOG(@"Enemy hit the bunker!");
             // Bounce off?
         }
-        else if ((contact.fixtureA == _playerFixture && contact.fixtureB == paintFixture) || (contact.fixtureA == paintFixture && contact.fixtureB == _playerFixture))
+        else if ((contact.fixtureA == _humanPlayer.fixture && contact.fixtureB == _paint.fixture) || (contact.fixtureA == _paint.fixture && contact.fixtureB == _humanPlayer.fixture))
         {
             //CCLOG(@"Player got hit by paint!");
             
@@ -460,7 +346,7 @@
             //CCScene *gameOverScene = [GameOverLayer sceneWithWon:NO];
             //[CCDirector sharedDirector] replaceScene:gameOverScene];
         }
-        else if ((contact.fixtureA == enemyFixture && contact.fixtureB == paintFixture) || (contact.fixtureA == paintFixture && contact.fixtureB == enemyFixture))
+        else if ((contact.fixtureA == enemyFixture && contact.fixtureB == _paint.fixture) || (contact.fixtureA == _paint.fixture && contact.fixtureB == enemyFixture))
         {
             //CCLOG(@"Enemy got hit by paint!");
             
@@ -537,9 +423,25 @@
                  }*/
             }
             
+            else if(spriteA.tag == 3 && spriteB.tag == 4)
+            {
+                if(std::find(toDestroy.begin(), toDestroy.end(), bodyA) == toDestroy.end())
+                {
+                    toDestroy.push_back(bodyA);
+                }
+            }
+            
+            else if (spriteA.tag == 4 && spriteB.tag == 3)
+            {
+                if(std::find(toDestroy.begin(), toDestroy.end(), bodyB) == toDestroy.end())
+                {
+                    toDestroy.push_back(bodyB);
+                }
+            }
+            
             else if(spriteA.tag == 3)
             {
-                b2Vec2 speed = playerBody->GetLinearVelocity();
+                b2Vec2 speed = _humanPlayer.body->GetLinearVelocity();
                 if(speed.x < 0.3f || speed.y < 0.3f)
                 {
                     if(std::find(toDestroy.begin(), toDestroy.end(), bodyA) == toDestroy.end())
@@ -551,7 +453,7 @@
             
             else if(spriteB.tag == 3)
             {
-                b2Vec2 speed = playerBody->GetLinearVelocity();
+                b2Vec2 speed = _humanPlayer.body->GetLinearVelocity();
                 if(speed.x < 0.3f || speed.y < 0.3f)
                 {
                     if(std::find(toDestroy.begin(), toDestroy.end(), bodyB) == toDestroy.end())
@@ -617,48 +519,133 @@
     kmGLPushMatrix();
 }
 
+# pragma mark Initialization methods
+-(void)basicSetup
+{
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    
+    //CCSprite* background = [CCSprite spriteWithFile:@"BACKGROUND FILE GOES HERE"];
+    //background.position = ccp(winSize.width/2, winSize.height/2);
+    //[self addChild:background z:-1];
+    
+    // Menu Items
+    //[self addBunkerAtPosition:ccp(winSize.width/2, winSize.height/2)];
+    //[self addNewEnemyAtPosition:ccp(470, winSize.height/2)];
+    
+    int tinyFont = winSize.width/kFontScaleTiny;
+    
+    [CCMenuItemFont setFontName:@"Marker Felt"];
+    [CCMenuItemFont setFontSize:tinyFont];
+    
+    CCMenuItemLabel* item1 = [CCMenuItemFont itemWithString:@"Back" target:self selector:@selector(onBack:)];
+    CCMenuItemLabel* item2 = [CCMenuItemFont itemWithString:@"Options" target:self selector:@selector(onOptions:)];
+    item1.color = ccRED;
+    item2.color = ccRED;
+    
+    CCMenu* menu = [CCMenu menuWithItems:item1,item2, nil];
+    [menu setPosition:ccp(winSize.width/2,winSize.height-item1.contentSize.height/3)];
+    [menu alignItemsHorizontally];
+    [self addChild:menu];
+    
+    gameData = [GameDataParser loadData];
+    
+    int selectedChapter = gameData.selectedChapter;
+    int selectedLevel = gameData.selectedLevel;
+    //self.player = [[Player alloc] initWithLayer:self world:world file:gameData.player];
+    
+    levels = [LevelParser loadLevelsForChapter:selectedChapter];
+    
+    [self addEnemiesWithLevel:selectedLevel];
+    
+    for(Level* level in levels.levels)
+    {
+        if(level.number == selectedLevel)
+        {
+            levelData = level;
+            for(NSString* baddy in level.enemies)
+            {
+                //[self addNewEnemyAtPosition:ccp(winSize.width -1.5*PTM_RATIO, winSize.height/2)];
+            }
+        }
+    }
+    /*GameData* gameData = [GameDataParser loadData];
+     
+     int selectedChapter = gameData.selectedChapter;
+     int selectedLevel = gameData.selectedLevel;
+     
+     Levels* levels = [LevelParser loadLevelsForChapter:selectedChapter];
+     
+     for(Level* level in levels.levels)
+     {
+     if(level.number == selectedLevel)
+     {
+     NSString* data = [NSString stringWithFormat:@"%@",level.data];
+     CCLabelTTF* label = [CCLabelTTF labelWithString:data fontName:@"Marker Felt" fontSize:largeFont];
+     label.position = ccp(screenSize.width/2,screenSize.height/2);
+     
+     // Add label to this scene
+     [self addChild:label z:0];
+     }
+     }*/
+    [self initPhysics];
+    // collision detection
+    contactListener = new MyContactListener();
+    world->SetContactListener(contactListener);
+    
+    self.touchEnabled = YES;
+}
+
+-(void)addEnemiesWithLevel:(int)selectedLevel
+{
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    
+    for(Level* level in levels.levels)
+    {
+        if(level.number == selectedLevel)
+        {
+            for(NSString* baddy in level.enemies)
+            {
+                CGPoint point = ccp(winSize.width - 1.5*PTM_RATIO, winSize.height/2);
+                _aiPlayer = [[AIPlayer alloc] initWithLayer:self andFile:baddy forWorld:world andPosition:point];
+                _aiPlayer.tag = 2;
+                [_batchNode addChild:_aiPlayer];
+            }
+        }
+    }
+}
+
+-(void)addPlayers
+{
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    
+    _humanPlayer = [[HumanPlayer alloc] initWithLayer:self andFile:gameData.player forWorld:world andPosition:ccp(1.5*PTM_RATIO, winSize.height/2)];
+    //_humanPlayer.sprite.position = ccp(1.5*PTM_RATIO, winSize.height/2);
+    //[_humanPlayer setPosition:ccp(1.5*PTM_RATIO, winSize.height/2)];
+    _humanPlayer.tag = 1;
+    [_batchNode addChild:_humanPlayer];
+    
+    
+    //_aiPlayer = [[AIPlayer alloc] init]
+    
+    _gameObjects = [NSMutableArray arrayWithObjects:[NSMutableArray array],[NSMutableArray array], nil];
+}
+
+-(void)addBunkers
+{
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    CGPoint pt = ccp(winSize.width/2, winSize.height/2);
+    _bunker = [[Bunker alloc] initWithLayer:self andFile:levelData.bunker forWorld:world andPosition:pt];
+    [_batchNode addChild:_bunker];
+}
+
 - (id)init {
     
     if( (self=[super initWithColor:ccc4(255,255,255,255)])) {
         self.iPad = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
-        
-        // Determine Screen Size
-        CGSize winSize = [CCDirector sharedDirector].winSize;
-        
-        self.touchEnabled = YES;
-        
-        [self initPhysics];
-        
-        [self addNewPlayerAtPosition:ccp(1.5*PTM_RATIO, winSize.height/2)];
-        [self addNewEnemyAtPosition:ccp(winSize.width -1.5*PTM_RATIO, winSize.height/2)];
-        [self addBunkerAtPosition:ccp(winSize.width/2, winSize.height/2)];
-        //[self addNewEnemyAtPosition:ccp(470, winSize.height/2)];
-        
+        [self basicSetup];
+        [self addPlayers];
+        [self addBunkers];
         [self scheduleUpdate];
-        
-        /*GameData* gameData = [GameDataParser loadData];
-        
-        int selectedChapter = gameData.selectedChapter;
-        int selectedLevel = gameData.selectedLevel;
-        
-        Levels* levels = [LevelParser loadLevelsForChapter:selectedChapter];
-        
-        for(Level* level in levels.levels)
-        {
-            if(level.number == selectedLevel)
-            {
-                NSString* data = [NSString stringWithFormat:@"%@",level.data];
-                CCLabelTTF* label = [CCLabelTTF labelWithString:data fontName:@"Marker Felt" fontSize:largeFont];
-                label.position = ccp(screenSize.width/2,screenSize.height/2);
-                
-                // Add label to this scene
-                [self addChild:label z:0];
-            }
-        }*/
-        
-        // collision detection
-        contactListener = new MyContactListener();
-        world->SetContactListener(contactListener);
     }
     return self;
 }
@@ -675,6 +662,14 @@
     //_cache = nil;
     
     [super dealloc];
+}
+
+# pragma mark Helper methods
+
+-(void)removeGameObject:(GameObject *)gameObject
+{
+    [_gameObjects[gameObject.team-1] removeObject:gameObject];
+    [gameObject removeFromParentAndCleanup:YES];
 }
 
 @end

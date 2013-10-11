@@ -1,5 +1,5 @@
 //
-//  ChapterSelect.m  <-- RENAME THIS
+//  ChapterSelect.m
 //  
 
 #import "ChapterSelect.h"

@@ -45,6 +45,9 @@
     int selectedLevel;
     BOOL sound;
     BOOL music;
+    NSString* player;
+    NSString* marker;
+    int fps;
 
     // Create NSData instance from xml in filePath
     NSString *filePath = [self dataFilePath:FALSE];
@@ -75,6 +78,9 @@
         NSArray *selectedLevelArray = [element elementsForName:@"SelectedLevel"];
         NSArray *soundArray = [element elementsForName:@"Sound"];
         NSArray *musicArray = [element elementsForName:@"Music"];
+        NSArray *playerArray = [element elementsForName:@"Player"];
+        NSArray *markerArray = [element elementsForName:@"Marker"];
+        NSArray *fpsArray = [element elementsForName:@"FPS"];
         
         // exampleInt
         if (selectedChapterArray.count > 0) {
@@ -99,6 +105,24 @@
             GDataXMLElement *musicElement = (GDataXMLElement *) [musicArray objectAtIndex:0];
             music = [[musicElement stringValue] boolValue];
         }
+        
+        // Player file string
+        if(playerArray.count > 0) {
+            GDataXMLElement *playerElement = (GDataXMLElement *) [playerArray objectAtIndex:0];
+            player = [playerElement stringValue];
+        }
+        
+        // Marker file string
+        if(markerArray.count > 0) {
+            GDataXMLElement *markerElement = (GDataXMLElement *) [markerArray objectAtIndex:0];
+            marker = [markerElement stringValue];
+        }
+        
+        // Marker FPS
+        if(fpsArray.count > 0) {
+            GDataXMLElement *fpsElement = (GDataXMLElement *) [fpsArray objectAtIndex:0];
+            fps = [[fpsElement stringValue] intValue];
+        }
     }
     
     /*************************************************************************** 
@@ -113,7 +137,7 @@
     //NSLog(@"XML value read for exampleBool = %i", exampleBool);
     //NSLog(@"XML value read for exampleString = %@", exampleString);
     
-    GameData *Data = [[GameData alloc] initWithSelectedChapter:selectedChapter selectedLevel:selectedLevel sound:sound music:music];
+    GameData *Data = [[GameData alloc] initWithSelectedChapter:selectedChapter selectedLevel:selectedLevel sound:sound music:music player:player marker:marker fps:fps];
                                                   
     [doc release];
     [xmlData release];
@@ -148,11 +172,20 @@
     GDataXMLElement *musicElement = [GDataXMLNode elementWithName:@"Music"
                                                       stringValue:saveData.music];
     
+    GDataXMLElement *playerElement = [GDataXMLNode elementWithName:@"Player" stringValue:saveData.player];
+    
+    GDataXMLElement *markerElement = [GDataXMLNode elementWithName:@"Marker" stringValue:saveData.marker];
+    
+    GDataXMLElement *fpsElement = [GDataXMLNode elementWithName:@"FPS" stringValue:[[NSNumber numberWithInt:saveData.fps] stringValue]];
+    
     // Using the elements just created, set up the hierarchy
     [gameDataElement addChild:selectedChapterElement];
     [gameDataElement addChild:selectedLevelElement];
     [gameDataElement addChild:soundElement];
     [gameDataElement addChild:musicElement];
+    [gameDataElement addChild:playerElement];
+    [gameDataElement addChild:markerElement];
+    [gameDataElement addChild:fpsElement];
     GDataXMLDocument *document = [[[GDataXMLDocument alloc] 
                                    initWithRootElement:gameDataElement] autorelease];
    
