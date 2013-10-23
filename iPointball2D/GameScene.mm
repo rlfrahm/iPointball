@@ -45,41 +45,23 @@
         location = [[CCDirector sharedDirector] convertToGL:location];
         b2Vec2 locationWorld = b2Vec2(location.x/PTM_RATIO, location.y/PTM_RATIO);
         [self singleTap:touch];
-        if(tapCount == 1 && !_bunker.fixture->TestPoint(locationWorld))
-        {
+        if (_humanPlayer.fixture->TestPoint(locationWorld)) {
+            b2MouseJointDef md;
+            md.bodyA = groundBody;
+            md.bodyB = _humanPlayer.body;
+            md.target = locationWorld;
+            md.collideConnected = false;
+            md.maxForce = 20.0f * _humanPlayer.body->GetMass();
+            _mouseJoint = (b2MouseJoint *)world->CreateJoint(&md);
+            _humanPlayer.body->SetAwake(true);
+        } else if(_bunker.fixture->TestPoint(locationWorld)) {
+            if(tapCount == 1) {
+                
+            } else if(tapCount == 2) {
+                [self doubleTap:touch withBody:_bunker.body];
+            }
+        } else if(tapCount == 1) {
             [self singleTap:touch];
-        }
-        else if(tapCount == 2 && _bunker.fixture->TestPoint(locationWorld))
-        {
-            [self doubleTap:touch withBody:_bunker.body];
-            // Two Taps
-            /*for(b2Body* b = world->GetBodyList(); b; b->GetNext())
-             {
-             // For each body in the world
-             if (b->GetType() == bunkerBody->GetType())
-             {
-             // We want to check the bunkerBody types
-             for(b2Fixture* f = b->GetFixtureList();f; f->GetNext())
-             {
-             // For each fixture of the current bunkerBody
-             if(f->TestPoint(locationWorld))
-             {
-             [self doubleTap:touch withBody:b];
-             }
-             }
-             
-             }else{
-             // If a bunkerBody wasn't doubleTapped
-             [self doubleTap:touch withBody:b];
-             }
-             }
-         
-            */
-        }
-        else if(tapCount > 2)
-        {
-            // For now we only need to check for a doubleTap
-            //[self singleTap:touch];
         }
     }
 }
@@ -89,23 +71,12 @@
     CCLOG(@"Single Tap!");
     CGPoint location = [touch locationInView:[touch view]];
     location = [[CCDirector sharedDirector] convertToGL:location];
-    b2Vec2 locationWorld = b2Vec2(location.x/PTM_RATIO, location.y/PTM_RATIO);
     origin = location;
-    if (_humanPlayer.fixture->TestPoint(locationWorld)) {
-        b2MouseJointDef md;
-        md.bodyA = groundBody;
-        md.bodyB = _humanPlayer.body;
-        md.target = locationWorld;
-        md.collideConnected = false;
-        md.maxForce = 20.0f * _humanPlayer.body->GetMass();
-        _mouseJoint = (b2MouseJoint *)world->CreateJoint(&md);
-        _humanPlayer.body->SetAwake(true);
-    } else {
-        // Shoot Stuff!
-        CGPoint shootVector = ccpSub(location, _humanPlayer.sprite.position);
-        CGFloat shootAngle = ccpToAngle(shootVector);
-        [self shootPaintToLocation:location withAngle:shootAngle];
-    }
+    
+    // Shoot Stuff!
+    CGPoint shootVector = ccpSub(location, _humanPlayer.sprite.position);
+    CGFloat shootAngle = ccpToAngle(shootVector);
+    [self shootPaintToLocation:location withAngle:shootAngle];
     firing = YES;
 }
 
