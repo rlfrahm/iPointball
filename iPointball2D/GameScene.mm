@@ -5,8 +5,6 @@
 #import "GameScene.h"
 #import "GameData.h"
 #import "GameDataParser.h"
-#import "LevelHelperLoader.h"
-#import "EnemyData.h"
 #import "HumanPlayer.h"
 #import "AIPlayer.h"
 #import "Bunker.h"
@@ -30,81 +28,6 @@
     Levels* levels;
 }
 @synthesize iPad;
-
--(void) initPhysics{
-    CGSize winSize = [[CCDirector sharedDirector] winSize];
-    
-    b2Vec2 gravity;
-    gravity.Set(0.0f, 0.0f);
-    world = new b2World(gravity);
-    
-    // Do we want to let bodies sleep?
-    world->SetAllowSleeping(true);
-    
-    world->SetContinuousPhysics(true);
-    
-    _debugDraw = new GLESDebugDraw(PTM_RATIO);
-    world->SetDebugDraw(_debugDraw);
-    
-    uint32 flags = 0;
-    flags += b2Draw::e_shapeBit;
-    //		flags += b2Draw::e_jointBit;
-	//		flags += b2Draw::e_aabbBit;
-	//		flags += b2Draw::e_pairBit;
-	//		flags += b2Draw::e_centerOfMassBit;
-	_debugDraw->SetFlags(flags);
-    
-    // Define the ground body.
-    b2BodyDef groundBodyDef;
-    groundBodyDef.position.Set(0, 0); // bottom-left corner
-    //groundBodyDef.angularDamping = 0.1f;
-    
-    // Call the body factory which allocates memory for the ground body
-    // from a pool that creates the ground box shape (also from a pool).
-    // The body is also added to the world.
-    groundBody = world->CreateBody(&groundBodyDef);
-    
-    // Define the ground box shape.
-    b2EdgeShape groundBox;
-    b2FixtureDef groundFixtureDef;
-    groundFixtureDef.friction = 0.3f;
-    //groundFixtureDef.filter.maskBits = WORLD_CATEGORY_BITS;
-    
-    
-    // bottom
-    groundBox.Set(b2Vec2(0,0), b2Vec2(winSize.width/PTM_RATIO,0));
-    groundBody->CreateFixture(&groundBox,0);
-    
-    // top
-    groundBox.Set(b2Vec2(0,winSize.height/PTM_RATIO), b2Vec2(winSize.width/PTM_RATIO,winSize.height/PTM_RATIO));
-    groundBody->CreateFixture(&groundBox,0);
-    
-    // left
-    groundBox.Set(b2Vec2(0,winSize.height/PTM_RATIO), b2Vec2(0,0));
-    groundBody->CreateFixture(&groundBox,0);
-    
-    // right
-    groundBox.Set(b2Vec2(winSize.width/PTM_RATIO,winSize.height/PTM_RATIO), b2Vec2(winSize.width/PTM_RATIO,0));
-    groundBody->CreateFixture(&groundBox,0);
-    
-    groundFixtureDef.shape = &groundBox;
-    groundFixtureDef.filter.categoryBits = 0x0001;
-}
-
--(void) addNewEnemyAtPosition:(CGPoint)p{
-    // Create enemy and add it to the layer
-    enemy = [CCSprite spriteWithFile:@"Target.png"];
-    enemy.position = p;
-    enemy.tag = 2;
-    [self addChild:enemy];
-    
-    EnemyData* data = [[[EnemyData alloc]init]autorelease];
-    [LevelHelperLoader setCustomValue:data withKey:@"data" onSprite:enemy];
-    
-    
-    
-    
-}
 
 #pragma mark Touch Interaction methods
 
@@ -156,13 +79,14 @@
         else if(tapCount > 2)
         {
             // For now we only need to check for a doubleTap
-            [self singleTap:touch];
+            //[self singleTap:touch];
         }
     }
 }
 
 -(void)singleTap:(UITouch*)touch
 {
+    CCLOG(@"Single Tap!");
     CGPoint location = [touch locationInView:[touch view]];
     location = [[CCDirector sharedDirector] convertToGL:location];
     b2Vec2 locationWorld = b2Vec2(location.x/PTM_RATIO, location.y/PTM_RATIO);
@@ -203,12 +127,11 @@
 -(void) ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
     //CCLOG(@"Touch Moved");
     if (_mouseJoint == NULL) return;
-    
     UITouch *myTouch = [touches anyObject];
     CGPoint location1 = [myTouch locationInView:[myTouch view]];
     location1 = [[CCDirector sharedDirector] convertToGL:location1];
     moveToLocation = b2Vec2(location1.x/PTM_RATIO, location1.y/PTM_RATIO);
-    //CGFloat distance = sqrtf((player.position.x-location1.x)*(player.position.x-location1.x)+(player.position.y-location1.y)*(player.position.y-location1.y));
+    
     _mouseJoint->SetTarget(moveToLocation);
 }
 
@@ -302,6 +225,27 @@
             sprite.position = ccp(b->GetPosition().x * PTM_RATIO,
                                   b->GetPosition().y * PTM_RATIO);
             sprite.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
+            /*
+            if(sprite.tag == 3)
+            {
+                CGSize winsize = [[CCDirector sharedDirector] winSize];
+                if(sprite.position.x - sprite.contentSize.width/2 <= 0)
+                {
+                    CCLOG(@"Destroy");
+                }
+                else if(sprite.position.x + sprite.contentSize.width/2 >= winsize.width)
+                {
+                    CCLOG(@"Destroy");
+                }
+                else if(sprite.position.y - sprite.contentSize.height/2 <= 0)
+                {
+                    CCLOG(@"Destroy");
+                }
+                else if(sprite.position.y + sprite.contentSize.height/2 >= winsize.height)
+                {
+                    CCLOG(@"Destroy");
+                }
+            }*/
         }
     }
     
@@ -325,12 +269,14 @@
         bodyA = contact.fixtureA->GetBody();
         bodyB = contact.fixtureB->GetBody();
         
+        
+        
         if ((contact.fixtureA == _humanPlayer.fixture && contact.fixtureB == _bunker.fixture) || (contact.fixtureA == _bunker.fixture && contact.fixtureB == _humanPlayer.fixture))
         {
             //CCLOG(@"Player hit the bunker!");
             // Bounce off?
         }
-        else if ((contact.fixtureA == enemyFixture && contact.fixtureB == _bunker.fixture) || (contact.fixtureA == _bunker.fixture && contact.fixtureB == enemyFixture))
+        else if ((contact.fixtureA == _aiPlayer.fixture && contact.fixtureB == _bunker.fixture) || (contact.fixtureA == _bunker.fixture && contact.fixtureB == _aiPlayer.fixture))
         {
             //CCLOG(@"Enemy hit the bunker!");
             // Bounce off?
@@ -346,7 +292,7 @@
             //CCScene *gameOverScene = [GameOverLayer sceneWithWon:NO];
             //[CCDirector sharedDirector] replaceScene:gameOverScene];
         }
-        else if ((contact.fixtureA == enemyFixture && contact.fixtureB == _paint.fixture) || (contact.fixtureA == _paint.fixture && contact.fixtureB == enemyFixture))
+        else if ((contact.fixtureA == _aiPlayer.fixture && contact.fixtureB == _paint.fixture) || (contact.fixtureA == _paint.fixture && contact.fixtureB == _aiPlayer.fixture))
         {
             //CCLOG(@"Enemy got hit by paint!");
             
@@ -368,6 +314,24 @@
             spriteB = (CCSprite *) bodyB->GetUserData();
             //CCLOG(@"User data A:%@ B:%@", spriteA, spriteB);
             // spriteA = player, spriteB = paint
+            if(bodyA == groundBody && bodyB == _paint.body)
+            {
+                CCLOG(@"Destroy paint! - 1");
+                if(std::find(toDestroy.begin(), toDestroy.end(), bodyB) == toDestroy.end())
+                {
+                    toDestroy.push_back(bodyB);
+                }
+                
+            }
+            else if(bodyB == groundBody && bodyA == _paint.body)
+            {
+                CCLOG(@"Destroy paint! - 2");
+                if(std::find(toDestroy.begin(), toDestroy.end(), bodyA) == toDestroy.end())
+                {
+                    toDestroy.push_back(bodyA);
+                }
+            }
+            
             if(spriteA.tag == 1 && spriteB.tag == 3)
             {
                 /*if(std::find(toDestroy.begin(), toDestroy.end(), bodyB) == toDestroy.end())
@@ -462,7 +426,6 @@
                     }
                 }
             }
-            
         }
         else
         {
@@ -481,12 +444,6 @@
         }
         world->DestroyBody(body);
     }
-    [self updateEnemy:dt];
-}
-
--(void)updateEnemy:(ccTime)dt
-{
-    //[self enemyMoveDecision];
 }
 
 -(void)draw{
@@ -501,16 +458,6 @@
     }
     firing = NO;
     
-    for (enemy in _enemiesAlive) {
-        EnemyData * data = [LevelHelperLoader customValueWithKey:@"data" forSprite:enemy];
-        if (!data.canSeePlayer) {
-            ccDrawColor4F(0.0f, 1.0f, 0.0f, 1.0f);
-        } else {
-            ccDrawColor4F(1.0f, 0.0f, 0.0f, 1.0f);
-        }
-        ccDrawLine(data.eye, data.target);
-    }
-    
     ccGLEnableVertexAttribs(kCCVertexAttribFlag_Position);
     
     kmGLPushMatrix();
@@ -520,8 +467,71 @@
 }
 
 # pragma mark Initialization methods
+
+-(void) initPhysics{
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    
+    b2Vec2 gravity;
+    gravity.Set(0.0f, 0.0f);
+    world = new b2World(gravity);
+    
+    // Do we want to let bodies sleep?
+    world->SetAllowSleeping(true);
+    
+    world->SetContinuousPhysics(true);
+    
+    _debugDraw = new GLESDebugDraw(PTM_RATIO);
+    world->SetDebugDraw(_debugDraw);
+    
+    uint32 flags = 0;
+    flags += b2Draw::e_shapeBit;
+    //		flags += b2Draw::e_jointBit;
+	//		flags += b2Draw::e_aabbBit;
+	//		flags += b2Draw::e_pairBit;
+	//		flags += b2Draw::e_centerOfMassBit;
+	_debugDraw->SetFlags(flags);
+    
+    // Define the ground body.
+    b2BodyDef groundBodyDef;
+    groundBodyDef.position.Set(0, 0); // bottom-left corner
+    //groundBodyDef.angularDamping = 0.1f;
+    
+    // Call the body factory which allocates memory for the ground body
+    // from a pool that creates the ground box shape (also from a pool).
+    // The body is also added to the world.
+    groundBodyDef.userData = self;
+    groundBody = world->CreateBody(&groundBodyDef);
+    
+    // Define the ground box shape.
+    b2EdgeShape groundBox;
+    b2FixtureDef groundFixtureDef;
+    groundFixtureDef.friction = 0.3f;
+    //groundFixtureDef.filter.maskBits = WORLD_CATEGORY_BITS;
+    
+    
+    // bottom
+    groundBox.Set(b2Vec2(0,0), b2Vec2(winSize.width/PTM_RATIO,0));
+    groundBody->CreateFixture(&groundBox,0);
+    
+    // top
+    groundBox.Set(b2Vec2(0,winSize.height/PTM_RATIO), b2Vec2(winSize.width/PTM_RATIO,winSize.height/PTM_RATIO));
+    groundBody->CreateFixture(&groundBox,0);
+    
+    // left
+    groundBox.Set(b2Vec2(0,winSize.height/PTM_RATIO), b2Vec2(0,0));
+    groundBody->CreateFixture(&groundBox,0);
+    
+    // right
+    groundBox.Set(b2Vec2(winSize.width/PTM_RATIO,winSize.height/PTM_RATIO), b2Vec2(winSize.width/PTM_RATIO,0));
+    groundBody->CreateFixture(&groundBox,0);
+    
+    groundFixtureDef.shape = &groundBox;
+    groundFixtureDef.filter.categoryBits = 0x0001;
+}
+
 -(void)basicSetup
 {
+    [self initPhysics];
     CGSize winSize = [CCDirector sharedDirector].winSize;
     
     //CCSprite* background = [CCSprite spriteWithFile:@"BACKGROUND FILE GOES HERE"];
@@ -555,7 +565,7 @@
     
     levels = [LevelParser loadLevelsForChapter:selectedChapter];
     
-    [self addEnemiesWithLevel:selectedLevel];
+    
     
     for(Level* level in levels.levels)
     {
@@ -587,7 +597,8 @@
      [self addChild:label z:0];
      }
      }*/
-    [self initPhysics];
+    
+    [self addEnemiesWithLevel:selectedLevel];
     // collision detection
     contactListener = new MyContactListener();
     world->SetContactListener(contactListener);
@@ -606,7 +617,7 @@
             for(NSString* baddy in level.enemies)
             {
                 CGPoint point = ccp(winSize.width - 1.5*PTM_RATIO, winSize.height/2);
-                _aiPlayer = [[AIPlayer alloc] initWithLayer:self andFile:baddy forWorld:world andPosition:point];
+                _aiPlayer = [[AIPlayer alloc] initWithLayer:self andFile:baddy forWorld:world andPosition:point wNumOnOppTeam:1];
                 _aiPlayer.tag = 2;
                 [_batchNode addChild:_aiPlayer];
             }
@@ -670,6 +681,46 @@
 {
     [_gameObjects[gameObject.team-1] removeObject:gameObject];
     [gameObject removeFromParentAndCleanup:YES];
+}
+
+-(void)setPlayer:(Player *)player attacking:(BOOL)attacking
+{
+    player.offense = attacking;
+    for(AIPlayer* ai in _gameObjects[player.team - 1])
+    {
+        ai.offense = attacking;
+    }
+}
+
+-(int)oppositeTeam:(int)team
+{
+    if(team == 1)
+    {
+        return 2;
+    } else {
+        return 1;
+    }
+}
+
+-(NSArray*)enemiesOfTeam:(int)team
+{
+    int oppositeTeam = [self oppositeTeam:team];
+    return _gameObjects[oppositeTeam-1];
+}
+
+-(NSArray*)enemiesWithinRange:(float)range ofPlayer:(Player *)player
+{
+    NSMutableArray* returnval = [NSMutableArray array];
+    NSArray* enemies = [self enemiesOfTeam:player.team];
+    for(GameObject* enemy in enemies)
+    {
+        float distance = ccpDistance(enemy.position, player.position);
+        if(distance < range)
+        {
+            [returnval addObject:enemy];
+        }
+    }
+    return returnval;
 }
 
 @end

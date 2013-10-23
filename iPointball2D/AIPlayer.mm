@@ -9,27 +9,32 @@
 #import "AIPlayer.h"
 #import "GameScene.h"
 #import "Box2D.h"
+#import "AIState.h"
+#import "AIStateStarting.h"
 
 #define PTM_RATIO 32
 
-typedef enum {
+/*typedef enum {
     StateStarting = 0,
     StateOffensive,
     StateDefensive,
     StateCTF
-}State;
+}State;*/
 
 @implementation AIPlayer {
     b2World* _world;
-    State _state;
+    AIState* _currentState;
 }
 
--(id)initWithLayer:(GameScene *)layer andFile:(NSString *)file forWorld:(b2World *)world andPosition:(CGPoint)position
+-(id)initWithLayer:(GameScene *)layer andFile:(NSString *)file forWorld:(b2World *)world andPosition:(CGPoint)position wNumOnOppTeam:(int)number
 {
     if((self = [super initWithSprite:file layer:layer andPosition:position]))
     {
         self.team = 2;
-        
+        [self createBodyForWorld:world];
+        self.knownNumberOfPlayers = number;
+        _currentState = [[AIStateStarting alloc] init];
+        //[self scheduleUpdate];
     }
     return self;
 }
@@ -63,14 +68,17 @@ typedef enum {
     self.fixture = self.body->CreateFixture(&enemyFixtureDef);
 }
 
+-(void)changeState:(id)state
+{
+    [_currentState exit:self];
+    _currentState = state;
+    [_currentState enter:self];
+}
+
 -(void)update:(ccTime)delta
 {
+    [_currentState execute:self];
     [super update:delta];
-    
-    if(_state == StateStarting)
-    {
-        
-    }
 }
 
 @end

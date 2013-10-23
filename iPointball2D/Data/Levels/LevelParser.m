@@ -47,7 +47,7 @@
     BOOL unlocked;
     int stars;
     NSString* data;
-    NSMutableArray* enemies = [[[NSMutableArray alloc]init]autorelease];
+    
     NSString* bunker;
     NSString* paint;
     Levels *levels = [[[Levels alloc]init]autorelease];
@@ -85,6 +85,7 @@
         NSArray *enemiesArray = [element elementsForName:@"Enemies"];
         NSArray *bunkerArray = [element elementsForName:@"Bunker"];
         NSArray *paintArray = [element elementsForName:@"Paint"];
+        NSMutableArray* enemies = [[[NSMutableArray alloc]init]autorelease];
         
         // exampleInt
         if (nameArray.count > 0) {
@@ -116,10 +117,10 @@
         
         if (enemiesArray.count > 0) {
             int i = 0;
-            for(GDataXMLElement* enemy in enemiesArray)
+            NSArray* eDataArray = [doc nodesForXPath:@"//Enemies" error:nil];
+            for(GDataXMLElement* enemy in eDataArray)
             {
-                NSArray* enemyArray = [enemy elementsForName:@"Enemy"];
-                
+                NSArray *enemyArray = [enemy elementsForName:@"Enemy"];
                 if (enemyArray.count > 0) {
                     GDataXMLElement* enemyElement = (GDataXMLElement *) [enemyArray objectAtIndex:i];
                     [enemies addObject:[enemyElement stringValue]];

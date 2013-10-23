@@ -8,9 +8,14 @@
 
 #import "Player.h"
 
+@class AIState;
+
 @interface AIPlayer : Player
 
--(id)initWithLayer:(GameScene*)layer andFile:(NSString*)file forWorld:(b2World*)world andPosition:(CGPoint)position;
+-(id)initWithLayer:(GameScene*)layer andFile:(NSString*)file forWorld:(b2World*)world andPosition:(CGPoint)position wNumOnOppTeam:(int)number;
+-(void)changeState:(AIState*)state;
+
+@property (nonatomic,assign) int knownNumberOfPlayers;
 
 //State stuff
 

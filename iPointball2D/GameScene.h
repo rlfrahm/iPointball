@@ -20,9 +20,6 @@
     GLESDebugDraw *_debugDraw;
     CGPoint origin;
     b2MouseJoint* _mouseJoint;
-    CCSprite* enemy;
-    b2Body* enemyBody;
-    b2Fixture* enemyFixture;
     b2Vec2 moveToLocation;
     BOOL firing;
     
@@ -32,5 +29,8 @@
 @property (nonatomic, assign) BOOL iPad;
 
 -(void)removeGameObject:(GameObject*)gameObject;
+-(void)setPlayer:(Player*)player attacking:(BOOL)attacking;
+-(NSArray*)enemiesOfTeam:(int)team;
+-(NSArray*)enemiesWithinRange:(float)range ofPlayer:(Player*)player;
 
 @end

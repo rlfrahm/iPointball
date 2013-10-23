@@ -18,6 +18,7 @@
     {
         self.currHP = 100;
         self.maxHP = 100;
+        self.offense = NO;
     }
     return self;
 }

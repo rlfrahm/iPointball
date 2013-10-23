@@ -4,9 +4,10 @@
 
 #import "MainMenu.h"
 #import "CCPhysicsSprite.h"
-#import "GameLevelLayer.h"
 #import "GameDataParser.h"
 #import "GameData.h"
+
+#define PTM_RATIO 32
 
 enum {
 	kTagParentNode = 1,
