@@ -5,22 +5,19 @@
         <Unlocked>1</Unlocked>
         <Stars>0</Stars>
         <Data>Some Level 1 data here...</Data>
-        <Enemies>
-            <Enemy>Target.png</Enemy>
-        </Enemies>
+        <Enemies>1</Enemies>
+        <Enemy>Target.png</Enemy>
         <Bunker>bunker1.png</Bunker>
         <Paint>Projectile.png</Paint>
     </Level>
     <Level>
         <Name>Chapter1Level2</Name>
         <Number>2</Number>
-        <Unlocked>0</Unlocked>
+        <Unlocked>1</Unlocked>
         <Stars>0</Stars>
         <Data>Some Level 1 data here...</Data>
-        <Enemies>
-            <Enemy>Target.png</Enemy>
-            <Enemy>Target.png</Enemy>
-        </Enemies>
+        <Enemies>2</Enemies>
+        <Enemy>Target.png</Enemy>
         <Bunker>bunker1.png</Bunker>
         <Paint>Projectile.png</Paint>
     </Level>
@@ -30,11 +27,8 @@
         <Unlocked>0</Unlocked>
         <Stars>0</Stars>
         <Data>Some Level 1 data here...</Data>
-        <Enemies>
-            <Enemy>Target.png</Enemy>
-            <Enemy>Target.png</Enemy>
-            <Enemy>Target.png</Enemy>
-        </Enemies>
+        <Enemies>3</Enemies>
+        <Enemy>Target.png</Enemy>
         <Bunker>bunker1.png</Bunker>
         <Paint>Projectile.png</Paint>
     </Level>

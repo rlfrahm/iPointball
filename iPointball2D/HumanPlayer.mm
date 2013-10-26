@@ -65,8 +65,8 @@
     playerTouchFixtureDef.filter.categoryBits = 0x0002;
     playerTouchFixtureDef.filter.maskBits = 0x0008 | 0x0001;
     
-    //self.body->CreateFixture(&playerTouchFixtureDef);
-    self.fixture = self.body->CreateFixture(&playerFixtureDef);
+    self.fixture = self.body->CreateFixture(&playerTouchFixtureDef);
+    self.body->CreateFixture(&playerFixtureDef);
 }
 
 @end

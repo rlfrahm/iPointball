@@ -27,6 +27,7 @@
 
 -(void)execute:(AIPlayer *)player
 {
+    
     // Check if we should change state
     NSArray* enemies = [player.layer enemiesWithinRange:200 ofPlayer:player];
     if(player.knownNumberOfPlayers == 0)
@@ -34,7 +35,12 @@
         [player changeState:[[AIStateRush alloc]init]];
         return;
     } else {
+        // Ray cast to look for cover
+        
+        // Then Move to cover
+        
         // Ray cast to look for enemies
+        
     }
 }
 

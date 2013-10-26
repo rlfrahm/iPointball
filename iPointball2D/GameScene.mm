@@ -44,7 +44,6 @@
         CGPoint location = [touch locationInView:[touch view]];
         location = [[CCDirector sharedDirector] convertToGL:location];
         b2Vec2 locationWorld = b2Vec2(location.x/PTM_RATIO, location.y/PTM_RATIO);
-        [self singleTap:touch];
         if (_humanPlayer.fixture->TestPoint(locationWorld)) {
             b2MouseJointDef md;
             md.bodyA = groundBody;
@@ -58,9 +57,23 @@
             if(tapCount == 1) {
                 
             } else if(tapCount == 2) {
+                b2PrismaticJointDef pj;
+                b2Vec2 axis = b2Vec2(0.0f,0.0f);
+                axis.Normalize();
+                pj.Initialize(_humanPlayer.body, _bunker.body, b2Vec2(0.0f,0.0f), axis);
+                pj.localAnchorA = _humanPlayer.body->GetLocalCenter();
+                pj.localAnchorB = _bunker.body->GetLocalCenter();
+                pj.motorSpeed = 3.5f;
+                pj.maxMotorForce = 1*_humanPlayer.body->GetMass();
+                pj.enableMotor = true;
+                //pj.lowerTranslation = 1.0f;
+                //pj.upperTranslation = 1.0f;
+                pj.enableLimit = true;
+                b2PrismaticJoint* joint = (b2PrismaticJoint *) world->CreateJoint(&pj);
+                joint=NULL;
                 [self doubleTap:touch withBody:_bunker.body];
             }
-        } else if(tapCount == 1) {
+        } else {
             [self singleTap:touch];
         }
     }
@@ -89,7 +102,7 @@
     CGFloat shootAngle = ccpToAngle(shootVector);
     float x = cosf(shootAngle);
     float y = sinf(shootAngle);
-    int pwr = 10;
+    int pwr = 1000;
     //b2Vec2 vec = b2Vec2(shootVector.x/PTM_RATIO,shootVector.y/PTM_RATIO);
     b2Vec2 impulse = b2Vec2(x*pwr,y*pwr);
     _humanPlayer.body->ApplyLinearImpulse(impulse, _humanPlayer.body->GetWorldCenter());
@@ -518,13 +531,13 @@
     [CCMenuItemFont setFontName:@"Marker Felt"];
     [CCMenuItemFont setFontSize:tinyFont];
     
-    CCMenuItemLabel* item1 = [CCMenuItemFont itemWithString:@"Back" target:self selector:@selector(onBack:)];
-    CCMenuItemLabel* item2 = [CCMenuItemFont itemWithString:@"Options" target:self selector:@selector(onOptions:)];
+    //CCMenuItemLabel* item1 = [CCMenuItemFont itemWithString:@"Back" target:self selector:@selector(onBack:)];
+    CCMenuItemLabel* item1 = [CCMenuItemFont itemWithString:@"O" target:self selector:@selector(onOptions:)];
     item1.color = ccRED;
-    item2.color = ccRED;
+    //item2.color = ccRED;
     
-    CCMenu* menu = [CCMenu menuWithItems:item1,item2, nil];
-    [menu setPosition:ccp(winSize.width/2,winSize.height-item1.contentSize.height/3)];
+    CCMenu* menu = [CCMenu menuWithItems:item1, nil];
+    [menu setPosition:ccp(item1.contentSize.width,winSize.height-item1.contentSize.height/3)];
     [menu alignItemsHorizontally];
     [self addChild:menu];
     
@@ -543,10 +556,6 @@
         if(level.number == selectedLevel)
         {
             levelData = level;
-            for(NSString* baddy in level.enemies)
-            {
-                //[self addNewEnemyAtPosition:ccp(winSize.width -1.5*PTM_RATIO, winSize.height/2)];
-            }
         }
     }
     /*GameData* gameData = [GameDataParser loadData];
@@ -585,11 +594,13 @@
     {
         if(level.number == selectedLevel)
         {
-            for(NSString* baddy in level.enemies)
+            for(int i=0; i<level.enemies; i++)
             {
                 CGPoint point = ccp(winSize.width - 1.5*PTM_RATIO, winSize.height/2);
-                _aiPlayer = [[AIPlayer alloc] initWithLayer:self andFile:baddy forWorld:world andPosition:point wNumOnOppTeam:1];
+                _aiPlayer = [[AIPlayer alloc] initWithLayer:self andFile:level.enemy forWorld:world andPosition:point wNumOnOppTeam:1];
                 _aiPlayer.tag = 2;
+                _aiPlayer.file = levelData.paint;
+                [_aiPlayer scheduleUpdateWithPriority:1];
                 [_batchNode addChild:_aiPlayer];
             }
         }

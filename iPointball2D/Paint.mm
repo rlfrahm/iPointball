@@ -8,6 +8,7 @@
 
 #import "Paint.h"
 #import "Box2D.h"
+#import "CGPointExtension.h"
 
 #define PTM_RATIO 32
 
@@ -65,6 +66,12 @@
     
     b2Vec2 force = b2Vec2(x1*power,y1*power);
     //paintBody->ApplyForceToCenter(force);
+    self.body->ApplyLinearImpulse(force, self.body->GetWorldCenter());
+}
+
+-(void)fireToLocationWithNormal:(b2Vec2)normal andPower:(float)power
+{
+    b2Vec2 force = b2Cross(normal, power);
     self.body->ApplyLinearImpulse(force, self.body->GetWorldCenter());
 }
 

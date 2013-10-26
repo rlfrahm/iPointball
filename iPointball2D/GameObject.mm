@@ -21,7 +21,7 @@
         [layer addChild:self.sprite];
         self.sprite.position = position;
         self.alive = YES;
-        [self scheduleUpdateWithPriority:1];
+        //[self scheduleUpdateWithPriority:1];
     }
     return self;
 }

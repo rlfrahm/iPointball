@@ -14,8 +14,15 @@
 
 -(id)initWithLayer:(GameScene*)layer andFile:(NSString*)file forWorld:(b2World*)world andPosition:(CGPoint)position wNumOnOppTeam:(int)number;
 -(void)changeState:(AIState*)state;
+-(NSString*)stateName;
 
 @property (nonatomic,assign) int knownNumberOfPlayers;
+@property CGPoint eye;
+@property CGPoint target;
+@property float rayAngle;
+@property BOOL canSeePlayer;
+@property double lastShot;
+@property(nonatomic, copy) NSString* file;
 
 //State stuff
 
