@@ -33,6 +33,7 @@
     CGFloat _angle2;
     b2Body* _moveToBody;
     CCSprite* joybtn;
+    BOOL _isMovingJoybtn;
 }
 @synthesize iPad;
 
@@ -52,7 +53,7 @@
         CGPoint location = [touch locationInView:[touch view]];
         location = [[CCDirector sharedDirector] convertToGL:location];
         b2Vec2 locationWorld = b2Vec2(location.x/PTM_RATIO, location.y/PTM_RATIO);
-        if (_humanPlayer.fixture->TestPoint(locationWorld)) {
+        if (_humanPlayer.fixture->TestPoint(locationWorld) && [self isTouchingJoybtn:location] == false) {
             b2MouseJointDef md;
             md.bodyA = groundBody;
             md.bodyB = _humanPlayer.body;
@@ -61,19 +62,23 @@
             md.maxForce = 20.0f * _humanPlayer.body->GetMass();
             _mouseJoint = (b2MouseJoint *)world->CreateJoint(&md);
             _humanPlayer.body->SetAwake(true);
+        } else if([self isTouchingJoybtn:location]) {
+            _isMovingJoybtn = true;
         } else if(_bunker.fixture->TestPoint(locationWorld)) {
             if(tapCount == 2) {
                 [self doubleTap:location withBody:_bunker.body];
             }
         } else {
             [self singleTap:location];
+            _isMovingJoybtn = false;
         }
     }
 }
 
--(BOOL)isTouchingJoybtn:(UITouch*)touch {
+-(BOOL)isTouchingJoybtn:(CGPoint)location {
     // Check if the touch point is on the joybtn
-    return NO;
+    float d = ccpLengthSQ(ccpSub(location, joybtn.position));
+    return (d < joybtn.contentSize.width);
 }
 
 -(void)singleTap:(CGPoint)location
@@ -99,13 +104,22 @@
 -(void) ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
     //CCLOG(@"Touch Moved");
     if (_mouseJoint == NULL) return;
-    _moving = YES;
     UITouch *myTouch = [touches anyObject];
     CGPoint location1 = [myTouch locationInView:[myTouch view]];
+    if(_isMovingJoybtn) [self moveJoybtn:location1];
+    _moving = YES;
     location1 = [[CCDirector sharedDirector] convertToGL:location1];
     moveToLocation = b2Vec2(location1.x/PTM_RATIO, location1.y/PTM_RATIO);
     
     _mouseJoint->SetTarget(moveToLocation);
+}
+
+-(void)moveJoybtn:(CGPoint)location {
+    if([self isTouchingJoybtn:location]) {
+        joybtn.position = location;
+    } else {
+        joybtn.position = ccp(50,50);
+    }
 }
 
 -(void) ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event{
