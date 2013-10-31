@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D0E6B1A181D585F0016E27B /* PauseLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D0E6B19181D585F0016E27B /* PauseLayer.mm */; };
+		4D0E6B1C181D80C00016E27B /* paused.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0E6B1B181D80C00016E27B /* paused.png */; };
 		4D1A9AC918001DCF004D663F /* Paint.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D1A9AC818001DCF004D663F /* Paint.mm */; };
 		4D1B02C217EDC5E60057F384 /* PRFilledPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D1B02BB17EDC5E60057F384 /* PRFilledPolygon.m */; };
 		4D1B02C317EDC5E60057F384 /* PRRatcliffTriangulator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D1B02BD17EDC5E60057F384 /* PRRatcliffTriangulator.mm */; };
@@ -301,6 +303,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4D0E6B18181D585F0016E27B /* PauseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseLayer.h; sourceTree = "<group>"; };
+		4D0E6B19181D585F0016E27B /* PauseLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PauseLayer.mm; sourceTree = "<group>"; };
+		4D0E6B1B181D80C00016E27B /* paused.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paused.png; sourceTree = "<group>"; };
 		4D1A9AC718001DCF004D663F /* Paint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Paint.h; sourceTree = "<group>"; };
 		4D1A9AC818001DCF004D663F /* Paint.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Paint.mm; sourceTree = "<group>"; };
 		4D1B02BA17EDC5E60057F384 /* PRFilledPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRFilledPolygon.h; sourceTree = "<group>"; };
@@ -844,6 +849,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D0E6B17181D583E0016E27B /* Layers */ = {
+			isa = PBXGroup;
+			children = (
+				4D0E6B18181D585F0016E27B /* PauseLayer.h */,
+				4D0E6B19181D585F0016E27B /* PauseLayer.mm */,
+			);
+			name = Layers;
+			sourceTree = "<group>";
+		};
 		4D16B15B1727212700D40933 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
@@ -1016,6 +1030,7 @@
 		4D4690FF1710734B00837BC5 /* iPointball2D */ = {
 			isa = PBXGroup;
 			children = (
+				4D0E6B17181D583E0016E27B /* Layers */,
 				4D1D800F17FCC5F00035F8CA /* Data */,
 				4D1D800117FCBAA00035F8CA /* Physics */,
 				4D1D800017FCBA890035F8CA /* Scenes */,
@@ -1631,6 +1646,7 @@
 		4DAA290217FE169600C26F58 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4D0E6B1B181D80C00016E27B /* paused.png */,
 				4DAA290317FE16C800C26F58 /* Progress */,
 				4D1D7FF017FCBA010035F8CA /* Arrow-Selected-iPad-hd.png */,
 				4D1D7FF117FCBA010035F8CA /* Arrow-Normal-iPhone.png */,
@@ -1828,6 +1844,7 @@
 				4DAA28F217FE144900C26F58 /* Pro-Normal-iPad-hd.png in Resources */,
 				4D46910C1710734B00837BC5 /* Icon-Small-50.png in Resources */,
 				4DAA292717FE16C800C26F58 /* 3Star-Normal-iPhone.png in Resources */,
+				4D0E6B1C181D80C00016E27B /* paused.png in Resources */,
 				4DAA28E517FE144900C26F58 /* Rookie-Normal-iPhone.png in Resources */,
 				4D46910E1710734B00837BC5 /* Icon-Small.png in Resources */,
 				4D1D7FFD17FCBA010035F8CA /* Arrow-Selected-iPhone-hd.png in Resources */,
@@ -2002,6 +2019,7 @@
 				4D46921E1710734E00837BC5 /* CCArray.m in Sources */,
 				4D4692211710734E00837BC5 /* ccCArray.m in Sources */,
 				4D4692241710734E00837BC5 /* CCFileUtils.m in Sources */,
+				4D0E6B1A181D585F0016E27B /* PauseLayer.mm in Sources */,
 				4D4692271710734E00837BC5 /* CCProfiling.m in Sources */,
 				4D4692291710734E00837BC5 /* ccUtils.c in Sources */,
 				4D46922D1710734E00837BC5 /* CCVertex.m in Sources */,

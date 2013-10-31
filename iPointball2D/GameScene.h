@@ -32,5 +32,6 @@
 -(void)setPlayer:(Player*)player attacking:(BOOL)attacking;
 -(NSArray*)enemiesOfTeam:(int)team;
 -(NSArray*)enemiesWithinRange:(float)range ofPlayer:(Player*)player;
+-(void)resume;
 
 @end

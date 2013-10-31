@@ -9,6 +9,8 @@
 #import "AIPlayer.h"
 #import "Bunker.h"
 #import "Paint.h"
+#import "PauseLayer.h"
+#import "AppDelegate.h"
 
 #define PAINTFPS 680 // pixels/sec
 #define PTM_RATIO 32 // pixels-meters
@@ -26,6 +28,10 @@
     Bunker* _bunker;
     Paint* _paint;
     Levels* levels;
+    BOOL _moving;
+    BOOL _moveToBunker;
+    CGFloat _angle2;
+    b2Body* _moveToBody;
 }
 @synthesize iPad;
 
@@ -33,6 +39,7 @@
 
 -(void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     //CCLOG(@"Touch Began");
+    _moving = NO;
     NSArray *touchArray = [touches allObjects];
     NSSet *allTouches = [event allTouches];
     // only run the following code if there is more than one touch
@@ -57,7 +64,7 @@
             if(tapCount == 1) {
                 
             } else if(tapCount == 2) {
-                b2PrismaticJointDef pj;
+                /*b2PrismaticJointDef pj;
                 b2Vec2 axis = b2Vec2(0.0f,0.0f);
                 axis.Normalize();
                 pj.Initialize(_humanPlayer.body, _bunker.body, b2Vec2(0.0f,0.0f), axis);
@@ -66,51 +73,55 @@
                 pj.motorSpeed = 3.5f;
                 pj.maxMotorForce = 1*_humanPlayer.body->GetMass();
                 pj.enableMotor = true;
+                
                 //pj.lowerTranslation = 1.0f;
                 //pj.upperTranslation = 1.0f;
                 pj.enableLimit = true;
                 b2PrismaticJoint* joint = (b2PrismaticJoint *) world->CreateJoint(&pj);
-                joint=NULL;
-                [self doubleTap:touch withBody:_bunker.body];
+                joint=NULL;*/
+                [self doubleTap:location withBody:_bunker.body];
             }
         } else {
-            [self singleTap:touch];
+            [self singleTap:location];
         }
     }
 }
 
--(void)singleTap:(UITouch*)touch
+-(void)singleTap:(CGPoint)location
 {
-    CCLOG(@"Single Tap!");
-    CGPoint location = [touch locationInView:[touch view]];
-    location = [[CCDirector sharedDirector] convertToGL:location];
+    //CCLOG(@"Single Tap!");
     origin = location;
-    
     // Shoot Stuff!
     CGPoint shootVector = ccpSub(location, _humanPlayer.sprite.position);
     CGFloat shootAngle = ccpToAngle(shootVector);
+    //CCLOG(@"%f",shootAngle);
+    //CCLOG(@"%f",_angle2);
+    //CCLOG(@"%f",shootAngle-_angle2);
+    if(shootAngle - _angle2 > 0.2 || shootAngle - _angle2 < -0.2) {_angle2 = shootAngle;return;}
     [self shootPaintToLocation:location withAngle:shootAngle];
     firing = YES;
+    _angle2 = shootAngle;
 }
 
--(void)doubleTap:(UITouch*)touch withBody:(b2Body*)bodyB
+-(void)doubleTap:(CGPoint)location withBody:(b2Body*)bodyB
 {
     CCLOG(@"Double Tap!");
-    CGPoint location = [touch locationInView:[touch view]];
-    location = [[CCDirector sharedDirector] convertToGL:location];
     CGPoint shootVector = ccpSub(location, _humanPlayer.sprite.position);
     CGFloat shootAngle = ccpToAngle(shootVector);
     float x = cosf(shootAngle);
     float y = sinf(shootAngle);
     int pwr = 1000;
     //b2Vec2 vec = b2Vec2(shootVector.x/PTM_RATIO,shootVector.y/PTM_RATIO);
-    b2Vec2 impulse = b2Vec2(x*pwr,y*pwr);
-    _humanPlayer.body->ApplyLinearImpulse(impulse, _humanPlayer.body->GetWorldCenter());
+    _moveToBunker = YES;
+    [self moveToBunkerWithBody:bodyB];
+    //b2Vec2 impulse = b2Vec2(x*pwr,y*pwr);
+    //_humanPlayer.body->ApplyLinearImpulse(impulse, _humanPlayer.body->GetWorldCenter());
 }
 
 -(void) ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
     //CCLOG(@"Touch Moved");
     if (_mouseJoint == NULL) return;
+    _moving = YES;
     UITouch *myTouch = [touches anyObject];
     CGPoint location1 = [myTouch locationInView:[myTouch view]];
     location1 = [[CCDirector sharedDirector] convertToGL:location1];
@@ -134,6 +145,37 @@
     }
 }
 
+-(void)moveToBunkerWithBody:(b2Body*)body
+{
+    if(body->GetUserData() == NULL) {return;}
+    if(_moveToBunker)
+    {
+        CCSprite* sprite = (CCSprite*) body->GetUserData();
+        //CCLOG(@"Distance: %f",ccpDistance(sprite.position, _humanPlayer.sprite.position));
+        if(ccpDistance(sprite.position, _humanPlayer.sprite.position) < 25) {
+            _humanPlayer.body->SetLinearVelocity(b2Vec2(0, 0));
+            _moveToBunker = NO;
+            CCLOG(@"%hhd",_moveToBunker);
+            return;
+        }
+        // Calculate unit vector
+        
+        //CCLOG(@"%f",ccpDistance(_humanPlayer.sprite.position, sprite.position));
+        b2Vec2 vector = b2Vec2(sprite.position.x - _humanPlayer.sprite.position.x, sprite.position.y - _humanPlayer.sprite.position.y);
+        //CCLOG(@"Vector -> %f : %f",vector.x, vector.y);
+        vector.Normalize();
+        //CCLOG(@"Normal -> %f : %f",vector.x, vector.y);
+        // Then multiply is by _aiplayer.speed
+        float massSpeed = _humanPlayer.body->GetMass() * _humanPlayer.speed;
+        vector = b2Vec2(vector.x * massSpeed, vector.y * massSpeed);
+        //vector = b2Cross(vector, massSpeed);
+        //CCLOG(@"Crossed -> %f : %f",vector.x, vector.y);
+        _humanPlayer.body->ApplyLinearImpulse(vector, _humanPlayer.body->GetWorldCenter());
+        
+        _moveToBody = body;
+    }
+}
+
 -(void)shootPaintToLocation:(CGPoint)location withAngle:(CGFloat)angle
 {
     CGPoint point = _humanPlayer.sprite.position;
@@ -149,7 +191,7 @@
 
 -(void)onOptions: (id) sender
 {
-    [SceneManager goOptionsMenu];
+    
 }
 
 - (void)onBack: (id) sender {
@@ -193,6 +235,46 @@
     }
 }
 
+# pragma mark Pause / Resume methods
+
+-(void)pauseGame
+{
+    ccColor4B c = {100,100,0,100};
+    PauseLayer* paused = [[[PauseLayer alloc] initWithColor:c]autorelease];
+    CGSize winsize = [[CCDirector sharedDirector] winSize];
+    paused.position = ccp(0, 0);
+    [self addChild:paused z:10];
+    [self onExit];
+}
+
+-(void)resume
+{
+    if(![AppController get].paused)
+    {
+        return;
+    }
+    [AppController get].paused = NO;
+    
+    [self onEnter];
+}
+
+-(void)onEnter
+{
+    if(![AppController get].paused)
+    {
+        [super onEnter];
+    }
+}
+
+-(void) onExit
+{
+    if (![AppController get].paused)
+    {
+        [AppController get].paused = YES;
+        [super onExit];
+    }
+}
+
 # pragma mark Update methods
 
 -(void) update:(ccTime)dt{
@@ -233,15 +315,7 @@
         }
     }
     
-    b2Vec2 playerPos = b2Vec2(_humanPlayer.position.x,_humanPlayer.position.y);
-    if(playerPos == moveToLocation)
-    {
-        //playerBody->SetLinearVelocity(b2Vec2(0,0));
-    }
-    else
-    {
-        
-    }
+    if(_moveToBunker) {[self moveToBunkerWithBody:_moveToBody];}
     
     std::vector<b2Body *>toDestroy;
     std::vector<MyContact>::iterator pos;
@@ -290,7 +364,6 @@
             
             
         }
-        CGSize winsize = [[CCDirector sharedDirector]winSize];
         
         if(bodyA->GetUserData() != NULL && bodyB->GetUserData() != NULL)
         {
@@ -532,7 +605,7 @@
     [CCMenuItemFont setFontSize:tinyFont];
     
     //CCMenuItemLabel* item1 = [CCMenuItemFont itemWithString:@"Back" target:self selector:@selector(onBack:)];
-    CCMenuItemLabel* item1 = [CCMenuItemFont itemWithString:@"O" target:self selector:@selector(onOptions:)];
+    CCMenuItemLabel* item1 = [CCMenuItemFont itemWithString:@"O" target:self selector:@selector(pauseGame)];
     item1.color = ccRED;
     //item2.color = ccRED;
     
@@ -615,6 +688,7 @@
     //_humanPlayer.sprite.position = ccp(1.5*PTM_RATIO, winSize.height/2);
     //[_humanPlayer setPosition:ccp(1.5*PTM_RATIO, winSize.height/2)];
     _humanPlayer.tag = 1;
+    _humanPlayer.speed = 1; // NEEDS TO BE SET FROM XML FILE***************!!!!!!!!!!!!!!!!!!
     [_batchNode addChild:_humanPlayer];
     
     

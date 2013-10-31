@@ -24,5 +24,10 @@
 @property (nonatomic, retain) UIWindow *window;
 @property (readonly) MyNavigationController *navController;
 @property (readonly) CCDirectorIOS *director;
+@property (nonatomic, assign) BOOL paused;
+
++(AppController *)get;
+-(void)pause;
+-(void)resume;
 
 @end

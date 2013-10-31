@@ -46,7 +46,18 @@
     bunkerFixtureDef.filter.categoryBits = 0x0016;
     bunkerFixtureDef.filter.maskBits = 0x0002 | 0x0004 | 0x0008;
     
-    self.fixture = self.body->CreateFixture(&bunkerFixtureDef);
+    b2CircleShape playerTouchShape;
+    playerTouchShape.m_radius = 1.0f;
+    
+    b2FixtureDef playerTouchFixtureDef;
+    playerTouchFixtureDef.shape = &playerTouchShape;
+    playerTouchFixtureDef.density = 1.0f;
+    playerTouchFixtureDef.filter.categoryBits = 0x0016;
+    playerTouchFixtureDef.filter.maskBits = 0x0001;
+    
+    self.fixture = self.body->CreateFixture(&playerTouchFixtureDef);
+    
+    self.body->CreateFixture(&bunkerFixtureDef);
 }
 
 @end

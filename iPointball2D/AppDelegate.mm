@@ -191,6 +191,21 @@
 	[[CCDirector sharedDirector] setNextDeltaTimeZero:YES];
 }
 
++(AppController *)get
+{
+    return (AppController *)[[UIApplication sharedApplication] delegate];
+}
+
+-(void)pause
+{
+    [director_ pause];
+}
+
+-(void)resume
+{
+    [director_ resume];
+}
+
 - (void) dealloc
 {
 	[window_ release];

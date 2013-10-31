@@ -10,6 +10,8 @@
 
 @interface Player : GameObject
 
+@property (nonatomic, assign) float speed;
+
 -(void)shootPaintToPoint:(CGPoint)point;
 
 @end
