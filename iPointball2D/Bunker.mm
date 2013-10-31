@@ -20,6 +20,7 @@
     if((self = [super initWithSprite:file layer:layer andPosition:position]))
     {
         [self createBodyForWorld:world];
+        [self createSnapPoints];
     }
     return self;
 }
@@ -58,6 +59,11 @@
     self.fixture = self.body->CreateFixture(&playerTouchFixtureDef);
     
     self.body->CreateFixture(&bunkerFixtureDef);
+}
+
+-(void)createSnapPoints
+{
+    
 }
 
 @end

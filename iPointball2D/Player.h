@@ -7,11 +7,16 @@
 //
 
 #import "GameObject.h"
+#import "cocos2d.h"
 
 @interface Player : GameObject
 
 @property (nonatomic, assign) float speed;
+@property (nonatomic, assign) CGFloat topY;
+@property (nonatomic, assign) CGFloat btmY;
+@property (nonatomic, assign) CGFloat leftX;
+@property (nonatomic, assign) BOOL snapped;
 
--(void)shootPaintToPoint:(CGPoint)point;
+-(void)setMovementWindow:(CGPoint)point;
 
 @end

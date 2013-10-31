@@ -94,9 +94,6 @@
     // Shoot Stuff!
     CGPoint shootVector = ccpSub(location, _humanPlayer.sprite.position);
     CGFloat shootAngle = ccpToAngle(shootVector);
-    //CCLOG(@"%f",shootAngle);
-    //CCLOG(@"%f",_angle2);
-    //CCLOG(@"%f",shootAngle-_angle2);
     if(shootAngle - _angle2 > 0.2 || shootAngle - _angle2 < -0.2) {_angle2 = shootAngle;return;}
     [self shootPaintToLocation:location withAngle:shootAngle];
     firing = YES;
@@ -106,16 +103,8 @@
 -(void)doubleTap:(CGPoint)location withBody:(b2Body*)bodyB
 {
     CCLOG(@"Double Tap!");
-    CGPoint shootVector = ccpSub(location, _humanPlayer.sprite.position);
-    CGFloat shootAngle = ccpToAngle(shootVector);
-    float x = cosf(shootAngle);
-    float y = sinf(shootAngle);
-    int pwr = 1000;
-    //b2Vec2 vec = b2Vec2(shootVector.x/PTM_RATIO,shootVector.y/PTM_RATIO);
     _moveToBunker = YES;
     [self moveToBunkerWithBody:bodyB];
-    //b2Vec2 impulse = b2Vec2(x*pwr,y*pwr);
-    //_humanPlayer.body->ApplyLinearImpulse(impulse, _humanPlayer.body->GetWorldCenter());
 }
 
 -(void) ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -155,6 +144,8 @@
         if(ccpDistance(sprite.position, _humanPlayer.sprite.position) < 25) {
             _humanPlayer.body->SetLinearVelocity(b2Vec2(0, 0));
             _moveToBunker = NO;
+            _humanPlayer.snapped = YES;
+            [_humanPlayer setMovementWindow:sprite.position];
             CCLOG(@"%hhd",_moveToBunker);
             return;
         }
@@ -173,6 +164,7 @@
         _humanPlayer.body->ApplyLinearImpulse(vector, _humanPlayer.body->GetWorldCenter());
         
         _moveToBody = body;
+        if(_humanPlayer.snapped) {_humanPlayer.snapped = NO;}
     }
 }
 
@@ -315,7 +307,19 @@
         }
     }
     
-    if(_moveToBunker) {[self moveToBunkerWithBody:_moveToBody];}
+    if(_moveToBunker) {
+        [self moveToBunkerWithBody:_moveToBody];
+    }
+    else if(_moveToBunker == NO && _humanPlayer.snapped) {
+        if(_humanPlayer.sprite.position.y > _humanPlayer.topY) {
+            _humanPlayer.body->SetLinearVelocity(b2Vec2(0,_humanPlayer.topY - _humanPlayer.sprite.position.y));
+        } else if(_humanPlayer.sprite.position.y < _humanPlayer.btmY) {
+            _humanPlayer.body->SetLinearVelocity(b2Vec2(0,_humanPlayer.btmY - _humanPlayer.sprite.position.y));
+        }
+        if (_humanPlayer.sprite.position.x < _humanPlayer.leftX) {
+            _humanPlayer.body->SetLinearVelocity(b2Vec2(_humanPlayer.leftX - _humanPlayer.sprite.position.x,0));
+        }
+    }
     
     std::vector<b2Body *>toDestroy;
     std::vector<MyContact>::iterator pos;

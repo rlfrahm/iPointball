@@ -9,6 +9,8 @@
 #import "Player.h"
 
 #define PTM_RATIO 32
+#define MOVE_WINDOW_Y 20
+#define MOVE_WINDOW_X 20
 
 @implementation Player
 
@@ -23,9 +25,11 @@
     return self;
 }
 
--(void)shootPaintToPoint:(CGPoint)point
+-(void)setMovementWindow:(CGPoint)point
 {
-    
+    self.topY = point.y + MOVE_WINDOW_Y;
+    self.btmY = point.y - MOVE_WINDOW_Y;
+    self.leftX = point.x - MOVE_WINDOW_X;
 }
 
 @end
