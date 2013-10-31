@@ -32,6 +32,7 @@
     BOOL _moveToBunker;
     CGFloat _angle2;
     b2Body* _moveToBody;
+    CCSprite* joybtn;
 }
 @synthesize iPad;
 
@@ -61,30 +62,18 @@
             _mouseJoint = (b2MouseJoint *)world->CreateJoint(&md);
             _humanPlayer.body->SetAwake(true);
         } else if(_bunker.fixture->TestPoint(locationWorld)) {
-            if(tapCount == 1) {
-                
-            } else if(tapCount == 2) {
-                /*b2PrismaticJointDef pj;
-                b2Vec2 axis = b2Vec2(0.0f,0.0f);
-                axis.Normalize();
-                pj.Initialize(_humanPlayer.body, _bunker.body, b2Vec2(0.0f,0.0f), axis);
-                pj.localAnchorA = _humanPlayer.body->GetLocalCenter();
-                pj.localAnchorB = _bunker.body->GetLocalCenter();
-                pj.motorSpeed = 3.5f;
-                pj.maxMotorForce = 1*_humanPlayer.body->GetMass();
-                pj.enableMotor = true;
-                
-                //pj.lowerTranslation = 1.0f;
-                //pj.upperTranslation = 1.0f;
-                pj.enableLimit = true;
-                b2PrismaticJoint* joint = (b2PrismaticJoint *) world->CreateJoint(&pj);
-                joint=NULL;*/
+            if(tapCount == 2) {
                 [self doubleTap:location withBody:_bunker.body];
             }
         } else {
             [self singleTap:location];
         }
     }
+}
+
+-(BOOL)isTouchingJoybtn:(UITouch*)touch {
+    // Check if the touch point is on the joybtn
+    return NO;
 }
 
 -(void)singleTap:(CGPoint)location
@@ -139,13 +128,24 @@
     if(body->GetUserData() == NULL) {return;}
     if(_moveToBunker)
     {
+        if(_humanPlayer.snapped) {_humanPlayer.snapped = NO;}
         CCSprite* sprite = (CCSprite*) body->GetUserData();
         //CCLOG(@"Distance: %f",ccpDistance(sprite.position, _humanPlayer.sprite.position));
         if(ccpDistance(sprite.position, _humanPlayer.sprite.position) < 25) {
             _humanPlayer.body->SetLinearVelocity(b2Vec2(0, 0));
+            if(joybtn.tag != 1) {
+                [self addChild:joybtn z:1 tag:1];
+                [joybtn runAction:[CCSequence actions:
+                                   [CCDelayTime actionWithDuration:0.5f],
+                                   [CCFadeTo actionWithDuration:0.5f opacity:192],
+                                   [CCBlink actionWithDuration:0.66f blinks:3],
+                                   nil]];
+            }
             _moveToBunker = NO;
             _humanPlayer.snapped = YES;
             [_humanPlayer setMovementWindow:sprite.position];
+            
+            
             CCLOG(@"%hhd",_moveToBunker);
             return;
         }
@@ -164,7 +164,6 @@
         _humanPlayer.body->ApplyLinearImpulse(vector, _humanPlayer.body->GetWorldCenter());
         
         _moveToBody = body;
-        if(_humanPlayer.snapped) {_humanPlayer.snapped = NO;}
     }
 }
 
@@ -305,6 +304,11 @@
                 }
             }*/
         }
+    }
+    
+    if(_humanPlayer.snapped == false && joybtn.tag == 1) {
+        [self removeChild:joybtn cleanup:YES];
+        joybtn.tag = 0;
     }
     
     if(_moveToBunker) {
@@ -656,6 +660,12 @@
      }*/
     
     [self addEnemiesWithLevel:selectedLevel];
+    
+    // Load joystick but don't display
+    joybtn = [[CCSprite spriteWithFile:@"joybtn.png"] retain];
+    joybtn.position = ccp(50,50);
+    joybtn.opacity = 0;
+    
     // collision detection
     contactListener = new MyContactListener();
     world->SetContactListener(contactListener);

@@ -42,6 +42,7 @@
 		4D2C4C8217FD825A00FA5E20 /* Levels-Chapter1.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4D2C4C7E17FD825A00FA5E20 /* Levels-Chapter1.xml */; };
 		4D2C4C8317FD825A00FA5E20 /* LevelParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2C4C8017FD825A00FA5E20 /* LevelParser.m */; };
 		4D2C4C8617FD82BF00FA5E20 /* Levels.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2C4C8517FD82BF00FA5E20 /* Levels.m */; };
+		4D2E00061822016300D97307 /* joybtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D2E00051822016300D97307 /* joybtn.png */; };
 		4D4690EE1710734B00837BC5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4690ED1710734B00837BC5 /* QuartzCore.framework */; };
 		4D4690F01710734B00837BC5 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4690EF1710734B00837BC5 /* OpenGLES.framework */; };
 		4D4690F21710734B00837BC5 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4690F11710734B00837BC5 /* OpenAL.framework */; };
@@ -363,6 +364,7 @@
 		4D2C4C8017FD825A00FA5E20 /* LevelParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelParser.m; sourceTree = "<group>"; };
 		4D2C4C8417FD82BF00FA5E20 /* Levels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Levels.h; sourceTree = "<group>"; };
 		4D2C4C8517FD82BF00FA5E20 /* Levels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Levels.m; sourceTree = "<group>"; };
+		4D2E00051822016300D97307 /* joybtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joybtn.png; sourceTree = "<group>"; };
 		4D4690EA1710734B00837BC5 /* iPointball2D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPointball2D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D4690ED1710734B00837BC5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4D4690EF1710734B00837BC5 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1646,6 +1648,7 @@
 		4DAA290217FE169600C26F58 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4D2E00051822016300D97307 /* joybtn.png */,
 				4D0E6B1B181D80C00016E27B /* paused.png */,
 				4DAA290317FE16C800C26F58 /* Progress */,
 				4D1D7FF017FCBA010035F8CA /* Arrow-Selected-iPad-hd.png */,
@@ -1877,6 +1880,7 @@
 				4DF73D9917FD0D5C00507149 /* StickyNote-iPad-hd.png in Resources */,
 				4DAA292817FE16C800C26F58 /* Locked-iPad-hd.png in Resources */,
 				4DAA28DB17FE144900C26F58 /* Amateur-Normal-iPad.png in Resources */,
+				4D2E00061822016300D97307 /* joybtn.png in Resources */,
 				4DAA28ED17FE144900C26F58 /* Semi-Pro-Normal-iPhone.png in Resources */,
 				4DAA291B17FE16C800C26F58 /* 0Star-Normal-iPhone.png in Resources */,
 				E131A3E51714B2B500DC66F8 /* Player.png in Resources */,
