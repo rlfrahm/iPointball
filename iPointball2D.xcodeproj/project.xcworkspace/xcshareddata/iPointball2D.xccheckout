@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>3C19C286-08F3-49EA-9D2D-5CC8F48D7060</string>
+	<string>941D8652-AF7B-4F0B-A3BF-4A3CD30B00E2</string>
 	<key>IDESourceControlProjectName</key>
 	<string>iPointball2D</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>14986B01-C3E5-4115-B5C9-F0A896124BA9</key>
-		<string>ssh://git.assembla.com/ipointball.git</string>
+		<key>7F6BF871-297F-4861-9E29-74219A9AF490</key>
+		<string>https://github.com/rlfrahm/iPointball.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>iPointball2D.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>14986B01-C3E5-4115-B5C9-F0A896124BA9</key>
+		<key>7F6BF871-297F-4861-9E29-74219A9AF490</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://git.assembla.com/ipointball.git</string>
+	<string>https://github.com/rlfrahm/iPointball.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>14986B01-C3E5-4115-B5C9-F0A896124BA9</string>
+	<string>7F6BF871-297F-4861-9E29-74219A9AF490</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>14986B01-C3E5-4115-B5C9-F0A896124BA9</string>
+			<string>7F6BF871-297F-4861-9E29-74219A9AF490</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ipointball</string>
 		</dict>
