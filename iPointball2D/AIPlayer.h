@@ -23,7 +23,7 @@
 @property float rayAngle;
 @property BOOL canSeePlayer;
 @property double lastShot;
-@property(nonatomic, copy) NSString* file;
+@property (nonatomic, copy) NSString* file;
 
 //State stuff
 

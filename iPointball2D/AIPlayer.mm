@@ -139,7 +139,9 @@
     }
     ccDrawLine(self.eye, self.target);
     //*/
-    [_currentState execute:self];
+    
+    
+    //[_currentState execute:self];
 }
 
 @end

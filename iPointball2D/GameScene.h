@@ -14,6 +14,7 @@
 @class Player;
 @class GameObject;
 @class Paint;
+@class Bunker;
 
 @interface GameScene : CCLayerColor {
     b2Body* groundBody;
@@ -33,6 +34,7 @@
 -(NSArray*)enemiesOfTeam:(int)team;
 -(NSArray*)enemiesWithinRange:(float)range ofPlayer:(Player*)player;
 -(NSArray*)bunkersWithinRange:(float)range ofPlayer:(Player*)player;
+-(BOOL)isNextToBunker:(Bunker*)bunker player:(Player*)player;
 -(void)resume;
 
 @end

@@ -814,5 +814,27 @@
     return _gameObjects[3];
 }
 
+-(NSArray*)bunkersWithinRange:(float)range ofPlayer:(Player *)player
+{
+    NSMutableArray* returnval = [NSMutableArray array];
+    NSArray* bunkers = [self bunkersOnField];
+    for(GameObject* bunker in bunkers)
+    {
+        float distance = ccpDistance(bunker.position, player.position);
+        if(distance < range) {
+            [returnval addObject:bunker];
+        }
+    }
+    return returnval;
+}
+
+-(BOOL)isNextToBunker:(Bunker *)bunker player:(Player *)player {
+    float distance = ccpDistance(bunker.position, player.position);
+    if(distance < 25) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
 
 @end
