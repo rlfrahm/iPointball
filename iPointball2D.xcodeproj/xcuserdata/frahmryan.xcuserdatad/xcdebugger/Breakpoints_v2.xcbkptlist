@@ -326,11 +326,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iPointball2D/GameScene.mm"
-            timestampString = "404908213.222984"
+            timestampString = "405470763.730436"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "400"
-            endingLineNumber = "400"
+            startingLineNumber = "403"
+            endingLineNumber = "403"
             landmarkName = "-update:"
             landmarkType = "5">
          </BreakpointContent>
@@ -342,11 +342,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iPointball2D/GameScene.mm"
-            timestampString = "404908213.222984"
+            timestampString = "405470763.730436"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "717"
-            endingLineNumber = "717"
+            startingLineNumber = "720"
+            endingLineNumber = "720"
             landmarkName = "-addPlayers"
             landmarkType = "5">
          </BreakpointContent>
@@ -358,11 +358,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iPointball2D/GameScene.mm"
-            timestampString = "404908213.222984"
+            timestampString = "405470763.730436"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "635"
-            endingLineNumber = "635"
+            startingLineNumber = "638"
+            endingLineNumber = "638"
             landmarkName = "-basicSetup"
             landmarkType = "5">
             <Locations>
@@ -404,11 +404,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iPointball2D/GameScene.mm"
-            timestampString = "404908213.222984"
+            timestampString = "405470763.730436"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "-ccTouchesBegan:withEvent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -420,11 +420,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iPointball2D/GameScene.mm"
-            timestampString = "404908213.222984"
+            timestampString = "405470763.730436"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "697"
-            endingLineNumber = "697"
+            startingLineNumber = "700"
+            endingLineNumber = "700"
             landmarkName = "-addEnemiesWithLevel:"
             landmarkType = "5">
             <Locations>
@@ -466,12 +466,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iPointball2D/AIPlayer.mm"
-            timestampString = "404490095.658345"
+            timestampString = "405470763.730436"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-            landmarkName = "-update:"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "-think"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -498,12 +498,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iPointball2D/AIPlayer.mm"
-            timestampString = "404491958.005355"
+            timestampString = "405470763.730436"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
-            landmarkName = "-update:"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
+            landmarkName = "-think"
             landmarkType = "5">
             <Locations>
                <Location

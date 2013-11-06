@@ -15,6 +15,7 @@
 -(id)initWithLayer:(GameScene*)layer andFile:(NSString*)file forWorld:(b2World*)world andPosition:(CGPoint)position wNumOnOppTeam:(int)number;
 -(void)changeState:(AIState*)state;
 -(NSString*)stateName;
+-(void)think;
 
 @property (nonatomic,assign) int knownNumberOfPlayers;
 @property CGPoint eye;

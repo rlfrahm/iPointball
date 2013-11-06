@@ -17,6 +17,7 @@
 
 @implementation GameScene {
     NSMutableArray* _gameObjects;
+    NSMutableArray* _aiplayers;
     HumanPlayer* _humanPlayer;
     CCSpriteBatchNode* _batchNode;
     AIPlayer* _aiPlayer;
@@ -338,6 +339,8 @@
             _humanPlayer.body->SetLinearVelocity(b2Vec2(_humanPlayer.leftX - _humanPlayer.sprite.position.x,0));
         }
     }
+    
+    for(AIPlayer* p in _aiplayers) [p think];
     
     std::vector<b2Body *>toDestroy;
     std::vector<MyContact>::iterator pos;
@@ -690,7 +693,7 @@
 -(void)addEnemiesWithLevel:(int)selectedLevel
 {
     CGSize winSize = [CCDirector sharedDirector].winSize;
-    
+    _aiplayers = [[NSMutableArray alloc] init];
     for(Level* level in levels.levels)
     {
         if(level.number == selectedLevel)
@@ -701,7 +704,7 @@
                 _aiPlayer = [[AIPlayer alloc] initWithLayer:self andFile:level.enemy forWorld:world andPosition:point wNumOnOppTeam:1];
                 _aiPlayer.tag = 2;
                 _aiPlayer.file = levelData.paint;
-                [_aiPlayer scheduleUpdateWithPriority:1];
+                [_aiplayers addObject:_aiPlayer];
                 [_batchNode addChild:_aiPlayer];
             }
         }
@@ -722,7 +725,7 @@
     
     //_aiPlayer = [[AIPlayer alloc] init]
     
-    _gameObjects = [NSMutableArray arrayWithObjects:[NSMutableArray array],[NSMutableArray array], nil];
+    _gameObjects = [NSMutableArray arrayWithObjects:[NSMutableArray array],[NSMutableArray array],[NSMutableArray array], nil];
 }
 
 -(void)addBunkers
@@ -806,5 +809,10 @@
     }
     return returnval;
 }
+
+-(NSArray*)bunkersOnField {
+    return _gameObjects[3];
+}
+
 
 @end

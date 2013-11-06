@@ -86,8 +86,9 @@
     return _currentState.name;
 }
 
--(void)update:(ccTime)delta
+-(void)think
 {
+    /*
     b2Vec2 p1 = self.body->GetWorldCenter();
     self.rayAngle += 360 / 5.0 / 60.0;
     
@@ -137,9 +138,8 @@
         ccDrawColor4F(0, 255, 0, 255);
     }
     ccDrawLine(self.eye, self.target);
-    
+    //*/
     [_currentState execute:self];
-    [super update:delta];
 }
 
 @end
