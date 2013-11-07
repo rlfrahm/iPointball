@@ -44,6 +44,7 @@
 {
     b2Vec2 p1 = self.body->GetPosition();
     b2Vec2 v = b2Vec2(point.x - p1.x, point.y - p1.y);
+    CCLOG(@"%f, %f",v.x, v.y);
     [self moveWithVector:v];
 }
 

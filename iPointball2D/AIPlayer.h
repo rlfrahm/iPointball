@@ -20,6 +20,7 @@
 @property (nonatomic,assign) int knownNumberOfPlayers;
 @property CGPoint eye;
 @property CGPoint target;
+@property BOOL color;
 @property float rayAngle;
 @property BOOL canSeePlayer;
 @property double lastShot;

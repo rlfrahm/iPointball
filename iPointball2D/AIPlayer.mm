@@ -25,6 +25,7 @@
 @implementation AIPlayer {
     b2World* _world;
     AIState* _currentState;
+    GameScene* _layer;
 }
 
 @synthesize  eye,target,canSeePlayer,lastShot,rayAngle,file;
@@ -38,6 +39,7 @@
         self.knownNumberOfPlayers = number;
         _currentState = [[AIStateStarting alloc] init];
         self.rayAngle = 0;
+        _layer = layer;
         CCLOG(@"%@", [self stateName]);
         //[super onEnter];
     }
@@ -86,11 +88,10 @@
     return _currentState.name;
 }
 
--(void)think
+-(void)rayCast
 {
-    /*
     b2Vec2 p1 = self.body->GetWorldCenter();
-    self.rayAngle += 360 / 5.0 / 60.0;
+    self.rayAngle += 360 / 100.0 / 60.0;
     
     float rayLength = 25;
     b2Vec2 p2 = p1 + rayLength*b2Vec2(sinf(self.rayAngle), cosf(self.rayAngle));
@@ -133,13 +134,16 @@
         Paint* paint = [[Paint alloc] initWithLayer:self.layer andFile:file forWorld:_world andPosition:self.sprite.position];
         [paint fireToLocationWithNormal:intersectionNormal andPower:2];
         
-        ccDrawColor4F(255, 0, 0, 255);
+        self.color = YES; //;
     } else {
-        ccDrawColor4F(0, 255, 0, 255);
+        self.color = NO; //
     }
-    ccDrawLine(self.eye, self.target);
     //*/
-    
+}
+
+-(void)think
+{
+    [self rayCast];
     
     [_currentState execute:self];
 }

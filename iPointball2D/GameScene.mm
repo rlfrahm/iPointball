@@ -35,6 +35,7 @@
     b2Body* _moveToBody;
     CCSprite* joybtn;
     BOOL _isMovingJoybtn;
+    NSMutableArray* _objectsToDraw;
 }
 @synthesize iPad;
 
@@ -539,6 +540,19 @@
         ccDrawCircle(origin, 20, 0, 10, NO);
     }
     firing = NO;
+    int i=0;
+    for(AIPlayer* p in _aiplayers) {
+        glLineWidth(3);
+        /*if(p.color) {
+            ccDrawColor4F(0.0f, 1.0f, 0.0f, 1.0f);
+        } else {
+            ccDrawColor4F(1.0f, 0.0f, 0.0f, 1.0f);
+        }
+         //*/
+        ccDrawColor4F(1.0f, 0.0f, 0.0f, 1.0f);
+        ccDrawLine(p.eye, p.target);
+        i++;
+    }
     
     ccGLEnableVertexAttribs(kCCVertexAttribFlag_Position);
     
@@ -647,7 +661,7 @@
     
     levels = [LevelParser loadLevelsForChapter:selectedChapter];
     
-    
+    _objectsToDraw = [[NSMutableArray alloc] init];
     
     for(Level* level in levels.levels)
     {
@@ -675,7 +689,7 @@
      [self addChild:label z:0];
      }
      }*/
-    _gameObjects = [NSMutableArray arrayWithObjects:[NSMutableArray array],[NSMutableArray array],[NSMutableArray array], nil];
+    _gameObjects = [[NSMutableArray arrayWithObjects:[NSMutableArray array],[NSMutableArray array],[NSMutableArray array],[NSMutableArray array], nil] init];
     [self addBunkers];
     [self addEnemiesWithLevel:selectedLevel];
     
@@ -854,6 +868,11 @@
 
 -(Player*)getHumanPlayer{
     return _humanPlayer;
+}
+
+-(void)addGameObject:(GameObject *)gameObject
+{
+    [_gameObjects[3] addObject:gameObject];
 }
 
 @end

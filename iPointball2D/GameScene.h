@@ -35,8 +35,10 @@
 -(NSArray*)enemiesWithinRange:(float)range ofPlayer:(Player*)player;
 -(NSArray*)bunkersWithinRange:(float)range ofPlayer:(Player*)player;
 -(BOOL)isNextToBunker:(b2Body*)bunker player:(Player*)player;
+-(BOOL)paintIsNextToPlayer:(Player*)player;
 -(b2Body*)getBunker;
 -(Player*)getHumanPlayer;
+-(void)addGameObject:(GameObject*)gameObject;
 -(void)resume;
 
 @end

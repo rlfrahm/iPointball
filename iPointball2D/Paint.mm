@@ -21,6 +21,7 @@
     if((self = [super initWithSprite:file layer:layer andPosition:position]))
     {
         [self createBodyForWorld:world];
+        
     }
     return self;
 }

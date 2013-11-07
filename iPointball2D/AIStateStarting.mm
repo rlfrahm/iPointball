@@ -49,7 +49,9 @@
         
         // Ray cast to look for enemies
         _bunker = [player.layer getBunker];
-    }
+    } 
+    
+    // Is the enemy shooting at me?
 }
 
 @end
