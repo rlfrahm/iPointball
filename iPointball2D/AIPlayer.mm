@@ -141,7 +141,7 @@
     //*/
     
     
-    //[_currentState execute:self];
+    [_currentState execute:self];
 }
 
 @end

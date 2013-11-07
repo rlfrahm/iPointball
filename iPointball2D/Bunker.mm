@@ -21,6 +21,7 @@
     {
         [self createBodyForWorld:world];
         [self createSnapPoints];
+        self.moveBounds = [NSArray arrayWithObjects:[NSNumber numberWithInt:20],[NSNumber numberWithInt:20], nil];
     }
     return self;
 }

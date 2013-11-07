@@ -675,7 +675,8 @@
      [self addChild:label z:0];
      }
      }*/
-    
+    _gameObjects = [NSMutableArray arrayWithObjects:[NSMutableArray array],[NSMutableArray array],[NSMutableArray array], nil];
+    [self addBunkers];
     [self addEnemiesWithLevel:selectedLevel];
     
     // Load joystick but don't display
@@ -704,8 +705,10 @@
                 _aiPlayer = [[AIPlayer alloc] initWithLayer:self andFile:level.enemy forWorld:world andPosition:point wNumOnOppTeam:1];
                 _aiPlayer.tag = 2;
                 _aiPlayer.file = levelData.paint;
-                [_aiplayers addObject:_aiPlayer];
+                _aiPlayer.speed = 1;
+                [_gameObjects[_aiPlayer.team-1] addObject:_aiPlayer];
                 [_batchNode addChild:_aiPlayer];
+                [_aiplayers addObject:_aiPlayer];
             }
         }
     }
@@ -720,12 +723,8 @@
     //[_humanPlayer setPosition:ccp(1.5*PTM_RATIO, winSize.height/2)];
     _humanPlayer.tag = 1;
     _humanPlayer.speed = 1; // NEEDS TO BE SET FROM XML FILE***************!!!!!!!!!!!!!!!!!!
+    [_gameObjects addObject:_humanPlayer];
     [_batchNode addChild:_humanPlayer];
-    
-    
-    //_aiPlayer = [[AIPlayer alloc] init]
-    
-    _gameObjects = [NSMutableArray arrayWithObjects:[NSMutableArray array],[NSMutableArray array],[NSMutableArray array], nil];
 }
 
 -(void)addBunkers
@@ -734,6 +733,7 @@
     CGPoint pt = ccp(winSize.width/2, winSize.height/2);
     _bunker = [[Bunker alloc] initWithLayer:self andFile:levelData.bunker forWorld:world andPosition:pt];
     [_batchNode addChild:_bunker];
+    [_gameObjects[2] addObject:_bunker];
 }
 
 - (id)init {
@@ -742,7 +742,7 @@
         self.iPad = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
         [self basicSetup];
         [self addPlayers];
-        [self addBunkers];
+        
         [self scheduleUpdate];
     }
     return self;
@@ -811,7 +811,11 @@
 }
 
 -(NSArray*)bunkersOnField {
-    return _gameObjects[3];
+    if(_gameObjects) {
+        return NULL;
+    } else {
+        return _gameObjects[2];
+    }
 }
 
 -(NSArray*)bunkersWithinRange:(float)range ofPlayer:(Player *)player
@@ -821,6 +825,7 @@
     for(GameObject* bunker in bunkers)
     {
         float distance = ccpDistance(bunker.position, player.position);
+        CCLOG(@"%f",distance);
         if(distance < range) {
             [returnval addObject:bunker];
         }
@@ -828,13 +833,27 @@
     return returnval;
 }
 
--(BOOL)isNextToBunker:(Bunker *)bunker player:(Player *)player {
-    float distance = ccpDistance(bunker.position, player.position);
-    if(distance < 25) {
+-(BOOL)isNextToBunker:(b2Body *)bunker player:(Player *)player {
+    if(bunker->GetUserData() == NULL) {
+        return NULL;
+    }
+    CCSprite* sprite = (CCSprite*)bunker->GetUserData();
+    //CGPoint p = sprite.position;
+    float distance = ccpDistance(sprite.position, player.sprite.position);
+    CCLOG(@"%f",distance);
+    if(distance < 20) {
         return YES;
     } else {
         return NO;
     }
+}
+
+-(b2Body*)getBunker {
+    return _bunker.body;
+}
+
+-(Player*)getHumanPlayer{
+    return _humanPlayer;
 }
 
 @end

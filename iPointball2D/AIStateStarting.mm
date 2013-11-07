@@ -30,30 +30,25 @@
 
 -(void)execute:(AIPlayer *)player
 {
-    
     // Check if we should change state
-    //NSArray* enemies = [player.layer enemiesWithinRange:200 ofPlayer:player];
+    // NSArray* enemies = [player.layer enemiesWithinRange:200 ofPlayer:player];
     if(player.knownNumberOfPlayers == 0)
     {
-        
         [player changeState:[[AIStateRush alloc]init]];
         return;
     } else if (_bunker != NULL){
-        b2Vec2 p1 = player.body->GetPosition();
-        b2Vec2 p2 = _bunker->GetPosition();
-        b2Vec2 vector = b2Vec2(p2.x - p1.x, p2.y - p1.y);
-        vector.Normalize();
-        vector = b2Vec2(vector.x * player.speed, vector.y * player.speed);
-        player.body->SetLinearVelocity(vector);
+        if([player.layer isNextToBunker:_bunker player:player]) {
+            [player changeState:[[AIStateDefensive alloc]init]];
+        } else {
+            [player moveToVector:_bunker->GetPosition()];
+        }
     } else {
         // Ray cast to look for cover
         
         // Then Move to cover
         
         // Ray cast to look for enemies
-        for(Bunker* b in [player.layer bunkersWithinRange:200 ofPlayer:player]) {
-            _bunker = b.body;
-        }
+        _bunker = [player.layer getBunker];
     }
 }
 

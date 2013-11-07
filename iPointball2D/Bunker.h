@@ -12,6 +12,7 @@
 
 @property (nonatomic, assign) CGPoint point1;
 @property (nonatomic, assign) CGPoint point2;
+@property (nonatomic, assign) NSArray* moveBounds;
 
 -(id)initWithLayer:(GameScene*)layer andFile:(NSString*)file forWorld:(b2World*)world andPosition:(CGPoint)position;
 

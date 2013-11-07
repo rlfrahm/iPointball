@@ -18,5 +18,7 @@
 @property (nonatomic, assign) BOOL snapped;
 
 -(void)setMovementWindow:(CGPoint)point;
+-(void)moveToPoint:(CGPoint)point;
+-(void)moveToVector:(b2Vec2)vector;
 
 @end
