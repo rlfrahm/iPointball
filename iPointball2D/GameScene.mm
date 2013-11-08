@@ -839,7 +839,7 @@
     for(GameObject* bunker in bunkers)
     {
         float distance = ccpDistance(bunker.position, player.position);
-        CCLOG(@"%f",distance);
+        //CCLOG(@"%f",distance);
         if(distance < range) {
             [returnval addObject:bunker];
         }
@@ -854,7 +854,7 @@
     CCSprite* sprite = (CCSprite*)bunker->GetUserData();
     //CGPoint p = sprite.position;
     float distance = ccpDistance(sprite.position, player.sprite.position);
-    CCLOG(@"%f",distance);
+    //CCLOG(@"%f",distance);
     if(distance < 20) {
         return YES;
     } else {
@@ -873,6 +873,11 @@
 -(void)addGameObject:(GameObject *)gameObject
 {
     [_gameObjects[3] addObject:gameObject];
+}
+
+-(void)addBatchNode:(Paint *)paint
+{
+    [_batchNode addChild:paint];
 }
 
 @end

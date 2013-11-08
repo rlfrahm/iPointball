@@ -20,5 +20,6 @@
 -(void)setMovementWindow:(CGPoint)point;
 -(void)moveToPoint:(CGPoint)point;
 -(void)moveToVector:(b2Vec2)vector;
+-(void)stopMovement;
 
 @end

@@ -38,6 +38,7 @@
         return;
     } else if (_bunker != NULL){
         if([player.layer isNextToBunker:_bunker player:player]) {
+            [player stopMovement];
             [player changeState:[[AIStateDefensive alloc]init]];
         } else {
             [player moveToVector:_bunker->GetPosition()];

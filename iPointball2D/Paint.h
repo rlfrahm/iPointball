@@ -10,8 +10,10 @@
 
 @interface Paint : GameObject
 
+@property (nonatomic, assign) int power;
+
 -(id)initWithLayer:(GameScene*)layer andFile:(NSString*)file forWorld:(b2World*)world andPosition:(CGPoint)position;
 -(void)fireToLocation:(CGPoint)point withAngle:(CGFloat)shootAngle;
--(void)fireToLocationWithNormal:(b2Vec2)normal andPower:(float)power;
+-(void)fireToLocationWithNormal:(b2Vec2)normal;
 
 @end

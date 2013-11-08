@@ -11,6 +11,7 @@
 #import "Box2D.h"
 #import "AIState.h"
 #import "AIStateStarting.h"
+#import "AIStateDefensive.h"
 #import "Paint.h"
 
 #define PTM_RATIO 32
@@ -26,6 +27,8 @@
     b2World* _world;
     AIState* _currentState;
     GameScene* _layer;
+    BOOL _cw;
+    int _count;
 }
 
 @synthesize  eye,target,canSeePlayer,lastShot,rayAngle,file;
@@ -37,10 +40,13 @@
         self.team = 2;
         [self createBodyForWorld:world];
         self.knownNumberOfPlayers = number;
-        _currentState = [[AIStateStarting alloc] init];
-        self.rayAngle = 0;
+        //_currentState = [[AIStateStarting alloc] init];
+        _currentState = [[AIStateDefensive alloc] init];
+        self.rayAngle = -2;
         _layer = layer;
         CCLOG(@"%@", [self stateName]);
+        _cw = true;
+        _count = 0;
         //[super onEnter];
     }
     return self;
@@ -70,7 +76,7 @@
     enemyFixtureDef.friction = 0.4f;
     enemyFixtureDef.restitution = 0.1f;
     enemyFixtureDef.filter.categoryBits = 0x0004;
-    enemyFixtureDef.filter.maskBits = 0x0008 | 0x0001 | 0x0016 | 0x0002;
+    enemyFixtureDef.filter.maskBits = 0x0001 | 0x0016 | 0x0002;
     
     self.fixture = self.body->CreateFixture(&enemyFixtureDef);
 }
@@ -91,7 +97,22 @@
 -(void)rayCast
 {
     b2Vec2 p1 = self.body->GetWorldCenter();
-    self.rayAngle += 360 / 100.0 / 60.0;
+    
+    if(_cw) {
+        self.rayAngle += 360 / 100.0 / 60.0;
+    } else {
+        self.rayAngle -= 360 / 100.0 / 60.0;
+    }
+    
+    if(self.rayAngle > -1) {
+        _cw = false;
+    } else if(self.rayAngle < -2) {
+        _cw = true;
+    }
+    //if(self.rayAngle < 2.3832) {self.rayAngle = 4.7124;}
+    //self.rayAngle = -2;
+    
+    //CCLOG(@"%f",self.rayAngle);
     
     float rayLength = 25;
     b2Vec2 p2 = p1 + rayLength*b2Vec2(sinf(self.rayAngle), cosf(self.rayAngle));
@@ -129,11 +150,17 @@
     
     b2Vec2 intersectionPoint = p1 + closestFraction * (p2 - p1);
     
+    intersectionNormal = b2Vec2(intersectionNormal.x * -1, intersectionNormal.y * -1);
+    
     if(self.canSeePlayer == YES)
     {
-        Paint* paint = [[Paint alloc] initWithLayer:self.layer andFile:file forWorld:_world andPosition:self.sprite.position];
-        [paint fireToLocationWithNormal:intersectionNormal andPower:2];
+        if(_count == 10) {
+            Paint* paint = [[Paint alloc] initWithLayer:self.layer andFile:file forWorld:_world andPosition:self.sprite.position];
+            [paint fireToLocationWithNormal:intersectionNormal];
+            _count = 0;
+        }
         
+        _count++;
         self.color = YES; //;
     } else {
         self.color = NO; //

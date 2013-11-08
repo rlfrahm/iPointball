@@ -55,4 +55,9 @@
     [self moveWithVector:v];
 }
 
+-(void)stopMovement
+{
+    self.body->SetLinearVelocity(b2Vec2(0, 0));
+}
+
 @end

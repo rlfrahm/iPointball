@@ -21,7 +21,7 @@
     if((self = [super initWithSprite:file layer:layer andPosition:position]))
     {
         [self createBodyForWorld:world];
-        
+        self.power = 2;
     }
     return self;
 }
@@ -51,7 +51,7 @@
     paintFixtureDef.friction = 0.5f;
     paintFixtureDef.restitution = .01f;
     paintFixtureDef.filter.categoryBits = 0x0008;
-    paintFixtureDef.filter.maskBits = 0x0004 | 0x0001 | 0x0016;
+    paintFixtureDef.filter.maskBits = 0x0001 | 0x0016;
     
     //paintShapeDef.friction = 0.0f;
     //paintShapeDef.restitution = 1.0f;
@@ -61,18 +61,17 @@
 
 -(void)fireToLocation:(CGPoint)point withAngle:(CGFloat)shootAngle
 {
-    int power = 2;
     float x1 = cos(shootAngle);
     float y1 = sin(shootAngle);
     
-    b2Vec2 force = b2Vec2(x1*power,y1*power);
+    b2Vec2 force = b2Vec2(x1*self.power,y1*self.power);
     //paintBody->ApplyForceToCenter(force);
     self.body->ApplyLinearImpulse(force, self.body->GetWorldCenter());
 }
 
--(void)fireToLocationWithNormal:(b2Vec2)normal andPower:(float)power
+-(void)fireToLocationWithNormal:(b2Vec2)normal
 {
-    b2Vec2 force = b2Cross(normal, power);
+    b2Vec2 force = b2Vec2(normal.x * self.power, normal.y * self.power);
     self.body->ApplyLinearImpulse(force, self.body->GetWorldCenter());
 }
 

@@ -39,6 +39,7 @@
 -(b2Body*)getBunker;
 -(Player*)getHumanPlayer;
 -(void)addGameObject:(GameObject*)gameObject;
+-(void)addBatchNode:(Paint*)paint;
 -(void)resume;
 
 @end
