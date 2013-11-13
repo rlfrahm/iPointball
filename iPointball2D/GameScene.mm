@@ -551,6 +551,9 @@
          //*/
         ccDrawColor4F(1.0f, 0.0f, 0.0f, 1.0f);
         ccDrawLine(p.eye, p.target);
+        
+        ccDrawPoint(p.target);
+        ccPointSize(1.0f);
         i++;
     }
     

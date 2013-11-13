@@ -42,6 +42,7 @@
         self.knownNumberOfPlayers = number;
         //_currentState = [[AIStateStarting alloc] init];
         _currentState = [[AIStateDefensive alloc] init];
+        self.lineOfSight = -1.57;
         self.rayAngle = -2;
         _layer = layer;
         CCLOG(@"%@", [self stateName]);
@@ -103,22 +104,19 @@
     } else {
         self.rayAngle -= 360 / 100.0 / 60.0;
     }
+     //*/
     
-    if(self.rayAngle > -1) {
+    if(self.rayAngle > self.lineOfSight + 0.7854) {
         _cw = false;
-    } else if(self.rayAngle < -2) {
+    } else if(self.rayAngle < self.lineOfSight - 0.7854) {
         _cw = true;
     }
-    //if(self.rayAngle < 2.3832) {self.rayAngle = 4.7124;}
-    //self.rayAngle = -2;
-    
-    //CCLOG(@"%f",self.rayAngle);
     
     float rayLength = 25;
     b2Vec2 p2 = p1 + rayLength*b2Vec2(sinf(self.rayAngle), cosf(self.rayAngle));
     
     self.eye = ccp(p1.x*PTM_RATIO, p1.y*PTM_RATIO);
-    self.target = ccp(p2.x*PTM_RATIO, p2.y*PTM_RATIO);
+    //self.target = ccp(p2.x*PTM_RATIO, p2.y*PTM_RATIO);
     
     b2RayCastInput input;
     input.p1 = p1;
@@ -132,16 +130,16 @@
         for(b2Fixture* f = b->GetFixtureList(); f; f->GetNext())
         {
             b2RayCastOutput output;
-            if(! f->RayCast(&output, input, 0))
+            if(!f->RayCast(&output, input, 0))
             {
-                self.canSeePlayer = NO;
+                //self.canSeePlayer = NO;
                 //continue;
             }
             if(output.fraction < closestFraction)
             {
                 closestFraction = output.fraction;
                 intersectionNormal = output.normal;
-                self.canSeePlayer = YES;
+                //self.canSeePlayer = YES;
                 break;
             }
         }
@@ -149,7 +147,7 @@
     }
     
     b2Vec2 intersectionPoint = p1 + closestFraction * (p2 - p1);
-    
+    self.target = ccp(intersectionPoint.x, intersectionPoint.y);
     intersectionNormal = b2Vec2(intersectionNormal.x * -1, intersectionNormal.y * -1);
     
     if(self.canSeePlayer == YES)

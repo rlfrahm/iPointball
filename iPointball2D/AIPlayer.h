@@ -25,7 +25,7 @@
 @property BOOL canSeePlayer;
 @property double lastShot;
 @property (nonatomic, copy) NSString* file;
-@property b2Vec2 v;
+@property float lineOfSight;
 
 //State stuff
 

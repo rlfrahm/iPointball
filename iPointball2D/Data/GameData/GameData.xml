@@ -7,4 +7,6 @@
     <Player>Player.png</Player>
     <Marker>Default.png</Marker>
     <FPS>30</FPS>
+    <Cash>1000</Cash>
+    <Paint>1000</Paint>
 </GameData>
