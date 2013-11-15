@@ -25,7 +25,9 @@
 @property BOOL canSeePlayer;
 @property double lastShot;
 @property (nonatomic, copy) NSString* file;
-@property float lineOfSight;
+@property float eyesight;
+@property (nonatomic, assign) NSMutableArray* viewport;
+@property (nonatomic, assign) NSMutableArray* coverOptions;
 
 //State stuff
 

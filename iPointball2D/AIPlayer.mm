@@ -15,6 +15,7 @@
 #import "Paint.h"
 
 #define PTM_RATIO 32
+#define RAYS 10
 
 /*typedef enum {
     StateStarting = 0,
@@ -29,6 +30,10 @@
     GameScene* _layer;
     BOOL _cw;
     int _count;
+    float _bounda;
+    float _boundb;
+    float _delta;
+    float _rays[RAYS];
 }
 
 @synthesize  eye,target,canSeePlayer,lastShot,rayAngle,file;
@@ -42,15 +47,27 @@
         self.knownNumberOfPlayers = number;
         //_currentState = [[AIStateStarting alloc] init];
         _currentState = [[AIStateDefensive alloc] init];
-        self.lineOfSight = -1.57;
-        self.rayAngle = -2;
+        self.eyesight = -1.57;
+        self.rayAngle = -1.57;
         _layer = layer;
         CCLOG(@"%@", [self stateName]);
         _cw = true;
         _count = 0;
+        _delta = 1.57 / RAYS;
+        self.viewport = [[NSMutableArray alloc]init];
+        self.coverOptions = [[NSMutableArray alloc]init];
+        [self initRays];
         //[super onEnter];
     }
     return self;
+}
+
+-(void)initRays
+{
+    _rays[0] = _boundb;
+    for(int i=1;i<RAYS;i++) {
+        _rays[i] = _rays[i-1] + _delta;
+    }
 }
 
 -(void)createBodyForWorld:(b2World*)world
@@ -98,25 +115,71 @@
 -(void)rayCast
 {
     b2Vec2 p1 = self.body->GetWorldCenter();
+    _bounda = self.eyesight + 0.7854;
+    _boundb = self.eyesight - 0.7854;
     
     if(_cw) {
-        self.rayAngle += 360 / 100.0 / 60.0;
+        self.eyesight += 360 / 100.0 / 60.0;
     } else {
-        self.rayAngle -= 360 / 100.0 / 60.0;
+        self.eyesight -= 360 / 100.0 / 60.0;
     }
      //*/
     
-    if(self.rayAngle > self.lineOfSight + 0.7854) {
+    if(self.eyesight >  self.eyesight + 0.7854) {
         _cw = false;
-    } else if(self.rayAngle < self.lineOfSight - 0.7854) {
+    } else if(self.eyesight < self.eyesight - 0.7854) {
         _cw = true;
     }
     
-    float rayLength = 25;
-    b2Vec2 p2 = p1 + rayLength*b2Vec2(sinf(self.rayAngle), cosf(self.rayAngle));
     
-    self.eye = ccp(p1.x*PTM_RATIO, p1.y*PTM_RATIO);
-    //self.target = ccp(p2.x*PTM_RATIO, p2.y*PTM_RATIO);
+    /*
+    for(int i=0;i<RAYS;i++) {
+        float rayLength = 25;
+        b2Vec2 p2 = p1 + rayLength*b2Vec2(sinf(self.rayAngle), cosf(self.rayAngle));
+        
+        b2RayCastInput input;
+        input.p1 = p1;
+        input.p2 = p2;
+        input.maxFraction = 1;
+        
+        float closestFraction = 1;
+        b2Vec2 intersectionNormal(0,0);
+        for(b2Body* b = _world->GetBodyList();b; b = b->GetNext())
+        {
+            for(b2Fixture* f = b->GetFixtureList(); f; f->GetNext())
+            {
+                b2RayCastOutput output;
+                if(!f->RayCast(&output, input, 0))
+                {
+                    self.canSeePlayer = NO;
+                    
+                    //continue;
+                }
+                if(fabsf(output.fraction) < closestFraction)
+                {
+                    CCLOG(@"Output Fraction: %f", output.fraction);
+                    CCLOG(@"Closest Fraction: %f", closestFraction);
+                    closestFraction = fabsf(output.fraction);
+                    intersectionNormal = output.normal;
+                    //self.canSeePlayer = YES;
+                    break;
+                }
+                break;
+            }
+        }
+        
+        
+        b2Vec2 intersectionPoint = p1 + closestFraction * (p2 - p1);
+        
+        float arr[] = {intersectionPoint.x*PTM_RATIO,intersectionPoint.y*PTM_RATIO};
+        [self.viewport addObject:[NSNumber numberWithFloat:arr[2]]];
+        //self.target = ccp(intersectionPoint.x*PTM_RATIO, intersectionPoint.y*PTM_RATIO);
+        intersectionNormal = b2Vec2(intersectionNormal.x * -1, intersectionNormal.y * -1);
+    }
+     //*/
+    
+    float rayLength = 10;
+    b2Vec2 p2 = p1 + rayLength*b2Vec2(sinf(self.rayAngle), cosf(self.rayAngle));
     
     b2RayCastInput input;
     input.p1 = p1;
@@ -127,28 +190,50 @@
     b2Vec2 intersectionNormal(0,0);
     for(b2Body* b = _world->GetBodyList();b; b = b->GetNext())
     {
+        
         for(b2Fixture* f = b->GetFixtureList(); f; f->GetNext())
         {
             b2RayCastOutput output;
             if(!f->RayCast(&output, input, 0))
             {
                 //self.canSeePlayer = NO;
+                
                 //continue;
             }
-            if(output.fraction < closestFraction)
+            if(fabsf(output.fraction) < closestFraction && fabsf(output.fraction) > 0.001)
             {
-                closestFraction = output.fraction;
+                CCLOG(@"%f",output.fraction);
+                //CCLOG(@"Output Fraction: %f", output.fraction);
+                //CCLOG(@"Closest Fraction: %f", closestFraction);
+                closestFraction = fabsf(output.fraction);
                 intersectionNormal = output.normal;
-                //self.canSeePlayer = YES;
+                if(b->GetUserData() != NULL) {
+                    CCSprite* s = (CCSprite*)b->GetUserData();
+                    if(s.tag == 1) {
+                        self.canSeePlayer = YES;
+                    } else if(s.tag == 4) {
+                        b2Vec2 ip(p1 + closestFraction * (p2 - p1));
+                        CGPoint pt = ccp(ip.x*PTM_RATIO, ip.y*PTM_RATIO);
+                        // Add ip to list of possible covers
+                        [self.coverOptions addObject:[NSValue valueWithCGPoint:pt]];
+                        self.canSeePlayer = NO;
+                    }
+                }
                 break;
             }
+            break;
         }
-        break;
     }
+    //NSValue* v = [self.coverOptions objectAtIndex:0];
+    //CGPoint pt = [v CGPointValue];
+    //CCLOG(@"%f, %f", pt.x, pt.y);
     
     b2Vec2 intersectionPoint = p1 + closestFraction * (p2 - p1);
-    self.target = ccp(intersectionPoint.x, intersectionPoint.y);
+    
+    self.target = ccp(intersectionPoint.x*PTM_RATIO, intersectionPoint.y*PTM_RATIO);
     intersectionNormal = b2Vec2(intersectionNormal.x * -1, intersectionNormal.y * -1);
+    self.eye = ccp(p1.x*PTM_RATIO, p1.y*PTM_RATIO);
+    //self.target = ccp(p2.x*PTM_RATIO, p2.y*PTM_RATIO);
     
     if(self.canSeePlayer == YES)
     {
@@ -159,12 +244,21 @@
         }
         
         _count++;
-        self.color = YES; //;
     } else {
-        self.color = NO; //
+        self.canSeePlayer = NO;
     }
     //*/
 }
+
+class MyQueryCallback : public b2QueryCallback {
+public:
+    std::vector<b2Body *>foundBodies;
+    
+    bool ReportFixture(b2Fixture* fixture){
+        foundBodies.push_back(fixture->GetBody());
+        return true;
+    }
+};
 
 -(void)think
 {

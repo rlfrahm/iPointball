@@ -542,18 +542,26 @@
     firing = NO;
     int i=0;
     for(AIPlayer* p in _aiplayers) {
-        glLineWidth(3);
-        /*if(p.color) {
+        glLineWidth(2);
+        ccPointSize(1.0f);
+        if(p.canSeePlayer) {
             ccDrawColor4F(0.0f, 1.0f, 0.0f, 1.0f);
         } else {
             ccDrawColor4F(1.0f, 0.0f, 0.0f, 1.0f);
         }
          //*/
-        ccDrawColor4F(1.0f, 0.0f, 0.0f, 1.0f);
+        //CCLOG(@"%f, %f : %f, %f", p.eye.x,p.eye.y,p.target.x,p.target.y);
+        //ccDrawColor4F(1.0f, 0.0f, 0.0f, 1.0f);
+        /*for(int j=0;i<p.viewport.count;i++) {
+            float* t = (float *)malloc(sizeof(float) * 2);
+            t = (float*)p.viewport[j];
+            CGPoint pt = ccp(t[0], t[1]);
+            ccDrawLine(p.eye, pt);
+            ccDrawPoint(pt);
+        }
+        //*/
         ccDrawLine(p.eye, p.target);
-        
         ccDrawPoint(p.target);
-        ccPointSize(1.0f);
         i++;
     }
     
