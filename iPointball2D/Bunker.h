@@ -15,6 +15,7 @@
 @property (nonatomic, assign) NSArray* moveBounds;
 
 -(id)initWithLayer:(GameScene*)layer andFile:(NSString*)file forWorld:(b2World*)world andPosition:(CGPoint)position;
+-(b2Body*)getBody;
 
 
 

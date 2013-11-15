@@ -62,8 +62,8 @@
     b2FixtureDef playerTouchFixtureDef;
     playerTouchFixtureDef.shape = &playerTouchShape;
     playerTouchFixtureDef.density = 1.0f;
-    playerTouchFixtureDef.filter.categoryBits = 0x0002;
-    playerTouchFixtureDef.filter.maskBits = 0x0008 | 0x0001;
+    //playerTouchFixtureDef.filter.categoryBits = 0x0002;
+    //playerTouchFixtureDef.filter.maskBits = 0x0008 | 0x0001;
     
     self.fixture = self.body->CreateFixture(&playerTouchFixtureDef);
     self.body->CreateFixture(&playerFixtureDef);

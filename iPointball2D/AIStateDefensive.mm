@@ -41,21 +41,7 @@
         return;
     }
     
-    // Else we will keep defending
-    // [player.layer setPlayer:player attacking:NO];
     
-    /*int r = arc4random() % 2;
-    if(r == 0) {
-        b2Body* b = [player.layer getBunker]; // Needs changed once more bunkers are added
-        float d = (b->GetPosition().y + 20) - player.sprite.position.y;
-        
-        [player moveToPoint:ccp(player.sprite.position.x, d)];
-    } else {
-        b2Body* b = [player.layer getBunker]; // Needs changed once more bunkers are added
-        float d = (b->GetPosition().y - 20) - player.sprite.position.y;
-        [player moveToPoint:ccp(player.sprite.position.x, d)];
-    } // Is there paint close to me?
-     //*/
 }
 
 @end

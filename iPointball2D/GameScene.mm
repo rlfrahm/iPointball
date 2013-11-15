@@ -543,24 +543,20 @@
     int i=0;
     for(AIPlayer* p in _aiplayers) {
         glLineWidth(2);
-        ccPointSize(1.0f);
+        ccPointSize(5.0f);
         if(p.canSeePlayer) {
             ccDrawColor4F(0.0f, 1.0f, 0.0f, 1.0f);
         } else {
             ccDrawColor4F(1.0f, 0.0f, 0.0f, 1.0f);
         }
-         //*/
-        //CCLOG(@"%f, %f : %f, %f", p.eye.x,p.eye.y,p.target.x,p.target.y);
-        //ccDrawColor4F(1.0f, 0.0f, 0.0f, 1.0f);
-        /*for(int j=0;i<p.viewport.count;i++) {
-            float* t = (float *)malloc(sizeof(float) * 2);
-            t = (float*)p.viewport[j];
-            CGPoint pt = ccp(t[0], t[1]);
-            ccDrawLine(p.eye, pt);
-            ccDrawPoint(pt);
-        }
-        //*/
         ccDrawLine(p.eye, p.target);
+        
+        for(int i=0;i<p.targetOptions.count;i++) {
+            NSValue* v = [p.targetOptions objectAtIndex:i];
+            CGPoint pt = [v CGPointValue];
+            ccDrawLine(p.eye, pt);
+            [p.targetOptions removeObjectAtIndex:i];
+        }//*/
         ccDrawPoint(p.target);
         i++;
     }
@@ -858,11 +854,12 @@
     return returnval;
 }
 
--(BOOL)isNextToBunker:(b2Body *)bunker player:(Player *)player {
-    if(bunker->GetUserData() == NULL) {
+-(BOOL)isNextToBunker:(Bunker*)bunker player:(Player *)player {
+    b2Body* b = [bunker getBody];
+    if(b->GetUserData() == NULL) {
         return NULL;
     }
-    CCSprite* sprite = (CCSprite*)bunker->GetUserData();
+    CCSprite* sprite = (CCSprite*)bunker.body->GetUserData();
     //CGPoint p = sprite.position;
     float distance = ccpDistance(sprite.position, player.sprite.position);
     //CCLOG(@"%f",distance);

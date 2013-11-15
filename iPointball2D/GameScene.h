@@ -34,7 +34,7 @@
 -(NSArray*)enemiesOfTeam:(int)team;
 -(NSArray*)enemiesWithinRange:(float)range ofPlayer:(Player*)player;
 -(NSArray*)bunkersWithinRange:(float)range ofPlayer:(Player*)player;
--(BOOL)isNextToBunker:(b2Body*)bunker player:(Player*)player;
+-(BOOL)isNextToBunker:(Bunker*)bunker player:(Player*)player;
 -(BOOL)paintIsNextToPlayer:(Player*)player;
 -(b2Body*)getBunker;
 -(Player*)getHumanPlayer;

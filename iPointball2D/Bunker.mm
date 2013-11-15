@@ -67,4 +67,9 @@
     
 }
 
+-(b2Body*)getBody
+{
+    return self.body;
+}
+
 @end

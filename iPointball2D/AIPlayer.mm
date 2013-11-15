@@ -45,8 +45,7 @@
         self.team = 2;
         [self createBodyForWorld:world];
         self.knownNumberOfPlayers = number;
-        //_currentState = [[AIStateStarting alloc] init];
-        _currentState = [[AIStateDefensive alloc] init];
+        _currentState = [[AIStateStarting alloc] init];
         self.eyesight = -1.57;
         self.rayAngle = -1.57;
         _layer = layer;
@@ -54,8 +53,8 @@
         _cw = true;
         _count = 0;
         _delta = 1.57 / RAYS;
-        self.viewport = [[NSMutableArray alloc]init];
         self.coverOptions = [[NSMutableArray alloc]init];
+        self.targetOptions = [[NSMutableArray alloc]init];
         [self initRays];
         //[super onEnter];
     }
@@ -118,68 +117,12 @@
     _bounda = self.eyesight + 0.7854;
     _boundb = self.eyesight - 0.7854;
     
-    if(_cw) {
-        self.eyesight += 360 / 100.0 / 60.0;
-    } else {
-        self.eyesight -= 360 / 100.0 / 60.0;
-    }
-     //*/
-    
-    if(self.eyesight >  self.eyesight + 0.7854) {
-        _cw = false;
-    } else if(self.eyesight < self.eyesight - 0.7854) {
-        _cw = true;
-    }
-    
-    
-    /*
-    for(int i=0;i<RAYS;i++) {
-        float rayLength = 25;
-        b2Vec2 p2 = p1 + rayLength*b2Vec2(sinf(self.rayAngle), cosf(self.rayAngle));
-        
-        b2RayCastInput input;
-        input.p1 = p1;
-        input.p2 = p2;
-        input.maxFraction = 1;
-        
-        float closestFraction = 1;
-        b2Vec2 intersectionNormal(0,0);
-        for(b2Body* b = _world->GetBodyList();b; b = b->GetNext())
-        {
-            for(b2Fixture* f = b->GetFixtureList(); f; f->GetNext())
-            {
-                b2RayCastOutput output;
-                if(!f->RayCast(&output, input, 0))
-                {
-                    self.canSeePlayer = NO;
-                    
-                    //continue;
-                }
-                if(fabsf(output.fraction) < closestFraction)
-                {
-                    CCLOG(@"Output Fraction: %f", output.fraction);
-                    CCLOG(@"Closest Fraction: %f", closestFraction);
-                    closestFraction = fabsf(output.fraction);
-                    intersectionNormal = output.normal;
-                    //self.canSeePlayer = YES;
-                    break;
-                }
-                break;
-            }
-        }
-        
-        
-        b2Vec2 intersectionPoint = p1 + closestFraction * (p2 - p1);
-        
-        float arr[] = {intersectionPoint.x*PTM_RATIO,intersectionPoint.y*PTM_RATIO};
-        [self.viewport addObject:[NSNumber numberWithFloat:arr[2]]];
-        //self.target = ccp(intersectionPoint.x*PTM_RATIO, intersectionPoint.y*PTM_RATIO);
-        intersectionNormal = b2Vec2(intersectionNormal.x * -1, intersectionNormal.y * -1);
-    }
+    [self scanTheField];
      //*/
     
     float rayLength = 10;
-    b2Vec2 p2 = p1 + rayLength*b2Vec2(sinf(self.rayAngle), cosf(self.rayAngle));
+    
+    b2Vec2 p2 = p1 + rayLength*b2Vec2(sinf(self.eyesight), cosf(self.eyesight));
     
     b2RayCastInput input;
     input.p1 = p1;
@@ -210,12 +153,26 @@
                 if(b->GetUserData() != NULL) {
                     CCSprite* s = (CCSprite*)b->GetUserData();
                     if(s.tag == 1) {
+                        b2Vec2 ip(p1 + closestFraction * (p2 - p1));
+                        CGPoint pt = ccp(ip.x*PTM_RATIO, ip.y*PTM_RATIO);
+                        [self.targetOptions addObject:[NSValue valueWithCGPoint:pt]];
+                        
+                        // Make additional state decisions
+                        
                         self.canSeePlayer = YES;
                     } else if(s.tag == 4) {
                         b2Vec2 ip(p1 + closestFraction * (p2 - p1));
-                        CGPoint pt = ccp(ip.x*PTM_RATIO, ip.y*PTM_RATIO);
+                        CGPoint pt = ccp(ip.x, ip.y);
                         // Add ip to list of possible covers
+                        //[self.coverOptions addObject:s];
                         [self.coverOptions addObject:[NSValue valueWithCGPoint:pt]];
+                        
+                        // Make additional state decisions
+                        
+                        self.canSeePlayer = NO;
+                    } else {
+                        // Make additional state decisions
+                        
                         self.canSeePlayer = NO;
                     }
                 }
@@ -232,10 +189,11 @@
     
     self.target = ccp(intersectionPoint.x*PTM_RATIO, intersectionPoint.y*PTM_RATIO);
     intersectionNormal = b2Vec2(intersectionNormal.x * -1, intersectionNormal.y * -1);
+    //*/
     self.eye = ccp(p1.x*PTM_RATIO, p1.y*PTM_RATIO);
     //self.target = ccp(p2.x*PTM_RATIO, p2.y*PTM_RATIO);
     
-    if(self.canSeePlayer == YES)
+    /*if(self.canSeePlayer == YES)
     {
         if(_count == 10) {
             Paint* paint = [[Paint alloc] initWithLayer:self.layer andFile:file forWorld:_world andPosition:self.sprite.position];
@@ -248,6 +206,34 @@
         self.canSeePlayer = NO;
     }
     //*/
+}
+
+-(void)scanTheField
+{
+    if(_cw) {
+        self.eyesight += 360 / 100.0 / 60.0;
+    } else {
+        self.eyesight -= 360 / 100.0 / 60.0;
+    }
+    
+    if(!self.canSeePlayer) {
+        if(self.eyesight >  self.rayAngle + 0.7854) {
+            self.eyesight = self.rayAngle + 0.7854;
+            _cw = false;
+        } else if(self.eyesight < self.rayAngle - 0.7854) {
+            self.eyesight = self.rayAngle - 0.7854;
+            _cw = true;
+        }
+    } else {
+        //self.eyesight = (self.target.y - self.eye.y) / (self.target.x - self.eye.x);
+    }
+}
+
+-(void)fireToPoint:(CGPoint)point
+{
+    Paint* paint = [[Paint alloc] initWithLayer:self.layer andFile:file forWorld:_world andPosition:self.sprite.position];
+    float a = (point.y - self.eye.y) / (point.x - self.eye.x);
+    [paint fireToLocation:point withAngle:a];
 }
 
 class MyQueryCallback : public b2QueryCallback {
@@ -263,7 +249,6 @@ public:
 -(void)think
 {
     [self rayCast];
-    
     [_currentState execute:self];
 }
 

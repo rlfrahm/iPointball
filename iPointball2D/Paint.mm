@@ -59,6 +59,13 @@
     self.body->CreateFixture(&paintFixtureDef);
 }
 
+/**
+ * Fire the paint to a location
+ *
+ * @param point The point that you want the point to move through
+ * @param shootAngle The angle that you want the paint to use in 
+ * order to move through that point
+ */
 -(void)fireToLocation:(CGPoint)point withAngle:(CGFloat)shootAngle
 {
     float x1 = cos(shootAngle);
@@ -69,6 +76,11 @@
     self.body->ApplyLinearImpulse(force, self.body->GetWorldCenter());
 }
 
+/**
+ * Fire the paint to a location using a normalized vector
+ *
+ * @param normal The normalized vector (vector.Normalize())
+ */
 -(void)fireToLocationWithNormal:(b2Vec2)normal
 {
     b2Vec2 force = b2Vec2(normal.x * self.power, normal.y * self.power);

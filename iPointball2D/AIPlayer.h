@@ -14,6 +14,7 @@
 
 -(id)initWithLayer:(GameScene*)layer andFile:(NSString*)file forWorld:(b2World*)world andPosition:(CGPoint)position wNumOnOppTeam:(int)number;
 -(void)changeState:(AIState*)state;
+-(void)fireToPoint:(CGPoint)point;
 -(NSString*)stateName;
 -(void)think;
 
@@ -26,8 +27,8 @@
 @property double lastShot;
 @property (nonatomic, copy) NSString* file;
 @property float eyesight;
-@property (nonatomic, assign) NSMutableArray* viewport;
 @property (nonatomic, assign) NSMutableArray* coverOptions;
+@property (nonatomic, assign) NSMutableArray* targetOptions;
 
 //State stuff
 

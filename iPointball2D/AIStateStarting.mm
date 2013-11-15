@@ -5,6 +5,12 @@
 //  Created by Ryan Frahm on 10/11/13.
 //  Copyright (c) 2013 Ryan Frahm. All rights reserved.
 //
+//  The starting state is reserved for the initial break
+//  at the beginning of the game.
+//
+//  This state's main purpose is to get to cover, however
+//  this state will also shoot if a target is visible
+//
 
 #import "AIStateStarting.h"
 #import "AIPlayer.h"
@@ -15,7 +21,8 @@
 #import "Bunker.h"
 
 @implementation AIStateStarting {
-    b2Body* _bunker;
+    Bunker* _bunker;
+    CGPoint _bunkerPt;
 }
 
 -(NSString*)name
@@ -34,22 +41,32 @@
     // NSArray* enemies = [player.layer enemiesWithinRange:200 ofPlayer:player];
     if(player.knownNumberOfPlayers == 0)
     {
+        // The other team's players have been eliminated
         [player changeState:[[AIStateRush alloc]init]];
         return;
-    } else if (_bunker != NULL){
-        if([player.layer isNextToBunker:_bunker player:player]) {
+    } else if (_bunkerPt.x > 0 && _bunkerPt.y > 0){
+        float d = ccpDistance(_bunkerPt, player.sprite.position);
+        if(ccpDistance(_bunkerPt, player.sprite.position) < 300) {
+            // Stop and change to defensive mentality
             [player stopMovement];
             [player changeState:[[AIStateDefensive alloc]init]];
         } else {
-            [player moveToVector:_bunker->GetPosition()];
+            // Keep moving for cover
+            //[player moveToVector:_bunker.body->GetPosition()];
+            [player moveToPoint:_bunkerPt];
+            if(player.targetOptions.count > 0) {
+                // Shoot if a target is visible.
+                int r = arc4random_uniform(player.targetOptions.count);
+                NSValue* v = [player.targetOptions objectAtIndex:r];
+                CGPoint pt = [v CGPointValue];
+                [player fireToPoint:pt];
+            }
         }
     } else {
-        // Ray cast to look for cover
-        
-        // Then Move to cover
-        
-        // Ray cast to look for enemies
-        _bunker = [player.layer getBunker];
+        // Decide on some cover
+        int r = arc4random_uniform(player.coverOptions.count);
+        NSValue* v = [player.coverOptions objectAtIndex:r];
+        _bunkerPt = [v CGPointValue];
     } 
     
     // Is the enemy shooting at me?
