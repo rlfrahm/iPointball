@@ -45,7 +45,6 @@
         [player changeState:[[AIStateRush alloc]init]];
         return;
     } else if (_bunkerPt.x > 0 && _bunkerPt.y > 0){
-        float d = ccpDistance(_bunkerPt, player.sprite.position);
         if(ccpDistance(_bunkerPt, player.sprite.position) < 300) {
             // Stop and change to defensive mentality
             [player stopMovement];
@@ -64,9 +63,12 @@
         }
     } else {
         // Decide on some cover
-        int r = arc4random_uniform(player.coverOptions.count);
-        NSValue* v = [player.coverOptions objectAtIndex:r];
-        _bunkerPt = [v CGPointValue];
+        if([player.coverOptions count] > 0) {
+            int r = arc4random_uniform(player.coverOptions.count);
+            NSValue* v = [player.coverOptions objectAtIndex:r];
+            _bunkerPt = [v CGPointValue];
+            player.coverLocale = _bunkerPt;
+        }
     } 
     
     // Is the enemy shooting at me?

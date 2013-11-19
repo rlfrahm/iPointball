@@ -113,6 +113,8 @@
 
 -(void)rayCast
 {
+    [self.targetOptions removeAllObjects];
+    
     b2Vec2 p1 = self.body->GetWorldCenter();
     _bounda = self.eyesight + 0.7854;
     _boundb = self.eyesight - 0.7854;
@@ -145,7 +147,7 @@
             }
             if(fabsf(output.fraction) < closestFraction && fabsf(output.fraction) > 0.001)
             {
-                CCLOG(@"%f",output.fraction);
+                //CCLOG(@"%f",output.fraction);
                 //CCLOG(@"Output Fraction: %f", output.fraction);
                 //CCLOG(@"Closest Fraction: %f", closestFraction);
                 closestFraction = fabsf(output.fraction);
@@ -170,9 +172,11 @@
                         // Make additional state decisions
                         
                         self.canSeePlayer = NO;
-                    } else {
-                        // Make additional state decisions
+                    } else if(s.tag == 3){
+                        // Move to cover
                         
+                        self.canSeePlayer = NO;
+                    } else {
                         self.canSeePlayer = NO;
                     }
                 }
@@ -216,16 +220,12 @@
         self.eyesight -= 360 / 100.0 / 60.0;
     }
     
-    if(!self.canSeePlayer) {
-        if(self.eyesight >  self.rayAngle + 0.7854) {
-            self.eyesight = self.rayAngle + 0.7854;
-            _cw = false;
-        } else if(self.eyesight < self.rayAngle - 0.7854) {
-            self.eyesight = self.rayAngle - 0.7854;
-            _cw = true;
-        }
-    } else {
-        //self.eyesight = (self.target.y - self.eye.y) / (self.target.x - self.eye.x);
+    if(self.eyesight >  self.rayAngle + 0.7854) {
+        self.eyesight = self.rayAngle + 0.7854;
+        _cw = false;
+    } else if(self.eyesight < self.rayAngle - 0.7854) {
+        self.eyesight = self.rayAngle - 0.7854;
+        _cw = true;
     }
 }
 

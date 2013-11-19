@@ -29,6 +29,8 @@
 @property float eyesight;
 @property (nonatomic, assign) NSMutableArray* coverOptions;
 @property (nonatomic, assign) NSMutableArray* targetOptions;
+@property BOOL targetAcquired;
+@property CGPoint coverLocale;
 
 //State stuff
 
