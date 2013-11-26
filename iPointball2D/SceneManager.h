@@ -20,5 +20,6 @@
 +(void) goOptionsMenu;
 +(void) goLevelSelect;
 +(void) goGameScene;
++(void) goUpgradeMenu;
 
 @end

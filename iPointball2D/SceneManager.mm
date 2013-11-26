@@ -40,6 +40,11 @@
     [SceneManager go:[GameScene node]];
 }
 
++(void) goUpgradeMenu
+{
+    
+}
+
 +(void) go: (CCLayer *) layer {
     CCDirector *director = [CCDirector sharedDirector];
     CCScene *newScene = [SceneManager wrap:layer];

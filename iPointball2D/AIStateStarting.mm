@@ -45,7 +45,8 @@
         [player changeState:[[AIStateRush alloc]init]];
         return;
     } else if (_bunkerPt.x > 0 && _bunkerPt.y > 0){
-        if(ccpDistance(_bunkerPt, player.sprite.position) < 300) {
+        float d = ccpDistance(_bunkerPt, player.sprite.position);
+        if(ccpDistance(_bunkerPt, player.sprite.position) < 338) {
             // Stop and change to defensive mentality
             [player stopMovement];
             [player changeState:[[AIStateDefensive alloc]init]];

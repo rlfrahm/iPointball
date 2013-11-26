@@ -27,6 +27,7 @@
     BOOL _timerStarted;
     AIPlayer* _player;
     BOOL _movePlans;
+    BOOL _movingback2cover;
 }
 
 -(NSString*)name
@@ -60,24 +61,18 @@
     if(b2Distance(_p1, _p2) < .01) {
         // If we are at our destination..
         [player stopMovement];
+        _movedone = YES;
     } else {
         // If we are still moving to our  destination..
         [player moveToVector:_p2];
+        _movedone = NO;
     }
 }
 
 -(void)movebackToCover:(AIPlayer*)player
 {
-    if(ccpDistance(player.sprite.position, player.coverLocale) < 300) {
-        // We should be back behind cover
-        CCLOG(@"%f", ccpDistance(player.sprite.position, player.coverLocale));
-        [player stopMovement];
-        _movePlans = NO;
-        return;
-    }
-    
     _timerStarted = YES;
-    if(_i > 4) {
+    if(_i > 20 && !_movingback2cover) {
         if(_upwards) {
             // Move down
             _p2 = b2Vec2(_p1.x, _p1.y - MOVE_DISTANCE);
@@ -88,10 +83,33 @@
         [self move:player];
         _movePlans = YES;
         _timerStarted = NO;
-    } else if(_movePlans) {
+        _movingback2cover = YES;
+        _i=0;
+        return;
+    } else if(_movingback2cover) {
+        [self move:player];
+    } else if(_movePlans && !_movedone) {
         [player stopMovement];
     }
     _i++;
+}
+
+-(void)amIWhereINeedToBe:(AIPlayer*)player
+{
+    if(ccpDistance(player.sprite.position, player.coverLocale) < 340  && _movingback2cover && !_movedone) {
+        // We should be back behind cover
+        //CCLOG(@"%f", ccpDistance(player.sprite.position, player.coverLocale));
+        [player stopMovement];
+        _movePlans = NO;
+        _movingback2cover = NO;
+        _movedone = YES;
+        return;
+    } else if(ccpDistance(player.sprite.position, player.coverLocale) > 600 && ccpDistance(player.sprite.position, player.coverLocale) < 800) {
+        // We are far away from the bunker and should come back
+        [player stopMovement];
+        _movePlans = YES;
+        _movedone = NO;
+    }
 }
 
 -(CGPoint)pickATarget:(AIPlayer*)player
@@ -115,12 +133,20 @@
      */
     // When we reach the bag...
     // If we don't have plans to move
+    [self amIWhereINeedToBe:player];
+    
     if(!_movePlans) {
         [self peekDirection];
         [self move:player];
     } else {
         if(player.targetAcquired) {
-            [self movebackToCover:player];
+            if(_movingback2cover) {
+                [self move:player];
+            } else if(_movedone){
+                
+            } else {
+                [self movebackToCover:player];
+            }
         } else {
             [self move:player];
         }
@@ -139,70 +165,8 @@
         }
         return;
     } else { // If we have a target..
+        
         return;
     }
-    
-    /*
-    if([player.targetOptions count] == 0) {
-        CCLOG(@"No targets");
-        // Peek around the bunker
-        [self peekDirection];
-        [self move:player];
-    } else if([player.targetOptions count] > 0) {
-        CCLOG(@"Targets visible");
-        player.knownNumberOfPlayers = 1;
-        _target = [self pickATarget:player];
-        player.targetAcquired = YES;
-        _i = 0;
-        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(movebackToCover) userInfo:nil repeats:YES];
-    }
-    */
-    // Check if we should change state
-    //NSArray* enemies = [player.layer enemiesWithinRange:200 ofPlayer:player];
-    /*if([player.targetOptions count] > 0)
-    {
-        player.knownNumberOfPlayers = 1;
-        // We have targets. Pick one and shoot.
-        [player stopMovement];
-        if(_target.x == 0 && _target.y == 0) {
-            _target = [self pickATarget:player];
-            [player fireToPoint:_target];
-        } else {
-            
-        }
-        return;
-    } else if([player.targetOptions count] == 0){
-        //if(player.knownNumberOfPlayers > 0) {
-        //    [player stopMovement];
-        //    return;
-        //}
-        if(_movedone) {
-            // We still can't see anbody
-            if(_upwards) {
-                _p2 = b2Vec2(_p1.x, _p1.y + 0.625);
-                [player moveToVector:_p2];
-                _movedone = NO;
-            } else {
-                _p2 = b2Vec2(_p1.x, _p1.y - 0.625);
-                [player moveToVector:_p2];
-                _movedone = NO;
-            }
-        }
-        // We don't have targets. Lets peek around the bunker.
-        _d = b2Distance(_p2, player.body->GetPosition());
-        if(b2Distance(_p2, player.body->GetPosition()) < .01) {
-            [player stopMovement];
-            if(_timerStarted) {
-                return;
-            }
-            _i = 0;
-            [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(movebackToCover) userInfo:nil repeats:YES];
-            _movedone = YES;
-        } else {
-            [player moveToVector:_p2];
-            _movedone = NO;
-        }
-        return;
-    }//*/
 }
 @end

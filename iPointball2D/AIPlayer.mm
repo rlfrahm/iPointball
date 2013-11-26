@@ -133,6 +133,8 @@
     
     float closestFraction = 1;
     b2Vec2 intersectionNormal(0,0);
+    CGPoint pt;
+    NSString* type = @"none";
     for(b2Body* b = _world->GetBodyList();b; b = b->GetNext())
     {
         
@@ -154,30 +156,18 @@
                 intersectionNormal = output.normal;
                 if(b->GetUserData() != NULL) {
                     CCSprite* s = (CCSprite*)b->GetUserData();
-                    if(s.tag == 1) {
+                    if(s.tag == 1) { // If the ray is intersecting a human player
                         b2Vec2 ip(p1 + closestFraction * (p2 - p1));
-                        CGPoint pt = ccp(ip.x*PTM_RATIO, ip.y*PTM_RATIO);
-                        [self.targetOptions addObject:[NSValue valueWithCGPoint:pt]];
-                        
-                        // Make additional state decisions
-                        
-                        self.canSeePlayer = YES;
-                    } else if(s.tag == 4) {
+                        pt = ccp(ip.x*PTM_RATIO, ip.y*PTM_RATIO);
+                        type = @"target";
+                    } else if(s.tag == 4) { // If the ray is intersecting a bunker
                         b2Vec2 ip(p1 + closestFraction * (p2 - p1));
-                        CGPoint pt = ccp(ip.x, ip.y);
-                        // Add ip to list of possible covers
-                        //[self.coverOptions addObject:s];
-                        [self.coverOptions addObject:[NSValue valueWithCGPoint:pt]];
-                        
-                        // Make additional state decisions
-                        
-                        self.canSeePlayer = NO;
-                    } else if(s.tag == 3){
+                        pt = ccp(ip.x, ip.y);
+                        type = @"cover";
+                    } else if(s.tag == 3){ // If the ray is intersecting paint
                         // Move to cover
-                        
-                        self.canSeePlayer = NO;
+                        type = @"paint";
                     } else {
-                        self.canSeePlayer = NO;
                     }
                 }
                 break;
@@ -185,6 +175,18 @@
             break;
         }
     }
+    
+    if([type isEqualToString:@"target"]) {
+        [self.targetOptions addObject:[NSValue valueWithCGPoint:pt]];
+        self.canSeePlayer = YES;
+    } else if([type isEqualToString:@"cover"]) {
+        [self.coverOptions addObject:[NSValue valueWithCGPoint:pt]];
+        self.canSeePlayer = NO;
+    } else {
+        self.canSeePlayer = NO;
+    }
+    
+    
     //NSValue* v = [self.coverOptions objectAtIndex:0];
     //CGPoint pt = [v CGPointValue];
     //CCLOG(@"%f, %f", pt.x, pt.y);

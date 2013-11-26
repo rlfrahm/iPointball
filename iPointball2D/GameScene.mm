@@ -45,7 +45,6 @@
     //CCLOG(@"Touch Began");
     _moving = NO;
     NSArray *touchArray = [touches allObjects];
-    NSSet *allTouches = [event allTouches];
     // only run the following code if there is more than one touch
     if([touchArray count]>0)
     {
@@ -247,10 +246,9 @@
 -(void)pauseGame
 {
     ccColor4B c = {100,100,0,100};
-    PauseLayer* paused = [[[PauseLayer alloc] initWithColor:c]autorelease];
-    CGSize winsize = [[CCDirector sharedDirector] winSize];
+    PauseLayer* paused = [[[PauseLayer alloc] initWithColor:c andScene:self]autorelease];
     paused.position = ccp(0, 0);
-    [self addChild:paused z:10];
+    [self.parent addChild:paused z:10];
     [self onExit];
 }
 
@@ -886,6 +884,11 @@
 -(void)addBatchNode:(Paint *)paint
 {
     [_batchNode addChild:paint];
+}
+
+-(BOOL)paintIsNextToPlayer:(Player *)player
+{
+    return false;
 }
 
 @end

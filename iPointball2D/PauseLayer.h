@@ -14,4 +14,6 @@
     
 }
 
+-(id) initWithColor:(ccColor4B)color andScene:(GameScene*)scene;
+
 @end

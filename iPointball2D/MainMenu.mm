@@ -26,6 +26,10 @@ enum {
     [SceneManager goOptionsMenu];
 }
 
+-(void)onUpgrade:(id)sender {
+    [SceneManager goUpgradeMenu];
+}
+
 - (id)init {
     
     if( (self=[super init])) {
@@ -94,8 +98,9 @@ enum {
     
     CCMenuItemFont *item1 = [CCMenuItemFont itemWithString:@"Play" target:self selector:@selector(onPlay:)];
     CCMenuItemFont *item2 = [CCMenuItemFont itemWithString:@"Options" target:self selector:@selector(onOptions:)];
+    CCMenuItemFont *item3 = [CCMenuItemFont itemWithString:@"Upgrade" target:self selector:@selector(onUpgrade:)];
     
-    CCMenu *menu = [CCMenu menuWithItems:item1,item2, nil];
+    CCMenu *menu = [CCMenu menuWithItems:item1,item2,item3, nil];
     
     [menu alignItemsVertically];
     

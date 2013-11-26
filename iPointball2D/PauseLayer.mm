@@ -8,17 +8,22 @@
 
 #import "PauseLayer.h"
 
-@implementation PauseLayer
+#define PTM_RATIO 32
 
--(id) initWithColor:(ccColor4B)color
+@implementation PauseLayer {
+    GameScene* _gs;
+}
+
+-(id) initWithColor:(ccColor4B)color andScene:(GameScene *)scene
 {
     if((self = [super initWithColor:color]))
     {
+        _gs = scene;
         self.touchEnabled = YES;
         CGSize winsize = [[CCDirector sharedDirector] winSize];
         CCSprite* paused = [CCSprite spriteWithFile:@"paused.png"];
-        [paused setPosition:ccp(winsize.width/2, winsize.height/2)];
-        [self.parent addChild:paused];
+        [paused setPosition:ccp(460, 0)];
+        [self addChild:paused];
     }
     return self;
 }
@@ -29,8 +34,7 @@
     {
         CGPoint location = [touch locationInView:[touch view]];
         location = [[CCDirector sharedDirector] convertToGL:location];
-        GameScene* gs;
-        [gs resume];
+        [_gs resume];
         [self.parent removeChild:self cleanup:YES];
     }
 }
