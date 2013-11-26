@@ -22,7 +22,7 @@
         self.touchEnabled = YES;
         CGSize winsize = [[CCDirector sharedDirector] winSize];
         CCSprite* paused = [CCSprite spriteWithFile:@"paused.png"];
-        [paused setPosition:ccp(460, 0)];
+        [paused setPosition:ccp(winsize.width, 0)];
         [self addChild:paused];
     }
     return self;

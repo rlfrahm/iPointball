@@ -214,6 +214,11 @@
     //*/
 }
 
+-(void)scheduleRaycast:(CGPoint)pt
+{
+    
+}
+
 -(void)scanTheField
 {
     if(_cw) {

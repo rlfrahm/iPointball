@@ -17,6 +17,7 @@
 -(void)fireToPoint:(CGPoint)point;
 -(NSString*)stateName;
 -(void)think;
+-(void)scheduleRaycast:(CGPoint)pt;
 
 @property (nonatomic,assign) int knownNumberOfPlayers;
 @property CGPoint eye;

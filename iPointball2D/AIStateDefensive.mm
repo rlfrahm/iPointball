@@ -28,6 +28,7 @@
     AIPlayer* _player;
     BOOL _movePlans;
     BOOL _movingback2cover;
+    BOOL _behindcover;
 }
 
 -(NSString*)name
@@ -96,6 +97,7 @@
 
 -(void)amIWhereINeedToBe:(AIPlayer*)player
 {
+    float d = ccpDistance(player.sprite.position, player.coverLocale);
     if(ccpDistance(player.sprite.position, player.coverLocale) < 340  && _movingback2cover && !_movedone) {
         // We should be back behind cover
         //CCLOG(@"%f", ccpDistance(player.sprite.position, player.coverLocale));
@@ -103,12 +105,14 @@
         _movePlans = NO;
         _movingback2cover = NO;
         _movedone = YES;
+        _behindcover = YES;
         return;
-    } else if(ccpDistance(player.sprite.position, player.coverLocale) > 600 && ccpDistance(player.sprite.position, player.coverLocale) < 800) {
+    } else if(ccpDistance(player.sprite.position, player.coverLocale) < 312 || ccpDistance(player.sprite.position, player.coverLocale) > 350) {
         // We are far away from the bunker and should come back
         [player stopMovement];
         _movePlans = YES;
         _movedone = NO;
+        _behindcover = NO;
     }
 }
 
@@ -140,14 +144,17 @@
         [self move:player];
     } else {
         if(player.targetAcquired) {
-            if(_movingback2cover) {
+            if(_behindcover) { // ****************
                 [self move:player];
-            } else if(_movedone){
-                
             } else {
                 [self movebackToCover:player];
             }
         } else {
+            if(_behindcover) {
+                
+            } else {
+                
+            }
             [self move:player];
         }
     }
