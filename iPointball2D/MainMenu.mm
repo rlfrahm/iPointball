@@ -32,7 +32,7 @@ enum {
 
 - (id)init {
     
-    if( (self=[super init])) {
+    if( (self=[super initWithColor:ccc4(97, 180, 207, 255)])) {
         self.iPad = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
         
         // Determine Screen Size
@@ -67,8 +67,6 @@ enum {
 		
 		[self addNewSpriteAtPosition:ccp(screenSize.width/2, screenSize.height/2)];
 		
-		
-		
 		[self scheduleUpdate];
         
         GameData *gameData = [GameDataParser loadData];
@@ -93,6 +91,10 @@ enum {
     // Calculate Large Font Size
     int largeFont = screenSize.height / kFontScaleLarge;
     
+    CCLabelTTF* title = [CCLabelTTF labelWithString:@"iPointball 2D" fontName:@"Marker Felt" fontSize:48 dimensions:CGSizeMake(250, 50) hAlignment:kCCTextAlignmentCenter];
+    [title setPosition:CGPointMake(screenSize.width/2, screenSize.height-45)];
+    [self addChild:title];
+    
     [CCMenuItemFont setFontName:@"Marker Felt"];
     [CCMenuItemFont setFontSize:largeFont];
     
@@ -103,6 +105,7 @@ enum {
     CCMenu *menu = [CCMenu menuWithItems:item1,item2,item3, nil];
     
     [menu alignItemsVertically];
+    
     
     [self addChild:menu];
     

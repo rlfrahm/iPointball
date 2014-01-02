@@ -142,6 +142,42 @@
 	
 	// make main window visible
 	[window_ makeKeyAndVisible];
+    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    if(![defaults integerForKey:@"player_speed"]) {
+        [defaults setInteger:1 forKey:@"player_speed"];
+    }
+    if(![defaults integerForKey:@"player_trigger_speed"]) {
+        [defaults setInteger:1 forKey:@"player_trigger_speed"];
+    }
+    if(![defaults integerForKey:@"player_pods"]) {
+        [defaults setInteger:3 forKey:@"player_pods"];
+    }
+    if(![defaults integerForKey:@"player_reload"]) {
+        [defaults setInteger:1 forKey:@"player_reload"];
+    }
+    if(![defaults stringForKey:@"marker_description"]) {
+        [defaults setObject:@"Marker 1" forKey:@"marker_description"];
+    }
+    if(![defaults integerForKey:@"marker_speed"]) {
+        [defaults setInteger:1 forKey:@"marker_speed"];
+    }
+    if(![defaults integerForKey:@"marker_accuracy"]) {
+        [defaults setInteger:1 forKey:@"marker_accuracy"];
+    }
+    if(![defaults integerForKey:@"marker_quality"]) {
+        [defaults setInteger:1 forKey:@"marker_quality"];
+    }
+    if(![defaults stringForKey:@"hopper_description"]) {
+        [defaults setObject:@"Junky old hopper" forKey:@"hopper_description"];
+    }
+    if(![defaults integerForKey:@"hopper_capacity"]) {
+        [defaults setInteger:50 forKey:@"hopper_capacity"];
+    }
+    if(![defaults integerForKey:@"pods_capacity"]) {
+        [defaults setInteger:40 forKey:@"pods_capacity"];
+    }
+    [defaults synchronize];
 	
 	return YES;
 }

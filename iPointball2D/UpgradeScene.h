@@ -1,5 +1,5 @@
 //
-//  ChapterSelect.h  <-- RENAME THIS
+//  SceneName.h  <-- RENAME THIS
 //  
 
 #import <Foundation/Foundation.h>
@@ -7,7 +7,7 @@
 #import "Constants.h"
 #import "SceneManager.h"
 
-@interface ChapterSelect : CCLayerColor {
+@interface UpgradeScene : CCLayerColor {  // <-- RENAME THIS (the SceneName bit)
     
 }
 

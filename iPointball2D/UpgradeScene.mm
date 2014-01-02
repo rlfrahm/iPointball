@@ -2,15 +2,16 @@
 //  SceneName.m  <-- RENAME THIS
 //  
 
-#import "OptionsMenu.h"  // <-- RENAME THIS
+#import "UpgradeScene.h"
 
-@implementation OptionsMenu  // <-- RENAME THIS
+@implementation UpgradeScene
 @synthesize iPad;
 
 - (void)onBack: (id) sender {
     /* 
      This is where you choose where clicking 'back' sends you.
      */
+    //[SceneManager goMainMenu];
     [SceneManager goMainMenu];
 }
 
@@ -18,7 +19,7 @@
 
     if (self.iPad) {
         // Create a menu image button for iPad
-        CCMenuItemImage *goBack = [CCMenuItemImage itemWithNormalImage:@"Arrow-Normal-iPad.png"
+        CCMenuItemImage *goBack = [CCMenuItemImage itemFromNormalImage:@"Arrow-Normal-iPad.png" 
                                                          selectedImage:@"Arrow-Selected-iPad.png"
                                                                 target:self 
                                                               selector:@selector(onBack:)];
@@ -33,7 +34,7 @@
     }
     else {
         // Create a menu image button for iPhone / iPod Touch
-        CCMenuItemImage *goBack = [CCMenuItemImage itemWithNormalImage:@"Arrow-Normal-iPhone.png"
+        CCMenuItemImage *goBack = [CCMenuItemImage itemFromNormalImage:@"Arrow-Normal-iPhone.png" 
                                                          selectedImage:@"Arrow-Selected-iPhone.png"
                                                                 target:self 
                                                               selector:@selector(onBack:)];
@@ -48,10 +49,31 @@
     }
 }
 
+-(void)changeSpeed {
+    
+}
+
+-(void)changeAccuracy {
+    
+}
+
+-(void)changeTriggerSpeed {
+    
+}
+
+- (void)buildUpgradeMenu {
+    CCMenuItemFont* item1 = [CCMenuItemFont itemWithString:@"Speed" target:self selector:@selector(changeSpeed)];
+    CCMenuItemFont* item2 = [CCMenuItemFont itemWithString:@"Accuracy" target:self selector:@selector(changeAccuracy)];
+    CCMenuItemFont* item3 = [CCMenuItemFont itemWithString:@"Trigger" target:self selector:@selector(changeTriggerSpeed)];
+    
+    CCMenu* menu = [CCMenu menuWithItems:item1,item2,item3, nil];
+    [menu alignItemsInColumns:[NSNumber numberWithInt:3], nil];
+    [self addChild:menu];
+}
+
 - (id)init {
     
     if( (self=[super initWithColor:ccc4(97, 180, 207, 255)])) {
-        self.iPad = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
         
         // Determine Screen Size
         CGSize screenSize = [CCDirector sharedDirector].winSize;  
@@ -60,7 +82,7 @@
         int largeFont = screenSize.height / kFontScaleLarge; 
         
         // Create a label
-        CCLabelTTF *label = [CCLabelTTF labelWithString:@"Options"    // <-- RENAME THIS
+        CCLabelTTF *label = [CCLabelTTF labelWithString:@"New Scene"
                                                fontName:@"Marker Felt" 
                                                fontSize:largeFont];  
 		// Center label
@@ -70,8 +92,9 @@
 		[self addChild:label z:0]; 
 
         //  Put a 'back' button in the scene
-        [self addBackButton];   
-
+        [self addBackButton];
+        
+        [self buildUpgradeMenu];
     }
     return self;
 }

@@ -9,6 +9,7 @@
 #import "OptionsMenu.h"
 #import "LevelSelect.h"
 #import "GameScene.h"
+#import "UpgradeScene.h"
 
 @interface SceneManager : NSObject {
     

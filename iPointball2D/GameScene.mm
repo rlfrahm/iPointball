@@ -1,6 +1,8 @@
 //
 //  SceneName.m
-//  
+//
+// http://www.raywenderlich.com/32049/texture-packer-tutorial-how-to-create-and-optimize-sprite-sheets-in-cocos2d
+//
 
 #import "GameScene.h"
 #import "GameData.h"
@@ -11,9 +13,11 @@
 #import "Paint.h"
 #import "PauseLayer.h"
 #import "AppDelegate.h"
+#import "HudLayer.h"
 
 #define PAINTFPS 680 // pixels/sec
 #define PTM_RATIO 32 // pixels-meters
+#define boris_random(smallNumber, bigNumber) ((((float) (arc4random() % ((unsigned)RAND_MAX + 1)) / RAND_MAX) * (bigNumber - smallNumber)) + smallNumber)
 
 @implementation GameScene {
     NSMutableArray* _gameObjects;
@@ -33,9 +37,12 @@
     BOOL _moveToBunker;
     CGFloat _angle2;
     b2Body* _moveToBody;
-    CCSprite* joybtn;
-    BOOL _isMovingJoybtn;
     NSMutableArray* _objectsToDraw;
+    NSUserDefaults* defaults;
+    int paintInHopper, numberOfPods, reloadAccumulator;
+    CCMenuItemFont* item2;
+    BOOL reloading;
+    float playerSpeed, markerAccuracy;
 }
 @synthesize iPad;
 
@@ -49,37 +56,31 @@
     if([touchArray count]>0)
     {
         // Choose one of the touches to work with
-        UITouch *touch = [touchArray objectAtIndex:0];
-        NSUInteger tapCount = [touch tapCount];
-        CGPoint location = [touch locationInView:[touch view]];
-        location = [[CCDirector sharedDirector] convertToGL:location];
-        b2Vec2 locationWorld = b2Vec2(location.x/PTM_RATIO, location.y/PTM_RATIO);
-        if (_humanPlayer.fixture->TestPoint(locationWorld) && [self isTouchingJoybtn:location] == false) {
-            b2MouseJointDef md;
-            md.bodyA = groundBody;
-            md.bodyB = _humanPlayer.body;
-            md.target = locationWorld;
-            md.collideConnected = false;
-            md.maxForce = 20.0f * _humanPlayer.body->GetMass();
-            _mouseJoint = (b2MouseJoint *)world->CreateJoint(&md);
-            _humanPlayer.body->SetAwake(true);
-        } else if([self isTouchingJoybtn:location]) {
-            _isMovingJoybtn = true;
-        } else if(_bunker.fixture->TestPoint(locationWorld)) {
-            if(tapCount == 2) {
-                [self doubleTap:location withBody:_bunker.body];
+        for(UITouch* touch in [event allTouches]) {
+            NSUInteger tapCount = [touch tapCount];
+            CGPoint location = [touch locationInView:[touch view]];
+            location = [[CCDirector sharedDirector] convertToGL:location];
+            b2Vec2 locationWorld = b2Vec2(location.x/PTM_RATIO, location.y/PTM_RATIO);
+            if (_humanPlayer.fixture->TestPoint(locationWorld)) {
+                b2MouseJointDef md;
+                md.bodyA = groundBody;
+                md.bodyB = _humanPlayer.body;
+                md.target = locationWorld;
+                md.collideConnected = false;
+                md.maxForce = 20.0f * _humanPlayer.body->GetMass();
+                _mouseJoint = (b2MouseJoint *)world->CreateJoint(&md);
+                _humanPlayer.body->SetAwake(true);
+            } else if(_bunker.fixture->TestPoint(locationWorld)) {
+                if(tapCount == 2) {
+                    [self doubleTap:location withBody:_bunker.body];
+                }
+            } else {
+                if(!reloading) {
+                    [self singleTap:location];
+                }
             }
-        } else {
-            [self singleTap:location];
-            _isMovingJoybtn = false;
         }
     }
-}
-
--(BOOL)isTouchingJoybtn:(CGPoint)location {
-    // Check if the touch point is on the joybtn
-    float d = ccpLengthSQ(ccpSub(location, joybtn.position));
-    return (d < joybtn.contentSize.width);
 }
 
 -(void)singleTap:(CGPoint)location
@@ -90,7 +91,14 @@
     CGPoint shootVector = ccpSub(location, _humanPlayer.sprite.position);
     CGFloat shootAngle = ccpToAngle(shootVector);
     if(shootAngle - _angle2 > 0.2 || shootAngle - _angle2 < -0.2) {_angle2 = shootAngle;return;}
-    [self shootPaintToLocation:location withAngle:shootAngle];
+    shootAngle = shootAngle + boris_random(-markerAccuracy, markerAccuracy);
+    if(paintInHopper > 0) {
+        [self shootPaintToLocation:location withAngle:shootAngle];
+        [item2 setString:[NSString stringWithFormat:@"%i",paintInHopper]];
+    } else {
+        NSLog(@"Reload!");
+    }
+    
     firing = YES;
     _angle2 = shootAngle;
 }
@@ -103,24 +111,14 @@
 }
 
 -(void) ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
-    //CCLOG(@"Touch Moved");
-    if (_mouseJoint == NULL) return;
     UITouch *myTouch = [touches anyObject];
     CGPoint location1 = [myTouch locationInView:[myTouch view]];
-    if(_isMovingJoybtn) [self moveJoybtn:location1];
+    if (_mouseJoint == NULL) return;
     _moving = YES;
     location1 = [[CCDirector sharedDirector] convertToGL:location1];
-    moveToLocation = b2Vec2(location1.x/PTM_RATIO, location1.y/PTM_RATIO);
-    
+    // Insert speed here!
+    moveToLocation = b2Vec2((location1.x/PTM_RATIO)*playerSpeed, (location1.y/PTM_RATIO)*playerSpeed);
     _mouseJoint->SetTarget(moveToLocation);
-}
-
--(void)moveJoybtn:(CGPoint)location {
-    if([self isTouchingJoybtn:location]) {
-        joybtn.position = location;
-    } else {
-        joybtn.position = ccp(50,50);
-    }
 }
 
 -(void) ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event{
@@ -134,7 +132,6 @@
     if (_mouseJoint){
         world->DestroyJoint(_mouseJoint);
         _mouseJoint = NULL;
-        //playerBody->SetLinearVelocity(b2Vec2(0,0));
     }
 }
 
@@ -148,19 +145,9 @@
         //CCLOG(@"Distance: %f",ccpDistance(sprite.position, _humanPlayer.sprite.position));
         if(ccpDistance(sprite.position, _humanPlayer.sprite.position) < 25) {
             _humanPlayer.body->SetLinearVelocity(b2Vec2(0, 0));
-            if(joybtn.tag != 1) {
-                [self addChild:joybtn z:1 tag:1];
-                [joybtn runAction:[CCSequence actions:
-                                   [CCDelayTime actionWithDuration:0.5f],
-                                   [CCFadeTo actionWithDuration:0.5f opacity:192],
-                                   [CCBlink actionWithDuration:0.66f blinks:3],
-                                   nil]];
-            }
             _moveToBunker = NO;
             _humanPlayer.snapped = YES;
             [_humanPlayer setMovementWindow:sprite.position];
-            
-            
             CCLOG(@"%hhd",_moveToBunker);
             return;
         }
@@ -191,6 +178,7 @@
     [_batchNode addChild:_paint];
     
     [_paint fireToLocation:location withAngle:angle];
+    paintInHopper--;
 }
 
 # pragma mark Scene Transition methods
@@ -320,7 +308,7 @@
         }
     }
     
-    if(_humanPlayer.snapped == false && joybtn.tag == 1) {
+    /*if(_humanPlayer.snapped == false && joybtn.tag == 1) {
         [self removeChild:joybtn cleanup:YES];
         joybtn.tag = 0;
     }
@@ -338,7 +326,7 @@
             _humanPlayer.body->SetLinearVelocity(b2Vec2(_humanPlayer.leftX - _humanPlayer.sprite.position.x,0));
         }
     }
-    
+    */
     for(AIPlayer* p in _aiplayers) [p think];
     
     std::vector<b2Body *>toDestroy;
@@ -635,28 +623,30 @@
     [self initPhysics];
     CGSize winSize = [CCDirector sharedDirector].winSize;
     
-    //CCSprite* background = [CCSprite spriteWithFile:@"BACKGROUND FILE GOES HERE"];
-    //background.position = ccp(winSize.width/2, winSize.height/2);
-    //[self addChild:background z:-1];
-    
-    // Menu Items
-    //[self addBunkerAtPosition:ccp(winSize.width/2, winSize.height/2)];
-    //[self addNewEnemyAtPosition:ccp(470, winSize.height/2)];
-    
     int tinyFont = winSize.width/kFontScaleTiny;
+    
+    defaults = [NSUserDefaults standardUserDefaults];
+    
+    paintInHopper = [defaults integerForKey:@"hopper_capacity"];
+    numberOfPods = [defaults integerForKey:@"player_pods"];
+    playerSpeed = 1 + ([defaults integerForKey:@"player_speed"]/10);
+    markerAccuracy = (110 - ([defaults integerForKey:@"marker_accuracy"]*10));
+    markerAccuracy = markerAccuracy / 400;
     
     [CCMenuItemFont setFontName:@"Marker Felt"];
     [CCMenuItemFont setFontSize:tinyFont];
+    [CCMenuItemFont setFontSize:22];
     
     //CCMenuItemLabel* item1 = [CCMenuItemFont itemWithString:@"Back" target:self selector:@selector(onBack:)];
     CCMenuItemLabel* item1 = [CCMenuItemFont itemWithString:@"O" target:self selector:@selector(pauseGame)];
+    item2 = [CCMenuItemFont itemWithString:[NSString stringWithFormat:@"%i", paintInHopper] target:self selector:@selector(beginReloadingPaint)];
     item1.color = ccRED;
-    //item2.color = ccRED;
+    item2.color = ccRED;
     
-    CCMenu* menu = [CCMenu menuWithItems:item1, nil];
-    [menu setPosition:ccp(item1.contentSize.width,winSize.height-item1.contentSize.height/3)];
+    CCMenu* menu = [CCMenu menuWithItems:item1,item2, nil];
+    [menu setPosition:ccp(40,winSize.height-10)];
     [menu alignItemsHorizontally];
-    [self addChild:menu];
+    [self addChild:menu z:1];
     
     gameData = [GameDataParser loadData];
     
@@ -675,39 +665,19 @@
             levelData = level;
         }
     }
-    /*GameData* gameData = [GameDataParser loadData];
-     
-     int selectedChapter = gameData.selectedChapter;
-     int selectedLevel = gameData.selectedLevel;
-     
-     Levels* levels = [LevelParser loadLevelsForChapter:selectedChapter];
-     
-     for(Level* level in levels.levels)
-     {
-     if(level.number == selectedLevel)
-     {
-     NSString* data = [NSString stringWithFormat:@"%@",level.data];
-     CCLabelTTF* label = [CCLabelTTF labelWithString:data fontName:@"Marker Felt" fontSize:largeFont];
-     label.position = ccp(screenSize.width/2,screenSize.height/2);
-     
-     // Add label to this scene
-     [self addChild:label z:0];
-     }
-     }*/
     _gameObjects = [[NSMutableArray arrayWithObjects:[NSMutableArray array],[NSMutableArray array],[NSMutableArray array],[NSMutableArray array], nil] init];
     [self addBunkers];
     [self addEnemiesWithLevel:selectedLevel];
     
     // Load joystick but don't display
-    joybtn = [[CCSprite spriteWithFile:@"joybtn.png"] retain];
-    joybtn.position = ccp(50,50);
-    joybtn.opacity = 0;
+    
     
     // collision detection
     contactListener = new MyContactListener();
     world->SetContactListener(contactListener);
     
     self.touchEnabled = YES;
+    reloading = NO;
 }
 
 -(void)addEnemiesWithLevel:(int)selectedLevel
@@ -756,12 +726,10 @@
 }
 
 - (id)init {
-    
-    if( (self=[super initWithColor:ccc4(255,255,255,255)])) {
+    if( (self=[super initWithColor:ccc4(0,201,13,255)])) {
         self.iPad = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
         [self basicSetup];
         [self addPlayers];
-        
         [self scheduleUpdate];
     }
     return self;
@@ -779,6 +747,37 @@
     //_cache = nil;
     
     [super dealloc];
+}
+
+# pragma mark Gameplay methods
+
+-(void)beginReloadingPaint {
+    if(numberOfPods > 0) {
+        reloadAccumulator = 0;
+        reloading = YES;
+        float interval = 3 - ([defaults integerForKey:@"player_reload"]/4);
+        NSTimer* timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(reloadPaint:) userInfo:Nil repeats:YES];
+    } else {
+        // The player is out of paint!
+        NSLog(@"Out of paint!");
+    }
+}
+
+-(void)reloadPaint:(NSTimer*)timer {
+    if (reloadAccumulator >= 3) {
+        int hopperCapacity = [defaults integerForKey:@"hopper_capacity"];
+        int podCapacity = [defaults integerForKey:@"pods_capacity"];
+        if(paintInHopper + podCapacity > hopperCapacity) {
+            paintInHopper = hopperCapacity;
+        } else {
+            paintInHopper = paintInHopper + podCapacity;
+        }
+        [item2 setString:[NSString stringWithFormat:@"%i", paintInHopper]];
+        [timer invalidate];
+        reloading = NO;
+    } else {
+        reloadAccumulator ++;
+    }
 }
 
 # pragma mark Helper methods

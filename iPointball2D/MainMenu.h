@@ -11,7 +11,7 @@
 #import "Box2D.h"
 #import "GLES-Render.h"
 
-@interface MainMenu : CCLayer {
+@interface MainMenu : CCLayerColor {
     CCTexture2D *spriteTexture_;	// weak ref
 	b2World* world;					// strong ref
 	GLESDebugDraw *m_debugDraw;		// strong ref

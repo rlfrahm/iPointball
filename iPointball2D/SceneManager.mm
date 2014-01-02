@@ -42,7 +42,7 @@
 
 +(void) goUpgradeMenu
 {
-    
+    [self go:[UpgradeScene node]];
 }
 
 +(void) go: (CCLayer *) layer {

@@ -94,7 +94,7 @@
 
 - (id)init {
     
-    if( (self=[super init])) {
+    if( (self=[super initWithColor:ccc4(97, 180, 207, 255)])) {
         self.iPad = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
         
         // Determine Screen Size

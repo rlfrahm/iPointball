@@ -12,7 +12,7 @@
 #import "GameData.h"
 #import "GameDataParser.h"
 
-@interface LevelSelect : CCLayer {
+@interface LevelSelect : CCLayerColor {
     
 }
 

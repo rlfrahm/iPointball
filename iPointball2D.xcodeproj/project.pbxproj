@@ -221,6 +221,8 @@
 		4D46932D1710735000837BC5 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D46932C1710735000837BC5 /* blocks.png */; };
 		4D650F4A17F67A9B00BB48AA /* bunker1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D650F4917F67A9B00BB48AA /* bunker1.png */; };
 		4D6A14F11728D814008DA350 /* features.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4D6A14F01728D814008DA350 /* features.txt */; };
+		4D8432F0184B7911003B28FC /* HudLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D8432EF184B7910003B28FC /* HudLayer.mm */; };
+		4D877AE71873792A00AE8B10 /* UpgradeScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877AE61873792A00AE8B10 /* UpgradeScene.mm */; };
 		4D97E3531808777C000CDA95 /* AIState.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D97E3521808777C000CDA95 /* AIState.mm */; };
 		4D97E35618087835000CDA95 /* AIStateDefensive.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D97E35518087835000CDA95 /* AIStateDefensive.mm */; };
 		4D97E35918087947000CDA95 /* AIStateRush.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D97E35818087947000CDA95 /* AIStateRush.mm */; };
@@ -738,6 +740,10 @@
 		4D650F4917F67A9B00BB48AA /* bunker1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bunker1.png; sourceTree = "<group>"; };
 		4D650F4B17F6E5D700BB48AA /* RayCastCallback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RayCastCallback.h; sourceTree = "<group>"; };
 		4D6A14F01728D814008DA350 /* features.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = features.txt; sourceTree = "<group>"; };
+		4D8432EE184B7910003B28FC /* HudLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HudLayer.h; sourceTree = "<group>"; };
+		4D8432EF184B7910003B28FC /* HudLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HudLayer.mm; sourceTree = "<group>"; };
+		4D877AE51873792A00AE8B10 /* UpgradeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpgradeScene.h; sourceTree = "<group>"; };
+		4D877AE61873792A00AE8B10 /* UpgradeScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UpgradeScene.mm; sourceTree = "<group>"; };
 		4D97E3511808777C000CDA95 /* AIState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIState.h; sourceTree = "<group>"; };
 		4D97E3521808777C000CDA95 /* AIState.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AIState.mm; sourceTree = "<group>"; };
 		4D97E35418087835000CDA95 /* AIStateDefensive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIStateDefensive.h; sourceTree = "<group>"; };
@@ -856,6 +862,8 @@
 			children = (
 				4D0E6B18181D585F0016E27B /* PauseLayer.h */,
 				4D0E6B19181D585F0016E27B /* PauseLayer.mm */,
+				4D8432EE184B7910003B28FC /* HudLayer.h */,
+				4D8432EF184B7910003B28FC /* HudLayer.mm */,
 			);
 			name = Layers;
 			sourceTree = "<group>";
@@ -897,8 +905,10 @@
 		4D1D800017FCBA890035F8CA /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				4D1D800917FCC1470035F8CA /* GameScene.h */,
+				4D877AE51873792A00AE8B10 /* UpgradeScene.h */,
+				4D877AE61873792A00AE8B10 /* UpgradeScene.mm */,
 				4D1D800817FCC1470035F8CA /* GameScene.mm */,
+				4D1D800917FCC1470035F8CA /* GameScene.h */,
 				4D1D800517FCC12B0035F8CA /* LevelSelect.mm */,
 				4D1D800617FCC12B0035F8CA /* LevelSelect.h */,
 				4D1D800217FCC0FD0035F8CA /* ChapterSelect.mm */,
@@ -2012,6 +2022,7 @@
 				4D2C4C8117FD825A00FA5E20 /* Level.m in Sources */,
 				4D1D800E17FCC4BE0035F8CA /* GDataXMLNode.m in Sources */,
 				4D4692031710734E00837BC5 /* CCGLView.m in Sources */,
+				4D8432F0184B7911003B28FC /* HudLayer.mm in Sources */,
 				4D4692071710734E00837BC5 /* CCTouchDispatcher.m in Sources */,
 				4D46920A1710734E00837BC5 /* CCTouchHandler.m in Sources */,
 				4D46920E1710734E00837BC5 /* CCDirectorMac.m in Sources */,
@@ -2109,6 +2120,7 @@
 				4D4693151710735000837BC5 /* b2WheelJoint.cpp in Sources */,
 				4D4693191710735000837BC5 /* b2Rope.cpp in Sources */,
 				4D46931F1710735000837BC5 /* main.m in Sources */,
+				4D877AE71873792A00AE8B10 /* UpgradeScene.mm in Sources */,
 				4D4693221710735000837BC5 /* AppDelegate.mm in Sources */,
 				4D46932B1710735000837BC5 /* GLES-Render.mm in Sources */,
 				4D1D801917FCC5F00035F8CA /* TemplateData.m in Sources */,

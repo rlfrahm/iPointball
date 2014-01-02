@@ -172,7 +172,7 @@
         }
         return;
     } else { // If we have a target..
-        
+        [player scheduleRaycast:_target];
         return;
     }
 }
