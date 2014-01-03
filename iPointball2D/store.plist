@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>hoppers</key>
+	<array/>
+	<key>markers</key>
+	<array>
+		<dict>
+			<key>owned</key>
+			<true/>
+			<key>quality</key>
+			<integer>1</integer>
+			<key>accuracy</key>
+			<integer>1</integer>
+			<key>speed</key>
+			<integer>1</integer>
+			<key>re-sell</key>
+			<integer>1</integer>
+			<key>price</key>
+			<integer>0</integer>
+			<key>description</key>
+			<string>Old, has-been found in the dumpster out back.</string>
+			<key>title</key>
+			<string>Marker 1</string>
+		</dict>
+		<dict>
+			<key>owned</key>
+			<false/>
+			<key>quality</key>
+			<integer>1</integer>
+			<key>accuracy</key>
+			<integer>2</integer>
+			<key>speed</key>
+			<integer>2</integer>
+			<key>re-sell</key>
+			<integer>10</integer>
+			<key>price</key>
+			<integer>25</integer>
+			<key>description</key>
+			<string>Entry level marker</string>
+			<key>title</key>
+			<string>Marker 2</string>
+		</dict>
+		<dict>
+			<key>owned</key>
+			<false/>
+			<key>quality</key>
+			<integer>1</integer>
+			<key>accuracy</key>
+			<integer>2</integer>
+			<key>speed</key>
+			<integer>2</integer>
+			<key>re-sell</key>
+			<integer>10</integer>
+			<key>price</key>
+			<integer>30</integer>
+			<key>description</key>
+			<string>Entry level marker</string>
+			<key>title</key>
+			<string>Marker 3</string>
+		</dict>
+		<dict>
+			<key>owned</key>
+			<false/>
+			<key>quality</key>
+			<integer>3</integer>
+			<key>accuracy</key>
+			<integer>3</integer>
+			<key>speed</key>
+			<integer>3</integer>
+			<key>re-sell</key>
+			<integer>25</integer>
+			<key>price</key>
+			<integer>100</integer>
+			<key>description</key>
+			<string>Novice level marker</string>
+			<key>title</key>
+			<string>Marker 4</string>
+		</dict>
+		<dict>
+			<key>owned</key>
+			<false/>
+			<key>quality</key>
+			<integer>5</integer>
+			<key>accuracy</key>
+			<integer>7</integer>
+			<key>speed</key>
+			<integer>5</integer>
+			<key>re-sell</key>
+			<integer>100</integer>
+			<key>price</key>
+			<integer>200</integer>
+			<key>description</key>
+			<string>Intermediate level marker</string>
+			<key>title</key>
+			<string>Marker 5</string>
+		</dict>
+		<dict>
+			<key>owned</key>
+			<true/>
+			<key>quality</key>
+			<integer>10</integer>
+			<key>accuracy</key>
+			<integer>10</integer>
+			<key>speed</key>
+			<integer>10</integer>
+			<key>re-sell</key>
+			<integer>300</integer>
+			<key>price</key>
+			<integer>500</integer>
+			<key>description</key>
+			<string>Pro marker</string>
+			<key>title</key>
+			<string>Marker 6</string>
+		</dict>
+	</array>
+</dict>
+</plist>

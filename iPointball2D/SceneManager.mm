@@ -45,6 +45,16 @@
     [self go:[UpgradeScene node]];
 }
 
++(void) goMarkerMenu
+{
+    [self go:[MarkerScene node]];
+}
+
++(void) goSkillsMenu
+{
+    [self go:[SkillsScene node]];
+}
+
 +(void) go: (CCLayer *) layer {
     CCDirector *director = [CCDirector sharedDirector];
     CCScene *newScene = [SceneManager wrap:layer];

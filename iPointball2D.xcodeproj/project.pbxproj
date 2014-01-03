@@ -223,6 +223,9 @@
 		4D6A14F11728D814008DA350 /* features.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4D6A14F01728D814008DA350 /* features.txt */; };
 		4D8432F0184B7911003B28FC /* HudLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D8432EF184B7910003B28FC /* HudLayer.mm */; };
 		4D877AE71873792A00AE8B10 /* UpgradeScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877AE61873792A00AE8B10 /* UpgradeScene.mm */; };
+		4D877AEA1875B8C300AE8B10 /* MarkerScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877AE91875B8C300AE8B10 /* MarkerScene.mm */; };
+		4D877AED1875B98700AE8B10 /* SkillsScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877AEC1875B98700AE8B10 /* SkillsScene.mm */; };
+		4D877AEF1875C16500AE8B10 /* store.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D877AEE1875C16500AE8B10 /* store.plist */; };
 		4D97E3531808777C000CDA95 /* AIState.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D97E3521808777C000CDA95 /* AIState.mm */; };
 		4D97E35618087835000CDA95 /* AIStateDefensive.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D97E35518087835000CDA95 /* AIStateDefensive.mm */; };
 		4D97E35918087947000CDA95 /* AIStateRush.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D97E35818087947000CDA95 /* AIStateRush.mm */; };
@@ -744,6 +747,11 @@
 		4D8432EF184B7910003B28FC /* HudLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HudLayer.mm; sourceTree = "<group>"; };
 		4D877AE51873792A00AE8B10 /* UpgradeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpgradeScene.h; sourceTree = "<group>"; };
 		4D877AE61873792A00AE8B10 /* UpgradeScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UpgradeScene.mm; sourceTree = "<group>"; };
+		4D877AE81875B8C300AE8B10 /* MarkerScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkerScene.h; sourceTree = "<group>"; };
+		4D877AE91875B8C300AE8B10 /* MarkerScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MarkerScene.mm; sourceTree = "<group>"; };
+		4D877AEB1875B98700AE8B10 /* SkillsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillsScene.h; sourceTree = "<group>"; };
+		4D877AEC1875B98700AE8B10 /* SkillsScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SkillsScene.mm; sourceTree = "<group>"; };
+		4D877AEE1875C16500AE8B10 /* store.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = store.plist; sourceTree = "<group>"; };
 		4D97E3511808777C000CDA95 /* AIState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIState.h; sourceTree = "<group>"; };
 		4D97E3521808777C000CDA95 /* AIState.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AIState.mm; sourceTree = "<group>"; };
 		4D97E35418087835000CDA95 /* AIStateDefensive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIStateDefensive.h; sourceTree = "<group>"; };
@@ -905,6 +913,10 @@
 		4D1D800017FCBA890035F8CA /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				4D877AEB1875B98700AE8B10 /* SkillsScene.h */,
+				4D877AEC1875B98700AE8B10 /* SkillsScene.mm */,
+				4D877AE81875B8C300AE8B10 /* MarkerScene.h */,
+				4D877AE91875B8C300AE8B10 /* MarkerScene.mm */,
 				4D877AE51873792A00AE8B10 /* UpgradeScene.h */,
 				4D877AE61873792A00AE8B10 /* UpgradeScene.mm */,
 				4D1D800817FCC1470035F8CA /* GameScene.mm */,
@@ -1587,6 +1599,7 @@
 			children = (
 				4D46931D1710735000837BC5 /* Prefix.pch */,
 				4D46931E1710735000837BC5 /* main.m */,
+				4D877AEE1875C16500AE8B10 /* store.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1861,6 +1874,7 @@
 				4DAA28E517FE144900C26F58 /* Rookie-Normal-iPhone.png in Resources */,
 				4D46910E1710734B00837BC5 /* Icon-Small.png in Resources */,
 				4D1D7FFD17FCBA010035F8CA /* Arrow-Selected-iPhone-hd.png in Resources */,
+				4D877AEF1875C16500AE8B10 /* store.plist in Resources */,
 				4DAA28F017FE144900C26F58 /* Semi-Pro-Selected-iPhone-hd.png in Resources */,
 				4DAA28F617FE144900C26F58 /* Pro-Selected-iPad-hd.png in Resources */,
 				4D4691101710734B00837BC5 /* Icon-Small@2x.png in Resources */,
@@ -2082,8 +2096,10 @@
 				4D4692BA1710734F00837BC5 /* b2Math.cpp in Sources */,
 				4D4692BD1710734F00837BC5 /* b2Settings.cpp in Sources */,
 				4D4692C01710734F00837BC5 /* b2StackAllocator.cpp in Sources */,
+				4D877AEA1875B8C300AE8B10 /* MarkerScene.mm in Sources */,
 				4D4692C31710734F00837BC5 /* b2Timer.cpp in Sources */,
 				4DF73DA217FD0DD300507149 /* Chapters.m in Sources */,
+				4D877AED1875B98700AE8B10 /* SkillsScene.mm in Sources */,
 				4DF73DA717FD0E1C00507149 /* Chapter.m in Sources */,
 				4D4692C71710734F00837BC5 /* b2Body.cpp in Sources */,
 				4D4692CA1710734F00837BC5 /* b2ContactManager.cpp in Sources */,

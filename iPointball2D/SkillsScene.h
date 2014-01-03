@@ -7,7 +7,7 @@
 #import "Constants.h"
 #import "SceneManager.h"
 
-@interface UpgradeScene : CCLayerColor {
+@interface SkillsScene : CCLayerColor {
     
 }
 

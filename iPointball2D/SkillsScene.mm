@@ -2,12 +2,9 @@
 //  SceneName.m  <-- RENAME THIS
 //  
 
-#import "UpgradeScene.h"
+#import "SkillsScene.h"
 
-@implementation UpgradeScene {
-    NSUserDefaults* defaults;
-    CCLabelTTF *dollarsLabel;
-}
+@implementation SkillsScene
 @synthesize iPad;
 
 - (void)onBack: (id) sender {
@@ -15,7 +12,7 @@
      This is where you choose where clicking 'back' sends you.
      */
     //[SceneManager goMainMenu];
-    [SceneManager goMainMenu];
+    [SceneManager goUpgradeMenu];
 }
 
 - (void)addBackButton {
@@ -52,55 +49,29 @@
     }
 }
 
--(void)onMarker {
-    [SceneManager goMarkerMenu];
-}
-
--(void)onSkills {
-    [SceneManager goSkillsMenu];
-}
-
--(void)onPlayer {
-    
-}
-
-- (void)buildUpgradeMenu {
-    [CCMenuItemFont setFontSize:22];
-    
-    CCMenuItemFont* item1 = [CCMenuItemFont itemWithString:@"Player" target:self selector:@selector(onPlayer)];
-    CCMenuItemFont* item2 = [CCMenuItemFont itemWithString:@"Marker" target:self selector:@selector(onMarker)];
-    CCMenuItemFont* item3 = [CCMenuItemFont itemWithString:@"Skills" target:self selector:@selector(onSkills)];
-    
-    CCMenu* menu = [CCMenu menuWithItems:item1,item2,item3, nil];
-    [menu alignItemsInRows:[NSNumber numberWithInt:3], nil];
-    [menu setPosition:ccp(40, [CCDirector sharedDirector].winSize.height - 100)];
-    [self addChild:menu];
-}
-
 - (id)init {
     
-    if( (self=[super initWithColor:ccc4(97, 180, 207, 255)])) {
+    if( (self=[super init])) {
         
         // Determine Screen Size
         CGSize screenSize = [CCDirector sharedDirector].winSize;  
         
         // Calculate Large Font Size
-        int largeFont = screenSize.height / kFontScaleTiny;
-        
-        defaults = [NSUserDefaults standardUserDefaults];
+        int largeFont = screenSize.height / kFontScaleLarge; 
         
         // Create a label
-        dollarsLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"$%i",[defaults integerForKey:@"player_dollars"]] fontName:@"Marker Felt" fontSize:largeFont];
-        
+        CCLabelTTF *label = [CCLabelTTF labelWithString:@"New Scene"    // <-- RENAME THIS
+                                               fontName:@"Marker Felt" 
+                                               fontSize:largeFont];  
 		// Center label
-		dollarsLabel.position = ccp( screenSize.width - 100, screenSize.height - 15);
+		label.position = ccp( screenSize.width/2, screenSize.height/2);  
+        
         // Add label to this scene
-		[self addChild:dollarsLabel z:0];
+		[self addChild:label z:0]; 
 
         //  Put a 'back' button in the scene
-        [self addBackButton];
-        
-        [self buildUpgradeMenu];
+        [self addBackButton];   
+
     }
     return self;
 }

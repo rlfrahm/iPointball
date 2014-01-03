@@ -156,6 +156,9 @@
     if(![defaults integerForKey:@"player_reload"]) {
         [defaults setInteger:1 forKey:@"player_reload"];
     }
+    if(![defaults integerForKey:@"player_dollars"]) {
+        [defaults setInteger:1000 forKey:@"player_dollars"];
+    }
     if(![defaults stringForKey:@"marker_description"]) {
         [defaults setObject:@"Marker 1" forKey:@"marker_description"];
     }
