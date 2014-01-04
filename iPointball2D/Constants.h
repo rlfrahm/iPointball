@@ -17,4 +17,15 @@
 #define kFontScaleMedium 10;
 #define kFontScaleSmall 12;
 #define kFontScaleTiny 14;
-#define PTM_RATIO 32;
+
+#define kFontSizeTiny 12
+#define kFontSizeSmall 14
+#define kFontSizeMedium 22;
+
+#define SCREEN [[CCDirector sharedDirector] winSize]
+#define isIPad UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
+#define DEVICESCALE (isIPad ? 2 : 1)
+
+#define PTM_RATIO (isIPad ? 64 : 32)
+
+#define random_range(low,high) (arc4random()%(high-low+1))+low

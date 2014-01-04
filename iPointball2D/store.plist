@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>skills</key>
+	<array/>
 	<key>hoppers</key>
 	<array/>
 	<key>markers</key>
@@ -15,7 +17,7 @@
 			<integer>1</integer>
 			<key>speed</key>
 			<integer>1</integer>
-			<key>re-sell</key>
+			<key>resale</key>
 			<integer>1</integer>
 			<key>price</key>
 			<integer>0</integer>
@@ -33,7 +35,7 @@
 			<integer>2</integer>
 			<key>speed</key>
 			<integer>2</integer>
-			<key>re-sell</key>
+			<key>resale</key>
 			<integer>10</integer>
 			<key>price</key>
 			<integer>25</integer>
@@ -51,7 +53,7 @@
 			<integer>2</integer>
 			<key>speed</key>
 			<integer>2</integer>
-			<key>re-sell</key>
+			<key>resale</key>
 			<integer>10</integer>
 			<key>price</key>
 			<integer>30</integer>
@@ -69,7 +71,7 @@
 			<integer>3</integer>
 			<key>speed</key>
 			<integer>3</integer>
-			<key>re-sell</key>
+			<key>resale</key>
 			<integer>25</integer>
 			<key>price</key>
 			<integer>100</integer>
@@ -87,7 +89,7 @@
 			<integer>7</integer>
 			<key>speed</key>
 			<integer>5</integer>
-			<key>re-sell</key>
+			<key>resale</key>
 			<integer>100</integer>
 			<key>price</key>
 			<integer>200</integer>
@@ -105,7 +107,7 @@
 			<integer>10</integer>
 			<key>speed</key>
 			<integer>10</integer>
-			<key>re-sell</key>
+			<key>resale</key>
 			<integer>300</integer>
 			<key>price</key>
 			<integer>500</integer>

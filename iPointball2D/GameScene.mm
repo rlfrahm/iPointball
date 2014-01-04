@@ -16,7 +16,6 @@
 #import "HudLayer.h"
 
 #define PAINTFPS 680 // pixels/sec
-#define PTM_RATIO 32 // pixels-meters
 #define boris_random(smallNumber, bigNumber) ((((float) (arc4random() % ((unsigned)RAND_MAX + 1)) / RAND_MAX) * (bigNumber - smallNumber)) + smallNumber)
 
 @implementation GameScene {

@@ -3,10 +3,28 @@
 //  
 
 #import "UpgradeScene.h"
+#import "SWMultiColumnTableView.h"
+#import "PlayerTable.h"
+#import "MarkerTable.h"
+#import "SkillsTable.h"
+#import "ProductShowroomLayer.h"
+
+#define SCREEN [[CCDirector sharedDirector] winSize]
+#define isIPad UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
+#define DEVICESCALE (isIPad ? 2 : 1)
 
 @implementation UpgradeScene {
     NSUserDefaults* defaults;
     CCLabelTTF *dollarsLabel;
+    SWTableView* playerTable;
+    SWTableView* markerTable;
+    SWTableView* skillsTable;
+    
+    PlayerTable* playerTableData;
+    MarkerTable* markerTableData;
+    SkillsTable* skillsTableData;
+    
+    ProductShowroomLayer* productShowroom;
 }
 @synthesize iPad;
 
@@ -33,7 +51,7 @@
         back.position = ccp(64, 64);
         
         // Add menu to this scene
-        [self addChild: back];
+        [self addChild: back z:1];
     }
     else {
         // Create a menu image button for iPhone / iPod Touch
@@ -48,7 +66,7 @@
         back.position = ccp(32, 32);
 
         // Add menu to this scene
-        [self addChild: back];        
+        [self addChild: back z:1];
     }
 }
 
@@ -64,17 +82,82 @@
     
 }
 
+-(void)updateProductShowRoomWithType:(NSString *)type andIndex:(NSUInteger)idx {
+    NSLog(@"Here");
+}
+
+-(void)markerTableView:(SWTableView *)table didSelectCell:(SWTableViewCell *)cell atIndex:(NSUInteger)idx {
+    NSLog(@"Here");
+    [productShowroom showMarkerWithIndex:idx];
+}
+
 - (void)buildUpgradeMenu {
-    [CCMenuItemFont setFontSize:22];
+    // Player table
+    playerTableData = [[PlayerTable alloc] init];
+    CGSize tableSize = CGSizeMake(SCREEN.width/2, SCREEN.height*0.7);
+    playerTable = [SWTableView viewWithDataSource:playerTableData size:tableSize];
+    playerTable.position = ccp(0, SCREEN.height/2 - tableSize.height/2);
+    playerTable.delegate = playerTableData;
+    playerTable.verticalFillOrder = SWTableViewFillTopDown;
+    playerTable.direction = SWScrollViewDirectionVertical;
+    [self addChild:playerTable];
+    [playerTable reloadData];
     
-    CCMenuItemFont* item1 = [CCMenuItemFont itemWithString:@"Player" target:self selector:@selector(onPlayer)];
-    CCMenuItemFont* item2 = [CCMenuItemFont itemWithString:@"Marker" target:self selector:@selector(onMarker)];
-    CCMenuItemFont* item3 = [CCMenuItemFont itemWithString:@"Skills" target:self selector:@selector(onSkills)];
+    // Marker table
+    markerTableData = [[MarkerTable alloc] init];
+    markerTableData.delegate = self;
+    markerTable = [SWTableView viewWithDataSource:markerTableData size:tableSize];
+    markerTable.position = ccp(0, SCREEN.height/2 - tableSize.height/2);
+    markerTable.delegate = markerTableData;
+    markerTable.verticalFillOrder = SWTableViewFillTopDown;
+    markerTable.direction = SWScrollViewDirectionVertical;
+    [self addChild:markerTable];
+    [markerTable reloadData];
+    markerTable.visible = NO;
     
-    CCMenu* menu = [CCMenu menuWithItems:item1,item2,item3, nil];
-    [menu alignItemsInRows:[NSNumber numberWithInt:3], nil];
-    [menu setPosition:ccp(40, [CCDirector sharedDirector].winSize.height - 100)];
-    [self addChild:menu];
+    // Skills table
+    skillsTableData = [[SkillsTable alloc] init];
+    skillsTable = [SWTableView viewWithDataSource:skillsTableData size:tableSize];
+    skillsTable.position = ccp(0, SCREEN.height/2 - tableSize.height/2);
+    skillsTable.delegate = skillsTableData;
+    skillsTable.verticalFillOrder = SWTableViewFillTopDown;
+    skillsTable.direction = SWScrollViewDirectionVertical;
+    [self addChild:skillsTable];
+    [skillsTable reloadData];
+    skillsTable.visible = NO;
+    
+    // Tabs for the store
+    CCMenuItemFont* player = [CCMenuItemFont itemWithString:@"Player" block:^(id sender) {
+        playerTable.visible = YES;
+        markerTable.visible = NO;
+        skillsTable.visible = NO;
+    }];
+    CCMenuItemFont* marker = [CCMenuItemFont itemWithString:@"Marker" block:^(id sender) {
+        playerTable.visible = NO;
+        markerTable.visible = YES;
+        skillsTable.visible = NO;
+    }];
+    CCMenuItemFont* skills = [CCMenuItemFont itemWithString:@"Skills" block:^(id sender) {
+        playerTable.visible = NO;
+        markerTable.visible = NO;
+        skillsTable.visible = YES;
+    }];
+    [player setFontSize:22];
+    [marker setFontSize:22];
+    [skills setFontSize:22];
+    
+    CCMenu* menu = [CCMenu menuWithItems:player,marker,skills, nil];
+    [menu alignItemsHorizontallyWithPadding:20*DEVICESCALE];
+    [menu setPosition:ccp(tableSize.width/2, SCREEN.height - 30)];
+    [self addChild:menu z:1];
+}
+
+-(void)buildProductShowroom {
+    productShowroom = [[ProductShowroomLayer alloc] init];
+    productShowroom.position = ccp(SCREEN.width/2 + 100, 50);
+    [productShowroom constructShowroom];
+    [productShowroom showMarkerWithIndex:0];
+    [self addChild:productShowroom z:2];
 }
 
 - (id)init {
@@ -97,10 +180,10 @@
         // Add label to this scene
 		[self addChild:dollarsLabel z:0];
 
+        [self buildUpgradeMenu];
+        [self buildProductShowroom];
         //  Put a 'back' button in the scene
         [self addBackButton];
-        
-        [self buildUpgradeMenu];
     }
     return self;
 }

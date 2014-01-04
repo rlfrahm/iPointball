@@ -159,8 +159,11 @@
     if(![defaults integerForKey:@"player_dollars"]) {
         [defaults setInteger:1000 forKey:@"player_dollars"];
     }
+    if(![defaults stringForKey:@"marker_title"]) {
+        [defaults setObject:@"Marker 1" forKey:@"marker_title"];
+    }
     if(![defaults stringForKey:@"marker_description"]) {
-        [defaults setObject:@"Marker 1" forKey:@"marker_description"];
+        [defaults setObject:@"Marker 1 description" forKey:@"marker_description"];
     }
     if(![defaults integerForKey:@"marker_speed"]) {
         [defaults setInteger:1 forKey:@"marker_speed"];

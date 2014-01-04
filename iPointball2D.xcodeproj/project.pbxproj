@@ -226,6 +226,17 @@
 		4D877AEA1875B8C300AE8B10 /* MarkerScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877AE91875B8C300AE8B10 /* MarkerScene.mm */; };
 		4D877AED1875B98700AE8B10 /* SkillsScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877AEC1875B98700AE8B10 /* SkillsScene.mm */; };
 		4D877AEF1875C16500AE8B10 /* store.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D877AEE1875C16500AE8B10 /* store.plist */; };
+		4D877B19187717FC00AE8B10 /* PlayerTable.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B18187717FC00AE8B10 /* PlayerTable.mm */; };
+		4D877B1C1877180C00AE8B10 /* MarkerTable.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B1B1877180C00AE8B10 /* MarkerTable.mm */; };
+		4D877B1F1877181800AE8B10 /* SkillsTable.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B1E1877181800AE8B10 /* SkillsTable.mm */; };
+		4D877B2218771F1700AE8B10 /* UpgradeCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B2118771F1700AE8B10 /* UpgradeCell.mm */; };
+		4D877B41187725AF00AE8B10 /* SWMultiColumnTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B36187725AF00AE8B10 /* SWMultiColumnTableView.m */; };
+		4D877B42187725AF00AE8B10 /* SWScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B38187725AF00AE8B10 /* SWScrollView.m */; };
+		4D877B43187725AF00AE8B10 /* SWSorting.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B3A187725AF00AE8B10 /* SWSorting.m */; };
+		4D877B44187725AF00AE8B10 /* SWTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B3C187725AF00AE8B10 /* SWTableView.m */; };
+		4D877B45187725AF00AE8B10 /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B3E187725AF00AE8B10 /* SWTableViewCell.m */; };
+		4D877B46187725AF00AE8B10 /* SWTableViewSpriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B40187725AF00AE8B10 /* SWTableViewSpriteCell.m */; };
+		4D877B491877572600AE8B10 /* ProductShowroomLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B481877572600AE8B10 /* ProductShowroomLayer.m */; };
 		4D97E3531808777C000CDA95 /* AIState.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D97E3521808777C000CDA95 /* AIState.mm */; };
 		4D97E35618087835000CDA95 /* AIStateDefensive.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D97E35518087835000CDA95 /* AIStateDefensive.mm */; };
 		4D97E35918087947000CDA95 /* AIStateRush.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D97E35818087947000CDA95 /* AIStateRush.mm */; };
@@ -752,6 +763,28 @@
 		4D877AEB1875B98700AE8B10 /* SkillsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillsScene.h; sourceTree = "<group>"; };
 		4D877AEC1875B98700AE8B10 /* SkillsScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SkillsScene.mm; sourceTree = "<group>"; };
 		4D877AEE1875C16500AE8B10 /* store.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = store.plist; sourceTree = "<group>"; };
+		4D877B17187717FC00AE8B10 /* PlayerTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerTable.h; sourceTree = "<group>"; };
+		4D877B18187717FC00AE8B10 /* PlayerTable.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerTable.mm; sourceTree = "<group>"; };
+		4D877B1A1877180C00AE8B10 /* MarkerTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkerTable.h; sourceTree = "<group>"; };
+		4D877B1B1877180C00AE8B10 /* MarkerTable.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MarkerTable.mm; sourceTree = "<group>"; };
+		4D877B1D1877181800AE8B10 /* SkillsTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillsTable.h; sourceTree = "<group>"; };
+		4D877B1E1877181800AE8B10 /* SkillsTable.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SkillsTable.mm; sourceTree = "<group>"; };
+		4D877B2018771F1700AE8B10 /* UpgradeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpgradeCell.h; sourceTree = "<group>"; };
+		4D877B2118771F1700AE8B10 /* UpgradeCell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UpgradeCell.mm; sourceTree = "<group>"; };
+		4D877B35187725AF00AE8B10 /* SWMultiColumnTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWMultiColumnTableView.h; path = ../../../../../../Downloads/tableView/SWMultiColumnTableView.h; sourceTree = "<group>"; };
+		4D877B36187725AF00AE8B10 /* SWMultiColumnTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWMultiColumnTableView.m; path = ../../../../../../Downloads/tableView/SWMultiColumnTableView.m; sourceTree = "<group>"; };
+		4D877B37187725AF00AE8B10 /* SWScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWScrollView.h; path = ../../../../../../Downloads/tableView/SWScrollView.h; sourceTree = "<group>"; };
+		4D877B38187725AF00AE8B10 /* SWScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWScrollView.m; path = ../../../../../../Downloads/tableView/SWScrollView.m; sourceTree = "<group>"; };
+		4D877B39187725AF00AE8B10 /* SWSorting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWSorting.h; path = ../../../../../../Downloads/tableView/SWSorting.h; sourceTree = "<group>"; };
+		4D877B3A187725AF00AE8B10 /* SWSorting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWSorting.m; path = ../../../../../../Downloads/tableView/SWSorting.m; sourceTree = "<group>"; };
+		4D877B3B187725AF00AE8B10 /* SWTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWTableView.h; path = ../../../../../../Downloads/tableView/SWTableView.h; sourceTree = "<group>"; };
+		4D877B3C187725AF00AE8B10 /* SWTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWTableView.m; path = ../../../../../../Downloads/tableView/SWTableView.m; sourceTree = "<group>"; };
+		4D877B3D187725AF00AE8B10 /* SWTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWTableViewCell.h; path = ../../../../../../Downloads/tableView/SWTableViewCell.h; sourceTree = "<group>"; };
+		4D877B3E187725AF00AE8B10 /* SWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWTableViewCell.m; path = ../../../../../../Downloads/tableView/SWTableViewCell.m; sourceTree = "<group>"; };
+		4D877B3F187725AF00AE8B10 /* SWTableViewSpriteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWTableViewSpriteCell.h; path = ../../../../../../Downloads/tableView/SWTableViewSpriteCell.h; sourceTree = "<group>"; };
+		4D877B40187725AF00AE8B10 /* SWTableViewSpriteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWTableViewSpriteCell.m; path = ../../../../../../Downloads/tableView/SWTableViewSpriteCell.m; sourceTree = "<group>"; };
+		4D877B471877572600AE8B10 /* ProductShowroomLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductShowroomLayer.h; sourceTree = "<group>"; };
+		4D877B481877572600AE8B10 /* ProductShowroomLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductShowroomLayer.m; sourceTree = "<group>"; };
 		4D97E3511808777C000CDA95 /* AIState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIState.h; sourceTree = "<group>"; };
 		4D97E3521808777C000CDA95 /* AIState.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AIState.mm; sourceTree = "<group>"; };
 		4D97E35418087835000CDA95 /* AIStateDefensive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIStateDefensive.h; sourceTree = "<group>"; };
@@ -913,12 +946,11 @@
 		4D1D800017FCBA890035F8CA /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				4D877B16187717D700AE8B10 /* Upgrade Scene */,
 				4D877AEB1875B98700AE8B10 /* SkillsScene.h */,
 				4D877AEC1875B98700AE8B10 /* SkillsScene.mm */,
 				4D877AE81875B8C300AE8B10 /* MarkerScene.h */,
 				4D877AE91875B8C300AE8B10 /* MarkerScene.mm */,
-				4D877AE51873792A00AE8B10 /* UpgradeScene.h */,
-				4D877AE61873792A00AE8B10 /* UpgradeScene.mm */,
 				4D1D800817FCC1470035F8CA /* GameScene.mm */,
 				4D1D800917FCC1470035F8CA /* GameScene.h */,
 				4D1D800517FCC12B0035F8CA /* LevelSelect.mm */,
@@ -1604,6 +1636,44 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		4D877B031877176400AE8B10 /* tableView */ = {
+			isa = PBXGroup;
+			children = (
+				4D877B35187725AF00AE8B10 /* SWMultiColumnTableView.h */,
+				4D877B36187725AF00AE8B10 /* SWMultiColumnTableView.m */,
+				4D877B37187725AF00AE8B10 /* SWScrollView.h */,
+				4D877B38187725AF00AE8B10 /* SWScrollView.m */,
+				4D877B39187725AF00AE8B10 /* SWSorting.h */,
+				4D877B3A187725AF00AE8B10 /* SWSorting.m */,
+				4D877B3B187725AF00AE8B10 /* SWTableView.h */,
+				4D877B3C187725AF00AE8B10 /* SWTableView.m */,
+				4D877B3D187725AF00AE8B10 /* SWTableViewCell.h */,
+				4D877B3E187725AF00AE8B10 /* SWTableViewCell.m */,
+				4D877B3F187725AF00AE8B10 /* SWTableViewSpriteCell.h */,
+				4D877B40187725AF00AE8B10 /* SWTableViewSpriteCell.m */,
+			);
+			path = tableView;
+			sourceTree = "<group>";
+		};
+		4D877B16187717D700AE8B10 /* Upgrade Scene */ = {
+			isa = PBXGroup;
+			children = (
+				4D877AE51873792A00AE8B10 /* UpgradeScene.h */,
+				4D877AE61873792A00AE8B10 /* UpgradeScene.mm */,
+				4D877B17187717FC00AE8B10 /* PlayerTable.h */,
+				4D877B18187717FC00AE8B10 /* PlayerTable.mm */,
+				4D877B1A1877180C00AE8B10 /* MarkerTable.h */,
+				4D877B1B1877180C00AE8B10 /* MarkerTable.mm */,
+				4D877B1D1877181800AE8B10 /* SkillsTable.h */,
+				4D877B1E1877181800AE8B10 /* SkillsTable.mm */,
+				4D877B2018771F1700AE8B10 /* UpgradeCell.h */,
+				4D877B2118771F1700AE8B10 /* UpgradeCell.mm */,
+				4D877B471877572600AE8B10 /* ProductShowroomLayer.h */,
+				4D877B481877572600AE8B10 /* ProductShowroomLayer.m */,
+			);
+			name = "Upgrade Scene";
+			sourceTree = "<group>";
+		};
 		4D97E35018087761000CDA95 /* States */ = {
 			isa = PBXGroup;
 			children = (
@@ -1768,6 +1838,7 @@
 		4DF73D9017FD0B5E00507149 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				4D877B031877176400AE8B10 /* tableView */,
 				4DF73D9117FD0B5E00507149 /* CCScrollLayer */,
 			);
 			path = Extensions;
@@ -1970,14 +2041,18 @@
 				4D4691461710734C00837BC5 /* CCAnimationCache.m in Sources */,
 				4D4691491710734C00837BC5 /* CCAtlasNode.m in Sources */,
 				4D46914C1710734C00837BC5 /* CCCamera.m in Sources */,
+				4D877B2218771F1700AE8B10 /* UpgradeCell.mm in Sources */,
+				4D877B44187725AF00AE8B10 /* SWTableView.m in Sources */,
 				4DD249441805F6FC006D9E9B /* AIPlayer.mm in Sources */,
 				4D46914F1710734C00837BC5 /* CCClippingNode.m in Sources */,
 				4D4691531710734C00837BC5 /* CCConfiguration.m in Sources */,
 				4D1D7FEF17FCB7640035F8CA /* OptionsMenu.mm in Sources */,
+				4D877B45187725AF00AE8B10 /* SWTableViewCell.m in Sources */,
 				4D4691561710734C00837BC5 /* ccDeprecated.m in Sources */,
 				4D4691591710734C00837BC5 /* CCDirector.m in Sources */,
 				4D46915C1710734C00837BC5 /* CCDrawingPrimitives.m in Sources */,
 				4D46915F1710734C00837BC5 /* CCDrawNode.m in Sources */,
+				4D877B1C1877180C00AE8B10 /* MarkerTable.mm in Sources */,
 				4D4691621710734C00837BC5 /* ccFPSImages.m in Sources */,
 				4D4691651710734C00837BC5 /* CCGLProgram.m in Sources */,
 				4D1D801B17FCC5F00035F8CA /* TemplateDataParser.m in Sources */,
@@ -1997,7 +2072,9 @@
 				4D46918A1710734D00837BC5 /* CCNode.m in Sources */,
 				4D46918D1710734D00837BC5 /* CCParallaxNode.m in Sources */,
 				4D4691901710734D00837BC5 /* CCParticleBatchNode.m in Sources */,
+				4D877B1F1877181800AE8B10 /* SkillsTable.mm in Sources */,
 				4D4691931710734D00837BC5 /* CCParticleExamples.m in Sources */,
+				4D877B43187725AF00AE8B10 /* SWSorting.m in Sources */,
 				4D4691961710734D00837BC5 /* CCParticleSystem.m in Sources */,
 				4D4691991710734D00837BC5 /* CCParticleSystemQuad.m in Sources */,
 				4D46919C1710734D00837BC5 /* CCPhysicsDebugNode.m in Sources */,
@@ -2033,6 +2110,7 @@
 				4D2016B117FE49CD00392465 /* Player.mm in Sources */,
 				4D4691FC1710734E00837BC5 /* CCDirectorIOS.m in Sources */,
 				4D4691FF1710734E00837BC5 /* CCES2Renderer.m in Sources */,
+				4D877B41187725AF00AE8B10 /* SWMultiColumnTableView.m in Sources */,
 				4D2C4C8117FD825A00FA5E20 /* Level.m in Sources */,
 				4D1D800E17FCC4BE0035F8CA /* GDataXMLNode.m in Sources */,
 				4D4692031710734E00837BC5 /* CCGLView.m in Sources */,
@@ -2082,6 +2160,7 @@
 				4D2016B717FE4CAD00392465 /* Bunker.mm in Sources */,
 				4D4692941710734F00837BC5 /* b2CollideEdge.cpp in Sources */,
 				4D4692961710734F00837BC5 /* b2CollidePolygon.cpp in Sources */,
+				4D877B19187717FC00AE8B10 /* PlayerTable.mm in Sources */,
 				4D4692981710734F00837BC5 /* b2Collision.cpp in Sources */,
 				4D46929B1710734F00837BC5 /* b2Distance.cpp in Sources */,
 				4D46929E1710734F00837BC5 /* b2DynamicTree.cpp in Sources */,
@@ -2090,6 +2169,7 @@
 				4D4692A81710734F00837BC5 /* b2CircleShape.cpp in Sources */,
 				4D4692AB1710734F00837BC5 /* b2EdgeShape.cpp in Sources */,
 				4D4692AE1710734F00837BC5 /* b2PolygonShape.cpp in Sources */,
+				4D877B46187725AF00AE8B10 /* SWTableViewSpriteCell.m in Sources */,
 				4D4692B31710734F00837BC5 /* b2BlockAllocator.cpp in Sources */,
 				4D2016B417FE4C8100392465 /* GameObject.mm in Sources */,
 				4D4692B61710734F00837BC5 /* b2Draw.cpp in Sources */,
@@ -2097,6 +2177,7 @@
 				4D4692BD1710734F00837BC5 /* b2Settings.cpp in Sources */,
 				4D4692C01710734F00837BC5 /* b2StackAllocator.cpp in Sources */,
 				4D877AEA1875B8C300AE8B10 /* MarkerScene.mm in Sources */,
+				4D877B491877572600AE8B10 /* ProductShowroomLayer.m in Sources */,
 				4D4692C31710734F00837BC5 /* b2Timer.cpp in Sources */,
 				4DF73DA217FD0DD300507149 /* Chapters.m in Sources */,
 				4D877AED1875B98700AE8B10 /* SkillsScene.mm in Sources */,
@@ -2132,6 +2213,7 @@
 				4D1D800717FCC12B0035F8CA /* LevelSelect.mm in Sources */,
 				4D46930C1710735000837BC5 /* b2RevoluteJoint.cpp in Sources */,
 				4D46930F1710735000837BC5 /* b2RopeJoint.cpp in Sources */,
+				4D877B42187725AF00AE8B10 /* SWScrollView.m in Sources */,
 				4D4693121710735000837BC5 /* b2WeldJoint.cpp in Sources */,
 				4D4693151710735000837BC5 /* b2WheelJoint.cpp in Sources */,
 				4D4693191710735000837BC5 /* b2Rope.cpp in Sources */,

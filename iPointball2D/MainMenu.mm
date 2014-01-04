@@ -100,9 +100,9 @@ enum {
     
     CCMenuItemFont *item1 = [CCMenuItemFont itemWithString:@"Play" target:self selector:@selector(onPlay:)];
     CCMenuItemFont *item2 = [CCMenuItemFont itemWithString:@"Options" target:self selector:@selector(onOptions:)];
-    CCMenuItemFont *item3 = [CCMenuItemFont itemWithString:@"Upgrade" target:self selector:@selector(onUpgrade:)];
+    CCMenuItemFont *item3 = [CCMenuItemFont itemWithString:@"Pro Shop" target:self selector:@selector(onUpgrade:)];
     
-    CCMenu *menu = [CCMenu menuWithItems:item1,item2,item3, nil];
+    CCMenu *menu = [CCMenu menuWithItems:item1,item3,item2, nil];
     
     [menu alignItemsVertically];
     
