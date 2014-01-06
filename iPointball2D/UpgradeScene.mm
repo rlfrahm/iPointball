@@ -80,10 +80,12 @@
 -(void)buyItemAtIndex:(NSUInteger)idx andNetDollars:(int)dollars {
     // Fired from ProductShowroomLayer.h
     [dollarsLabel setString:[NSString stringWithFormat:@"$%i", dollars]];
+    [markerTable reloadData];
 }
 
 -(void)sellItemAtIndex:(NSUInteger)idx andNetDollars:(int)dollars {
     [dollarsLabel setString:[NSString stringWithFormat:@"$%i", dollars]];
+    [markerTable reloadData];
 }
 
 #pragma mark Initialization

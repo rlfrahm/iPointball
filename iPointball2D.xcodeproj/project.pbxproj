@@ -302,6 +302,8 @@
 		4DAA292A17FE16C800C26F58 /* Locked-iPhone-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA291617FE16C800C26F58 /* Locked-iPhone-hd.png */; };
 		4DAA292B17FE16C800C26F58 /* Locked-iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA291717FE16C800C26F58 /* Locked-iPhone.png */; };
 		4DBF281A187A36EE00B77FAC /* LoadoutScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF2819187A36EE00B77FAC /* LoadoutScene.mm */; };
+		4DBF281E187B2C2500B77FAC /* CollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF281D187B2C2500B77FAC /* CollectionView.m */; };
+		4DBF2821187B302600B77FAC /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF2820187B302600B77FAC /* CollectionViewCell.m */; };
 		4DD249411805F33F006D9E9B /* HumanPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4DD249401805F33F006D9E9B /* HumanPlayer.mm */; };
 		4DD249441805F6FC006D9E9B /* AIPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4DD249431805F6FC006D9E9B /* AIPlayer.mm */; };
 		4DF73D9417FD0B5E00507149 /* CCScrollLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF73D9317FD0B5E00507149 /* CCScrollLayer.m */; };
@@ -854,6 +856,10 @@
 		4DAA291717FE16C800C26F58 /* Locked-iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Locked-iPhone.png"; sourceTree = "<group>"; };
 		4DBF2818187A36EE00B77FAC /* LoadoutScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadoutScene.h; sourceTree = "<group>"; };
 		4DBF2819187A36EE00B77FAC /* LoadoutScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LoadoutScene.mm; sourceTree = "<group>"; };
+		4DBF281C187B2C2500B77FAC /* CollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionView.h; sourceTree = "<group>"; };
+		4DBF281D187B2C2500B77FAC /* CollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionView.m; sourceTree = "<group>"; };
+		4DBF281F187B302600B77FAC /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
+		4DBF2820187B302600B77FAC /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
 		4DD2493F1805F33F006D9E9B /* HumanPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HumanPlayer.h; sourceTree = "<group>"; };
 		4DD249401805F33F006D9E9B /* HumanPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HumanPlayer.mm; sourceTree = "<group>"; };
 		4DD249421805F6FC006D9E9B /* AIPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIPlayer.h; sourceTree = "<group>"; };
@@ -945,8 +951,7 @@
 		4D1D800017FCBA890035F8CA /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				4DBF2818187A36EE00B77FAC /* LoadoutScene.h */,
-				4DBF2819187A36EE00B77FAC /* LoadoutScene.mm */,
+				4DBF281B187B2B6400B77FAC /* Loadout Scene */,
 				4D877B16187717D700AE8B10 /* Upgrade Scene */,
 				4D1D800817FCC1470035F8CA /* GameScene.mm */,
 				4D1D800917FCC1470035F8CA /* GameScene.h */,
@@ -1802,6 +1807,19 @@
 			path = Progress;
 			sourceTree = "<group>";
 		};
+		4DBF281B187B2B6400B77FAC /* Loadout Scene */ = {
+			isa = PBXGroup;
+			children = (
+				4DBF2818187A36EE00B77FAC /* LoadoutScene.h */,
+				4DBF2819187A36EE00B77FAC /* LoadoutScene.mm */,
+				4DBF281C187B2C2500B77FAC /* CollectionView.h */,
+				4DBF281D187B2C2500B77FAC /* CollectionView.m */,
+				4DBF281F187B302600B77FAC /* CollectionViewCell.h */,
+				4DBF2820187B302600B77FAC /* CollectionViewCell.m */,
+			);
+			name = "Loadout Scene";
+			sourceTree = "<group>";
+		};
 		4DD2493E1805F327006D9E9B /* Players */ = {
 			isa = PBXGroup;
 			children = (
@@ -2063,6 +2081,7 @@
 				4D4691741710734C00837BC5 /* CCLabelBMFont.m in Sources */,
 				4DF73DA417FD0DD300507149 /* ChapterParser.m in Sources */,
 				4D4691771710734D00837BC5 /* CCLabelTTF.m in Sources */,
+				4DBF2821187B302600B77FAC /* CollectionViewCell.m in Sources */,
 				4D46917A1710734D00837BC5 /* CCLayer.m in Sources */,
 				4D46917E1710734D00837BC5 /* CCMenu.m in Sources */,
 				4D4691811710734D00837BC5 /* CCMenuItem.m in Sources */,
@@ -2092,6 +2111,7 @@
 				4D4691D01710734D00837BC5 /* CCTexture2D.m in Sources */,
 				4D4691D31710734D00837BC5 /* CCTextureAtlas.m in Sources */,
 				4D4691D61710734D00837BC5 /* CCTextureCache.m in Sources */,
+				4DBF281E187B2C2500B77FAC /* CollectionView.m in Sources */,
 				4D1D800417FCC0FD0035F8CA /* ChapterSelect.mm in Sources */,
 				4D4691D91710734D00837BC5 /* CCTexturePVR.m in Sources */,
 				4D4691DC1710734D00837BC5 /* CCTileMapAtlas.m in Sources */,

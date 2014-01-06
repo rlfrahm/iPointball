@@ -3,8 +3,11 @@
 //  
 
 #import "LoadoutScene.h"
+#import "CollectionView.h"
 
-@implementation LoadoutScene
+@implementation LoadoutScene {
+    NSUserDefaults* defaults;
+}
 @synthesize iPad;
 
 - (void)onBack: (id) sender {
@@ -57,6 +60,37 @@
     [self addChild:menu];
 }
 
+-(void)buildMarkerLoadout {
+    CCMenuItemFont* marker = [CCMenuItemFont itemWithString:[defaults stringForKey:@"marker_title"] block:^(id sender){
+        NSURL* file = [[NSBundle mainBundle] URLForResource:@"upgrades" withExtension:@"plist"];
+        NSDictionary* d = [NSDictionary dictionaryWithContentsOfURL:file];
+        CollectionView* collection = [[CollectionView alloc] initWithData:[d objectForKey:@"markers"]];
+        [collection setPosition:ccp(SCREEN.width/4, SCREEN.height/5)];
+        [collection setContentSize:CGSizeMake(SCREEN.width/2, SCREEN.height/2)];
+        [self addChild:collection];
+    }];
+    [marker setFontSize:22];
+    CCMenu* menu = [CCMenu menuWithItems:marker, nil];
+    [menu setPosition:ccp(SCREEN.width/4, SCREEN.height/2)];
+    [self addChild:menu];
+}
+
+-(void)buildBarrelLoadout {
+    
+}
+
+-(void)buildHopperLoadout {
+    
+}
+
+-(void)buildPodLoadout {
+    
+}
+
+-(void)buildApparelLoadout {
+    
+}
+
 - (id)init {
     
     if( (self=[super init])) {
@@ -71,7 +105,7 @@
         int largeFont = screenSize.height / kFontScaleLarge; 
         
         // Create a label
-        CCLabelTTF *label = [CCLabelTTF labelWithString:@"Loadout Scene"    // <-- RENAME THIS
+        CCLabelTTF *label = [CCLabelTTF labelWithString:@"Loadout Scene"
                                                fontName:@"Marker Felt" 
                                                fontSize:largeFont];  
 		// Center label
@@ -83,6 +117,13 @@
         //  Put a 'back' button in the scene
         [self addBackButton];   
         //[self addPlayButton];
+        
+        defaults = [NSUserDefaults standardUserDefaults];
+        [self buildMarkerLoadout];
+        [self buildBarrelLoadout];
+        [self buildHopperLoadout];
+        [self buildPodLoadout];
+        [self buildApparelLoadout];
     }
     return self;
 }
