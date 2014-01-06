@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>handling</key>
+	<dict>
+		<key>cost</key>
+		<integer>1</integer>
+		<key>description</key>
+		<string>The speed at which the player can move their marker.</string>
+		<key>title</key>
+		<string>Handling</string>
+		<key>value</key>
+		<integer>1</integer>
+	</dict>
+	<key>reload</key>
+	<dict>
+		<key>description</key>
+		<string>The speed at which the player can reload their marker.</string>
+		<key>title</key>
+		<string>Reload</string>
+		<key>cost</key>
+		<integer>1</integer>
+		<key>value</key>
+		<integer>1</integer>
+	</dict>
+	<key>trigger</key>
+	<dict>
+		<key>description</key>
+		<string>The fire rate of the player.</string>
+		<key>title</key>
+		<string>Trigger</string>
+		<key>cost</key>
+		<integer>1</integer>
+		<key>value</key>
+		<integer>1</integer>
+	</dict>
+	<key>speed</key>
+	<dict>
+		<key>description</key>
+		<string>The speed at which the player can run.</string>
+		<key>title</key>
+		<string>Speed</string>
+		<key>cost</key>
+		<integer>1</integer>
+		<key>value</key>
+		<integer>1</integer>
+	</dict>
+</dict>
+</plist>

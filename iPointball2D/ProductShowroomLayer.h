@@ -8,9 +8,20 @@
 
 #import "cocos2d.h"
 
-@interface ProductShowroomLayer : CCLayer
+@protocol ProductShowroomLayerDelegate;
+
+@interface ProductShowroomLayer : CCLayer<UIAlertViewDelegate>
+
+@property (nonatomic, assign) id<ProductShowroomLayerDelegate> delegate;
 
 -(void)constructShowroom;
 -(void)showMarkerWithIndex:(NSUInteger)idx;
+
+@end
+
+@protocol ProductShowroomLayerDelegate <NSObject>
+
+-(void)buyItemAtIndex:(NSUInteger)idx andNetDollars:(int)dollars;
+-(void)sellItemAtIndex:(NSUInteger)idx andNetDollars:(int)dollars;
 
 @end

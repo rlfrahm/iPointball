@@ -70,26 +70,23 @@
     }
 }
 
--(void)onMarker {
-    [SceneManager goMarkerMenu];
-}
-
--(void)onSkills {
-    [SceneManager goSkillsMenu];
-}
-
--(void)onPlayer {
-    
-}
-
--(void)updateProductShowRoomWithType:(NSString *)type andIndex:(NSUInteger)idx {
-    NSLog(@"Here");
-}
+#pragma mark Delegates
 
 -(void)markerTableView:(SWTableView *)table didSelectCell:(SWTableViewCell *)cell atIndex:(NSUInteger)idx {
-    NSLog(@"Here");
+    // Fired from MarkerTable.h
     [productShowroom showMarkerWithIndex:idx];
 }
+
+-(void)buyItemAtIndex:(NSUInteger)idx andNetDollars:(int)dollars {
+    // Fired from ProductShowroomLayer.h
+    [dollarsLabel setString:[NSString stringWithFormat:@"$%i", dollars]];
+}
+
+-(void)sellItemAtIndex:(NSUInteger)idx andNetDollars:(int)dollars {
+    [dollarsLabel setString:[NSString stringWithFormat:@"$%i", dollars]];
+}
+
+#pragma mark Initialization
 
 - (void)buildUpgradeMenu {
     // Player table
@@ -127,7 +124,7 @@
     skillsTable.visible = NO;
     
     // Tabs for the store
-    CCMenuItemFont* player = [CCMenuItemFont itemWithString:@"Player" block:^(id sender) {
+    CCMenuItemFont* player = [CCMenuItemFont itemWithString:@"Apparel" block:^(id sender) {
         playerTable.visible = YES;
         markerTable.visible = NO;
         skillsTable.visible = NO;
@@ -154,6 +151,7 @@
 
 -(void)buildProductShowroom {
     productShowroom = [[ProductShowroomLayer alloc] init];
+    productShowroom.delegate = self;
     productShowroom.position = ccp(SCREEN.width/2 + 100, 50);
     [productShowroom constructShowroom];
     [productShowroom showMarkerWithIndex:0];

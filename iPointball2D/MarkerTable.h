@@ -16,8 +16,6 @@
 
 @property (nonatomic, assign) id<MarkerTableDelegate> delegate;
 
--(void)upgrades:(NSArray*)array;
-
 @end
 
 @protocol MarkerTableDelegate <NSObject>

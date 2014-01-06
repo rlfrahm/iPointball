@@ -45,14 +45,9 @@
     [self go:[UpgradeScene node]];
 }
 
-+(void) goMarkerMenu
++(void) goLoadoutMenu
 {
-    [self go:[MarkerScene node]];
-}
-
-+(void) goSkillsMenu
-{
-    [self go:[SkillsScene node]];
+    [self go:[LoadoutScene node]];
 }
 
 +(void) go: (CCLayer *) layer {

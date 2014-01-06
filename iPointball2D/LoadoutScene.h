@@ -7,7 +7,7 @@
 #import "Constants.h"
 #import "SceneManager.h"
 
-@interface SkillsScene : CCLayerColor {
+@interface LoadoutScene : CCLayer {  // <-- RENAME THIS (the SceneName bit)
     
 }
 

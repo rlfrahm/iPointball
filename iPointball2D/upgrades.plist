@@ -2,10 +2,51 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>skills</key>
-	<array/>
+	<key>barrels</key>
+	<array>
+		<dict>
+			<key>price</key>
+			<integer>0</integer>
+			<key>owned</key>
+			<true/>
+			<key>accuracy</key>
+			<integer>1</integer>
+			<key>title</key>
+			<string>Barrel 1</string>
+			<key>description</key>
+			<string>Beginer barrel</string>
+		</dict>
+	</array>
+	<key>pods</key>
+	<array>
+		<dict>
+			<key>price</key>
+			<integer>0</integer>
+			<key>owned</key>
+			<true/>
+			<key>capacity</key>
+			<integer>40</integer>
+			<key>title</key>
+			<string>Pod 1</string>
+			<key>description</key>
+			<string>Beginer pod</string>
+		</dict>
+	</array>
 	<key>hoppers</key>
-	<array/>
+	<array>
+		<dict>
+			<key>price</key>
+			<integer>0</integer>
+			<key>owned</key>
+			<true/>
+			<key>capacity</key>
+			<integer>50</integer>
+			<key>title</key>
+			<string>Hopper 1</string>
+			<key>description</key>
+			<string>Beginer hopper</string>
+		</dict>
+	</array>
 	<key>markers</key>
 	<array>
 		<dict>

@@ -9,7 +9,10 @@
 #import "SkillsTable.h"
 #import "UpgradeCell.h"
 
-@implementation SkillsTable
+@implementation SkillsTable {
+    NSDictionary* skills;
+    NSArray* skillsList;
+}
 
 -(Class)cellClassForTable:(SWTableView*)table {
     return [UpgradeCell class];
@@ -19,8 +22,19 @@
     return [UpgradeCell cellSize];
 }
 
+-(id)init {
+    self = [super init];
+    if(self) {
+        NSURL* file = [[NSBundle mainBundle] URLForResource:@"skills" withExtension:@"plist"];
+        skills = [NSDictionary dictionaryWithContentsOfURL:file];
+        skillsList = [NSArray arrayWithObjects:@"handling",@"reload",@"trigger",@"speed", nil];
+    }
+    return self;
+}
+
 -(SWTableViewCell*)table:(SWTableView *)table cellAtIndex:(NSUInteger)idx {
     SWTableViewCell* cell = [table dequeueCell];
+    NSDictionary* cellContents = [skills objectForKey:[skillsList objectAtIndex:idx]];
     
     if(!cell) {
         cell = [[UpgradeCell new] autorelease];
@@ -34,8 +48,8 @@
     sprite.color = ccc3(255, 151, 0);
     sprite.textureRect = CGRectMake(0, 0, size.width, size.height);
     
-    CCLabelTTF* label = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"Skill %i", idx] fontName:@"Palatino-Bold" fontSize:22];
-    label.position = ccp(size.width/2,size.height/2);
+    CCLabelTTF* label = [CCLabelTTF labelWithString:[cellContents objectForKey:@"title"] fontName:@"Palatino-Bold" fontSize:18];
+    label.position = ccp(size.width/2 - 80,size.height/2);
     [sprite addChild:label];
     
     sprite.anchorPoint = CGPointZero;
@@ -45,7 +59,7 @@
 }
 
 -(NSUInteger)numberOfCellsInTableView:(SWTableView *)table {
-    return 15;
+    return 4;
 }
 
 -(void)table:(SWTableView *)table cellTouched:(SWTableViewCell *)cell {

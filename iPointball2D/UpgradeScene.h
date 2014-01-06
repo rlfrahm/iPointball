@@ -7,8 +7,9 @@
 #import "Constants.h"
 #import "SceneManager.h"
 #import "MarkerTable.h"
+#import "ProductShowroomLayer.h"
 
-@interface UpgradeScene : CCLayerColor<MarkerTableDelegate> {
+@interface UpgradeScene : CCLayerColor<MarkerTableDelegate, ProductShowroomLayerDelegate> {
     
 }
 

@@ -65,6 +65,15 @@
     }
 }
 
+-(void)addLoadoutSelectButton {
+    CCMenuItemFont* loadoutButton = [CCMenuItemFont itemWithString:@"Loadout" block:^(id sender){
+        [SceneManager goLoadoutMenu];
+    }];
+    CCMenu* menu = [CCMenu menuWithItems:loadoutButton, nil];
+    [menu setPosition:ccp(SCREEN.width - 80, 20)];
+    [self addChild:menu];
+}
+
 - (id)init {
     
     if( (self=[super initWithColor:ccc4(97, 180, 207, 255)])) {
@@ -175,7 +184,7 @@
 
         //  Put a 'back' button in the scene
         [self addBackButton];   
-
+        [self addLoadoutSelectButton];
     }
     return self;
 }

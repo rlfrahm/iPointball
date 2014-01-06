@@ -144,6 +144,7 @@
 	[window_ makeKeyAndVisible];
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    // Player defaults
     if(![defaults integerForKey:@"player_speed"]) {
         [defaults setInteger:1 forKey:@"player_speed"];
     }
@@ -159,6 +160,7 @@
     if(![defaults integerForKey:@"player_dollars"]) {
         [defaults setInteger:1000 forKey:@"player_dollars"];
     }
+    // Marker defaults
     if(![defaults stringForKey:@"marker_title"]) {
         [defaults setObject:@"Marker 1" forKey:@"marker_title"];
     }
@@ -174,12 +176,14 @@
     if(![defaults integerForKey:@"marker_quality"]) {
         [defaults setInteger:1 forKey:@"marker_quality"];
     }
+    // Hopper defaults
     if(![defaults stringForKey:@"hopper_description"]) {
         [defaults setObject:@"Junky old hopper" forKey:@"hopper_description"];
     }
     if(![defaults integerForKey:@"hopper_capacity"]) {
         [defaults setInteger:50 forKey:@"hopper_capacity"];
     }
+    // Pod defaults
     if(![defaults integerForKey:@"pods_capacity"]) {
         [defaults setInteger:40 forKey:@"pods_capacity"];
     }

@@ -223,9 +223,7 @@
 		4D6A14F11728D814008DA350 /* features.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4D6A14F01728D814008DA350 /* features.txt */; };
 		4D8432F0184B7911003B28FC /* HudLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D8432EF184B7910003B28FC /* HudLayer.mm */; };
 		4D877AE71873792A00AE8B10 /* UpgradeScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877AE61873792A00AE8B10 /* UpgradeScene.mm */; };
-		4D877AEA1875B8C300AE8B10 /* MarkerScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877AE91875B8C300AE8B10 /* MarkerScene.mm */; };
-		4D877AED1875B98700AE8B10 /* SkillsScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877AEC1875B98700AE8B10 /* SkillsScene.mm */; };
-		4D877AEF1875C16500AE8B10 /* store.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D877AEE1875C16500AE8B10 /* store.plist */; };
+		4D877AEF1875C16500AE8B10 /* upgrades.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D877AEE1875C16500AE8B10 /* upgrades.plist */; };
 		4D877B19187717FC00AE8B10 /* PlayerTable.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B18187717FC00AE8B10 /* PlayerTable.mm */; };
 		4D877B1C1877180C00AE8B10 /* MarkerTable.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B1B1877180C00AE8B10 /* MarkerTable.mm */; };
 		4D877B1F1877181800AE8B10 /* SkillsTable.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B1E1877181800AE8B10 /* SkillsTable.mm */; };
@@ -236,7 +234,8 @@
 		4D877B44187725AF00AE8B10 /* SWTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B3C187725AF00AE8B10 /* SWTableView.m */; };
 		4D877B45187725AF00AE8B10 /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B3E187725AF00AE8B10 /* SWTableViewCell.m */; };
 		4D877B46187725AF00AE8B10 /* SWTableViewSpriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B40187725AF00AE8B10 /* SWTableViewSpriteCell.m */; };
-		4D877B491877572600AE8B10 /* ProductShowroomLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B481877572600AE8B10 /* ProductShowroomLayer.m */; };
+		4D877B491877572600AE8B10 /* ProductShowroomLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B481877572600AE8B10 /* ProductShowroomLayer.mm */; };
+		4D877B4B18785BDC00AE8B10 /* skills.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D877B4A18785BDC00AE8B10 /* skills.plist */; };
 		4D97E3531808777C000CDA95 /* AIState.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D97E3521808777C000CDA95 /* AIState.mm */; };
 		4D97E35618087835000CDA95 /* AIStateDefensive.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D97E35518087835000CDA95 /* AIStateDefensive.mm */; };
 		4D97E35918087947000CDA95 /* AIStateRush.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D97E35818087947000CDA95 /* AIStateRush.mm */; };
@@ -302,6 +301,7 @@
 		4DAA292917FE16C800C26F58 /* Locked-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA291517FE16C800C26F58 /* Locked-iPad.png */; };
 		4DAA292A17FE16C800C26F58 /* Locked-iPhone-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA291617FE16C800C26F58 /* Locked-iPhone-hd.png */; };
 		4DAA292B17FE16C800C26F58 /* Locked-iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DAA291717FE16C800C26F58 /* Locked-iPhone.png */; };
+		4DBF281A187A36EE00B77FAC /* LoadoutScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF2819187A36EE00B77FAC /* LoadoutScene.mm */; };
 		4DD249411805F33F006D9E9B /* HumanPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4DD249401805F33F006D9E9B /* HumanPlayer.mm */; };
 		4DD249441805F6FC006D9E9B /* AIPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4DD249431805F6FC006D9E9B /* AIPlayer.mm */; };
 		4DF73D9417FD0B5E00507149 /* CCScrollLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF73D9317FD0B5E00507149 /* CCScrollLayer.m */; };
@@ -758,11 +758,7 @@
 		4D8432EF184B7910003B28FC /* HudLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HudLayer.mm; sourceTree = "<group>"; };
 		4D877AE51873792A00AE8B10 /* UpgradeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpgradeScene.h; sourceTree = "<group>"; };
 		4D877AE61873792A00AE8B10 /* UpgradeScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UpgradeScene.mm; sourceTree = "<group>"; };
-		4D877AE81875B8C300AE8B10 /* MarkerScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkerScene.h; sourceTree = "<group>"; };
-		4D877AE91875B8C300AE8B10 /* MarkerScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MarkerScene.mm; sourceTree = "<group>"; };
-		4D877AEB1875B98700AE8B10 /* SkillsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillsScene.h; sourceTree = "<group>"; };
-		4D877AEC1875B98700AE8B10 /* SkillsScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SkillsScene.mm; sourceTree = "<group>"; };
-		4D877AEE1875C16500AE8B10 /* store.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = store.plist; sourceTree = "<group>"; };
+		4D877AEE1875C16500AE8B10 /* upgrades.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = upgrades.plist; sourceTree = "<group>"; };
 		4D877B17187717FC00AE8B10 /* PlayerTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerTable.h; sourceTree = "<group>"; };
 		4D877B18187717FC00AE8B10 /* PlayerTable.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerTable.mm; sourceTree = "<group>"; };
 		4D877B1A1877180C00AE8B10 /* MarkerTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkerTable.h; sourceTree = "<group>"; };
@@ -784,7 +780,8 @@
 		4D877B3F187725AF00AE8B10 /* SWTableViewSpriteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWTableViewSpriteCell.h; path = ../../../../../../Downloads/tableView/SWTableViewSpriteCell.h; sourceTree = "<group>"; };
 		4D877B40187725AF00AE8B10 /* SWTableViewSpriteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWTableViewSpriteCell.m; path = ../../../../../../Downloads/tableView/SWTableViewSpriteCell.m; sourceTree = "<group>"; };
 		4D877B471877572600AE8B10 /* ProductShowroomLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductShowroomLayer.h; sourceTree = "<group>"; };
-		4D877B481877572600AE8B10 /* ProductShowroomLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductShowroomLayer.m; sourceTree = "<group>"; };
+		4D877B481877572600AE8B10 /* ProductShowroomLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ProductShowroomLayer.mm; sourceTree = "<group>"; };
+		4D877B4A18785BDC00AE8B10 /* skills.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = skills.plist; sourceTree = "<group>"; };
 		4D97E3511808777C000CDA95 /* AIState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIState.h; sourceTree = "<group>"; };
 		4D97E3521808777C000CDA95 /* AIState.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AIState.mm; sourceTree = "<group>"; };
 		4D97E35418087835000CDA95 /* AIStateDefensive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIStateDefensive.h; sourceTree = "<group>"; };
@@ -855,6 +852,8 @@
 		4DAA291517FE16C800C26F58 /* Locked-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Locked-iPad.png"; sourceTree = "<group>"; };
 		4DAA291617FE16C800C26F58 /* Locked-iPhone-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Locked-iPhone-hd.png"; sourceTree = "<group>"; };
 		4DAA291717FE16C800C26F58 /* Locked-iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Locked-iPhone.png"; sourceTree = "<group>"; };
+		4DBF2818187A36EE00B77FAC /* LoadoutScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadoutScene.h; sourceTree = "<group>"; };
+		4DBF2819187A36EE00B77FAC /* LoadoutScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LoadoutScene.mm; sourceTree = "<group>"; };
 		4DD2493F1805F33F006D9E9B /* HumanPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HumanPlayer.h; sourceTree = "<group>"; };
 		4DD249401805F33F006D9E9B /* HumanPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HumanPlayer.mm; sourceTree = "<group>"; };
 		4DD249421805F6FC006D9E9B /* AIPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIPlayer.h; sourceTree = "<group>"; };
@@ -946,11 +945,9 @@
 		4D1D800017FCBA890035F8CA /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				4DBF2818187A36EE00B77FAC /* LoadoutScene.h */,
+				4DBF2819187A36EE00B77FAC /* LoadoutScene.mm */,
 				4D877B16187717D700AE8B10 /* Upgrade Scene */,
-				4D877AEB1875B98700AE8B10 /* SkillsScene.h */,
-				4D877AEC1875B98700AE8B10 /* SkillsScene.mm */,
-				4D877AE81875B8C300AE8B10 /* MarkerScene.h */,
-				4D877AE91875B8C300AE8B10 /* MarkerScene.mm */,
 				4D1D800817FCC1470035F8CA /* GameScene.mm */,
 				4D1D800917FCC1470035F8CA /* GameScene.h */,
 				4D1D800517FCC12B0035F8CA /* LevelSelect.mm */,
@@ -1631,7 +1628,8 @@
 			children = (
 				4D46931D1710735000837BC5 /* Prefix.pch */,
 				4D46931E1710735000837BC5 /* main.m */,
-				4D877AEE1875C16500AE8B10 /* store.plist */,
+				4D877AEE1875C16500AE8B10 /* upgrades.plist */,
+				4D877B4A18785BDC00AE8B10 /* skills.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1669,7 +1667,7 @@
 				4D877B2018771F1700AE8B10 /* UpgradeCell.h */,
 				4D877B2118771F1700AE8B10 /* UpgradeCell.mm */,
 				4D877B471877572600AE8B10 /* ProductShowroomLayer.h */,
-				4D877B481877572600AE8B10 /* ProductShowroomLayer.m */,
+				4D877B481877572600AE8B10 /* ProductShowroomLayer.mm */,
 			);
 			name = "Upgrade Scene";
 			sourceTree = "<group>";
@@ -1919,6 +1917,7 @@
 				4DAA291F17FE16C800C26F58 /* 1Star-Normal-iPhone.png in Resources */,
 				4DF73DA317FD0DD300507149 /* Chapters.xml in Resources */,
 				4DAA28FE17FE144900C26F58 /* Renaissance-Selected-iPad-hd.png in Resources */,
+				4D877B4B18785BDC00AE8B10 /* skills.plist in Resources */,
 				4D1D7FFB17FCBA010035F8CA /* Arrow-Normal-iPad.png in Resources */,
 				4DAA292117FE16C800C26F58 /* 2Star-Normal-iPad.png in Resources */,
 				4D4691061710734B00837BC5 /* Default-568h@2x.png in Resources */,
@@ -1945,7 +1944,7 @@
 				4DAA28E517FE144900C26F58 /* Rookie-Normal-iPhone.png in Resources */,
 				4D46910E1710734B00837BC5 /* Icon-Small.png in Resources */,
 				4D1D7FFD17FCBA010035F8CA /* Arrow-Selected-iPhone-hd.png in Resources */,
-				4D877AEF1875C16500AE8B10 /* store.plist in Resources */,
+				4D877AEF1875C16500AE8B10 /* upgrades.plist in Resources */,
 				4DAA28F017FE144900C26F58 /* Semi-Pro-Selected-iPhone-hd.png in Resources */,
 				4DAA28F617FE144900C26F58 /* Pro-Selected-iPad-hd.png in Resources */,
 				4D4691101710734B00837BC5 /* Icon-Small@2x.png in Resources */,
@@ -2033,6 +2032,7 @@
 				4D4691341710734C00837BC5 /* CCActionManager.m in Sources */,
 				4D4691371710734C00837BC5 /* CCActionPageTurn3D.m in Sources */,
 				4DD249411805F33F006D9E9B /* HumanPlayer.mm in Sources */,
+				4DBF281A187A36EE00B77FAC /* LoadoutScene.mm in Sources */,
 				4D46913A1710734C00837BC5 /* CCActionProgressTimer.m in Sources */,
 				4D46913D1710734C00837BC5 /* CCActionTiledGrid.m in Sources */,
 				4D4691401710734C00837BC5 /* CCActionTween.m in Sources */,
@@ -2176,11 +2176,9 @@
 				4D4692BA1710734F00837BC5 /* b2Math.cpp in Sources */,
 				4D4692BD1710734F00837BC5 /* b2Settings.cpp in Sources */,
 				4D4692C01710734F00837BC5 /* b2StackAllocator.cpp in Sources */,
-				4D877AEA1875B8C300AE8B10 /* MarkerScene.mm in Sources */,
-				4D877B491877572600AE8B10 /* ProductShowroomLayer.m in Sources */,
+				4D877B491877572600AE8B10 /* ProductShowroomLayer.mm in Sources */,
 				4D4692C31710734F00837BC5 /* b2Timer.cpp in Sources */,
 				4DF73DA217FD0DD300507149 /* Chapters.m in Sources */,
-				4D877AED1875B98700AE8B10 /* SkillsScene.mm in Sources */,
 				4DF73DA717FD0E1C00507149 /* Chapter.m in Sources */,
 				4D4692C71710734F00837BC5 /* b2Body.cpp in Sources */,
 				4D4692CA1710734F00837BC5 /* b2ContactManager.cpp in Sources */,

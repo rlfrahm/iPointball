@@ -12,14 +12,17 @@
 
 @implementation MarkerTable {
     NSURL* file;
-    NSDictionary* plistContent;
-    NSArray* upgrades;
+    NSMutableArray* plistContent;
     NSDictionary* markerN;
     NSUserDefaults* defaults;
 }
 
--(void)upgrades:(NSArray *)array {
-    upgrades = array;
+-(id)init {
+    self = [super init];
+    if(self) {
+        
+    }
+    return self;
 }
 
 -(Class)cellClassForTable:(SWTableView*)table {
@@ -32,11 +35,13 @@
 
 -(SWTableViewCell*)table:(SWTableView *)table cellAtIndex:(NSUInteger)idx {
     SWTableViewCell* cell = [table dequeueCell];
-    // Create references to store.plist
-    file = [[NSBundle mainBundle] URLForResource:@"store" withExtension:@"plist"];
-    plistContent = [NSDictionary dictionaryWithContentsOfURL:file];
-    upgrades = [plistContent objectForKey:@"markers"];
-    markerN = [upgrades objectAtIndex:idx];
+    // Create references to upgrades.plist
+    file = [[NSBundle mainBundle] URLForResource:@"upgrades" withExtension:@"plist"];
+    NSDictionary* d = [NSDictionary dictionaryWithContentsOfURL:file];
+    plistContent = [NSMutableArray array];
+    plistContent = [d objectForKey:@"markers"];
+    
+    markerN = [plistContent objectAtIndex:idx];
     
     defaults = [NSUserDefaults standardUserDefaults];
     
@@ -52,7 +57,7 @@
     
     sprite.color = ccc3(random_range(10, 100), random_range(10, 100), random_range(10, 100));
     sprite.textureRect = CGRectMake(0, 0, size.width, size.height);
-    sprite.opacity = 255;
+    sprite.opacity = 100;
     
     CCLabelTTF* label = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%@", [markerN objectForKey:@"title"]] fontName:@"Palatino-Bold" fontSize:18];
     label.position = ccp(size.width/2 - 80,size.height/2);
@@ -110,6 +115,7 @@
 
 -(void)dealloc {
     [super dealloc];
+    [plistContent release];
 }
 
 @end

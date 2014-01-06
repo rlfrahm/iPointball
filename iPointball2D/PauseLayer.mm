@@ -7,6 +7,7 @@
 //
 
 #import "PauseLayer.h"
+#import "SceneManager.h"
 
 #define PTM_RATIO 32
 
@@ -24,6 +25,19 @@
         CCSprite* paused = [CCSprite spriteWithFile:@"paused.png"];
         [paused setPosition:ccp(winsize.width - 70, 0)];
         [self addChild:paused];
+        
+        CCMenuItemFont* quitMenuItem = [CCMenuItemFont itemWithString:@"Quit" block:^(id sender){
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Confirm Quit"
+                                                            message:@"Are you sure you want to quit?"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Yes"
+                                                  otherButtonTitles:@"No", nil];
+            [alert show];
+            [alert release];
+        }];
+        CCMenu* menu = [CCMenu menuWithItems:quitMenuItem, nil];
+        [menu setPosition:CGPointMake(SCREEN.width/2, 20)];
+        [self addChild:menu];
     }
     return self;
 }
@@ -32,10 +46,19 @@
 {
     for(UITouch* touch in touches)
     {
-        CGPoint location = [touch locationInView:[touch view]];
-        location = [[CCDirector sharedDirector] convertToGL:location];
         [_gs resume];
         [self.parent removeChild:self cleanup:YES];
+    }
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString* button = [alertView buttonTitleAtIndex:buttonIndex];
+    if([button isEqualToString:@"Yes"]) {
+        [_gs resume];
+        [self.parent removeChild:self cleanup:YES];
+        [SceneManager goLevelSelect];
+    } else {
+        
     }
 }
 

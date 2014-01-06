@@ -10,8 +10,7 @@
 #import "LevelSelect.h"
 #import "GameScene.h"
 #import "UpgradeScene.h"
-#import "MarkerScene.h"
-#import "SkillsScene.h"
+#import "LoadoutScene.h"
 
 @interface SceneManager : NSObject
 
@@ -21,7 +20,6 @@
 +(void) goLevelSelect;
 +(void) goGameScene;
 +(void) goUpgradeMenu;
-+(void) goMarkerMenu;
-+(void) goSkillsMenu;
++(void) goLoadoutMenu;
 
 @end

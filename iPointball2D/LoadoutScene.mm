@@ -1,18 +1,17 @@
 //
-//  SceneName.m  <-- RENAME THIS
+//  SceneName.m
 //  
 
-#import "SkillsScene.h"
+#import "LoadoutScene.h"
 
-@implementation SkillsScene
+@implementation LoadoutScene
 @synthesize iPad;
 
 - (void)onBack: (id) sender {
     /* 
      This is where you choose where clicking 'back' sends you.
      */
-    //[SceneManager goMainMenu];
-    [SceneManager goUpgradeMenu];
+    [SceneManager goLevelSelect];
 }
 
 - (void)addBackButton {
@@ -49,10 +48,22 @@
     }
 }
 
+-(void)addPlayButton {
+    CCMenuItemFont* play = [CCMenuItemFont itemWithString:@"Play" block:^(id sender){
+        [SceneManager goGameScene];
+    }];
+    CCMenu* menu = [CCMenu menuWithItems:play, nil];
+    [menu setPosition:ccp(SCREEN.height - 50, 20)];
+    [self addChild:menu];
+}
+
 - (id)init {
     
     if( (self=[super init])) {
-        
+
+        // Determine Device
+        self.iPad = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
+
         // Determine Screen Size
         CGSize screenSize = [CCDirector sharedDirector].winSize;  
         
@@ -60,7 +71,7 @@
         int largeFont = screenSize.height / kFontScaleLarge; 
         
         // Create a label
-        CCLabelTTF *label = [CCLabelTTF labelWithString:@"New Scene"    // <-- RENAME THIS
+        CCLabelTTF *label = [CCLabelTTF labelWithString:@"Loadout Scene"    // <-- RENAME THIS
                                                fontName:@"Marker Felt" 
                                                fontSize:largeFont];  
 		// Center label
@@ -71,7 +82,7 @@
 
         //  Put a 'back' button in the scene
         [self addBackButton];   
-
+        //[self addPlayButton];
     }
     return self;
 }
