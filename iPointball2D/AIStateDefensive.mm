@@ -97,7 +97,7 @@
 
 -(void)amIWhereINeedToBe:(AIPlayer*)player
 {
-    float d = ccpDistance(player.sprite.position, player.coverLocale);
+    //float d = ccpDistance(player.sprite.position, player.coverLocale);
     if(ccpDistance(player.sprite.position, player.coverLocale) < 340  && _movingback2cover && !_movedone) {
         // We should be back behind cover
         //CCLOG(@"%f", ccpDistance(player.sprite.position, player.coverLocale));

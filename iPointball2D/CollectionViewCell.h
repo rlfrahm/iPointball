@@ -10,7 +10,7 @@
 
 @protocol CollectionViewCellDelegate;
 
-@interface CollectionViewCell : CCLayerColor<CollectionViewCellDelegate>
+@interface CollectionViewCell : CCLayerColor
 
 @property (nonatomic) NSUInteger idx;
 @property (nonatomic, assign) id<CollectionViewCellDelegate> delegate;

@@ -9,8 +9,6 @@
 #import "HumanPlayer.h"
 #import "cocos2d.h"
 
-#define PTM_RATIO 32
-
 @implementation HumanPlayer {
     b2World* _world;
 };

@@ -11,7 +11,7 @@
 @implementation CollectionViewCell
 
 -(id)init {
-    self = [super init];
+    self = [super initWithColor:ccc4(255, 151, 0, 255)];
     if(self) {
         self.touchEnabled = YES;
     }
@@ -22,10 +22,15 @@
     return CGSizeMake(100, 100);
 }
 
--(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+-(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
+    NSLog(@"Here");
     if([self.delegate respondsToSelector:@selector(cellTouchedAtIndex:)]) {
         [self.delegate cellTouchedAtIndex:self.idx];
     }
+}
+
+-(void)cellTouchedAtIndex:(NSUInteger)idx {
+    
 }
 
 @end

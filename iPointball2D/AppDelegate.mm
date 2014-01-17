@@ -176,7 +176,20 @@
     if(![defaults integerForKey:@"marker_quality"]) {
         [defaults setInteger:1 forKey:@"marker_quality"];
     }
+    // Barrel defaults
+    if(![defaults stringForKey:@"barrel_title"]) {
+        [defaults setObject:@"Barrel 1" forKey:@"barrel_title"];
+    }
+    if(![defaults stringForKey:@"barrel_description"]) {
+        [defaults setObject:@"Junk old barrel" forKey:@"barrel_description"];
+    }
+    if(![defaults integerForKey:@"barrel_accuracy"]) {
+        [defaults setInteger:1 forKey:@"barrel_accuracy"];
+    }
     // Hopper defaults
+    if(![defaults stringForKey:@"hopper_title"]) {
+        [defaults setObject:@"Hopper 1" forKey:@"hopper_title"];
+    }
     if(![defaults stringForKey:@"hopper_description"]) {
         [defaults setObject:@"Junky old hopper" forKey:@"hopper_description"];
     }
@@ -184,6 +197,9 @@
         [defaults setInteger:50 forKey:@"hopper_capacity"];
     }
     // Pod defaults
+    if(![defaults stringForKey:@"pods_title"]) {
+        [defaults setObject:@"Pod 1" forKey:@"pods_title"];
+    }
     if(![defaults integerForKey:@"pods_capacity"]) {
         [defaults setInteger:40 forKey:@"pods_capacity"];
     }

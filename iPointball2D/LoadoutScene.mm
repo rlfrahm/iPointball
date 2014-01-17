@@ -3,12 +3,12 @@
 //  
 
 #import "LoadoutScene.h"
-#import "CollectionView.h"
 
 @implementation LoadoutScene {
     NSUserDefaults* defaults;
+    NSDictionary* plistContents;
 }
-@synthesize iPad;
+@synthesize iPad, marker, barrel, hopper, pod;
 
 - (void)onBack: (id) sender {
     /* 
@@ -19,12 +19,9 @@
 
 - (void)addBackButton {
 
-    if (self.iPad) {
+    if (isIPad) {
         // Create a menu image button for iPad
-        CCMenuItemImage *goBack = [CCMenuItemImage itemFromNormalImage:@"Arrow-Normal-iPad.png" 
-                                                         selectedImage:@"Arrow-Selected-iPad.png"
-                                                                target:self 
-                                                              selector:@selector(onBack:)];
+        CCMenuItemImage *goBack = [CCMenuItemImage itemWithNormalImage:@"Arrow-Normal-iPad.png"  selectedImage:@"Arrow-Selected-iPad.png" target:self selector:@selector(onBack:)];
         // Add menu image to menu
         CCMenu *back = [CCMenu menuWithItems: goBack, nil];
 
@@ -36,10 +33,7 @@
     }
     else {
         // Create a menu image button for iPhone / iPod Touch
-        CCMenuItemImage *goBack = [CCMenuItemImage itemFromNormalImage:@"Arrow-Normal-iPhone.png" 
-                                                         selectedImage:@"Arrow-Selected-iPhone.png"
-                                                                target:self 
-                                                              selector:@selector(onBack:)];
+        CCMenuItemImage *goBack = [CCMenuItemImage itemWithNormalImage:@"Arrow-Normal-iPhone.png"  selectedImage:@"Arrow-Selected-iPhone.png" target:self selector:@selector(onBack:)];
         // Add menu image to menu
         CCMenu *back = [CCMenu menuWithItems: goBack, nil];
 
@@ -61,69 +55,108 @@
 }
 
 -(void)buildMarkerLoadout {
-    CCMenuItemFont* marker = [CCMenuItemFont itemWithString:[defaults stringForKey:@"marker_title"] block:^(id sender){
-        NSURL* file = [[NSBundle mainBundle] URLForResource:@"upgrades" withExtension:@"plist"];
-        NSDictionary* d = [NSDictionary dictionaryWithContentsOfURL:file];
-        CollectionView* collection = [[CollectionView alloc] initWithData:[d objectForKey:@"markers"]];
+    marker = [CCMenuItemFont itemWithString:[defaults stringForKey:@"marker_title"] block:^(id sender){
+        CollectionView* collection = [[CollectionView alloc] initWithData:[[self loadPlistData] objectForKey:@"markers"]];
+        collection.delegate = self;
+        collection.type = @"markers";
         [collection setPosition:ccp(SCREEN.width/4, SCREEN.height/5)];
         [collection setContentSize:CGSizeMake(SCREEN.width/2, SCREEN.height/2)];
         [self addChild:collection];
     }];
     [marker setFontSize:22];
     CCMenu* menu = [CCMenu menuWithItems:marker, nil];
-    [menu setPosition:ccp(SCREEN.width/4, SCREEN.height/2)];
+    [menu setPosition:ccp(SCREEN.width/6, SCREEN.height/2)];
     [self addChild:menu];
 }
 
 -(void)buildBarrelLoadout {
-    
+    barrel = [CCMenuItemFont itemWithString:@"Barrel 1" block:^(id sender){
+        CollectionView* collection = [[CollectionView alloc] initWithData:[[self loadPlistData] objectForKey:@"barrels"]];
+        collection.delegate = self;
+        collection.type = @"barrels";
+        [collection setPosition:ccp(SCREEN.width/4, SCREEN.height/5)];
+        [collection setContentSize:CGSizeMake(SCREEN.width/2, SCREEN.height/2)];
+        [self addChild:collection];
+    }];
+    [barrel setFontSize:22];
+    CCMenu* menu = [CCMenu menuWithItems:barrel, nil];
+    [menu setPosition:ccp(SCREEN.width/2.5, SCREEN.height/2)];
+    [self addChild:menu];
 }
 
 -(void)buildHopperLoadout {
-    
+    hopper = [CCMenuItemFont itemWithString:[defaults stringForKey:@"hopper_title"] block:^(id sender){
+        CollectionView* collection = [[CollectionView alloc] initWithData:[[self loadPlistData] objectForKey:@"hoppers"]];
+        collection.delegate = self;
+        collection.type = @"hoppers";
+        [collection setPosition:ccp(SCREEN.width/4, SCREEN.height/5)];
+        [collection setContentSize:CGSizeMake(SCREEN.width/2, SCREEN.height/2)];
+        [self addChild:collection];
+    }];
+    [hopper setFontSize:22];
+    CCMenu* menu = [CCMenu menuWithItems:hopper, nil];
+    [menu setPosition:ccp(SCREEN.width/1.5, SCREEN.height/2)];
+    [self addChild:menu];
 }
 
 -(void)buildPodLoadout {
-    
+    pod = [CCMenuItemFont itemWithString:[defaults stringForKey:@"pods_title"] block:^(id sender){
+        CollectionView* collection = [[CollectionView alloc] initWithData:[[self loadPlistData] objectForKey:@"pods"]];
+        collection.delegate = self;
+        collection.type = @"pods";
+        [collection setPosition:ccp(SCREEN.width/4, SCREEN.height/5)];
+        [collection setContentSize:CGSizeMake(SCREEN.width/2, SCREEN.height/2)];
+        [self addChild:collection];
+    }];
+    [pod setFontSize:22];
+    CCMenu* menu = [CCMenu menuWithItems:pod, nil];
+    [menu setPosition:ccp(SCREEN.width/1.1, SCREEN.height/2)];
+    [self addChild:menu];
 }
 
 -(void)buildApparelLoadout {
     
 }
 
+-(void)cellTouchedAtIndex:(NSUInteger)idx andType:(NSString *)type{
+    defaults = [NSUserDefaults standardUserDefaults];
+    if([type isEqualToString:@"markers"]) {
+        NSLog(@"%@", [defaults stringForKey:@"marker_title"]);
+        [marker setString:[defaults stringForKey:@"marker_title"]];
+    } else if([type isEqualToString:@"barrels"]) {
+        [barrel setString:[defaults stringForKey:@"barrel_title"]];
+    } else if([type isEqualToString:@"hoppers"]) {
+        [hopper setString:[defaults stringForKey:@"hopper_title"]];
+    } else if([type isEqualToString:@"pods"]) {
+        [pod setString:[defaults stringForKey:@"pods_title"]];
+    }
+}
+
+-(NSDictionary*)loadPlistData {
+    NSURL* url = [[NSBundle mainBundle] URLForResource:@"upgrades" withExtension:@"plist"];
+    return [NSDictionary dictionaryWithContentsOfURL:url];
+}
+
 - (id)init {
     
-    if( (self=[super init])) {
+    if( (self=[super initWithColor:ccc4(97, 180, 207, 255)])) {
 
         // Determine Device
         self.iPad = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
-
-        // Determine Screen Size
-        CGSize screenSize = [CCDirector sharedDirector].winSize;  
-        
-        // Calculate Large Font Size
-        int largeFont = screenSize.height / kFontScaleLarge; 
-        
-        // Create a label
-        CCLabelTTF *label = [CCLabelTTF labelWithString:@"Loadout Scene"
-                                               fontName:@"Marker Felt" 
-                                               fontSize:largeFont];  
-		// Center label
-		label.position = ccp( screenSize.width/2, screenSize.height/2);  
-        
-        // Add label to this scene
-		[self addChild:label z:0]; 
 
         //  Put a 'back' button in the scene
         [self addBackButton];   
         //[self addPlayButton];
         
         defaults = [NSUserDefaults standardUserDefaults];
+        plistContents = [self loadPlistData];
         [self buildMarkerLoadout];
         [self buildBarrelLoadout];
         [self buildHopperLoadout];
         [self buildPodLoadout];
         [self buildApparelLoadout];
+        
+        self.touchEnabled = YES;
     }
     return self;
 }

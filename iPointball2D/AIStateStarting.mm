@@ -20,6 +20,8 @@
 #import "AIStateRush.h"
 #import "Bunker.h"
 
+#define MIN_NEXT_TO_BUNKER_DISTANCE 338
+
 @implementation AIStateStarting {
     Bunker* _bunker;
     CGPoint _bunkerPt;
@@ -45,8 +47,8 @@
         [player changeState:[[AIStateRush alloc]init]];
         return;
     } else if (_bunkerPt.x > 0 && _bunkerPt.y > 0){
-        float d = ccpDistance(_bunkerPt, player.sprite.position);
-        if(ccpDistance(_bunkerPt, player.sprite.position) < 338) {
+        //float d = ccpDistance(_bunkerPt, player.sprite.position);
+        if(ccpDistance(_bunkerPt, player.sprite.position) < MIN_NEXT_TO_BUNKER_DISTANCE) {
             // Stop and change to defensive mentality
             [player stopMovement];
             [player changeState:[[AIStateDefensive alloc]init]];

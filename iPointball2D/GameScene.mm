@@ -534,7 +534,11 @@
         } else {
             ccDrawColor4F(1.0f, 0.0f, 0.0f, 1.0f);
         }
-        ccDrawLine(p.eye, p.target);
+        for(int i=0; i<p.rayVectors.count;i++) {
+            CGPoint pt = [[p.rayVectors objectAtIndex:i] CGPointValue];
+            ccDrawLine(p.eye, pt);
+        }
+        //ccDrawLine(p.eye, p.target);
         
         for(int i=0;i<p.targetOptions.count;i++) {
             NSValue* v = [p.targetOptions objectAtIndex:i];

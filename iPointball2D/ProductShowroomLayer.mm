@@ -26,6 +26,8 @@
     CCMenuItemFont* buySellMenuItem;
     CCMenu* menu;
     
+    CCSprite* markerSprite;
+    
     BOOL owned;
     
     NSURL* file;
@@ -122,6 +124,7 @@
 }
 
 -(void)showMarkerWithIndex:(NSUInteger)idx {
+    [self removeChild:markerSprite cleanup:YES];
     marker = [self getObjectForKey:@"markers" atIndex:idx];
     index = idx;
     //title = [self makeSmallLabelWithString:[marker objectForKey:@"title"]];
@@ -133,6 +136,12 @@
     [price setString:[NSString stringWithFormat:@"$%@",[marker objectForKey:@"price"]]];
     [resale setString:[NSString stringWithFormat:@"$%@",[marker objectForKey:@"resale"]]];
     owned = [[marker objectForKey:@"owned"] boolValue];
+    markerSprite = [[CCSprite alloc] initWithFile:[NSString stringWithFormat:@"%@",[marker objectForKey:@"file"]]];
+    [markerSprite setPosition:ccp(0, 125)];
+    [markerSprite setContentSize:CGSizeMake(50, 50)];
+    markerSprite.scaleX = 0.4;
+    markerSprite.scaleY = 0.4;
+    [self addChild:markerSprite];
     
     if(owned) {
         [buySellMenuItem setString:@"Sell"];

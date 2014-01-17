@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D0334F61888C39D0005B2CB /* marker_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0334F51888C39D0005B2CB /* marker_1.png */; };
+		4D0334F81888C3A70005B2CB /* marker_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0334F71888C3A70005B2CB /* marker_2.png */; };
+		4D0334FA1888C3B00005B2CB /* marker_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0334F91888C3B00005B2CB /* marker_3.png */; };
+		4D0334FC1888C3B70005B2CB /* marker_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0334FB1888C3B70005B2CB /* marker_5.png */; };
+		4D0334FE1888C3F50005B2CB /* marker_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0334FD1888C3F50005B2CB /* marker_4.png */; };
+		4D0335001888C4050005B2CB /* marker_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0334FF1888C4050005B2CB /* marker_6.png */; };
+		4D0335031888DCC10005B2CB /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0335021888DCC10005B2CB /* back.png */; };
+		4D0335051888DCC60005B2CB /* backspace.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0335041888DCC60005B2CB /* backspace.png */; };
 		4D0E6B1A181D585F0016E27B /* PauseLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D0E6B19181D585F0016E27B /* PauseLayer.mm */; };
 		4D0E6B1C181D80C00016E27B /* paused.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0E6B1B181D80C00016E27B /* paused.png */; };
 		4D1A9AC918001DCF004D663F /* Paint.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D1A9AC818001DCF004D663F /* Paint.mm */; };
@@ -322,6 +330,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4D0334F51888C39D0005B2CB /* marker_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker_1.png; sourceTree = "<group>"; };
+		4D0334F71888C3A70005B2CB /* marker_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker_2.png; sourceTree = "<group>"; };
+		4D0334F91888C3B00005B2CB /* marker_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker_3.png; sourceTree = "<group>"; };
+		4D0334FB1888C3B70005B2CB /* marker_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker_5.png; sourceTree = "<group>"; };
+		4D0334FD1888C3F50005B2CB /* marker_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker_4.png; sourceTree = "<group>"; };
+		4D0334FF1888C4050005B2CB /* marker_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker_6.png; sourceTree = "<group>"; };
+		4D0335021888DCC10005B2CB /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
+		4D0335041888DCC60005B2CB /* backspace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backspace.png; sourceTree = "<group>"; };
 		4D0E6B18181D585F0016E27B /* PauseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseLayer.h; sourceTree = "<group>"; };
 		4D0E6B19181D585F0016E27B /* PauseLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PauseLayer.mm; sourceTree = "<group>"; };
 		4D0E6B1B181D80C00016E27B /* paused.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paused.png; sourceTree = "<group>"; };
@@ -903,15 +919,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4D0E6B17181D583E0016E27B /* Layers */ = {
+		4D0334F41888C38E0005B2CB /* markers */ = {
 			isa = PBXGroup;
 			children = (
+				4D0334FF1888C4050005B2CB /* marker_6.png */,
+				4D0334FD1888C3F50005B2CB /* marker_4.png */,
+				4D0334FB1888C3B70005B2CB /* marker_5.png */,
+				4D0334F91888C3B00005B2CB /* marker_3.png */,
+				4D0334F71888C3A70005B2CB /* marker_2.png */,
+				4D0334F51888C39D0005B2CB /* marker_1.png */,
+			);
+			name = markers;
+			sourceTree = "<group>";
+		};
+		4D0335011888DCB80005B2CB /* navigation */ = {
+			isa = PBXGroup;
+			children = (
+				4D0335041888DCC60005B2CB /* backspace.png */,
+				4D0335021888DCC10005B2CB /* back.png */,
+			);
+			name = navigation;
+			sourceTree = "<group>";
+		};
+		4D0E6B17181D583E0016E27B /* Game Scene */ = {
+			isa = PBXGroup;
+			children = (
+				4D1D800817FCC1470035F8CA /* GameScene.mm */,
+				4D1D800917FCC1470035F8CA /* GameScene.h */,
 				4D0E6B18181D585F0016E27B /* PauseLayer.h */,
 				4D0E6B19181D585F0016E27B /* PauseLayer.mm */,
 				4D8432EE184B7910003B28FC /* HudLayer.h */,
 				4D8432EF184B7910003B28FC /* HudLayer.mm */,
 			);
-			name = Layers;
+			name = "Game Scene";
 			sourceTree = "<group>";
 		};
 		4D16B15B1727212700D40933 /* Objects */ = {
@@ -951,10 +991,9 @@
 		4D1D800017FCBA890035F8CA /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				4D0E6B17181D583E0016E27B /* Game Scene */,
 				4DBF281B187B2B6400B77FAC /* Loadout Scene */,
 				4D877B16187717D700AE8B10 /* Upgrade Scene */,
-				4D1D800817FCC1470035F8CA /* GameScene.mm */,
-				4D1D800917FCC1470035F8CA /* GameScene.h */,
 				4D1D800517FCC12B0035F8CA /* LevelSelect.mm */,
 				4D1D800617FCC12B0035F8CA /* LevelSelect.h */,
 				4D1D800217FCC0FD0035F8CA /* ChapterSelect.mm */,
@@ -1088,7 +1127,6 @@
 		4D4690FF1710734B00837BC5 /* iPointball2D */ = {
 			isa = PBXGroup;
 			children = (
-				4D0E6B17181D583E0016E27B /* Layers */,
 				4D1D800F17FCC5F00035F8CA /* Data */,
 				4D1D800117FCBAA00035F8CA /* Physics */,
 				4D1D800017FCBA890035F8CA /* Scenes */,
@@ -1744,6 +1782,8 @@
 		4DAA290217FE169600C26F58 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4D0335011888DCB80005B2CB /* navigation */,
+				4D0334F41888C38E0005B2CB /* markers */,
 				4D2E00051822016300D97307 /* joybtn.png */,
 				4D0E6B1B181D80C00016E27B /* paused.png */,
 				4DAA290317FE16C800C26F58 /* Progress */,
@@ -1932,6 +1972,7 @@
 				4D1D802217FCC70E0035F8CA /* GameData.xml in Resources */,
 				4D4691041710734B00837BC5 /* Default@2x.png in Resources */,
 				4DAA291D17FE16C800C26F58 /* 1Star-Normal-iPad.png in Resources */,
+				4D0334FA1888C3B00005B2CB /* marker_3.png in Resources */,
 				4DAA291F17FE16C800C26F58 /* 1Star-Normal-iPhone.png in Resources */,
 				4DF73DA317FD0DD300507149 /* Chapters.xml in Resources */,
 				4DAA28FE17FE144900C26F58 /* Renaissance-Selected-iPad-hd.png in Resources */,
@@ -1941,6 +1982,7 @@
 				4D4691061710734B00837BC5 /* Default-568h@2x.png in Resources */,
 				4DAA292017FE16C800C26F58 /* 2Star-Normal-iPad-hd.png in Resources */,
 				4DAA291E17FE16C800C26F58 /* 1Star-Normal-iPhone-hd.png in Resources */,
+				4D0334F81888C3A70005B2CB /* marker_2.png in Resources */,
 				4DF73D9C17FD0D5C00507149 /* StickyNote-iPhone.png in Resources */,
 				4D1D7FFF17FCBA010035F8CA /* Arrow-Normal-iPad-hd.png in Resources */,
 				4D4691081710734B00837BC5 /* Default-Landscape~ipad.png in Resources */,
@@ -1951,6 +1993,7 @@
 				4DAA28EA17FE144900C26F58 /* Semi-Pro-Normal-iPad-hd.png in Resources */,
 				4DAA28EC17FE144900C26F58 /* Semi-Pro-Normal-iPhone-hd.png in Resources */,
 				4DF73D9B17FD0D5C00507149 /* StickyNote-iPhone-hd.png in Resources */,
+				4D0334F61888C39D0005B2CB /* marker_1.png in Resources */,
 				4D46910A1710734B00837BC5 /* Icon-72.png in Resources */,
 				4DAA291917FE16C800C26F58 /* 0Star-Normal-iPad.png in Resources */,
 				4DAA291A17FE16C800C26F58 /* 0Star-Normal-iPhone-hd.png in Resources */,
@@ -1978,6 +2021,7 @@
 				4DAA28DA17FE144900C26F58 /* Amateur-Normal-iPad-hd.png in Resources */,
 				4D4691141710734B00837BC5 /* Icon@2x.png in Resources */,
 				4DAA28E917FE144900C26F58 /* Rookie-Selected-iPhone.png in Resources */,
+				4D0335001888C4050005B2CB /* marker_6.png in Resources */,
 				4D1D801A17FCC5F00035F8CA /* TemplateData.xml in Resources */,
 				4DAA28DE17FE144900C26F58 /* Amateur-Selected-iPad-hd.png in Resources */,
 				4D46926D1710734F00837BC5 /* ChangeLog in Resources */,
@@ -1988,6 +2032,7 @@
 				4D46932D1710735000837BC5 /* blocks.png in Resources */,
 				4DAA28F117FE144900C26F58 /* Semi-Pro-Selected-iPhone.png in Resources */,
 				4DAA290117FE144900C26F58 /* Renaissance-Selected-iPhone.png in Resources */,
+				4D0335031888DCC10005B2CB /* back.png in Resources */,
 				4DAA28E217FE144900C26F58 /* Rookie-Normal-iPad-hd.png in Resources */,
 				4DF73D9917FD0D5C00507149 /* StickyNote-iPad-hd.png in Resources */,
 				4DAA292817FE16C800C26F58 /* Locked-iPad-hd.png in Resources */,
@@ -2014,6 +2059,9 @@
 				4DAA292917FE16C800C26F58 /* Locked-iPad.png in Resources */,
 				4DAA28F417FE144900C26F58 /* Pro-Normal-iPhone-hd.png in Resources */,
 				E1A2C56F1715E3A9007B65B0 /* links.txt in Resources */,
+				4D0335051888DCC60005B2CB /* backspace.png in Resources */,
+				4D0334FC1888C3B70005B2CB /* marker_5.png in Resources */,
+				4D0334FE1888C3F50005B2CB /* marker_4.png in Resources */,
 				4D6A14F11728D814008DA350 /* features.txt in Resources */,
 				4DAA28FC17FE144900C26F58 /* Renaissance-Normal-iPhone-hd.png in Resources */,
 				4D1D7FFC17FCBA010035F8CA /* Arrow-Selected-iPhone.png in Resources */,

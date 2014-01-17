@@ -9,8 +9,21 @@
 #import "cocos2d.h"
 #import "CollectionViewCell.h"
 
+@protocol CollectionViewDelegate;
+
 @interface CollectionView : CCLayerColor<CollectionViewCellDelegate>
+
+@property (nonatomic, assign) id<CollectionViewDelegate> delegate;
+@property (nonatomic, assign) NSString* type;
+@property (nonatomic, assign) NSMutableArray* ownedObjects;
 
 -(id)initWithData:(NSDictionary*)dict;
 
 @end
+
+@protocol CollectionViewDelegate <NSObject>
+
+-(void)cellTouchedAtIndex:(NSUInteger)idx andType:(NSString*)type;
+
+@end
+

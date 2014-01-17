@@ -14,8 +14,9 @@
 #import "AIStateDefensive.h"
 #import "Paint.h"
 
-#define PTM_RATIO 32
 #define RAYS 10
+#define FOURTY_FIVE_DEGREES 0.785
+#define NINETY_DEGRESS 1.57
 
 /*typedef enum {
     StateStarting = 0,
@@ -36,7 +37,7 @@
     float _rays[RAYS];
 }
 
-@synthesize  eye,target,canSeePlayer,lastShot,rayAngle,file;
+@synthesize  eye,target,canSeePlayer,lastShot,rayAngle;
 
 -(id)initWithLayer:(GameScene *)layer andFile:(NSString *)file forWorld:(b2World *)world andPosition:(CGPoint)position wNumOnOppTeam:(int)number
 {
@@ -52,9 +53,10 @@
         CCLOG(@"%@", [self stateName]);
         _cw = true;
         _count = 0;
-        _delta = 1.57 / RAYS;
+        _delta = 3 / RAYS;
         self.coverOptions = [[NSMutableArray alloc]init];
         self.targetOptions = [[NSMutableArray alloc]init];
+        self.rayVectors = [[NSMutableArray alloc] initWithCapacity:RAYS];
         [self initRays];
         //[super onEnter];
     }
@@ -111,6 +113,22 @@
     return _currentState.name;
 }
 
+-(void)rayCastMultiple {
+    [self.targetOptions removeAllObjects];
+    [self.rayVectors removeAllObjects];
+    
+    b2Vec2 p1 = self.body->GetWorldCenter();
+    float startAngle = self.eyesight - FOURTY_FIVE_DEGREES, raylength = 10;
+    
+    for(int i=0; i<RAYS; i++) {
+        _rays[i] = startAngle + (_delta * i);
+        b2Vec2 pt = (p1 + raylength * b2Vec2(sinf(_rays[i]), cosf(_rays[i])));
+        [self.rayVectors addObject:[NSValue valueWithCGPoint:ccp(pt.x, pt.y)]];
+    }
+    
+    self.eye = ccp(p1.x*PTM_RATIO, p1.y*PTM_RATIO);
+}
+
 -(void)rayCast
 {
     [self.targetOptions removeAllObjects];
@@ -137,7 +155,6 @@
     NSString* type = @"none";
     for(b2Body* b = _world->GetBodyList();b; b = b->GetNext())
     {
-        
         for(b2Fixture* f = b->GetFixtureList(); f; f->GetNext())
         {
             b2RayCastOutput output;
@@ -165,9 +182,9 @@
                         pt = ccp(ip.x, ip.y);
                         type = @"cover";
                     } else if(s.tag == 3){ // If the ray is intersecting paint
-                        // Move to cover
                         type = @"paint";
                     } else {
+                        
                     }
                 }
                 break;
@@ -238,7 +255,7 @@
 
 -(void)fireToPoint:(CGPoint)point
 {
-    Paint* paint = [[Paint alloc] initWithLayer:self.layer andFile:file forWorld:_world andPosition:self.sprite.position];
+    Paint* paint = [[Paint alloc] initWithLayer:self.layer andFile:self.file forWorld:_world andPosition:self.sprite.position];
     float a = (point.y - self.eye.y) / (point.x - self.eye.x);
     [paint fireToLocation:point withAngle:a];
 }
@@ -255,7 +272,8 @@ public:
 
 -(void)think
 {
-    [self rayCast];
+    [self rayCastMultiple];
+    //[self rayCast];
     [_currentState execute:self];
 }
 

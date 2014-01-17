@@ -32,6 +32,7 @@
 @property (nonatomic, assign) NSMutableArray* targetOptions;
 @property BOOL targetAcquired;
 @property CGPoint coverLocale;
+@property (nonatomic, assign) NSMutableArray* rayVectors;
 
 //State stuff
 

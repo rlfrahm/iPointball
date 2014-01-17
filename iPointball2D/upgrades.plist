@@ -50,6 +50,8 @@
 	<key>markers</key>
 	<array>
 		<dict>
+			<key>file</key>
+			<string>marker_1.png</string>
 			<key>owned</key>
 			<true/>
 			<key>quality</key>
@@ -68,6 +70,8 @@
 			<string>Marker 1</string>
 		</dict>
 		<dict>
+			<key>file</key>
+			<string>marker_2.png</string>
 			<key>owned</key>
 			<false/>
 			<key>quality</key>
@@ -86,6 +90,8 @@
 			<string>Marker 2</string>
 		</dict>
 		<dict>
+			<key>file</key>
+			<string>marker_3.png</string>
 			<key>owned</key>
 			<false/>
 			<key>quality</key>
@@ -104,6 +110,8 @@
 			<string>Marker 3</string>
 		</dict>
 		<dict>
+			<key>file</key>
+			<string>marker_4.png</string>
 			<key>owned</key>
 			<false/>
 			<key>quality</key>
@@ -122,6 +130,8 @@
 			<string>Marker 4</string>
 		</dict>
 		<dict>
+			<key>file</key>
+			<string>marker_5.png</string>
 			<key>owned</key>
 			<false/>
 			<key>quality</key>
@@ -140,6 +150,8 @@
 			<string>Marker 5</string>
 		</dict>
 		<dict>
+			<key>file</key>
+			<string>marker_6.png</string>
 			<key>owned</key>
 			<true/>
 			<key>quality</key>
