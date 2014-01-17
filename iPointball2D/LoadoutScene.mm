@@ -155,8 +155,6 @@
         [self buildHopperLoadout];
         [self buildPodLoadout];
         [self buildApparelLoadout];
-        
-        self.touchEnabled = YES;
     }
     return self;
 }

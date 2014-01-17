@@ -944,8 +944,8 @@
 		4D0E6B17181D583E0016E27B /* Game Scene */ = {
 			isa = PBXGroup;
 			children = (
-				4D1D800817FCC1470035F8CA /* GameScene.mm */,
 				4D1D800917FCC1470035F8CA /* GameScene.h */,
+				4D1D800817FCC1470035F8CA /* GameScene.mm */,
 				4D0E6B18181D585F0016E27B /* PauseLayer.h */,
 				4D0E6B19181D585F0016E27B /* PauseLayer.mm */,
 				4D8432EE184B7910003B28FC /* HudLayer.h */,

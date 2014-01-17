@@ -13,20 +13,24 @@
 -(id)init {
     self = [super initWithColor:ccc4(255, 151, 0, 255)];
     if(self) {
-        self.touchEnabled = YES;
+        [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
     }
     return self;
 }
 
--(CGSize)cellSize {
-    return CGSizeMake(100, 100);
+-(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    return YES;
 }
 
 -(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-    NSLog(@"Here");
+    NSLog(@"HERE");
     if([self.delegate respondsToSelector:@selector(cellTouchedAtIndex:)]) {
         [self.delegate cellTouchedAtIndex:self.idx];
     }
+}
+
+-(CGSize)cellSize {
+    return CGSizeMake(100, 100);
 }
 
 -(void)cellTouchedAtIndex:(NSUInteger)idx {

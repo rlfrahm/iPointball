@@ -39,6 +39,7 @@
             }
             break;
         }
+        self.touchEnabled = YES;
     }
     return self;
 }

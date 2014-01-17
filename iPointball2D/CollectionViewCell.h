@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Ryan Frahm. All rights reserved.
 //
 
-#import "CCLayer.h"
+#import "cocos2d.h"
 
 @protocol CollectionViewCellDelegate;
 
