@@ -23,10 +23,15 @@
 }
 
 -(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-    NSLog(@"HERE");
-    if([self.delegate respondsToSelector:@selector(cellTouchedAtIndex:)]) {
-        [self.delegate cellTouchedAtIndex:self.idx];
-    }
+    NSLog(@"%f",self.position.y);
+    CGPoint location = [touch locationInView:[touch view]];
+    location = [[CCDirector sharedDirector] convertToGL:location];
+    if(CGRectContainsPoint(CGRectMake(self.position.x, self.position.y, self.contentSize.width, self.contentSize.height), location)) {
+        NSLog(@"HERE");
+        /*if([self.delegate respondsToSelector:@selector(cellTouchedAtIndex:)]) {
+            [self.delegate cellTouchedAtIndex:self.idx];
+        }//*/
+    }//*/
 }
 
 -(CGSize)cellSize {

@@ -62,6 +62,10 @@
         [collection setPosition:ccp(SCREEN.width/4, SCREEN.height/5)];
         [collection setContentSize:CGSizeMake(SCREEN.width/2, SCREEN.height/2)];
         [self addChild:collection];
+        marker.isEnabled = NO;
+        barrel.isEnabled = NO;
+        hopper.isEnabled = NO;
+        pod.isEnabled = NO;
     }];
     [marker setFontSize:22];
     CCMenu* menu = [CCMenu menuWithItems:marker, nil];
@@ -77,6 +81,10 @@
         [collection setPosition:ccp(SCREEN.width/4, SCREEN.height/5)];
         [collection setContentSize:CGSizeMake(SCREEN.width/2, SCREEN.height/2)];
         [self addChild:collection];
+        marker.isEnabled = NO;
+        barrel.isEnabled = NO;
+        hopper.isEnabled = NO;
+        pod.isEnabled = NO;
     }];
     [barrel setFontSize:22];
     CCMenu* menu = [CCMenu menuWithItems:barrel, nil];
@@ -92,6 +100,10 @@
         [collection setPosition:ccp(SCREEN.width/4, SCREEN.height/5)];
         [collection setContentSize:CGSizeMake(SCREEN.width/2, SCREEN.height/2)];
         [self addChild:collection];
+        marker.isEnabled = NO;
+        barrel.isEnabled = NO;
+        hopper.isEnabled = NO;
+        pod.isEnabled = NO;
     }];
     [hopper setFontSize:22];
     CCMenu* menu = [CCMenu menuWithItems:hopper, nil];
@@ -107,6 +119,10 @@
         [collection setPosition:ccp(SCREEN.width/4, SCREEN.height/5)];
         [collection setContentSize:CGSizeMake(SCREEN.width/2, SCREEN.height/2)];
         [self addChild:collection];
+        marker.isEnabled = NO;
+        barrel.isEnabled = NO;
+        hopper.isEnabled = NO;
+        pod.isEnabled = NO;
     }];
     [pod setFontSize:22];
     CCMenu* menu = [CCMenu menuWithItems:pod, nil];
@@ -130,6 +146,10 @@
     } else if([type isEqualToString:@"pods"]) {
         [pod setString:[defaults stringForKey:@"pods_title"]];
     }
+    marker.isEnabled = YES;
+    barrel.isEnabled = YES;
+    hopper.isEnabled = YES;
+    pod.isEnabled = YES;
 }
 
 -(NSDictionary*)loadPlistData {

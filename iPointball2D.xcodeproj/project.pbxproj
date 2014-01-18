@@ -15,6 +15,7 @@
 		4D0335001888C4050005B2CB /* marker_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0334FF1888C4050005B2CB /* marker_6.png */; };
 		4D0335031888DCC10005B2CB /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0335021888DCC10005B2CB /* back.png */; };
 		4D0335051888DCC60005B2CB /* backspace.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0335041888DCC60005B2CB /* backspace.png */; };
+		4D033508188AE2AA0005B2CB /* UpgradesTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D033507188AE2AA0005B2CB /* UpgradesTable.m */; };
 		4D0E6B1A181D585F0016E27B /* PauseLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D0E6B19181D585F0016E27B /* PauseLayer.mm */; };
 		4D0E6B1C181D80C00016E27B /* paused.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0E6B1B181D80C00016E27B /* paused.png */; };
 		4D1A9AC918001DCF004D663F /* Paint.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D1A9AC818001DCF004D663F /* Paint.mm */; };
@@ -232,7 +233,7 @@
 		4D8432F0184B7911003B28FC /* HudLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D8432EF184B7910003B28FC /* HudLayer.mm */; };
 		4D877AE71873792A00AE8B10 /* UpgradeScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877AE61873792A00AE8B10 /* UpgradeScene.mm */; };
 		4D877AEF1875C16500AE8B10 /* upgrades.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D877AEE1875C16500AE8B10 /* upgrades.plist */; };
-		4D877B19187717FC00AE8B10 /* PlayerTable.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B18187717FC00AE8B10 /* PlayerTable.mm */; };
+		4D877B19187717FC00AE8B10 /* BarrelsTable.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B18187717FC00AE8B10 /* BarrelsTable.mm */; };
 		4D877B1C1877180C00AE8B10 /* MarkerTable.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B1B1877180C00AE8B10 /* MarkerTable.mm */; };
 		4D877B1F1877181800AE8B10 /* SkillsTable.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B1E1877181800AE8B10 /* SkillsTable.mm */; };
 		4D877B2218771F1700AE8B10 /* UpgradeCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B2118771F1700AE8B10 /* UpgradeCell.mm */; };
@@ -338,6 +339,8 @@
 		4D0334FF1888C4050005B2CB /* marker_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker_6.png; sourceTree = "<group>"; };
 		4D0335021888DCC10005B2CB /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		4D0335041888DCC60005B2CB /* backspace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backspace.png; sourceTree = "<group>"; };
+		4D033506188AE2AA0005B2CB /* UpgradesTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpgradesTable.h; sourceTree = "<group>"; };
+		4D033507188AE2AA0005B2CB /* UpgradesTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpgradesTable.m; sourceTree = "<group>"; };
 		4D0E6B18181D585F0016E27B /* PauseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseLayer.h; sourceTree = "<group>"; };
 		4D0E6B19181D585F0016E27B /* PauseLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PauseLayer.mm; sourceTree = "<group>"; };
 		4D0E6B1B181D80C00016E27B /* paused.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paused.png; sourceTree = "<group>"; };
@@ -777,8 +780,8 @@
 		4D877AE51873792A00AE8B10 /* UpgradeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpgradeScene.h; sourceTree = "<group>"; };
 		4D877AE61873792A00AE8B10 /* UpgradeScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UpgradeScene.mm; sourceTree = "<group>"; };
 		4D877AEE1875C16500AE8B10 /* upgrades.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = upgrades.plist; sourceTree = "<group>"; };
-		4D877B17187717FC00AE8B10 /* PlayerTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerTable.h; sourceTree = "<group>"; };
-		4D877B18187717FC00AE8B10 /* PlayerTable.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerTable.mm; sourceTree = "<group>"; };
+		4D877B17187717FC00AE8B10 /* BarrelsTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarrelsTable.h; sourceTree = "<group>"; };
+		4D877B18187717FC00AE8B10 /* BarrelsTable.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BarrelsTable.mm; sourceTree = "<group>"; };
 		4D877B1A1877180C00AE8B10 /* MarkerTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkerTable.h; sourceTree = "<group>"; };
 		4D877B1B1877180C00AE8B10 /* MarkerTable.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MarkerTable.mm; sourceTree = "<group>"; };
 		4D877B1D1877181800AE8B10 /* SkillsTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillsTable.h; sourceTree = "<group>"; };
@@ -1701,8 +1704,8 @@
 			children = (
 				4D877AE51873792A00AE8B10 /* UpgradeScene.h */,
 				4D877AE61873792A00AE8B10 /* UpgradeScene.mm */,
-				4D877B17187717FC00AE8B10 /* PlayerTable.h */,
-				4D877B18187717FC00AE8B10 /* PlayerTable.mm */,
+				4D877B17187717FC00AE8B10 /* BarrelsTable.h */,
+				4D877B18187717FC00AE8B10 /* BarrelsTable.mm */,
 				4D877B1A1877180C00AE8B10 /* MarkerTable.h */,
 				4D877B1B1877180C00AE8B10 /* MarkerTable.mm */,
 				4D877B1D1877181800AE8B10 /* SkillsTable.h */,
@@ -1711,6 +1714,8 @@
 				4D877B2118771F1700AE8B10 /* UpgradeCell.mm */,
 				4D877B471877572600AE8B10 /* ProductShowroomLayer.h */,
 				4D877B481877572600AE8B10 /* ProductShowroomLayer.mm */,
+				4D033506188AE2AA0005B2CB /* UpgradesTable.h */,
+				4D033507188AE2AA0005B2CB /* UpgradesTable.m */,
 			);
 			name = "Upgrade Scene";
 			sourceTree = "<group>";
@@ -2207,6 +2212,7 @@
 				4D4692441710734E00837BC5 /* CDAudioManager.m in Sources */,
 				4D4692481710734E00837BC5 /* CDOpenALSupport.m in Sources */,
 				4D46924B1710734E00837BC5 /* CDXMacOSXSupport.m in Sources */,
+				4D033508188AE2AA0005B2CB /* UpgradesTable.m in Sources */,
 				4D46924E1710734E00837BC5 /* CDXPropertyModifierAction.m in Sources */,
 				4D4692511710734F00837BC5 /* CocosDenshion.m in Sources */,
 				4D4692551710734F00837BC5 /* SimpleAudioEngine.m in Sources */,
@@ -2228,7 +2234,7 @@
 				4D2016B717FE4CAD00392465 /* Bunker.mm in Sources */,
 				4D4692941710734F00837BC5 /* b2CollideEdge.cpp in Sources */,
 				4D4692961710734F00837BC5 /* b2CollidePolygon.cpp in Sources */,
-				4D877B19187717FC00AE8B10 /* PlayerTable.mm in Sources */,
+				4D877B19187717FC00AE8B10 /* BarrelsTable.mm in Sources */,
 				4D4692981710734F00837BC5 /* b2Collision.cpp in Sources */,
 				4D46929B1710734F00837BC5 /* b2Distance.cpp in Sources */,
 				4D46929E1710734F00837BC5 /* b2DynamicTree.cpp in Sources */,

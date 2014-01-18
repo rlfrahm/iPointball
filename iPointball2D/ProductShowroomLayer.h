@@ -16,6 +16,7 @@
 
 -(void)constructShowroom;
 -(void)showMarkerWithIndex:(NSUInteger)idx;
+-(void)showBarrelWithIndex:(NSUInteger)idx;
 
 @end
 

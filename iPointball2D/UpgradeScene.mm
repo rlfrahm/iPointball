@@ -4,10 +4,7 @@
 
 #import "UpgradeScene.h"
 #import "SWMultiColumnTableView.h"
-#import "PlayerTable.h"
-#import "MarkerTable.h"
 #import "SkillsTable.h"
-#import "ProductShowroomLayer.h"
 
 #define SCREEN [[CCDirector sharedDirector] winSize]
 #define isIPad UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
@@ -16,14 +13,15 @@
 @implementation UpgradeScene {
     NSUserDefaults* defaults;
     CCLabelTTF *dollarsLabel;
-    SWTableView* playerTable;
+    SWTableView* barrelTable;
     SWTableView* markerTable;
     SWTableView* skillsTable;
+    SWTableView* upgradesTable;
     
-    PlayerTable* playerTableData;
+    BarrelsTable* barrelTableData;
     MarkerTable* markerTableData;
     SkillsTable* skillsTableData;
-    
+    UpgradesTable* upgradesTableData;
     ProductShowroomLayer* productShowroom;
 }
 @synthesize iPad;
@@ -77,6 +75,11 @@
     [productShowroom showMarkerWithIndex:idx];
 }
 
+-(void)barrelTableView:(SWTableView *)table didSelectCell:(SWTableViewCell *)cell atIndex:(NSUInteger)idx {
+    // Fired from BarrelsTable.h
+    [productShowroom showBarrelWithIndex:idx];
+}
+
 -(void)buyItemAtIndex:(NSUInteger)idx andNetDollars:(int)dollars {
     // Fired from ProductShowroomLayer.h
     [dollarsLabel setString:[NSString stringWithFormat:@"$%i", dollars]];
@@ -91,16 +94,26 @@
 #pragma mark Initialization
 
 - (void)buildUpgradeMenu {
-    // Player table
-    playerTableData = [[PlayerTable alloc] init];
+    // Upgrades table
+    upgradesTableData = [[UpgradesTable alloc] init];
     CGSize tableSize = CGSizeMake(SCREEN.width/2, SCREEN.height*0.7);
-    playerTable = [SWTableView viewWithDataSource:playerTableData size:tableSize];
-    playerTable.position = ccp(0, SCREEN.height/2 - tableSize.height/2);
-    playerTable.delegate = playerTableData;
-    playerTable.verticalFillOrder = SWTableViewFillTopDown;
-    playerTable.direction = SWScrollViewDirectionVertical;
-    [self addChild:playerTable];
-    [playerTable reloadData];
+    upgradesTable = [SWTableView viewWithDataSource:upgradesTableData size:tableSize];
+    upgradesTable.position = ccp(0, SCREEN.height/2 - tableSize.height/2);
+    upgradesTable.delegate = upgradesTableData;
+    upgradesTable.verticalFillOrder = SWTableViewFillTopDown;
+    upgradesTable.direction = SWScrollViewDirectionVertical;
+    [self addChild:upgradesTable];
+    [self reloadUpgradesTableWithKey:@"markers"];
+    
+    /*// Player table
+    barrelTableData = [[BarrelsTable alloc] init];
+    barrelTable = [SWTableView viewWithDataSource:barrelTableData size:tableSize];
+    barrelTable.position = ccp(0, SCREEN.height/2 - tableSize.height/2);
+    barrelTable.delegate = barrelTableData;
+    barrelTable.verticalFillOrder = SWTableViewFillTopDown;
+    barrelTable.direction = SWScrollViewDirectionVertical;
+    [self addChild:barrelTable];
+    [barrelTable reloadData];
     
     // Marker table
     markerTableData = [[MarkerTable alloc] init];
@@ -124,31 +137,38 @@
     [self addChild:skillsTable];
     [skillsTable reloadData];
     skillsTable.visible = NO;
+    */
     
     // Tabs for the store
-    CCMenuItemFont* player = [CCMenuItemFont itemWithString:@"Apparel" block:^(id sender) {
-        playerTable.visible = YES;
-        markerTable.visible = NO;
-        skillsTable.visible = NO;
-    }];
     CCMenuItemFont* marker = [CCMenuItemFont itemWithString:@"Marker" block:^(id sender) {
-        playerTable.visible = NO;
-        markerTable.visible = YES;
-        skillsTable.visible = NO;
+        [self reloadUpgradesTableWithKey:@"markers"];
     }];
-    CCMenuItemFont* skills = [CCMenuItemFont itemWithString:@"Skills" block:^(id sender) {
-        playerTable.visible = NO;
-        markerTable.visible = NO;
-        skillsTable.visible = YES;
+    CCMenuItemFont* barrel = [CCMenuItemFont itemWithString:@"Barrels" block:^(id sender) {
+        [self reloadUpgradesTableWithKey:@"barrels"];
     }];
-    [player setFontSize:22];
-    [marker setFontSize:22];
-    [skills setFontSize:22];
+    CCMenuItemFont* hoppers = [CCMenuItemFont itemWithString:@"Hoppers" block:^(id sender) {
+        [self reloadUpgradesTableWithKey:@"hoppers"];
+    }];
+    CCMenuItemFont* pods = [CCMenuItemFont itemWithString:@"Pods" block:^(id sender) {
+        [self reloadUpgradesTableWithKey:@"pods"];
+    }];
+    [barrel setFontSize:18];
+    [marker setFontSize:18];
+    [hoppers setFontSize:18];
+    [pods setFontSize:18];
     
-    CCMenu* menu = [CCMenu menuWithItems:player,marker,skills, nil];
+    CCMenu* menu = [CCMenu menuWithItems:barrel,marker,hoppers,pods, nil];
     [menu alignItemsHorizontallyWithPadding:20*DEVICESCALE];
     [menu setPosition:ccp(tableSize.width/2, SCREEN.height - 30)];
     [self addChild:menu z:1];
+}
+
+-(void)reloadUpgradesTableWithKey:(NSString*)key {
+    NSURL* url = [[NSBundle mainBundle] URLForResource:@"upgrades" withExtension:@"plist"];
+    NSDictionary* plistContent = [[NSDictionary alloc] initWithContentsOfURL:url];
+    NSArray* content = [[NSArray alloc] initWithArray:[plistContent objectForKey:key]];
+    upgradesTableData.upgrades = [content copy];
+    [upgradesTable reloadData];
 }
 
 -(void)buildProductShowroom {

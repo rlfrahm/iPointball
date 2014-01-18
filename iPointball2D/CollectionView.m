@@ -96,9 +96,9 @@
         [defaults synchronize];
     }
     
-    //if([self.delegate respondsToSelector:@selector(cellTouchedAtIndex:andType:)]) {
-    //    [self.delegate cellTouchedAtIndex:idx andType:self.type];
-    //}
+    if([self.delegate respondsToSelector:@selector(cellTouchedAtIndex:andType:)]) {
+        [self.delegate cellTouchedAtIndex:idx andType:self.type];
+    }
     
     [self.parent removeChild:self cleanup:YES];
 }

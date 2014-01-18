@@ -150,6 +150,10 @@
     }
 }
 
+-(void)showBarrelWithIndex:(NSUInteger)idx {
+    
+}
+
 -(NSDictionary*)getObjectForKey:(NSString*)key atIndex:(NSUInteger)idx {
     file = [[NSBundle mainBundle] URLForResource:@"upgrades" withExtension:@"plist"];
     NSDictionary* d = [NSDictionary dictionaryWithContentsOfURL:file];
