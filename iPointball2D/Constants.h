@@ -36,3 +36,5 @@
 #define kProductShowroomSpriteDefaultScale 0.2
 #define kLoadoutSpriteDefaultScale 0.1
 #define kGameSpriteDefaultScale 1
+#define kGameSpriteTenthScale 0.1
+#define kGameSpriteTwentiethScale 0.05

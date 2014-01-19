@@ -152,6 +152,23 @@
     pod.isEnabled = YES;
 }
 
+-(void)changeValuesUsingDictionary:(NSDictionary *)values {
+    NSString* type = [values objectForKey:@"type"];
+    if([type hasPrefix:@"marker"]) {
+        [marker setString:[values objectForKey:@"title"]];
+    } else if([type hasPrefix:@"barrel"]) {
+        [barrel setString:[values objectForKey:@"title"]];
+    } else if([type hasPrefix:@"hopper"]) {
+        [hopper setString:[values objectForKey:@"title"]];
+    } else if([type hasPrefix:@"pod"]) {
+        [pod setString:[values objectForKey:@"title"]];
+    }
+    marker.isEnabled = YES;
+    barrel.isEnabled = YES;
+    hopper.isEnabled = YES;
+    pod.isEnabled = YES;
+}
+
 -(NSDictionary*)loadPlistData {
     NSURL* url = [[NSBundle mainBundle] URLForResource:@"upgrades" withExtension:@"plist"];
     return [NSDictionary dictionaryWithContentsOfURL:url];

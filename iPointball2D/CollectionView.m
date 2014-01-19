@@ -24,13 +24,16 @@
         int rows = count/cols + 1;
         int idx = 0;
         
-        self.cellPositions = [[NSMutableArray alloc] init];
+        self.cells = [[NSMutableArray alloc] init];
         for(int row=0; row<rows; row++) {
             for(int col=0; col<cols; col++) {
                 if(count>0) {
                     CollectionViewCell* cell = [self cellWithContents:[self.ownedObjects objectAtIndex:idx] atIndexPath:idx];
                     [cell setPosition:ccp(col*110, row*-110)];
-                    [self.cellPositions addObject:[NSValue valueWithCGPoint:ccp(col*110, row*-110)]];
+                    NSMutableDictionary* cellInfo = [[NSMutableDictionary alloc] init];
+                    [cellInfo setObject:[NSValue valueWithCGPoint:ccp(col*110, row*-110)] forKey:@"position"];
+                    [cellInfo setObject:[NSNumber numberWithInt:idx] forKey:@"index"];
+                    [self.cells addObject:cellInfo];
                     cell.idx = idx;
                     [self addChild:cell z:2];
                     idx++;
@@ -112,14 +115,48 @@
 -(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint location = [touch locationInView:[touch view]];
     location = [[CCDirector sharedDirector] convertToGL:location];
-    for(int i=0; i<self.cellPositions.count; i++) {
-        CGPoint pt = [[self.cellPositions objectAtIndex:i] CGPointValue];
+    for(int i=0; i<self.cells.count; i++) {
+        NSMutableDictionary* d = [self.cells objectAtIndex:i];
+        CGPoint pt = [[d objectForKey:@"position"] CGPointValue];
+        int index = [[d objectForKey:@"index"] integerValue];
         if(CGRectContainsPoint(CGRectMake(SCREEN.width/4 + pt.x,SCREEN.height/5 + pt.y, 100, 100), location)) {
-            NSLog(@"HERE");
-            /*if([self.delegate respondsToSelector:@selector(cellTouchedAtIndex:)]) {
-             [self.delegate cellTouchedAtIndex:self.idx];
+            NSDictionary* item = [self.ownedObjects objectAtIndex:index];
+            [self setUserDefaultsUsingDictionary:item];
+            if([self.delegate respondsToSelector:@selector(changeValuesUsingDictionary:)]) {
+             [self.delegate changeValuesUsingDictionary:item];
              }//*/
+            [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
+            [self.parent removeChild:self cleanup:YES];
         }//*/
+    }
+}
+
+-(void)setUserDefaultsUsingDictionary:(NSDictionary*)dict {
+    NSString* type = [dict objectForKey:@"type"];
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    if([type hasPrefix:@"marker"]) {
+        [defaults setObject:[dict objectForKey:@"title"] forKey:@"marker_title"];
+        [defaults setObject:[dict objectForKey:@"description"] forKey:@"marker_description"];
+        [defaults setInteger:[[dict objectForKey:@"accuracy"] integerValue] forKey:@"marker_accuracy"];
+        [defaults setInteger:[[dict objectForKey:@"speed"] integerValue] forKey:@"marker_speed"];
+        [defaults setInteger:[[dict objectForKey:@"quality"] integerValue] forKey:@"marker_quality"];
+        [defaults synchronize];
+    } else if([type hasPrefix:@"barrel"]) {
+        [defaults setObject:[dict objectForKey:@"title"] forKey:@"barrel_title"];
+        [defaults setObject:[dict objectForKey:@"description"] forKey:@"barrel_description"];
+        [defaults setInteger:[[dict objectForKey:@"accuracy"] integerValue] forKey:@"barrel_accuracy"];
+        [defaults synchronize];
+    } else if([type hasPrefix:@"hopper"]) {
+        [defaults setObject:[dict objectForKey:@"title"] forKey:@"hopper_title"];
+        [defaults setObject:[dict objectForKey:@"description"] forKey:@"hopper_description"];
+        [defaults setInteger:[[dict objectForKey:@"capacity"] integerValue] forKey:@"hopper_capacity"];
+        [defaults synchronize];
+    } else if([type hasPrefix:@"pod"]) {
+        [defaults setObject:[dict objectForKey:@"title"] forKey:@"pod_title"];
+        [defaults setInteger:[[dict objectForKey:@"capacity"] integerValue] forKey:@"pod_capacity"];
+        [defaults synchronize];
+    } else {
+        NSLog(@"Could not set the user defaults in collectionview.m.");
     }
 }
 

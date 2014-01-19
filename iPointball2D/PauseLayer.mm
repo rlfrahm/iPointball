@@ -9,8 +9,6 @@
 #import "PauseLayer.h"
 #import "SceneManager.h"
 
-#define PTM_RATIO 32
-
 @implementation PauseLayer {
     GameScene* _gs;
 }
@@ -56,6 +54,7 @@
     if([button isEqualToString:@"Yes"]) {
         [_gs resume];
         [self.parent removeChild:self cleanup:YES];
+        [self.parent.parent removeChild:self.parent cleanup:YES];
         [SceneManager goLevelSelect];
     } else {
         

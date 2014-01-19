@@ -641,10 +641,12 @@
     [CCMenuItemFont setFontSize:22];
     
     //CCMenuItemLabel* item1 = [CCMenuItemFont itemWithString:@"Back" target:self selector:@selector(onBack:)];
-    CCMenuItemLabel* item1 = [CCMenuItemFont itemWithString:@"O" target:self selector:@selector(pauseGame)];
+    //CCMenuItemLabel* item3 = [CCMenuItemFont itemWithString:@"O" target:self selector:@selector(pauseGame)];
+    CCMenuItemImage* item1 = [CCMenuItemImage itemWithNormalImage:@"pause_game.png" selectedImage:@"pause_game.png" target:self selector:@selector(pauseGame)];
     item2 = [CCMenuItemFont itemWithString:[NSString stringWithFormat:@"%i", paintInHopper] target:self selector:@selector(beginReloadingPaint)];
     item1.color = ccRED;
     item2.color = ccRED;
+    item1.scale = kGameSpriteTwentiethScale;
     
     CCMenu* menu = [CCMenu menuWithItems:item1,item2, nil];
     [menu setPosition:ccp(40,winSize.height-10)];

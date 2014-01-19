@@ -38,7 +38,9 @@
     
     //CCMenuItemLabel* item1 = [CCMenuItemFont itemWithString:@"Back" target:self selector:@selector(onBack:)];
     CCMenuItemLabel* item1 = [CCMenuItemFont itemWithString:@"O" target:self selector:@selector(pauseGame)];
+    
     item1.color = ccRED;
+    item1.scale = kGameSpriteDefaultScale;
     //item2.color = ccRED;
     
     CCMenu* menu = [CCMenu menuWithItems:item1, nil];
