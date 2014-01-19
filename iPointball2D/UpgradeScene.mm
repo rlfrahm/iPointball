@@ -38,10 +38,7 @@
 
     if (self.iPad) {
         // Create a menu image button for iPad
-        CCMenuItemImage *goBack = [CCMenuItemImage itemFromNormalImage:@"Arrow-Normal-iPad.png" 
-                                                         selectedImage:@"Arrow-Selected-iPad.png"
-                                                                target:self 
-                                                              selector:@selector(onBack:)];
+        CCMenuItemImage *goBack = [CCMenuItemImage itemWithNormalImage:@"Arrow-Normal-iPad.png"  selectedImage:@"Arrow-Selected-iPad.png" target:self selector:@selector(onBack:)];
         // Add menu image to menu
         CCMenu *back = [CCMenu menuWithItems: goBack, nil];
 
@@ -53,10 +50,7 @@
     }
     else {
         // Create a menu image button for iPhone / iPod Touch
-        CCMenuItemImage *goBack = [CCMenuItemImage itemFromNormalImage:@"Arrow-Normal-iPhone.png" 
-                                                         selectedImage:@"Arrow-Selected-iPhone.png"
-                                                                target:self 
-                                                              selector:@selector(onBack:)];
+        CCMenuItemImage *goBack = [CCMenuItemImage itemWithNormalImage:@"Arrow-Normal-iPhone.png"  selectedImage:@"Arrow-Selected-iPhone.png" target:self selector:@selector(onBack:)];
         // Add menu image to menu
         CCMenu *back = [CCMenu menuWithItems: goBack, nil];
 
@@ -69,6 +63,10 @@
 }
 
 #pragma mark Delegates
+
+-(void)didSelectUpgradeAtIndex:(NSUInteger)idx fromUpgrades:(NSMutableArray *)upgrades {
+    [productShowroom showUpgradeAtIndex:idx fromUpgrades:upgrades];
+}
 
 -(void)markerTableView:(SWTableView *)table didSelectCell:(SWTableViewCell *)cell atIndex:(NSUInteger)idx {
     // Fired from MarkerTable.h
@@ -96,6 +94,7 @@
 - (void)buildUpgradeMenu {
     // Upgrades table
     upgradesTableData = [[UpgradesTable alloc] init];
+    upgradesTableData.delegate = self;
     CGSize tableSize = CGSizeMake(SCREEN.width/2, SCREEN.height*0.7);
     upgradesTable = [SWTableView viewWithDataSource:upgradesTableData size:tableSize];
     upgradesTable.position = ccp(0, SCREEN.height/2 - tableSize.height/2);
@@ -157,8 +156,8 @@
     [hoppers setFontSize:18];
     [pods setFontSize:18];
     
-    CCMenu* menu = [CCMenu menuWithItems:barrel,marker,hoppers,pods, nil];
-    [menu alignItemsHorizontallyWithPadding:20*DEVICESCALE];
+    CCMenu* menu = [CCMenu menuWithItems:marker,barrel,hoppers,pods, nil];
+    [menu alignItemsHorizontallyWithPadding:10*DEVICESCALE];
     [menu setPosition:ccp(tableSize.width/2, SCREEN.height - 30)];
     [self addChild:menu z:1];
 }
@@ -176,7 +175,7 @@
     productShowroom.delegate = self;
     productShowroom.position = ccp(SCREEN.width/2 + 100, 50);
     [productShowroom constructShowroom];
-    [productShowroom showMarkerWithIndex:0];
+    //[productShowroom showMarkerWithIndex:0];
     [self addChild:productShowroom z:2];
 }
 

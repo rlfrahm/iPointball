@@ -45,12 +45,14 @@
     label.position = ccp(size.width/2 - 80,size.height/2);
     [sprite addChild:label z:0 tag:0];
     
+    defaults = [NSUserDefaults standardUserDefaults];
     CCMenuItemFont* ownedLabel;
     BOOL owned = [[cellContent objectForKey:@"owned"] boolValue];
     if(owned) {
         ownedLabel = [CCMenuItemFont itemWithString:@"equip" block:^(id sender){
             NSDictionary* content = [NSDictionary dictionaryWithDictionary:cellContent];
             NSString* title = [NSString stringWithFormat:@"%@", [content objectForKey:@"title"]];
+            defaults = [NSUserDefaults standardUserDefaults];
             [defaults setObject:title forKey:@"content_title"];
             [defaults setObject:[NSString stringWithFormat:@"%@", [content objectForKey:@"description"]] forKey:@"content_description"];
             [defaults setInteger:[[content objectForKey:@"speed"] integerValue] forKey:@"content_speed"];
@@ -84,8 +86,16 @@
 }
 
 -(void)table:(SWTableView *)table cellTouched:(SWTableViewCell *)cell {
-    if([self.delegate respondsToSelector:@selector(UpgradesTableView:didSelectCell:atIndex:)]) {
-        [self.delegate UpgradesTableView:table didSelectCell:cell atIndex:cell.idx];
+    CCArray* a = [[CCArray alloc] initWithArray:cell.children];
+    CCSprite* s = (CCSprite*)[a objectAtIndex:0];
+    self.lastCellSprite.opacity = kCellOpacityDefault;
+    s.opacity = kCellOpacitySelected;
+    self.lastCellSprite = s;
+    
+    NSLog(@"%i", cell.idx);
+    //if(self.upgrades == nil) NSLog(@"Upgrades is nil"); return;
+    if([self.delegate respondsToSelector:@selector(didSelectUpgradeAtIndex:fromUpgrades:)]) {
+        [self.delegate didSelectUpgradeAtIndex:cell.idx fromUpgrades:self.upgrades];
     }
 }
 

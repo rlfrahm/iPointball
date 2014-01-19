@@ -11,6 +11,7 @@
 @interface ProductShowroomLayer ()
 
 @property (nonatomic, retain) NSDictionary* marker;
+@property (nonatomic, retain) NSDictionary* upgrade;
 
 @end
 
@@ -27,6 +28,7 @@
     CCMenu* menu;
     
     CCSprite* markerSprite;
+    CCSprite* upgradeSprite;
     
     BOOL owned;
     
@@ -37,7 +39,7 @@
     NSUInteger index;
 }
 
-@synthesize marker;
+@synthesize marker, upgrade;
 
 -(void)constructShowroom {
     title = [self makeSmallLabelWithString:@"Title"];
@@ -79,14 +81,34 @@
 
 -(void)equipItem {
     if(owned) {
-        marker = [self getObjectForKey:@"markers" atIndex:index];
-        [defaults setObject:[marker objectForKey:@"title"] forKey:@"marker_title"];
-        [defaults setObject:[marker objectForKey:@"description"] forKey:@"marker_description"];
-        [defaults setInteger:[[marker objectForKey:@"accuracy"] integerValue] forKey:@"marker_accuracy"];
-        [defaults setInteger:[[marker objectForKey:@"speed"] integerValue] forKey:@"marker_speed"];
-        [defaults setInteger:[[marker objectForKey:@"quality"] integerValue] forKey:@"marker_quality"];
-        [defaults synchronize];
-        NSLog(@"Equipping");
+        NSString* upgradeType = [upgrade objectForKey:@"type"];
+        defaults = [NSUserDefaults standardUserDefaults];
+        if([upgradeType hasPrefix:@"marker"]) {
+            [defaults setObject:[upgrade objectForKey:@"title"] forKey:@"marker_title"];
+            [defaults setObject:[upgrade objectForKey:@"description"] forKey:@"marker_description"];
+            [defaults setInteger:[[upgrade objectForKey:@"accuracy"] integerValue] forKey:@"marker_accuracy"];
+            [defaults setInteger:[[upgrade objectForKey:@"speed"] integerValue] forKey:@"marker_speed"];
+            [defaults setInteger:[[upgrade objectForKey:@"quality"] integerValue] forKey:@"marker_quality"];
+            [defaults synchronize];
+            NSLog(@"Marker equipped..");
+        } else if([upgradeType hasPrefix:@"barrel"]) {
+            [defaults setObject:[upgrade objectForKey:@"title"] forKey:@"barrel_title"];
+            [defaults setObject:[upgrade objectForKey:@"description"] forKey:@"barrel_description"];
+            [defaults setInteger:[[upgrade objectForKey:@"accuracy"] integerValue] forKey:@"barrel_accuracy"];
+            [defaults synchronize];
+            NSLog(@"Barrel equipped..");
+        } else if([upgradeType hasPrefix:@"hopper"]) {
+            [defaults setObject:[upgrade objectForKey:@"title"] forKey:@"hopper_title"];
+            [defaults setObject:[upgrade objectForKey:@"description"] forKey:@"hopper_description"];
+            [defaults setInteger:[[upgrade objectForKey:@"capacity"] integerValue] forKey:@"hopper_capacity"];
+            [defaults synchronize];
+            NSLog(@"Hopper equipped..");
+        } else if([upgradeType hasPrefix:@"pod"]) {
+            [defaults setObject:[upgrade objectForKey:@"title"] forKey:@"pod_title"];
+            [defaults setInteger:[[upgrade objectForKey:@"capacity"] integerValue] forKey:@"pod_capacity"];
+            [defaults synchronize];
+            NSLog(@"Pod equipped..");
+        }
     } else {
         
     }
@@ -121,6 +143,29 @@
     NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
     NSString* documentsDirectory = [paths objectAtIndex:0];
     return [documentsDirectory stringByAppendingPathComponent:@"upgrades.plist"];
+}
+
+-(void)showUpgradeAtIndex:(NSUInteger)idx fromUpgrades:(NSMutableArray *)upgrades {
+    [self removeChild:upgradeSprite cleanup:YES];
+    upgrade = [upgrades objectAtIndex:idx];
+    //if(!upgrade || upgrade.count != 0) NSLog(@"Upgrade is nil or empty for the product showroom!"); return;
+    [title setString:[upgrade objectForKey:@"title"]];
+    [description setString:[upgrade objectForKey:@"description"]];
+    [price setString:[NSString stringWithFormat:@"$%@",[upgrade objectForKey:@"price"]]];
+    [resale setString:[NSString stringWithFormat:@"$%@",[upgrade objectForKey:@"resale"]]];
+    owned = [[upgrade objectForKey:@"owned"] boolValue];
+    upgradeSprite = [[CCSprite alloc] initWithFile:[NSString stringWithFormat:@"%@",[upgrade objectForKey:@"file"]]];
+    [upgradeSprite setPosition:ccp(0, 125)];
+    [upgradeSprite setContentSize:CGSizeMake(50, 50)];
+    upgradeSprite.scaleX = 0.1;
+    upgradeSprite.scaleY = 0.1;
+    [self addChild:upgradeSprite];
+    if(owned) {
+        [buySellMenuItem setString:@"Sell"];
+    } else {
+        [buySellMenuItem setString:@"Buy"];
+    }
+    
 }
 
 -(void)showMarkerWithIndex:(NSUInteger)idx {
@@ -199,6 +244,12 @@
             [self buyItem];
         }
     }
+}
+
+-(void)dealloc {
+    [super dealloc];
+    [marker release];
+    [upgrade release];
 }
 
 @end

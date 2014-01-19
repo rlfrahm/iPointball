@@ -5,6 +5,12 @@
 	<key>barrels</key>
 	<array>
 		<dict>
+			<key>type</key>
+			<string>barrel</string>
+			<key>resale</key>
+			<integer>1</integer>
+			<key>file</key>
+			<string>barrel_1.png</string>
 			<key>price</key>
 			<integer>0</integer>
 			<key>owned</key>
@@ -20,6 +26,12 @@
 	<key>pods</key>
 	<array>
 		<dict>
+			<key>type</key>
+			<string>pod</string>
+			<key>resale</key>
+			<integer>1</integer>
+			<key>file</key>
+			<string>pod_1.png</string>
 			<key>price</key>
 			<integer>0</integer>
 			<key>owned</key>
@@ -35,6 +47,12 @@
 	<key>hoppers</key>
 	<array>
 		<dict>
+			<key>type</key>
+			<string>hopper</string>
+			<key>resale</key>
+			<integer>1</integer>
+			<key>file</key>
+			<string>hopper_1.png</string>
 			<key>price</key>
 			<integer>0</integer>
 			<key>owned</key>
@@ -50,6 +68,8 @@
 	<key>markers</key>
 	<array>
 		<dict>
+			<key>type</key>
+			<string>marker</string>
 			<key>file</key>
 			<string>marker_1.png</string>
 			<key>owned</key>
@@ -70,6 +90,8 @@
 			<string>Marker 1</string>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>marker</string>
 			<key>file</key>
 			<string>marker_2.png</string>
 			<key>owned</key>
@@ -90,6 +112,8 @@
 			<string>Marker 2</string>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>marker</string>
 			<key>file</key>
 			<string>marker_3.png</string>
 			<key>owned</key>
@@ -110,6 +134,8 @@
 			<string>Marker 3</string>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>marker</string>
 			<key>file</key>
 			<string>marker_4.png</string>
 			<key>owned</key>
@@ -130,6 +156,8 @@
 			<string>Marker 4</string>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>marker</string>
 			<key>file</key>
 			<string>marker_5.png</string>
 			<key>owned</key>
@@ -150,6 +178,8 @@
 			<string>Marker 5</string>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>marker</string>
 			<key>file</key>
 			<string>marker_6.png</string>
 			<key>owned</key>

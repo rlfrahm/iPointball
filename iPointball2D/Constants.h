@@ -29,3 +29,6 @@
 #define PTM_RATIO (isIPad ? 64 : 32)
 
 #define random_range(low,high) (arc4random()%(high-low+1))+low
+
+#define kCellOpacityDefault 100
+#define kCellOpacitySelected 200

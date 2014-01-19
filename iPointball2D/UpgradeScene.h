@@ -17,6 +17,6 @@
 
 @property (nonatomic, assign) BOOL iPad;
 
--(void)updateProductShowRoomWithType:(NSString*)type andIndex:(NSUInteger)idx;
+//-(void)updateProductShowRoomWithType:(NSString*)type andIndex:(NSUInteger)idx;
 
 @end

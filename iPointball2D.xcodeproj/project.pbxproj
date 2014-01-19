@@ -7,15 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4D0334F61888C39D0005B2CB /* marker_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0334F51888C39D0005B2CB /* marker_1.png */; };
-		4D0334F81888C3A70005B2CB /* marker_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0334F71888C3A70005B2CB /* marker_2.png */; };
-		4D0334FA1888C3B00005B2CB /* marker_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0334F91888C3B00005B2CB /* marker_3.png */; };
-		4D0334FC1888C3B70005B2CB /* marker_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0334FB1888C3B70005B2CB /* marker_5.png */; };
-		4D0334FE1888C3F50005B2CB /* marker_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0334FD1888C3F50005B2CB /* marker_4.png */; };
-		4D0335001888C4050005B2CB /* marker_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0334FF1888C4050005B2CB /* marker_6.png */; };
 		4D0335031888DCC10005B2CB /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0335021888DCC10005B2CB /* back.png */; };
 		4D0335051888DCC60005B2CB /* backspace.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0335041888DCC60005B2CB /* backspace.png */; };
 		4D033508188AE2AA0005B2CB /* UpgradesTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D033507188AE2AA0005B2CB /* UpgradesTable.m */; };
+		4D03350A188AFC140005B2CB /* barrel_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D033509188AFC140005B2CB /* barrel_1.png */; };
+		4D03350F188B6A240005B2CB /* pod_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D03350D188B6A240005B2CB /* pod_1.png */; };
+		4D033510188B6A240005B2CB /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4D03350E188B6A240005B2CB /* license.txt */; };
+		4D033513188B6AF40005B2CB /* hopper_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D033512188B6AF40005B2CB /* hopper_1.png */; };
+		4D033515188B80880005B2CB /* marker_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D033514188B80880005B2CB /* marker_2.png */; };
+		4D033517188B80E60005B2CB /* marker_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D033516188B80E60005B2CB /* marker_1.png */; };
+		4D033519188B81170005B2CB /* marker_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D033518188B81170005B2CB /* marker_3.png */; };
+		4D03351B188B81490005B2CB /* marker_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D03351A188B81490005B2CB /* marker_4.png */; };
+		4D03351D188B81820005B2CB /* marker_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D03351C188B81820005B2CB /* marker_6.png */; };
+		4D03351F188B81E10005B2CB /* marker_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D03351E188B81E10005B2CB /* marker_5.png */; };
 		4D0E6B1A181D585F0016E27B /* PauseLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D0E6B19181D585F0016E27B /* PauseLayer.mm */; };
 		4D0E6B1C181D80C00016E27B /* paused.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0E6B1B181D80C00016E27B /* paused.png */; };
 		4D1A9AC918001DCF004D663F /* Paint.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D1A9AC818001DCF004D663F /* Paint.mm */; };
@@ -331,16 +335,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4D0334F51888C39D0005B2CB /* marker_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker_1.png; sourceTree = "<group>"; };
-		4D0334F71888C3A70005B2CB /* marker_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker_2.png; sourceTree = "<group>"; };
-		4D0334F91888C3B00005B2CB /* marker_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker_3.png; sourceTree = "<group>"; };
-		4D0334FB1888C3B70005B2CB /* marker_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker_5.png; sourceTree = "<group>"; };
-		4D0334FD1888C3F50005B2CB /* marker_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker_4.png; sourceTree = "<group>"; };
-		4D0334FF1888C4050005B2CB /* marker_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker_6.png; sourceTree = "<group>"; };
 		4D0335021888DCC10005B2CB /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		4D0335041888DCC60005B2CB /* backspace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backspace.png; sourceTree = "<group>"; };
 		4D033506188AE2AA0005B2CB /* UpgradesTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpgradesTable.h; sourceTree = "<group>"; };
 		4D033507188AE2AA0005B2CB /* UpgradesTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpgradesTable.m; sourceTree = "<group>"; };
+		4D033509188AFC140005B2CB /* barrel_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barrel_1.png; sourceTree = "<group>"; };
+		4D03350D188B6A240005B2CB /* pod_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pod_1.png; sourceTree = "<group>"; };
+		4D03350E188B6A240005B2CB /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
+		4D033512188B6AF40005B2CB /* hopper_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hopper_1.png; sourceTree = "<group>"; };
+		4D033514188B80880005B2CB /* marker_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker_2.png; sourceTree = "<group>"; };
+		4D033516188B80E60005B2CB /* marker_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker_1.png; sourceTree = "<group>"; };
+		4D033518188B81170005B2CB /* marker_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker_3.png; sourceTree = "<group>"; };
+		4D03351A188B81490005B2CB /* marker_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker_4.png; sourceTree = "<group>"; };
+		4D03351C188B81820005B2CB /* marker_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker_6.png; sourceTree = "<group>"; };
+		4D03351E188B81E10005B2CB /* marker_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker_5.png; sourceTree = "<group>"; };
 		4D0E6B18181D585F0016E27B /* PauseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseLayer.h; sourceTree = "<group>"; };
 		4D0E6B19181D585F0016E27B /* PauseLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PauseLayer.mm; sourceTree = "<group>"; };
 		4D0E6B1B181D80C00016E27B /* paused.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paused.png; sourceTree = "<group>"; };
@@ -925,12 +933,12 @@
 		4D0334F41888C38E0005B2CB /* markers */ = {
 			isa = PBXGroup;
 			children = (
-				4D0334FF1888C4050005B2CB /* marker_6.png */,
-				4D0334FD1888C3F50005B2CB /* marker_4.png */,
-				4D0334FB1888C3B70005B2CB /* marker_5.png */,
-				4D0334F91888C3B00005B2CB /* marker_3.png */,
-				4D0334F71888C3A70005B2CB /* marker_2.png */,
-				4D0334F51888C39D0005B2CB /* marker_1.png */,
+				4D03351E188B81E10005B2CB /* marker_5.png */,
+				4D03351C188B81820005B2CB /* marker_6.png */,
+				4D03351A188B81490005B2CB /* marker_4.png */,
+				4D033518188B81170005B2CB /* marker_3.png */,
+				4D033516188B80E60005B2CB /* marker_1.png */,
+				4D033514188B80880005B2CB /* marker_2.png */,
 			);
 			name = markers;
 			sourceTree = "<group>";
@@ -942,6 +950,31 @@
 				4D0335021888DCC10005B2CB /* back.png */,
 			);
 			name = navigation;
+			sourceTree = "<group>";
+		};
+		4D03350B188AFC1B0005B2CB /* barrels */ = {
+			isa = PBXGroup;
+			children = (
+				4D033509188AFC140005B2CB /* barrel_1.png */,
+			);
+			name = barrels;
+			sourceTree = "<group>";
+		};
+		4D03350C188B6A0A0005B2CB /* pods */ = {
+			isa = PBXGroup;
+			children = (
+				4D03350D188B6A240005B2CB /* pod_1.png */,
+				4D03350E188B6A240005B2CB /* license.txt */,
+			);
+			name = pods;
+			sourceTree = "<group>";
+		};
+		4D033511188B6A920005B2CB /* hoppers */ = {
+			isa = PBXGroup;
+			children = (
+				4D033512188B6AF40005B2CB /* hopper_1.png */,
+			);
+			name = hoppers;
 			sourceTree = "<group>";
 		};
 		4D0E6B17181D583E0016E27B /* Game Scene */ = {
@@ -1787,6 +1820,9 @@
 		4DAA290217FE169600C26F58 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4D033511188B6A920005B2CB /* hoppers */,
+				4D03350C188B6A0A0005B2CB /* pods */,
+				4D03350B188AFC1B0005B2CB /* barrels */,
 				4D0335011888DCB80005B2CB /* navigation */,
 				4D0334F41888C38E0005B2CB /* markers */,
 				4D2E00051822016300D97307 /* joybtn.png */,
@@ -1977,7 +2013,6 @@
 				4D1D802217FCC70E0035F8CA /* GameData.xml in Resources */,
 				4D4691041710734B00837BC5 /* Default@2x.png in Resources */,
 				4DAA291D17FE16C800C26F58 /* 1Star-Normal-iPad.png in Resources */,
-				4D0334FA1888C3B00005B2CB /* marker_3.png in Resources */,
 				4DAA291F17FE16C800C26F58 /* 1Star-Normal-iPhone.png in Resources */,
 				4DF73DA317FD0DD300507149 /* Chapters.xml in Resources */,
 				4DAA28FE17FE144900C26F58 /* Renaissance-Selected-iPad-hd.png in Resources */,
@@ -1987,7 +2022,6 @@
 				4D4691061710734B00837BC5 /* Default-568h@2x.png in Resources */,
 				4DAA292017FE16C800C26F58 /* 2Star-Normal-iPad-hd.png in Resources */,
 				4DAA291E17FE16C800C26F58 /* 1Star-Normal-iPhone-hd.png in Resources */,
-				4D0334F81888C3A70005B2CB /* marker_2.png in Resources */,
 				4DF73D9C17FD0D5C00507149 /* StickyNote-iPhone.png in Resources */,
 				4D1D7FFF17FCBA010035F8CA /* Arrow-Normal-iPad-hd.png in Resources */,
 				4D4691081710734B00837BC5 /* Default-Landscape~ipad.png in Resources */,
@@ -1998,15 +2032,16 @@
 				4DAA28EA17FE144900C26F58 /* Semi-Pro-Normal-iPad-hd.png in Resources */,
 				4DAA28EC17FE144900C26F58 /* Semi-Pro-Normal-iPhone-hd.png in Resources */,
 				4DF73D9B17FD0D5C00507149 /* StickyNote-iPhone-hd.png in Resources */,
-				4D0334F61888C39D0005B2CB /* marker_1.png in Resources */,
 				4D46910A1710734B00837BC5 /* Icon-72.png in Resources */,
 				4DAA291917FE16C800C26F58 /* 0Star-Normal-iPad.png in Resources */,
 				4DAA291A17FE16C800C26F58 /* 0Star-Normal-iPhone-hd.png in Resources */,
+				4D03351D188B81820005B2CB /* marker_6.png in Resources */,
 				4DAA28E417FE144900C26F58 /* Rookie-Normal-iPhone-hd.png in Resources */,
 				4DAA28F217FE144900C26F58 /* Pro-Normal-iPad-hd.png in Resources */,
 				4D46910C1710734B00837BC5 /* Icon-Small-50.png in Resources */,
 				4DAA292717FE16C800C26F58 /* 3Star-Normal-iPhone.png in Resources */,
 				4D0E6B1C181D80C00016E27B /* paused.png in Resources */,
+				4D03351F188B81E10005B2CB /* marker_5.png in Resources */,
 				4DAA28E517FE144900C26F58 /* Rookie-Normal-iPhone.png in Resources */,
 				4D46910E1710734B00837BC5 /* Icon-Small.png in Resources */,
 				4D1D7FFD17FCBA010035F8CA /* Arrow-Selected-iPhone-hd.png in Resources */,
@@ -2017,6 +2052,7 @@
 				4D4691121710734B00837BC5 /* Icon.png in Resources */,
 				4DAA28EE17FE144900C26F58 /* Semi-Pro-Selected-iPad-hd.png in Resources */,
 				4DAA28E717FE144900C26F58 /* Rookie-Selected-iPad.png in Resources */,
+				4D03351B188B81490005B2CB /* marker_4.png in Resources */,
 				4DAA292517FE16C800C26F58 /* 3Star-Normal-iPad.png in Resources */,
 				4D1D7FFA17FCBA010035F8CA /* Arrow-Normal-iPhone-hd.png in Resources */,
 				4DAA28F717FE144900C26F58 /* Pro-Selected-iPad.png in Resources */,
@@ -2025,10 +2061,12 @@
 				4DAA292217FE16C800C26F58 /* 2Star-Normal-iPhone-hd.png in Resources */,
 				4DAA28DA17FE144900C26F58 /* Amateur-Normal-iPad-hd.png in Resources */,
 				4D4691141710734B00837BC5 /* Icon@2x.png in Resources */,
+				4D03350F188B6A240005B2CB /* pod_1.png in Resources */,
 				4DAA28E917FE144900C26F58 /* Rookie-Selected-iPhone.png in Resources */,
-				4D0335001888C4050005B2CB /* marker_6.png in Resources */,
+				4D033510188B6A240005B2CB /* license.txt in Resources */,
 				4D1D801A17FCC5F00035F8CA /* TemplateData.xml in Resources */,
 				4DAA28DE17FE144900C26F58 /* Amateur-Selected-iPad-hd.png in Resources */,
+				4D033517188B80E60005B2CB /* marker_1.png in Resources */,
 				4D46926D1710734F00837BC5 /* ChangeLog in Resources */,
 				4DAA292317FE16C800C26F58 /* 2Star-Normal-iPhone.png in Resources */,
 				4DAA28F817FE144900C26F58 /* Pro-Selected-iPhone-hd.png in Resources */,
@@ -2037,6 +2075,7 @@
 				4D46932D1710735000837BC5 /* blocks.png in Resources */,
 				4DAA28F117FE144900C26F58 /* Semi-Pro-Selected-iPhone.png in Resources */,
 				4DAA290117FE144900C26F58 /* Renaissance-Selected-iPhone.png in Resources */,
+				4D033513188B6AF40005B2CB /* hopper_1.png in Resources */,
 				4D0335031888DCC10005B2CB /* back.png in Resources */,
 				4DAA28E217FE144900C26F58 /* Rookie-Normal-iPad-hd.png in Resources */,
 				4DF73D9917FD0D5C00507149 /* StickyNote-iPad-hd.png in Resources */,
@@ -2046,6 +2085,7 @@
 				4DAA28ED17FE144900C26F58 /* Semi-Pro-Normal-iPhone.png in Resources */,
 				4DAA291B17FE16C800C26F58 /* 0Star-Normal-iPhone.png in Resources */,
 				E131A3E51714B2B500DC66F8 /* Player.png in Resources */,
+				4D03350A188AFC140005B2CB /* barrel_1.png in Resources */,
 				4DAA28F317FE144900C26F58 /* Pro-Normal-iPad.png in Resources */,
 				4D1D7FF817FCBA010035F8CA /* Arrow-Selected-iPad-hd.png in Resources */,
 				4DAA28E117FE144900C26F58 /* Amateur-Selected-iPhone.png in Resources */,
@@ -2062,17 +2102,17 @@
 				4DF73D9A17FD0D5C00507149 /* StickyNote-iPad.png in Resources */,
 				4DAA290017FE144900C26F58 /* Renaissance-Selected-iPhone-hd.png in Resources */,
 				4DAA292917FE16C800C26F58 /* Locked-iPad.png in Resources */,
+				4D033519188B81170005B2CB /* marker_3.png in Resources */,
 				4DAA28F417FE144900C26F58 /* Pro-Normal-iPhone-hd.png in Resources */,
 				E1A2C56F1715E3A9007B65B0 /* links.txt in Resources */,
 				4D0335051888DCC60005B2CB /* backspace.png in Resources */,
-				4D0334FC1888C3B70005B2CB /* marker_5.png in Resources */,
-				4D0334FE1888C3F50005B2CB /* marker_4.png in Resources */,
 				4D6A14F11728D814008DA350 /* features.txt in Resources */,
 				4DAA28FC17FE144900C26F58 /* Renaissance-Normal-iPhone-hd.png in Resources */,
 				4D1D7FFC17FCBA010035F8CA /* Arrow-Selected-iPhone.png in Resources */,
 				4DAA292B17FE16C800C26F58 /* Locked-iPhone.png in Resources */,
 				4DAA291C17FE16C800C26F58 /* 1Star-Normal-iPad-hd.png in Resources */,
 				4DAA28F917FE144900C26F58 /* Pro-Selected-iPhone.png in Resources */,
+				4D033515188B80880005B2CB /* marker_2.png in Resources */,
 				4DAA292617FE16C800C26F58 /* 3Star-Normal-iPhone-hd.png in Resources */,
 				4DAA28E317FE144900C26F58 /* Rookie-Normal-iPad.png in Resources */,
 				4DAA28F517FE144900C26F58 /* Pro-Normal-iPhone.png in Resources */,

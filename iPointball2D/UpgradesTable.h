@@ -15,11 +15,12 @@
 
 @property (nonatomic, assign) id<UpgradesTableDelegate> delegate;
 @property (nonatomic, assign) NSMutableArray* upgrades;
+@property (nonatomic, assign) CCSprite* lastCellSprite;
 
 @end
 
 @protocol UpgradesTableDelegate <NSObject>
 
--(void)UpgradesTableView:(SWTableView*)table didSelectCell:(SWTableViewCell*)cell atIndex:(NSUInteger)idx;
+-(void)didSelectUpgradeAtIndex:(NSUInteger)idx fromUpgrades:(NSMutableArray*)upgrades;
 
 @end

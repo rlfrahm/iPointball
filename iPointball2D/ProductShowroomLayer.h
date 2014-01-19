@@ -17,6 +17,7 @@
 -(void)constructShowroom;
 -(void)showMarkerWithIndex:(NSUInteger)idx;
 -(void)showBarrelWithIndex:(NSUInteger)idx;
+-(void)showUpgradeAtIndex:(NSUInteger)idx fromUpgrades:(NSMutableArray*)upgrades;
 
 @end
 
