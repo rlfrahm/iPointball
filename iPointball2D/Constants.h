@@ -32,3 +32,7 @@
 
 #define kCellOpacityDefault 100
 #define kCellOpacitySelected 200
+
+#define kProductShowroomSpriteDefaultScale 0.2
+#define kLoadoutSpriteDefaultScale 0.1
+#define kGameSpriteDefaultScale 1

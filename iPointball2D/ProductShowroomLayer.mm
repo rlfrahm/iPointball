@@ -117,26 +117,50 @@
 -(void)updatePlistWithBoughtMarker {
     NSFileManager* fileManager = [NSFileManager defaultManager];
     BOOL success = [fileManager fileExistsAtPath:[self filepath]];
+    success = YES;
     if(success) {
-        NSMutableDictionary* tempRoot = [NSMutableDictionary dictionaryWithContentsOfFile:[self filepath]];
+        NSURL* url = [[NSBundle mainBundle] URLForResource:@"upgrades" withExtension:@"plist"];
+        NSData* plistData = [[NSData alloc] initWithContentsOfURL:url];
+        NSMutableDictionary* tempRoot = [NSMutableDictionary dictionaryWithContentsOfURL:url];
         NSMutableArray* tempMarkers = [tempRoot objectForKey:@"markers"];;
         NSMutableDictionary* tempMarker = [tempMarkers objectAtIndex:index];
-        if(owned) {
+        BOOL own = [[tempMarker objectForKey:@"owned"] boolValue];
+        if(own) {
             [tempMarker setObject:[NSNumber numberWithBool:YES] forKey:@"owned"];
         } else {
-            [tempMarker setObject:[NSNumber numberWithBool:NO] forKey:@"owned"];
+            [tempMarker setObject:[NSNumber numberWithBool:YES] forKey:@"owned"];
         }
-        [tempMarkers removeObjectAtIndex:index];
-        [tempMarkers insertObject:tempMarker atIndex:index];
+        [tempMarkers setObject:tempMarker atIndexedSubscript:index];
+        //[tempMarkers removeObjectAtIndex:index];
+        //[tempMarkers insertObject:tempMarker atIndex:index];
         [tempRoot setObject:tempMarkers forKey:@"markers"];
-        [tempRoot writeToFile:[self filepath] atomically:YES];
+        [tempRoot writeToURL:url atomically:YES];
+        //[tempRoot writeToFile:[self filepath] atomically:YES];
     } else {
         
     }
 }
 
 -(void)updatePlistWithSoldMarker {
+    NSString* rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString* plistPath = [rootPath stringByAppendingString:@"upgrades.plist"];
+    NSString* error = nil;
+    NSURL* url = [[NSBundle mainBundle] URLForResource:@"upgrades" withExtension:@"plist"];
+    NSMutableDictionary* tempRoot = [NSMutableDictionary dictionaryWithContentsOfURL:url];
+    NSMutableArray* tempMarkers = [tempRoot objectForKey:@"markers"];;
+    NSMutableDictionary* tempMarker = [tempMarkers objectAtIndex:index];
+    [tempMarker setObject:[NSNumber numberWithBool:NO] forKey:@"owned"];
+    [tempMarkers setObject:tempMarker atIndexedSubscript:index];
+    //[tempMarkers removeObjectAtIndex:index];
+    //[tempMarkers insertObject:tempMarker atIndex:index];
+    [tempRoot setObject:tempMarkers forKey:@"markers"];
     
+    NSData* plistData = [NSPropertyListSerialization dataFromPropertyList:tempRoot format:NSPropertyListXMLFormat_v1_0 errorDescription:&error];
+    if([plistData writeToFile:plistPath atomically:YES]) {
+        NSLog(@"It worked!");
+    } else {
+        NSLog(@"It didn't work!");
+    }
 }
 
 -(NSString*)filepath {
@@ -157,46 +181,15 @@
     upgradeSprite = [[CCSprite alloc] initWithFile:[NSString stringWithFormat:@"%@",[upgrade objectForKey:@"file"]]];
     [upgradeSprite setPosition:ccp(0, 125)];
     [upgradeSprite setContentSize:CGSizeMake(50, 50)];
-    upgradeSprite.scaleX = 0.1;
-    upgradeSprite.scaleY = 0.1;
+    upgradeSprite.scaleX = kProductShowroomSpriteDefaultScale;
+    upgradeSprite.scaleY = kProductShowroomSpriteDefaultScale;
     [self addChild:upgradeSprite];
     if(owned) {
         [buySellMenuItem setString:@"Sell"];
     } else {
         [buySellMenuItem setString:@"Buy"];
     }
-    
-}
-
--(void)showMarkerWithIndex:(NSUInteger)idx {
-    [self removeChild:markerSprite cleanup:YES];
-    marker = [self getObjectForKey:@"markers" atIndex:idx];
     index = idx;
-    //title = [self makeSmallLabelWithString:[marker objectForKey:@"title"]];
-    //description = [self makeSmallLabelWithString:[marker objectForKey:@"description"]];
-    //price = [self makeSmallLabelWithString:[marker objectForKey:@"price"]];
-    //resale = [self makeSmallLabelWithString:[marker objectForKey:@"resale"]];
-    [title setString:[marker objectForKey:@"title"]];
-    [description setString:[marker objectForKey:@"description"]];
-    [price setString:[NSString stringWithFormat:@"$%@",[marker objectForKey:@"price"]]];
-    [resale setString:[NSString stringWithFormat:@"$%@",[marker objectForKey:@"resale"]]];
-    owned = [[marker objectForKey:@"owned"] boolValue];
-    markerSprite = [[CCSprite alloc] initWithFile:[NSString stringWithFormat:@"%@",[marker objectForKey:@"file"]]];
-    [markerSprite setPosition:ccp(0, 125)];
-    [markerSprite setContentSize:CGSizeMake(50, 50)];
-    markerSprite.scaleX = 0.4;
-    markerSprite.scaleY = 0.4;
-    [self addChild:markerSprite];
-    
-    if(owned) {
-        [buySellMenuItem setString:@"Sell"];
-    } else {
-        [buySellMenuItem setString:@"Buy"];
-    }
-}
-
--(void)showBarrelWithIndex:(NSUInteger)idx {
-    
 }
 
 -(NSDictionary*)getObjectForKey:(NSString*)key atIndex:(NSUInteger)idx {
@@ -213,8 +206,8 @@
 -(void)buyItem {
     owned = YES;
     int dollars = [defaults integerForKey:@"player_dollars"];
-    if(dollars >= [[price string] intValue]) {
-        dollars = dollars - [[price string] intValue];
+    if(dollars >= [[upgrade objectForKey:@"price"] integerValue]) {
+        dollars = dollars - [[upgrade objectForKey:@"price"] integerValue];
         [self updatePlistWithBoughtMarker];
         if([self.delegate respondsToSelector:@selector(buyItemAtIndex:andNetDollars:)]) {
             [self.delegate buyItemAtIndex:index andNetDollars:dollars];
@@ -226,7 +219,7 @@
 
 -(void)sellItem {
     owned = NO;
-    int dollars = [defaults integerForKey:@"player_dollars"] + [[resale string] intValue];
+    int dollars = [defaults integerForKey:@"player_dollars"] + [[upgrade objectForKey:@"resale"] integerValue];
     [self updatePlistWithSoldMarker];
     if([self.delegate respondsToSelector:@selector(sellItemAtIndex:andNetDollars:)]) {
         [self.delegate sellItemAtIndex:index andNetDollars:dollars];

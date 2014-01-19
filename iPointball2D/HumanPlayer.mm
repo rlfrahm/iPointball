@@ -29,6 +29,8 @@
     // Define the dynamic body.
     // Set up a 1m squared box in the physics world
     self.sprite.tag = 1;
+    self.sprite.scaleX = kGameSpriteDefaultScale;
+    self.sprite.scaleY = kGameSpriteDefaultScale;
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.position.Set(self.sprite.position.x/PTM_RATIO, self.sprite.position.y/PTM_RATIO);
@@ -42,7 +44,7 @@
     
     // Create player shape
     b2PolygonShape playerShape;
-    playerShape.SetAsBox(self.contentSize.width/PTM_RATIO/2, self.contentSize.height/PTM_RATIO/2); // These are mid points for our 1m box
+    playerShape.SetAsBox(self.contentSize.width/PTM_RATIO/2 * kGameSpriteDefaultScale, self.contentSize.height/PTM_RATIO/2 * kGameSpriteDefaultScale); // These are mid points for our 1m box
     
     // Create shape definition and add to body
     b2FixtureDef playerFixtureDef;

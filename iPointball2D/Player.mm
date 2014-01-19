@@ -8,7 +8,6 @@
 
 #import "Player.h"
 
-#define PTM_RATIO 32
 #define MOVE_WINDOW_Y 20
 #define MOVE_WINDOW_X 20
 

@@ -24,11 +24,13 @@
         int rows = count/cols + 1;
         int idx = 0;
         
+        self.cellPositions = [[NSMutableArray alloc] init];
         for(int row=0; row<rows; row++) {
             for(int col=0; col<cols; col++) {
                 if(count>0) {
                     CollectionViewCell* cell = [self cellWithContents:[self.ownedObjects objectAtIndex:idx] atIndexPath:idx];
                     [cell setPosition:ccp(col*110, row*-110)];
+                    [self.cellPositions addObject:[NSValue valueWithCGPoint:ccp(col*110, row*-110)]];
                     cell.idx = idx;
                     [self addChild:cell z:2];
                     idx++;
@@ -39,7 +41,7 @@
             }
             break;
         }
-        self.touchEnabled = YES;
+        [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
     }
     return self;
 }
@@ -54,8 +56,8 @@
     [cell setContentSize:cellSize];
     
     CCSprite* sprite = [[CCSprite alloc] initWithFile:[NSString stringWithFormat:@"%@", [cellContents objectForKey:@"file"]]];
-    sprite.scaleX = 0.25;
-    sprite.scaleY = 0.25;
+    sprite.scaleX = kLoadoutSpriteDefaultScale;
+    sprite.scaleY = kLoadoutSpriteDefaultScale;
     [sprite setPosition:ccp(cell.contentSize.width/2, cell.contentSize.height/2)];
     [cell addChild:sprite];
     [cell addChild:cellTitle];
@@ -101,6 +103,24 @@
     }
     
     [self.parent removeChild:self cleanup:YES];
+}
+
+-(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    return YES;
+}
+
+-(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
+    CGPoint location = [touch locationInView:[touch view]];
+    location = [[CCDirector sharedDirector] convertToGL:location];
+    for(int i=0; i<self.cellPositions.count; i++) {
+        CGPoint pt = [[self.cellPositions objectAtIndex:i] CGPointValue];
+        if(CGRectContainsPoint(CGRectMake(SCREEN.width/4 + pt.x,SCREEN.height/5 + pt.y, 100, 100), location)) {
+            NSLog(@"HERE");
+            /*if([self.delegate respondsToSelector:@selector(cellTouchedAtIndex:)]) {
+             [self.delegate cellTouchedAtIndex:self.idx];
+             }//*/
+        }//*/
+    }
 }
 
 @end

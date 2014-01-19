@@ -6,12 +6,10 @@
 #import "cocos2d.h"
 #import "Constants.h"
 #import "SceneManager.h"
-#import "MarkerTable.h"
 #import "ProductShowroomLayer.h"
-#import "BarrelsTable.h"
 #import "UpgradesTable.h"
 
-@interface UpgradeScene : CCLayerColor<MarkerTableDelegate, ProductShowroomLayerDelegate, BarrelTableDelegate, UpgradesTableDelegate> {
+@interface UpgradeScene : CCLayerColor<ProductShowroomLayerDelegate, UpgradesTableDelegate> {
     
 }
 

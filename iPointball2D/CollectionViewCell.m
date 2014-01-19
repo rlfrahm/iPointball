@@ -13,25 +13,9 @@
 -(id)init {
     self = [super initWithColor:ccc4(255, 151, 0, 255)];
     if(self) {
-        [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+        
     }
     return self;
-}
-
--(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    return YES;
-}
-
--(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-    NSLog(@"%f",self.position.y);
-    CGPoint location = [touch locationInView:[touch view]];
-    location = [[CCDirector sharedDirector] convertToGL:location];
-    if(CGRectContainsPoint(CGRectMake(self.position.x, self.position.y, self.contentSize.width, self.contentSize.height), location)) {
-        NSLog(@"HERE");
-        /*if([self.delegate respondsToSelector:@selector(cellTouchedAtIndex:)]) {
-            [self.delegate cellTouchedAtIndex:self.idx];
-        }//*/
-    }//*/
 }
 
 -(CGSize)cellSize {

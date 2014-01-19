@@ -26,7 +26,7 @@
 -(SWTableViewCell*)table:(SWTableView *)table cellAtIndex:(NSUInteger)idx {
     SWTableViewCell* cell = [table dequeueCell];
     cellContent = [self.upgrades objectAtIndex:idx];
-    
+    defaults = [NSUserDefaults standardUserDefaults];
     if(!cell) {
         cell = [[UpgradeCell new] autorelease];
         cell.anchorPoint = CGPointZero;
@@ -48,7 +48,13 @@
     defaults = [NSUserDefaults standardUserDefaults];
     CCMenuItemFont* ownedLabel;
     BOOL owned = [[cellContent objectForKey:@"owned"] boolValue];
-    if(owned) {
+    NSString* contentTitle = [cellContent objectForKey:@"title"];
+    if([[defaults objectForKey:@"marker_title"] hasPrefix:contentTitle] ||
+       [[defaults objectForKey:@"barrel_title"] hasPrefix:contentTitle] ||
+       [[defaults objectForKey:@"hopper_title"] hasPrefix:contentTitle] ||
+       [[defaults objectForKey:@"pods_title"] hasPrefix:contentTitle]) {
+        ownedLabel = [CCMenuItemFont itemWithString:@"equipped"];
+    } else if(owned) {
         ownedLabel = [CCMenuItemFont itemWithString:@"equip" block:^(id sender){
             NSDictionary* content = [NSDictionary dictionaryWithDictionary:cellContent];
             NSString* title = [NSString stringWithFormat:@"%@", [content objectForKey:@"title"]];

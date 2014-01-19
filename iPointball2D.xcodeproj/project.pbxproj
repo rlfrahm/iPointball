@@ -20,6 +20,7 @@
 		4D03351B188B81490005B2CB /* marker_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D03351A188B81490005B2CB /* marker_4.png */; };
 		4D03351D188B81820005B2CB /* marker_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D03351C188B81820005B2CB /* marker_6.png */; };
 		4D03351F188B81E10005B2CB /* marker_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D03351E188B81E10005B2CB /* marker_5.png */; };
+		4D033522188B83820005B2CB /* Player2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D033521188B83820005B2CB /* Player2.png */; };
 		4D0E6B1A181D585F0016E27B /* PauseLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D0E6B19181D585F0016E27B /* PauseLayer.mm */; };
 		4D0E6B1C181D80C00016E27B /* paused.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0E6B1B181D80C00016E27B /* paused.png */; };
 		4D1A9AC918001DCF004D663F /* Paint.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D1A9AC818001DCF004D663F /* Paint.mm */; };
@@ -237,9 +238,6 @@
 		4D8432F0184B7911003B28FC /* HudLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D8432EF184B7910003B28FC /* HudLayer.mm */; };
 		4D877AE71873792A00AE8B10 /* UpgradeScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877AE61873792A00AE8B10 /* UpgradeScene.mm */; };
 		4D877AEF1875C16500AE8B10 /* upgrades.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D877AEE1875C16500AE8B10 /* upgrades.plist */; };
-		4D877B19187717FC00AE8B10 /* BarrelsTable.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B18187717FC00AE8B10 /* BarrelsTable.mm */; };
-		4D877B1C1877180C00AE8B10 /* MarkerTable.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B1B1877180C00AE8B10 /* MarkerTable.mm */; };
-		4D877B1F1877181800AE8B10 /* SkillsTable.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B1E1877181800AE8B10 /* SkillsTable.mm */; };
 		4D877B2218771F1700AE8B10 /* UpgradeCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B2118771F1700AE8B10 /* UpgradeCell.mm */; };
 		4D877B41187725AF00AE8B10 /* SWMultiColumnTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B36187725AF00AE8B10 /* SWMultiColumnTableView.m */; };
 		4D877B42187725AF00AE8B10 /* SWScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D877B38187725AF00AE8B10 /* SWScrollView.m */; };
@@ -349,6 +347,7 @@
 		4D03351A188B81490005B2CB /* marker_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker_4.png; sourceTree = "<group>"; };
 		4D03351C188B81820005B2CB /* marker_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker_6.png; sourceTree = "<group>"; };
 		4D03351E188B81E10005B2CB /* marker_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker_5.png; sourceTree = "<group>"; };
+		4D033521188B83820005B2CB /* Player2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Player2.png; sourceTree = "<group>"; };
 		4D0E6B18181D585F0016E27B /* PauseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseLayer.h; sourceTree = "<group>"; };
 		4D0E6B19181D585F0016E27B /* PauseLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PauseLayer.mm; sourceTree = "<group>"; };
 		4D0E6B1B181D80C00016E27B /* paused.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paused.png; sourceTree = "<group>"; };
@@ -788,12 +787,6 @@
 		4D877AE51873792A00AE8B10 /* UpgradeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpgradeScene.h; sourceTree = "<group>"; };
 		4D877AE61873792A00AE8B10 /* UpgradeScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UpgradeScene.mm; sourceTree = "<group>"; };
 		4D877AEE1875C16500AE8B10 /* upgrades.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = upgrades.plist; sourceTree = "<group>"; };
-		4D877B17187717FC00AE8B10 /* BarrelsTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarrelsTable.h; sourceTree = "<group>"; };
-		4D877B18187717FC00AE8B10 /* BarrelsTable.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BarrelsTable.mm; sourceTree = "<group>"; };
-		4D877B1A1877180C00AE8B10 /* MarkerTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkerTable.h; sourceTree = "<group>"; };
-		4D877B1B1877180C00AE8B10 /* MarkerTable.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MarkerTable.mm; sourceTree = "<group>"; };
-		4D877B1D1877181800AE8B10 /* SkillsTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkillsTable.h; sourceTree = "<group>"; };
-		4D877B1E1877181800AE8B10 /* SkillsTable.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SkillsTable.mm; sourceTree = "<group>"; };
 		4D877B2018771F1700AE8B10 /* UpgradeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpgradeCell.h; sourceTree = "<group>"; };
 		4D877B2118771F1700AE8B10 /* UpgradeCell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UpgradeCell.mm; sourceTree = "<group>"; };
 		4D877B35187725AF00AE8B10 /* SWMultiColumnTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWMultiColumnTableView.h; path = ../../../../../../Downloads/tableView/SWMultiColumnTableView.h; sourceTree = "<group>"; };
@@ -975,6 +968,18 @@
 				4D033512188B6AF40005B2CB /* hopper_1.png */,
 			);
 			name = hoppers;
+			sourceTree = "<group>";
+		};
+		4D033520188B835A0005B2CB /* game_sprites */ = {
+			isa = PBXGroup;
+			children = (
+				4D033521188B83820005B2CB /* Player2.png */,
+				E131A3E31714B2B500DC66F8 /* Projectile.png */,
+				E131A3E41714B2B500DC66F8 /* Target.png */,
+				4D650F4917F67A9B00BB48AA /* bunker1.png */,
+				E131A3E21714B2B500DC66F8 /* Player.png */,
+			);
+			name = game_sprites;
 			sourceTree = "<group>";
 		};
 		4D0E6B17181D583E0016E27B /* Game Scene */ = {
@@ -1737,12 +1742,6 @@
 			children = (
 				4D877AE51873792A00AE8B10 /* UpgradeScene.h */,
 				4D877AE61873792A00AE8B10 /* UpgradeScene.mm */,
-				4D877B17187717FC00AE8B10 /* BarrelsTable.h */,
-				4D877B18187717FC00AE8B10 /* BarrelsTable.mm */,
-				4D877B1A1877180C00AE8B10 /* MarkerTable.h */,
-				4D877B1B1877180C00AE8B10 /* MarkerTable.mm */,
-				4D877B1D1877181800AE8B10 /* SkillsTable.h */,
-				4D877B1E1877181800AE8B10 /* SkillsTable.mm */,
 				4D877B2018771F1700AE8B10 /* UpgradeCell.h */,
 				4D877B2118771F1700AE8B10 /* UpgradeCell.mm */,
 				4D877B471877572600AE8B10 /* ProductShowroomLayer.h */,
@@ -1820,6 +1819,7 @@
 		4DAA290217FE169600C26F58 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4D033520188B835A0005B2CB /* game_sprites */,
 				4D033511188B6A920005B2CB /* hoppers */,
 				4D03350C188B6A0A0005B2CB /* pods */,
 				4D03350B188AFC1B0005B2CB /* barrels */,
@@ -1836,10 +1836,6 @@
 				4D1D7FF517FCBA010035F8CA /* Arrow-Selected-iPhone-hd.png */,
 				4D1D7FF617FCBA010035F8CA /* Arrow-Selected-iPad.png */,
 				4D1D7FF717FCBA010035F8CA /* Arrow-Normal-iPad-hd.png */,
-				4D650F4917F67A9B00BB48AA /* bunker1.png */,
-				E131A3E21714B2B500DC66F8 /* Player.png */,
-				E131A3E31714B2B500DC66F8 /* Projectile.png */,
-				E131A3E41714B2B500DC66F8 /* Target.png */,
 				4D4691011710734B00837BC5 /* Default.png */,
 				4D4691031710734B00837BC5 /* Default@2x.png */,
 				4D4691051710734B00837BC5 /* Default-568h@2x.png */,
@@ -2114,6 +2110,7 @@
 				4DAA28F917FE144900C26F58 /* Pro-Selected-iPhone.png in Resources */,
 				4D033515188B80880005B2CB /* marker_2.png in Resources */,
 				4DAA292617FE16C800C26F58 /* 3Star-Normal-iPhone-hd.png in Resources */,
+				4D033522188B83820005B2CB /* Player2.png in Resources */,
 				4DAA28E317FE144900C26F58 /* Rookie-Normal-iPad.png in Resources */,
 				4DAA28F517FE144900C26F58 /* Pro-Normal-iPhone.png in Resources */,
 				4DAA292417FE16C800C26F58 /* 3Star-Normal-iPad-hd.png in Resources */,
@@ -2163,7 +2160,6 @@
 				4D4691591710734C00837BC5 /* CCDirector.m in Sources */,
 				4D46915C1710734C00837BC5 /* CCDrawingPrimitives.m in Sources */,
 				4D46915F1710734C00837BC5 /* CCDrawNode.m in Sources */,
-				4D877B1C1877180C00AE8B10 /* MarkerTable.mm in Sources */,
 				4D4691621710734C00837BC5 /* ccFPSImages.m in Sources */,
 				4D4691651710734C00837BC5 /* CCGLProgram.m in Sources */,
 				4D1D801B17FCC5F00035F8CA /* TemplateDataParser.m in Sources */,
@@ -2184,7 +2180,6 @@
 				4D46918A1710734D00837BC5 /* CCNode.m in Sources */,
 				4D46918D1710734D00837BC5 /* CCParallaxNode.m in Sources */,
 				4D4691901710734D00837BC5 /* CCParticleBatchNode.m in Sources */,
-				4D877B1F1877181800AE8B10 /* SkillsTable.mm in Sources */,
 				4D4691931710734D00837BC5 /* CCParticleExamples.m in Sources */,
 				4D877B43187725AF00AE8B10 /* SWSorting.m in Sources */,
 				4D4691961710734D00837BC5 /* CCParticleSystem.m in Sources */,
@@ -2274,7 +2269,6 @@
 				4D2016B717FE4CAD00392465 /* Bunker.mm in Sources */,
 				4D4692941710734F00837BC5 /* b2CollideEdge.cpp in Sources */,
 				4D4692961710734F00837BC5 /* b2CollidePolygon.cpp in Sources */,
-				4D877B19187717FC00AE8B10 /* BarrelsTable.mm in Sources */,
 				4D4692981710734F00837BC5 /* b2Collision.cpp in Sources */,
 				4D46929B1710734F00837BC5 /* b2Distance.cpp in Sources */,
 				4D46929E1710734F00837BC5 /* b2DynamicTree.cpp in Sources */,

@@ -16,6 +16,7 @@
 @property (nonatomic, assign) id<CollectionViewDelegate> delegate;
 @property (nonatomic, assign) NSString* type;
 @property (nonatomic, assign) NSMutableArray* ownedObjects;
+@property (nonatomic, assign) NSMutableArray* cellPositions;
 
 -(id)initWithData:(NSDictionary*)dict;
 

@@ -9,8 +9,6 @@
 #import "GameObject.h"
 #import "GameScene.h"
 
-#define PTM_RATIO 32 // pixels-meters
-
 @implementation GameObject
 @synthesize body,bodyDef,fixture,fixtureDef,sprite;
 
@@ -30,9 +28,6 @@
 -(void)draw
 {
     if (self.alive == NO) return;
-    
-    int x = self.position.x - self.contentSize.width/2;
-    int y = self.position.y - self.contentSize.height/2;
 }
 
 -(void)update:(ccTime)delta
