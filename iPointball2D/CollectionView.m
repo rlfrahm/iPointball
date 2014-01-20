@@ -1,5 +1,5 @@
 //
-//  PickerLayer.m
+//  CollectionView.m
 //  iPointball2D
 //
 //  Created by Ryan Frahm on 1/6/14.
@@ -50,6 +50,7 @@
             if([self.delegate respondsToSelector:@selector(enableMenuItems)]) {
                 [self.delegate enableMenuItems];
             }
+            [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
         }];
         close.scale = kGameSpriteTwentiethScale;
         CCMenu* menu = [CCMenu menuWithItems:close, nil];
