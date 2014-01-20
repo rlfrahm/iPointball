@@ -26,6 +26,7 @@
 
 -(void)cellTouchedAtIndex:(NSUInteger)idx andType:(NSString*)type;
 -(void)changeValuesUsingDictionary:(NSDictionary*)values;
+-(void)enableMenuItems;
 
 @end
 

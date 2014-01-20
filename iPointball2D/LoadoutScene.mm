@@ -130,6 +130,13 @@
     [self addChild:menu];
 }
 
+-(void)enableMenuItems {
+    marker.isEnabled = YES;
+    barrel.isEnabled = YES;
+    hopper.isEnabled = YES;
+    pod.isEnabled = YES;
+}
+
 -(void)buildApparelLoadout {
     
 }

@@ -45,6 +45,16 @@
             break;
         }
         [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+        CCMenuItemImage* close = [[CCMenuItemImage alloc] initWithNormalImage:@"close.png" selectedImage:@"close.png" disabledImage:@"close.png" block:^(id sender) {
+            [self.parent removeChild:self cleanup:YES];
+            if([self.delegate respondsToSelector:@selector(enableMenuItems)]) {
+                [self.delegate enableMenuItems];
+            }
+        }];
+        close.scale = kGameSpriteTwentiethScale;
+        CCMenu* menu = [CCMenu menuWithItems:close, nil];
+        [menu setPosition:ccp(0, SCREEN.height/2)];
+        [self addChild:menu z:2];
     }
     return self;
 }
