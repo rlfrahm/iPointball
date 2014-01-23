@@ -12,7 +12,7 @@
 #import "AIState.h"
 #import "AIStateStarting.h"
 #import "AIStateDefensive.h"
-#import "Paint.h"
+#import "Marker.h"
 
 #define RAYS 10
 #define FOURTY_FIVE_DEGREES 0.785
@@ -35,6 +35,7 @@
     float _boundb;
     float _delta;
     float _rays[RAYS];
+    float _angle2;
 }
 
 @synthesize  eye,target,canSeePlayer,lastShot,rayAngle;
@@ -58,6 +59,14 @@
         self.targetOptions = [[NSMutableArray alloc]init];
         self.rayVectors = [[NSMutableArray alloc] initWithCapacity:RAYS];
         [self initRays];
+        self.marker = [[Marker alloc] initWithAccuracy:10];
+        [self.marker setHopperCapacity:50];
+        [self.marker setPaintLeftInHopper:[self.marker getHopperCapacity]];
+        self.pods = 3;
+        self.speed = 1 + (10/10);
+        self.reload = 10;
+        self.pod = [[Pod alloc] init];
+        self.pod.capacity = 40;
         //[super onEnter];
     }
     return self;
@@ -94,8 +103,8 @@
     enemyFixtureDef.density = 1000.0f;
     enemyFixtureDef.friction = 0.4f;
     enemyFixtureDef.restitution = 0.1f;
-    enemyFixtureDef.filter.categoryBits = 0x0004;
-    enemyFixtureDef.filter.maskBits = 0x0001 | 0x0016 | 0x0002;
+    enemyFixtureDef.filter.categoryBits = kCategoryBitsAiPlayer;
+    enemyFixtureDef.filter.maskBits = kCategoryBitsWorld | kCategoryBitsHumanPlayer | kCategoryBitsHumanPaint | kCategoryBitsBunker;
     
     self.fixture = self.body->CreateFixture(&enemyFixtureDef);
 }
@@ -131,7 +140,7 @@
 
 -(void)rayCast
 {
-    [self.targetOptions removeAllObjects];
+    //[self.targetOptions removeAllObjects];
     
     b2Vec2 p1 = self.body->GetWorldCenter();
     _bounda = self.eyesight + 0.7854;
@@ -193,10 +202,10 @@
         }
     }
     
-    if([type isEqualToString:@"target"]) {
-        [self.targetOptions addObject:[NSValue valueWithCGPoint:pt]];
+    if([type hasPrefix:@"t"]) {
+        [self.targetOptions setObject:[NSValue valueWithCGPoint:pt] atIndexedSubscript:0];
         self.canSeePlayer = YES;
-    } else if([type isEqualToString:@"cover"]) {
+    } else if([type hasPrefix:@"c"]) {
         [self.coverOptions addObject:[NSValue valueWithCGPoint:pt]];
         self.canSeePlayer = NO;
     } else {
@@ -216,14 +225,12 @@
     self.eye = ccp(p1.x*PTM_RATIO, p1.y*PTM_RATIO);
     //self.target = ccp(p2.x*PTM_RATIO, p2.y*PTM_RATIO);
     
-    /*if(self.canSeePlayer == YES)
+    if(self.canSeePlayer == YES)
     {
-        if(_count == 10) {
-            Paint* paint = [[Paint alloc] initWithLayer:self.layer andFile:file forWorld:_world andPosition:self.sprite.position];
-            [paint fireToLocationWithNormal:intersectionNormal];
+        if(_count == 5) {
+            [self shootPaintToLocation:[[self.targetOptions objectAtIndex:0] CGPointValue]];
             _count = 0;
         }
-        
         _count++;
     } else {
         self.canSeePlayer = NO;
@@ -253,13 +260,6 @@
     }
 }
 
--(void)fireToPoint:(CGPoint)point
-{
-    Paint* paint = [[Paint alloc] initWithLayer:self.layer andFile:self.file forWorld:_world andPosition:self.sprite.position];
-    float a = (point.y - self.eye.y) / (point.x - self.eye.x);
-    [paint fireToLocation:point withAngle:a];
-}
-
 class MyQueryCallback : public b2QueryCallback {
 public:
     std::vector<b2Body *>foundBodies;
@@ -272,8 +272,8 @@ public:
 
 -(void)think
 {
-    [self rayCastMultiple];
-    //[self rayCast];
+    //[self rayCastMultiple];
+    [self rayCast];
     [_currentState execute:self];
 }
 

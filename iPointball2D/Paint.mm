@@ -10,16 +10,15 @@
 #import "Box2D.h"
 #import "CGPointExtension.h"
 
-#define PTM_RATIO 32
-
 @implementation Paint {
     b2World* _world;
 }
 
--(id)initWithLayer:(GameScene *)layer andFile:(NSString *)file forWorld:(b2World *)world andPosition:(CGPoint)position
+-(id)initWithLayer:(GameScene *)layer forWorld:(b2World *)world position:(CGPoint)position andTeam:(int)team
 {
-    if((self = [super initWithSprite:file layer:layer andPosition:position]))
+    if((self = [super initWithSprite:@"Projectile.png" layer:layer andPosition:position]))
     {
+        self.team = team;
         [self createBodyForWorld:world];
         self.power = 2;
     }
@@ -31,7 +30,6 @@
     _world = world;
     // body definition
     
-    self.sprite.tag = 3;
     b2BodyDef paintBodyDef;
     paintBodyDef.type = b2_dynamicBody;
     paintBodyDef.position.Set(self.sprite.position.x/PTM_RATIO, self.sprite.position.y/PTM_RATIO);
@@ -50,9 +48,15 @@
     paintFixtureDef.density = 1.0f;
     paintFixtureDef.friction = 0.5f;
     paintFixtureDef.restitution = .01f;
-    paintFixtureDef.filter.categoryBits = 0x0008;
-    paintFixtureDef.filter.maskBits = 0x0001 | 0x0016;
-    
+    if(self.team == 1) {
+        self.sprite.tag = 3;
+        paintFixtureDef.filter.categoryBits = kCategoryBitsHumanPaint;
+        paintFixtureDef.filter.maskBits = kCategoryBitsAiPlayer | kCategoryBitsBunker | kCategoryBitsHumanPaint | kCategoryBitsAiPaint;
+    } else {
+        self.sprite.tag = 4;
+        paintFixtureDef.filter.categoryBits = kCategoryBitsAiPlayer;
+        paintFixtureDef.filter.maskBits = kCategoryBitsHumanPlayer | kCategoryBitsBunker | kCategoryBitsHumanPaint | kCategoryBitsAiPaint;
+    }
     //paintShapeDef.friction = 0.0f;
     //paintShapeDef.restitution = 1.0f;
     

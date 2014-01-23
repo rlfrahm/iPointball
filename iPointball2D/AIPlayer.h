@@ -14,7 +14,6 @@
 
 -(id)initWithLayer:(GameScene*)layer andFile:(NSString*)file forWorld:(b2World*)world andPosition:(CGPoint)position wNumOnOppTeam:(int)number;
 -(void)changeState:(AIState*)state;
--(void)fireToPoint:(CGPoint)point;
 -(NSString*)stateName;
 -(void)think;
 -(void)scheduleRaycast:(CGPoint)pt;

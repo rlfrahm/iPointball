@@ -89,7 +89,7 @@ enum
 		
 		// Enable Touches/Mouse.
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
-		self.isTouchEnabled = YES;
+		self.touchEnabled = YES;
 #elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
         self.isMouseEnabled = YES;
 #endif

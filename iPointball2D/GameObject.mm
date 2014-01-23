@@ -1,5 +1,5 @@
 //
-//  PhysicsObject.m
+//  GameObject.m
 //  iPointball2D
 //
 //  Created by Ryan Frahm on 10/3/13.

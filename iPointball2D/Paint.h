@@ -12,7 +12,7 @@
 
 @property (nonatomic, assign) int power;
 
--(id)initWithLayer:(GameScene*)layer andFile:(NSString*)file forWorld:(b2World*)world andPosition:(CGPoint)position;
+-(id)initWithLayer:(GameScene*)layer forWorld:(b2World*)world position:(CGPoint)position andTeam:(int)team;
 -(void)fireToLocation:(CGPoint)point withAngle:(CGFloat)shootAngle;
 -(void)fireToLocationWithNormal:(b2Vec2)normal;
 

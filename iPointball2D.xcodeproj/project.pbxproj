@@ -318,6 +318,11 @@
 		4DBF281A187A36EE00B77FAC /* LoadoutScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF2819187A36EE00B77FAC /* LoadoutScene.mm */; };
 		4DBF281E187B2C2500B77FAC /* CollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF281D187B2C2500B77FAC /* CollectionView.m */; };
 		4DBF2821187B302600B77FAC /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DBF2820187B302600B77FAC /* CollectionViewCell.m */; };
+		4DCFEEAC188D962700FA12E1 /* level_data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4DCFEEAB188D962700FA12E1 /* level_data.plist */; };
+		4DCFEEB0188D99F900FA12E1 /* Marker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCFEEAF188D99F900FA12E1 /* Marker.m */; };
+		4DCFEEB4188D9A1500FA12E1 /* Hopper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCFEEB3188D9A1500FA12E1 /* Hopper.m */; };
+		4DCFEEB7188D9A2600FA12E1 /* Barrel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCFEEB6188D9A2600FA12E1 /* Barrel.m */; };
+		4DCFEEBB188DA33D00FA12E1 /* Pod.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCFEEBA188DA33D00FA12E1 /* Pod.m */; };
 		4DD249411805F33F006D9E9B /* HumanPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4DD249401805F33F006D9E9B /* HumanPlayer.mm */; };
 		4DD249441805F6FC006D9E9B /* AIPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4DD249431805F6FC006D9E9B /* AIPlayer.mm */; };
 		4DF73D9417FD0B5E00507149 /* CCScrollLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF73D9317FD0B5E00507149 /* CCScrollLayer.m */; };
@@ -886,6 +891,15 @@
 		4DBF281D187B2C2500B77FAC /* CollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionView.m; sourceTree = "<group>"; };
 		4DBF281F187B302600B77FAC /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
 		4DBF2820187B302600B77FAC /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
+		4DCFEEAB188D962700FA12E1 /* level_data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level_data.plist; sourceTree = "<group>"; };
+		4DCFEEAE188D99F900FA12E1 /* Marker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Marker.h; sourceTree = "<group>"; };
+		4DCFEEAF188D99F900FA12E1 /* Marker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Marker.m; sourceTree = "<group>"; };
+		4DCFEEB2188D9A1500FA12E1 /* Hopper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hopper.h; sourceTree = "<group>"; };
+		4DCFEEB3188D9A1500FA12E1 /* Hopper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Hopper.m; sourceTree = "<group>"; };
+		4DCFEEB5188D9A2600FA12E1 /* Barrel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Barrel.h; sourceTree = "<group>"; };
+		4DCFEEB6188D9A2600FA12E1 /* Barrel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Barrel.m; sourceTree = "<group>"; };
+		4DCFEEB9188DA33D00FA12E1 /* Pod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pod.h; sourceTree = "<group>"; };
+		4DCFEEBA188DA33D00FA12E1 /* Pod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pod.m; sourceTree = "<group>"; };
 		4DD2493F1805F33F006D9E9B /* HumanPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HumanPlayer.h; sourceTree = "<group>"; };
 		4DD249401805F33F006D9E9B /* HumanPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HumanPlayer.mm; sourceTree = "<group>"; };
 		4DD249421805F6FC006D9E9B /* AIPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIPlayer.h; sourceTree = "<group>"; };
@@ -1730,6 +1744,7 @@
 				4D46931E1710735000837BC5 /* main.m */,
 				4D877AEE1875C16500AE8B10 /* upgrades.plist */,
 				4D877B4A18785BDC00AE8B10 /* skills.plist */,
+				4DCFEEAB188D962700FA12E1 /* level_data.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1914,9 +1929,33 @@
 			name = "Loadout Scene";
 			sourceTree = "<group>";
 		};
+		4DCFEEAD188D99D900FA12E1 /* Marker */ = {
+			isa = PBXGroup;
+			children = (
+				4DCFEEB2188D9A1500FA12E1 /* Hopper.h */,
+				4DCFEEB3188D9A1500FA12E1 /* Hopper.m */,
+				4DCFEEAE188D99F900FA12E1 /* Marker.h */,
+				4DCFEEAF188D99F900FA12E1 /* Marker.m */,
+				4DCFEEB5188D9A2600FA12E1 /* Barrel.h */,
+				4DCFEEB6188D9A2600FA12E1 /* Barrel.m */,
+			);
+			name = Marker;
+			sourceTree = "<group>";
+		};
+		4DCFEEB8188D9ACE00FA12E1 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				4DCFEEB9188DA33D00FA12E1 /* Pod.h */,
+				4DCFEEBA188DA33D00FA12E1 /* Pod.m */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
 		4DD2493E1805F327006D9E9B /* Players */ = {
 			isa = PBXGroup;
 			children = (
+				4DCFEEB8188D9ACE00FA12E1 /* Pod */,
+				4DCFEEAD188D99D900FA12E1 /* Marker */,
 				4D2016AF17FE49CD00392465 /* Player.h */,
 				4D2016B017FE49CD00392465 /* Player.mm */,
 				4DD2493F1805F33F006D9E9B /* HumanPlayer.h */,
@@ -2062,6 +2101,7 @@
 				4D1D7FFD17FCBA010035F8CA /* Arrow-Selected-iPhone-hd.png in Resources */,
 				4D877AEF1875C16500AE8B10 /* upgrades.plist in Resources */,
 				4DAA28F017FE144900C26F58 /* Semi-Pro-Selected-iPhone-hd.png in Resources */,
+				4DCFEEAC188D962700FA12E1 /* level_data.plist in Resources */,
 				4DAA28F617FE144900C26F58 /* Pro-Selected-iPad-hd.png in Resources */,
 				4D4691101710734B00837BC5 /* Icon-Small@2x.png in Resources */,
 				4D4691121710734B00837BC5 /* Icon.png in Resources */,
@@ -2206,6 +2246,7 @@
 				4D4691991710734D00837BC5 /* CCParticleSystemQuad.m in Sources */,
 				4D46919C1710734D00837BC5 /* CCPhysicsDebugNode.m in Sources */,
 				4D46919F1710734D00837BC5 /* CCPhysicsSprite.mm in Sources */,
+				4DCFEEB7188D9A2600FA12E1 /* Barrel.m in Sources */,
 				4D4691A21710734D00837BC5 /* CCProgressTimer.m in Sources */,
 				4D4691A61710734D00837BC5 /* CCRenderTexture.m in Sources */,
 				4D4691A91710734D00837BC5 /* CCScene.m in Sources */,
@@ -2229,7 +2270,9 @@
 				4D4691E51710734D00837BC5 /* CCTMXTiledMap.m in Sources */,
 				4D97E3531808777C000CDA95 /* AIState.mm in Sources */,
 				4D4691E81710734E00837BC5 /* CCTMXXMLParser.m in Sources */,
+				4DCFEEB4188D9A1500FA12E1 /* Hopper.m in Sources */,
 				4D1D802117FCC70E0035F8CA /* GameData.m in Sources */,
+				4DCFEEB0188D99F900FA12E1 /* Marker.m in Sources */,
 				4D4691EB1710734E00837BC5 /* CCTransition.m in Sources */,
 				4D4691EE1710734E00837BC5 /* CCTransitionPageTurn.m in Sources */,
 				4D4691F11710734E00837BC5 /* CCTransitionProgress.m in Sources */,
@@ -2322,6 +2365,7 @@
 				4D4692E71710734F00837BC5 /* b2ContactSolver.cpp in Sources */,
 				4D4692EA1710734F00837BC5 /* b2EdgeAndCircleContact.cpp in Sources */,
 				4D4692ED1710734F00837BC5 /* b2EdgeAndPolygonContact.cpp in Sources */,
+				4DCFEEBB188DA33D00FA12E1 /* Pod.m in Sources */,
 				4D97E35918087947000CDA95 /* AIStateRush.mm in Sources */,
 				4D4692F01710734F00837BC5 /* b2PolygonAndCircleContact.cpp in Sources */,
 				4D1D7FE817FCB5D30035F8CA /* SceneManager.mm in Sources */,

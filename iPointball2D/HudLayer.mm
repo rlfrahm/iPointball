@@ -28,6 +28,10 @@
     return self;
 }
 
+-(void)pauseGame {
+    
+}
+
 -(void) addOptionsMenu
 {
     CGSize winSize = [CCDirector sharedDirector].winSize;

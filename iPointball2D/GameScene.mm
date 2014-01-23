@@ -16,7 +16,6 @@
 #import "HudLayer.h"
 
 #define PAINTFPS 680 // pixels/sec
-#define boris_random(smallNumber, bigNumber) ((((float) (arc4random() % ((unsigned)RAND_MAX + 1)) / RAND_MAX) * (bigNumber - smallNumber)) + smallNumber)
 
 @implementation GameScene {
     NSMutableArray* _gameObjects;
@@ -38,10 +37,7 @@
     b2Body* _moveToBody;
     NSMutableArray* _objectsToDraw;
     NSUserDefaults* defaults;
-    int paintInHopper, numberOfPods, reloadAccumulator;
     CCMenuItemFont* item2;
-    BOOL reloading;
-    float playerSpeed, markerAccuracy;
 }
 @synthesize iPad;
 
@@ -74,7 +70,7 @@
                     [self doubleTap:location withBody:_bunker.body];
                 }
             } else {
-                if(!reloading) {
+                if(!_humanPlayer.reloading) {
                     [self singleTap:location];
                 }
             }
@@ -87,19 +83,10 @@
     //CCLOG(@"Single Tap!");
     origin = location;
     // Shoot Stuff!
-    CGPoint shootVector = ccpSub(location, _humanPlayer.sprite.position);
-    CGFloat shootAngle = ccpToAngle(shootVector);
-    if(shootAngle - _angle2 > 0.2 || shootAngle - _angle2 < -0.2) {_angle2 = shootAngle;return;}
-    shootAngle = shootAngle + boris_random(-markerAccuracy, markerAccuracy);
-    if(paintInHopper > 0) {
-        [self shootPaintToLocation:location withAngle:shootAngle];
-        [item2 setString:[NSString stringWithFormat:@"%i",paintInHopper]];
-    } else {
-        NSLog(@"Reload!");
-    }
+    [_humanPlayer shootPaintToLocation:location];
+    [item2 setString:[NSString stringWithFormat:@"%i",[_humanPlayer.marker getPaintLeftInHopper]]];
     
     firing = YES;
-    _angle2 = shootAngle;
 }
 
 -(void)doubleTap:(CGPoint)location withBody:(b2Body*)bodyB
@@ -116,7 +103,7 @@
     _moving = YES;
     location1 = [[CCDirector sharedDirector] convertToGL:location1];
     // Insert speed here!
-    moveToLocation = b2Vec2((location1.x/PTM_RATIO)*playerSpeed, (location1.y/PTM_RATIO)*playerSpeed);
+    moveToLocation = b2Vec2((location1.x/PTM_RATIO)*_humanPlayer.speed, (location1.y/PTM_RATIO)*_humanPlayer.speed);
     _mouseJoint->SetTarget(moveToLocation);
 }
 
@@ -166,18 +153,6 @@
         
         _moveToBody = body;
     }
-}
-
--(void)shootPaintToLocation:(CGPoint)location withAngle:(CGFloat)angle
-{
-    CGPoint point = _humanPlayer.sprite.position;
-    _paint = [[Paint alloc] initWithLayer:self andFile:levelData.paint forWorld:world andPosition:point];
-    _paint.tag = 3;
-    
-    [_batchNode addChild:_paint];
-    
-    [_paint fireToLocation:location withAngle:angle];
-    paintInHopper--;
 }
 
 # pragma mark Scene Transition methods
@@ -400,21 +375,21 @@
                 }
             }
             
-            if(spriteA.tag == 1 && spriteB.tag == 3)
+            if(spriteA.tag == 1 && spriteB.tag == 4)
             {
-                /*if(std::find(toDestroy.begin(), toDestroy.end(), bodyB) == toDestroy.end())
+                if(std::find(toDestroy.begin(), toDestroy.end(), bodyB) == toDestroy.end())
                  {
                  toDestroy.push_back(bodyB);
-                 }*/
+                 }
             }
             
             // spriteA = paint, spriteB = player
-            else if(spriteA.tag == 3 && spriteB.tag == 1)
+            else if(spriteA.tag == 4 && spriteB.tag == 1)
             {
-                /*if(std::find(toDestroy.begin(), toDestroy.end(), bodyA) == toDestroy.end())
+                if(std::find(toDestroy.begin(), toDestroy.end(), bodyA) == toDestroy.end())
                  {
                  toDestroy.push_back(bodyA);
-                 }*/
+                 }
             }
             
             // spriteA = enemy, spriteB = paint
@@ -455,7 +430,7 @@
                  }*/
             }
             
-            else if(spriteA.tag == 3 && spriteB.tag == 4)
+            else if(spriteA.tag == 3 && spriteB.tag == 5)
             {
                 if(std::find(toDestroy.begin(), toDestroy.end(), bodyA) == toDestroy.end())
                 {
@@ -463,7 +438,7 @@
                 }
             }
             
-            else if (spriteA.tag == 4 && spriteB.tag == 3)
+            else if (spriteA.tag == 5 && spriteB.tag == 3)
             {
                 if(std::find(toDestroy.begin(), toDestroy.end(), bodyB) == toDestroy.end())
                 {
@@ -516,7 +491,6 @@
 
 -(void)draw{
     [super draw];
-    
     if(firing)
     {
         glLineWidth(3);
@@ -529,24 +503,21 @@
     for(AIPlayer* p in _aiplayers) {
         glLineWidth(2);
         ccPointSize(5.0f);
-        if(p.canSeePlayer) {
-            ccDrawColor4F(0.0f, 1.0f, 0.0f, 1.0f);
-        } else {
-            ccDrawColor4F(1.0f, 0.0f, 0.0f, 1.0f);
-        }
-        for(int i=0; i<p.rayVectors.count;i++) {
+        ccDrawColor4F(1.0f, 0.0f, 0.0f, 1.0f);
+        /*for(int i=0; i<p.rayVectors.count;i++) {
             CGPoint pt = [[p.rayVectors objectAtIndex:i] CGPointValue];
             ccDrawLine(p.eye, pt);
-        }
-        //ccDrawLine(p.eye, p.target);
-        
+        }*/
+        ccDrawLine(p.eye, p.target);
+        ccDrawPoint(p.target);
         for(int i=0;i<p.targetOptions.count;i++) {
+            ccDrawColor4F(0.0f, 1.0f, 0.0f, 1.0f);
             NSValue* v = [p.targetOptions objectAtIndex:i];
             CGPoint pt = [v CGPointValue];
             ccDrawLine(p.eye, pt);
-            [p.targetOptions removeObjectAtIndex:i];
+            //[p.targetOptions removeObjectAtIndex:i];
         }//*/
-        ccDrawPoint(p.target);
+        
         i++;
     }
     
@@ -618,7 +589,7 @@
     groundBody->CreateFixture(&groundBox,0);
     
     groundFixtureDef.shape = &groundBox;
-    groundFixtureDef.filter.categoryBits = 0x0001;
+    groundFixtureDef.filter.categoryBits = kCategoryBitsWorld;
 }
 
 -(void)basicSetup
@@ -630,12 +601,6 @@
     
     defaults = [NSUserDefaults standardUserDefaults];
     
-    paintInHopper = [defaults integerForKey:@"hopper_capacity"];
-    numberOfPods = [defaults integerForKey:@"player_pods"];
-    playerSpeed = 1 + ([defaults integerForKey:@"player_speed"]/10);
-    markerAccuracy = (110 - ([defaults integerForKey:@"marker_accuracy"]*10));
-    markerAccuracy = markerAccuracy / 400;
-    
     [CCMenuItemFont setFontName:@"Marker Felt"];
     [CCMenuItemFont setFontSize:tinyFont];
     [CCMenuItemFont setFontSize:22];
@@ -643,7 +608,7 @@
     //CCMenuItemLabel* item1 = [CCMenuItemFont itemWithString:@"Back" target:self selector:@selector(onBack:)];
     //CCMenuItemLabel* item3 = [CCMenuItemFont itemWithString:@"O" target:self selector:@selector(pauseGame)];
     CCMenuItemImage* item1 = [CCMenuItemImage itemWithNormalImage:@"pause_game.png" selectedImage:@"pause_game.png" target:self selector:@selector(pauseGame)];
-    item2 = [CCMenuItemFont itemWithString:[NSString stringWithFormat:@"%i", paintInHopper] target:self selector:@selector(beginReloadingPaint)];
+    item2 = [CCMenuItemFont itemWithString:[NSString stringWithFormat:@"%i", [defaults integerForKey:@"hopper_capacity"]] target:self selector:@selector(reloadPaint)];
     item1.color = ccRED;
     item2.color = ccRED;
     item1.scale = kGameSpriteTwentiethScale;
@@ -682,7 +647,6 @@
     world->SetContactListener(contactListener);
     
     self.touchEnabled = YES;
-    reloading = NO;
 }
 
 -(void)addEnemiesWithLevel:(int)selectedLevel
@@ -697,9 +661,10 @@
             {
                 CGPoint point = ccp(winSize.width - 1.5*PTM_RATIO, winSize.height/2);
                 _aiPlayer = [[AIPlayer alloc] initWithLayer:self andFile:level.enemy forWorld:world andPosition:point wNumOnOppTeam:1];
-                _aiPlayer.tag = 2;
+                _aiPlayer.world = world;
+                _aiPlayer.layer = self;
                 _aiPlayer.file = levelData.paint;
-                _aiPlayer.speed = 1;
+                _aiPlayer.speed = [defaults integerForKey:@"player_speed"];
                 [_gameObjects[_aiPlayer.team-1] addObject:_aiPlayer];
                 [_batchNode addChild:_aiPlayer];
                 [_aiplayers addObject:_aiPlayer];
@@ -715,8 +680,8 @@
     _humanPlayer = [[HumanPlayer alloc] initWithLayer:self andFile:gameData.player forWorld:world andPosition:ccp(1.5*PTM_RATIO, winSize.height/2)];
     //_humanPlayer.sprite.position = ccp(1.5*PTM_RATIO, winSize.height/2);
     //[_humanPlayer setPosition:ccp(1.5*PTM_RATIO, winSize.height/2)];
-    _humanPlayer.tag = 1;
-    _humanPlayer.speed = 1; // NEEDS TO BE SET FROM XML FILE***************!!!!!!!!!!!!!!!!!!
+    _humanPlayer.world = world;
+    _humanPlayer.layer = self;
     [_gameObjects addObject:_humanPlayer];
     [_batchNode addChild:_humanPlayer];
 }
@@ -756,33 +721,9 @@
 
 # pragma mark Gameplay methods
 
--(void)beginReloadingPaint {
-    if(numberOfPods > 0) {
-        reloadAccumulator = 0;
-        reloading = YES;
-        float interval = 3 - ([defaults integerForKey:@"player_reload"]/4);
-        NSTimer* timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(reloadPaint:) userInfo:Nil repeats:YES];
-    } else {
-        // The player is out of paint!
-        NSLog(@"Out of paint!");
-    }
-}
-
--(void)reloadPaint:(NSTimer*)timer {
-    if (reloadAccumulator >= 3) {
-        int hopperCapacity = [defaults integerForKey:@"hopper_capacity"];
-        int podCapacity = [defaults integerForKey:@"pods_capacity"];
-        if(paintInHopper + podCapacity > hopperCapacity) {
-            paintInHopper = hopperCapacity;
-        } else {
-            paintInHopper = paintInHopper + podCapacity;
-        }
-        [item2 setString:[NSString stringWithFormat:@"%i", paintInHopper]];
-        [timer invalidate];
-        reloading = NO;
-    } else {
-        reloadAccumulator ++;
-    }
+-(void)reloadPaint {
+    [_humanPlayer reloadPaint];
+    [item2 setString:[NSString stringWithFormat:@"%i", [_humanPlayer getPaintLeftInHopper]]];
 }
 
 # pragma mark Helper methods

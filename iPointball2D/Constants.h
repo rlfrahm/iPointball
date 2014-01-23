@@ -29,6 +29,7 @@
 #define PTM_RATIO (isIPad ? 64 : 32)
 
 #define random_range(low,high) (arc4random()%(high-low+1))+low
+#define boris_random(smallNumber, bigNumber) ((((float) (arc4random() % ((unsigned)RAND_MAX + 1)) / RAND_MAX) * (bigNumber - smallNumber)) + smallNumber)
 
 #define kCellOpacityDefault 100
 #define kCellOpacitySelected 200
@@ -38,3 +39,10 @@
 #define kGameSpriteDefaultScale 1
 #define kGameSpriteTenthScale 0.1
 #define kGameSpriteTwentiethScale 0.05
+
+#define kCategoryBitsWorld 0x0001
+#define kCategoryBitsHumanPlayer 0x0002
+#define kCategoryBitsAiPlayer 0x0004
+#define kCategoryBitsBunker 0x0008
+#define kCategoryBitsAiPaint 0x0016
+#define kCategoryBitsHumanPaint 0x0032

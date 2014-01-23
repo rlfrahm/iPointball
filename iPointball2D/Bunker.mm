@@ -9,8 +9,6 @@
 #import "Bunker.h"
 #import "Box2D.h"
 
-#define PTM_RATIO 32
-
 @implementation Bunker {
     b2World* _world;
 }
@@ -31,7 +29,7 @@
     _world = world;
     // Define the dynamic body.
     // Set up a 1m squared box in the physics world
-    self.sprite.tag = 4;
+    self.sprite.tag = 5;
     b2BodyDef bunkerBodyDef;
     bunkerBodyDef.type = b2_staticBody;
     bunkerBodyDef.position.Set(self.sprite.position.x/PTM_RATIO, self.sprite.position.y/PTM_RATIO);
@@ -45,8 +43,8 @@
     bunkerFixtureDef.shape = &bunkerShape;
     bunkerFixtureDef.density = 1.0f;
     bunkerFixtureDef.restitution = 0.1f;
-    bunkerFixtureDef.filter.categoryBits = 0x0016;
-    bunkerFixtureDef.filter.maskBits = 0x0002 | 0x0004 | 0x0008;
+    bunkerFixtureDef.filter.categoryBits = kCategoryBitsBunker;
+    bunkerFixtureDef.filter.maskBits = kCategoryBitsHumanPlayer | kCategoryBitsAiPlayer | kCategoryBitsHumanPaint | kCategoryBitsAiPaint;
     
     b2CircleShape playerTouchShape;
     playerTouchShape.m_radius = 1.0f;
@@ -54,8 +52,8 @@
     b2FixtureDef playerTouchFixtureDef;
     playerTouchFixtureDef.shape = &playerTouchShape;
     playerTouchFixtureDef.density = 1.0f;
-    playerTouchFixtureDef.filter.categoryBits = 0x0016;
-    playerTouchFixtureDef.filter.maskBits = 0x0001;
+    playerTouchFixtureDef.filter.categoryBits = kCategoryBitsBunker;
+    playerTouchFixtureDef.filter.maskBits = kCategoryBitsWorld;
     
     self.fixture = self.body->CreateFixture(&playerTouchFixtureDef);
     

@@ -19,6 +19,15 @@
     {
         self.team = 1;
         [self createBodyForWorld:world];
+        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+        self.marker = [[Marker alloc] initWithAccuracy:[defaults integerForKey:@"marker_accuracy"]];
+        [self.marker setHopperCapacity:[defaults integerForKey:@"hopper_capacity"]];
+        [self.marker setPaintLeftInHopper:[defaults integerForKey:@"hopper_capacity"]];
+        self.pods = [defaults integerForKey:@"player_pods"];
+        self.speed = 1 + ([defaults integerForKey:@"player_speed"]/10);
+        self.reload = [defaults integerForKey:@"player_reload"];
+        self.pod = [[Pod alloc] init];
+        self.pod.capacity = [defaults integerForKey:@"pods_capacity"];
     }
     return self;
 }
@@ -52,8 +61,8 @@
     playerFixtureDef.density = 1000.0f;
     playerFixtureDef.friction = 0.4f;
     playerFixtureDef.restitution = 0.1f;
-    playerFixtureDef.filter.categoryBits = 0x0002;
-    playerFixtureDef.filter.maskBits = 0x0008 | 0x0001 | 0x0004;
+    playerFixtureDef.filter.categoryBits = kCategoryBitsHumanPlayer;
+    playerFixtureDef.filter.maskBits = kCategoryBitsWorld | kCategoryBitsAiPlayer | kCategoryBitsBunker | kCategoryBitsAiPaint;
     self.fixtureDef = playerFixtureDef;
     
     b2CircleShape playerTouchShape;
