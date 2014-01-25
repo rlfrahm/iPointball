@@ -46,9 +46,9 @@
 -(void)createMovingPaintToLocation:(CGPoint)location withAngle:(CGFloat)angle
 {
     CGPoint point = self.sprite.position;
-    _paint = [[Paint alloc] initWithLayer:self.layer forWorld:self.world position:point andTeam:self.team];
+    _paint = [[Paint alloc] initWithLayer:self.layer forWorld:self.world position:point andTeam:self.team + 2];
     
-    [_batchNode addChild:_paint];
+    //[_batchNode addChild:_paint];
     
     [_paint fireToLocation:location withAngle:angle];
     [self.marker setPaintLeftInHopper:[self.marker getPaintLeftInHopper]-1];

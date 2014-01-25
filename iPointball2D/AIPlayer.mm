@@ -186,7 +186,7 @@
                         b2Vec2 ip(p1 + closestFraction * (p2 - p1));
                         pt = ccp(ip.x*PTM_RATIO, ip.y*PTM_RATIO);
                         type = @"target";
-                    } else if(s.tag == 4) { // If the ray is intersecting a bunker
+                    } else if(s.tag == 5) { // If the ray is intersecting a bunker
                         b2Vec2 ip(p1 + closestFraction * (p2 - p1));
                         pt = ccp(ip.x, ip.y);
                         type = @"cover";

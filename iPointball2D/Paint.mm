@@ -21,6 +21,7 @@
         self.team = team;
         [self createBodyForWorld:world];
         self.power = 2;
+        self.sprite.tag = team;
     }
     return self;
 }

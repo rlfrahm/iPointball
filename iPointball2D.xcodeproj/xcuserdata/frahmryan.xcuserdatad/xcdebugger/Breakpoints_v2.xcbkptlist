@@ -949,22 +949,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iPointball2D/AIPlayer.mm"
-            timestampString = "411941106.168038"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
-            landmarkName = "-rayCast"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "iPointball2D/GameScene.mm"
             timestampString = "411941106.168038"
             startingColumnNumber = "9223372036854775807"
@@ -1060,11 +1044,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iPointball2D/Paint.mm"
-            timestampString = "411941934.361079"
+            timestampString = "412352944.443485"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "-createBodyForWorld:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1092,11 +1076,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iPointball2D/Paint.mm"
-            timestampString = "411942536.689696"
+            timestampString = "412352944.443485"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "-createBodyForWorld:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1108,7 +1092,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iPointball2D/Paint.mm"
-            timestampString = "411942614.549889"
+            timestampString = "412352944.443485"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "23"
@@ -1120,7 +1104,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iPointball2D/GameScene.mm"
@@ -1133,13 +1117,13 @@
             landmarkType = "5">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[GameScene update:]"
                   moduleName = "iPointball2D"
                   urlString = "file:///Users/frahmryan/Desktop/game/iPointball/iPointball2D/GameScene.mm"
-                  timestampString = "411942949.680497"
+                  timestampString = "412352944.769783"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "380"
@@ -1147,13 +1131,13 @@
                   offsetFromSymbolStart = "6293">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[GameScene update:]"
                   moduleName = "iPointball2D"
                   urlString = "file:///Users/frahmryan/Desktop/game/iPointball/iPointball2D/GameScene.mm"
-                  timestampString = "411942949.680994"
+                  timestampString = "412352944.770022"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "380"
@@ -1161,13 +1145,13 @@
                   offsetFromSymbolStart = "6400">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[GameScene update:]"
                   moduleName = "iPointball2D"
                   urlString = "file:///Users/frahmryan/Desktop/game/iPointball/iPointball2D/GameScene.mm"
-                  timestampString = "411942949.681381"
+                  timestampString = "412352944.770209"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "380"
@@ -1175,13 +1159,13 @@
                   offsetFromSymbolStart = "6672">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[GameScene update:]"
                   moduleName = "iPointball2D"
                   urlString = "file:///Users/frahmryan/Desktop/game/iPointball/iPointball2D/GameScene.mm"
-                  timestampString = "411942949.681761"
+                  timestampString = "412352944.770391"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "380"
@@ -1189,13 +1173,13 @@
                   offsetFromSymbolStart = "6785">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[GameScene update:]"
                   moduleName = "iPointball2D"
                   urlString = "file:///Users/frahmryan/Desktop/game/iPointball/iPointball2D/GameScene.mm"
-                  timestampString = "411942949.68215"
+                  timestampString = "412352944.770571"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "380"
@@ -1208,7 +1192,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iPointball2D/GameScene.mm"
@@ -1221,13 +1205,13 @@
             landmarkType = "5">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[GameScene update:]"
                   moduleName = "iPointball2D"
                   urlString = "file:///Users/frahmryan/Desktop/game/iPointball/iPointball2D/GameScene.mm"
-                  timestampString = "411942949.682627"
+                  timestampString = "412352944.770778"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "389"
@@ -1235,13 +1219,13 @@
                   offsetFromSymbolStart = "7389">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[GameScene update:]"
                   moduleName = "iPointball2D"
                   urlString = "file:///Users/frahmryan/Desktop/game/iPointball/iPointball2D/GameScene.mm"
-                  timestampString = "411942949.683011"
+                  timestampString = "412352944.77107"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "389"
@@ -1249,13 +1233,13 @@
                   offsetFromSymbolStart = "7496">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[GameScene update:]"
                   moduleName = "iPointball2D"
                   urlString = "file:///Users/frahmryan/Desktop/game/iPointball/iPointball2D/GameScene.mm"
-                  timestampString = "411942949.683369"
+                  timestampString = "412352944.771305"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "389"
@@ -1263,13 +1247,13 @@
                   offsetFromSymbolStart = "7765">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[GameScene update:]"
                   moduleName = "iPointball2D"
                   urlString = "file:///Users/frahmryan/Desktop/game/iPointball/iPointball2D/GameScene.mm"
-                  timestampString = "411942949.683745"
+                  timestampString = "412352944.771493"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "389"
@@ -1277,13 +1261,13 @@
                   offsetFromSymbolStart = "7830">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[GameScene update:]"
                   moduleName = "iPointball2D"
                   urlString = "file:///Users/frahmryan/Desktop/game/iPointball/iPointball2D/GameScene.mm"
-                  timestampString = "411942949.684087"
+                  timestampString = "412352944.771704"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "389"
@@ -1296,16 +1280,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iPointball2D/Player.mm"
-            timestampString = "411942851.536742"
+            filePath = "iPointball2D/AIPlayer.mm"
+            timestampString = "412350965.195718"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "-shootPaintToLocation:"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
+            landmarkName = "-rayCast"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iPointball2D/AIPlayer.mm"
+            timestampString = "412352950.473078"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
+            landmarkName = "-rayCast"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iPointball2D/AIPlayer.mm"
+            timestampString = "412352951.645457"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
+            landmarkName = "-rayCast"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
