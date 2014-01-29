@@ -49,7 +49,7 @@
     paintFixtureDef.density = 1.0f;
     paintFixtureDef.friction = 0.5f;
     paintFixtureDef.restitution = .01f;
-    if(self.team == 1) {
+    if(self.team == 3) {
         self.sprite.tag = 3;
         paintFixtureDef.filter.categoryBits = kCategoryBitsHumanPaint;
         paintFixtureDef.filter.maskBits = kCategoryBitsAiPlayer | kCategoryBitsBunker | kCategoryBitsHumanPaint | kCategoryBitsAiPaint;

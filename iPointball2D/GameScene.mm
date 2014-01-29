@@ -590,6 +590,7 @@
     
     groundFixtureDef.shape = &groundBox;
     groundFixtureDef.filter.categoryBits = kCategoryBitsWorld;
+    groundFixtureDef.filter.maskBits = kCategoryBitsAiPaint | kCategoryBitsAiPlayer | kCategoryBitsHumanPaint | kCategoryBitsHumanPlayer;
 }
 
 -(void)basicSetup

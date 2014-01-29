@@ -62,7 +62,7 @@
     playerFixtureDef.friction = 0.4f;
     playerFixtureDef.restitution = 0.1f;
     playerFixtureDef.filter.categoryBits = kCategoryBitsHumanPlayer;
-    playerFixtureDef.filter.maskBits = kCategoryBitsWorld | kCategoryBitsAiPlayer | kCategoryBitsBunker | kCategoryBitsAiPaint;
+    playerFixtureDef.filter.maskBits = kCategoryBitsWorld | kCategoryBitsAiPlayer | kCategoryBitsBunker;
     self.fixtureDef = playerFixtureDef;
     
     b2CircleShape playerTouchShape;
@@ -71,8 +71,8 @@
     b2FixtureDef playerTouchFixtureDef;
     playerTouchFixtureDef.shape = &playerTouchShape;
     playerTouchFixtureDef.density = 1.0f;
-    //playerTouchFixtureDef.filter.categoryBits = 0x0002;
-    //playerTouchFixtureDef.filter.maskBits = 0x0008 | 0x0001;
+    //playerTouchFixtureDef.filter.categoryBits = kCategoryBitsHumanPlayer;
+    //playerTouchFixtureDef.filter.maskBits = kCategoryBitsWorld | kCategoryBitsAiPlayer | kCategoryBitsBunker | kCategoryBitsAiPaint;
     
     self.fixture = self.body->CreateFixture(&playerTouchFixtureDef);
     self.body->CreateFixture(&playerFixtureDef);

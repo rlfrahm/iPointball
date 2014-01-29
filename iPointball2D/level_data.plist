@@ -8,10 +8,31 @@
 		<key>levels</key>
 		<array>
 			<dict>
-				<key>paint</key>
-				<real>0</real>
+				<key>bunker_locations</key>
+				<array>
+					<dict>
+						<key>file</key>
+						<string>bunker1.png</string>
+						<key>y</key>
+						<real>0.5</real>
+						<key>x</key>
+						<real>0.5</real>
+					</dict>
+					<dict>
+						<key>file</key>
+						<string>bunker1.png</string>
+						<key>y</key>
+						<real>0.25</real>
+						<key>x</key>
+						<real>0.6</real>
+					</dict>
+				</array>
+				<key>paint_file</key>
+				<string>Projectile.png</string>
 				<key>enemies</key>
 				<integer>1</integer>
+				<key>enemy_file</key>
+				<string>Target.png</string>
 				<key>title</key>
 				<string>Level 1</string>
 			</dict>
