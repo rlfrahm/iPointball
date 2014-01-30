@@ -46,3 +46,5 @@
 #define kCategoryBitsBunker 0x0008
 #define kCategoryBitsAiPaint 0x0016
 #define kCategoryBitsHumanPaint 0x0032
+
+#define MIN_NEXT_TO_BUNKER_DISTANCE 338

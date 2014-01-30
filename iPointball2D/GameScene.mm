@@ -374,7 +374,7 @@
                     toDestroy.push_back(bodyA);
                 }
             }
-            
+            // player / enemy paint
             if(spriteA.tag == 1 && spriteB.tag == 4)
             {
                 if(std::find(toDestroy.begin(), toDestroy.end(), bodyB) == toDestroy.end())
@@ -430,7 +430,7 @@
                  }*/
             }
             
-            else if(spriteA.tag == 3 && spriteB.tag == 5)
+            else if((spriteA.tag == 3 || spriteA.tag == 4) && spriteB.tag == 5)
             {
                 if(std::find(toDestroy.begin(), toDestroy.end(), bodyA) == toDestroy.end())
                 {
@@ -438,7 +438,7 @@
                 }
             }
             
-            else if (spriteA.tag == 5 && spriteB.tag == 3)
+            else if (spriteA.tag == 5 && (spriteA.tag == 3 || spriteA.tag == 4))
             {
                 if(std::find(toDestroy.begin(), toDestroy.end(), bodyB) == toDestroy.end())
                 {

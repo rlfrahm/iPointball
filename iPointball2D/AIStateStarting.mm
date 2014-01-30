@@ -20,8 +20,6 @@
 #import "AIStateRush.h"
 #import "Bunker.h"
 
-#define MIN_NEXT_TO_BUNKER_DISTANCE 338
-
 @implementation AIStateStarting {
     Bunker* _bunker;
     CGPoint _bunkerPt;
@@ -61,7 +59,6 @@
                 int r = arc4random_uniform(player.targetOptions.count);
                 NSValue* v = [player.targetOptions objectAtIndex:r];
                 CGPoint pt = [v CGPointValue];
-                [player fireToPoint:pt];
             }
         }
     } else {
